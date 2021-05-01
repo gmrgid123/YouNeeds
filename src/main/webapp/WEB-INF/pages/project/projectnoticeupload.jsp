@@ -12,13 +12,13 @@
 <script src="${path}/resources/js/jquery.backtotop.js"></script>
 <script src="${path}/resources/js/jquery.mobilemenu.js"></script>
 
-
 <link href="${path}/resources/css/layout.css" rel="stylesheet" type="text/css" media="all">
-<link href="${path}/resources/css/slider/slider-banner.css" rel="stylesheet" type="text/css">
 
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Gugi&display=swap" rel="stylesheet">
 
+
+<!-- -------------------------------------------------------------------------------- -->
 
 <style type="text/css">
 
@@ -26,7 +26,7 @@
 	font-family: 'Gugi', cursive;
  }
 .body{
-	margin-left : 30%;
+	margin-left : 35%;
 	margin-bottom : 5%;
 }
 
@@ -61,7 +61,6 @@
 <jsp:include page="../form/header.jsp"></jsp:include>
 
 <!-- --------------------------------------------------------------------------- -->
-		
 <!-- --------------------------------------------------------------------------- -->
 	
 		<form action="">
@@ -77,7 +76,7 @@
 		</form>
 	
 <!-- --------------------------------------------------------------------------- -->
-	
+<!-- -------------------------------------------------------------------------------- -->	
 	<!-- footer include -->
 	<jsp:include page="../form/footer.jsp"></jsp:include>
 	

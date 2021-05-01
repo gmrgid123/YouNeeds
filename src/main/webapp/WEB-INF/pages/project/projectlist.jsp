@@ -6,24 +6,20 @@
 
 
 <!-- JAVASCRIPTS -->
-<script src="${path}/resources/js/slider/slider.js"
-	type="text/javascript"></script>
-<script src="${path}/resources/js/slider/jssor.slider-28.1.0.min.js"
-	type="text/javascript"></script>
+<script src="${path}/resources/js/slider/slider.js" type="text/javascript"></script>
+<script src="${path}/resources/js/slider/jssor.slider-28.1.0.min.js" type="text/javascript"></script>
 <script src="${path}/resources/js/jquery.min.js"></script>
 <script src="${path}/resources/js/jquery.backtotop.js"></script>
 <script src="${path}/resources/js/jquery.mobilemenu.js"></script>
 
 
-<link href="${path}/resources/css/layout.css" rel="stylesheet"
-	type="text/css" media="all">
-<link href="${path}/resources/css/slider/slider-banner.css"
-	rel="stylesheet" type="text/css">
+<link href="${path}/resources/css/layout.css" rel="stylesheet" type="text/css" media="all">
+
 
 <link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Gugi&display=swap"
-	rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Gugi&display=swap" rel="stylesheet">
 
+<!-- -------------------------------------------------------------------------------- -->
 
 <style type="text/css">
 * {
@@ -107,9 +103,16 @@
 	margin-left: 30px;
 }
 
+
+#c2 {
+	margin-top: 55px;
+}
+
+
 #c3 {
 	margin-top: 55px;
 }
+
 
 #btn2 {
 	display: inline-block;
@@ -136,13 +139,14 @@
 	<jsp:include page="../form/header.jsp"></jsp:include>
 
 	<!-- --------------------------------------------------------------------------- -->
-	<!-- --------------------------------------------------------------------------- -->
-	<section>
-		<div class="top" style="background-color: #93C0C5; display: flex; text-align: center; height: 50px;">
+	
+	<div class="top" style="background-color: #93C0C5; display: flex; text-align: center; height: 50px;">
 			<h1 style="margin: auto; font-weight: bold; color: white; 
 				font-family: 'Gugi', cursive;">
 				프로젝트 목록</h1>
 		</div>
+	
+	<!-- --------------------------------------------------------------------------- -->
 		<div class="topbar"
 			style="text-align: center; background-color: white; color: gray;">
 			<input type="button" value="전체" id="btn" onclick="location.href=''">
@@ -153,19 +157,17 @@
 			<input type="button" value="푸드" id="btn" onclick="location.href=''">
 			<input type="button" value="패션" id="btn" onclick="location.href=''">
 		</div>
-	</section>
-
-
 	<!-- ------------------------------------------------------------------------------ -->
 	<!-- -----------------------프로젝트 첫 줄---------------------------------------------- -->
+	
 	<div class="main">
 		<main class="container">
 			<div>
-				<a class="project_card" href="pjdetail.do">
-					<div class="card" id="c1" style="margin-bottom: 50px;">
+				<a class="project_card" href="pjform.do">
+					<div class="card" id="c1">
 						<div class="card_header">
 							<span><img src="${path}/resources/images/1.jpg"
-								style="width: 100%; height: 100%;"></span>
+								style="width: 100%; height: 120px;" ></span>
 						</div>
 						<div class="card_body">
 							<hr>
@@ -178,8 +180,8 @@
 				<a class="project_card" href="#">
 					<div class="card" id="c1">
 						<div class="card_header">
-							<span><img src="${path}/resources/images/"
-								style="width: 100%; height: 100%;"></span>
+							<span><img src="${path}/resources/images/2.jpg"
+								style="width: 100%; height: 120px;;"></span>
 						</div>
 						<div class="card_body">
 							<hr>
@@ -192,8 +194,8 @@
 				<a class="project_card" href="#">
 					<div class="card" id="c1">
 						<div class="card_header">
-							<span><img src="${path}/resources/images/"
-								style="width: 100%; height: 100%;"></span>
+							<span><img src="${path}/resources/images/3.jpg"
+								style="width: 100%; height: 120px;"></span>
 						</div>
 						<div class="card_body">
 							<hr>
@@ -210,8 +212,8 @@
 				<a class="project_card" href="#">
 					<div class="card" id="c2">
 						<div class="card_header">
-							<span><img src="${path}/resources/images/"
-								style="width: 100%; height: 100%;"></span>
+							<span><img src="${path}/resources/images/4.jpg"
+								style="width: 100%; height: 120px;"></span>
 						</div>
 						<div class="card_body">
 							<hr>
@@ -220,15 +222,13 @@
 						</div>
 					</div>
 				</a>
-
-
 				<!-- -------------------------------------------------------------------------- -->
 
 				<a class="project_card" href="#">
 					<div class="card" id="c2">
 						<div class="card_header">
-							<span><img src="${path}/resources/images/"
-								style="width: 100%; height: 100%;"></span>
+							<span><img src="${path}/resources/images/5.jpg"
+								style="width: 100%; height: 120px;"></span>
 						</div>
 						<div class="card_body">
 							<hr>
@@ -243,8 +243,8 @@
 				<a class="project_card" href="#">
 					<div class="card" id="c2">
 						<div class="card_header">
-							<span><img src="${path}/resources/images/"
-								style="width: 100%; height: 100%;"></span>
+							<span><img src="${path}/resources/images/6.jpg"
+								style="width: 100%; height: 120px;"></span>
 						</div>
 						<div class="card_body">
 							<hr>
@@ -261,8 +261,8 @@
 				<a class="project_card" href="#">
 					<div class="card" id="c3" >
 						<div class="card_header">
-							<span><img src="${path}/resources/images/"
-								style="width: 100%; height: 100%;"></span>
+							<span><img src="${path}/resources/images/7.jpg"
+								style="width: 100%; height: 120px;"></span>
 						</div>
 						<div class="card_body">
 							<hr>
@@ -278,8 +278,8 @@
 				<a class="project_card" href="#">
 					<div class="card" id="c3">
 						<div class="card_header">
-							<span><img src="${path}/resources/images/"
-								style="width: 100%; height: 100%;"></span>
+							<span><img src="${path}/resources/images/6.jpg"
+								style="width: 100%; height: 120px"></span>
 						</div>
 						<div class="card_body">
 							<hr>
@@ -294,8 +294,8 @@
 				<a class="project_card" href="#">
 					<div class="card" id="c3">
 						<div class="card_header">
-							<span><img src="${path}/resources/images/"
-								style="width: 100%; height: 100%;"></span>
+							<span><img src="${path}/resources/images/5.jpg"
+								style="width: 100%; height: 120px"></span>
 						</div>
 						<div class="card_body">
 							<hr>
@@ -314,6 +314,7 @@
 				<input type="button" value=">" id="btn2" onclick="location.href=''">
 			</div>
 		</main>
+
 	</div>
 
 
