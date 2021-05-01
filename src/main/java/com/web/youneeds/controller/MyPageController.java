@@ -26,7 +26,7 @@ public class MyPageController {
 	@RequestMapping("/creatorMypage")
 	public String creatorMypage(Locale locale, Model model) {
 		logger.info("creatorMypage 페이지 호출");
-			
+		
 		return "mypage/creatorMypage";
 	}
 	
