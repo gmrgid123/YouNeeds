@@ -36,6 +36,7 @@
         <li><a href="userMypage">유저 마이페이지 테스트</a></li>
         <li><a href="creatorMypage">창작 마이페이지 테스트</a></li>
         <li><a href="videoChatPage">화생채팅 페이지 테스트</a></li>
+        <li><a href="pwdCheckTest">비밀번호 체크 페이지 테스트</a></li>
       </ul>
     </div>
     <!-- ################################################################################################ -->
@@ -78,7 +79,7 @@
          <!-- 펼치기 스타일 메뉴 -->
         
         
-        <li><a href="list.do">프로젝트 목록</a></li>
+        <li><a href="pjlist.do">프로젝트 목록</a></li>
         <li><a href="pjupload.do">프로젝트 등록</a></li>
         <li><a href="notice_board">공지사항</a></li>
         <li><a href="qna_board">QnA</a></li>

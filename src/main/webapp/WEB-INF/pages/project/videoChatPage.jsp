@@ -6,7 +6,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>MyPage</title>
+<title>videoChatPage</title>
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -55,10 +55,19 @@
 			<br>
 			<div class="creator">설명회 개최자</div>
 			<br>
-			<div class="videoChat" style="width: 700px; height: 350px; background-color:lightgray;">화상 채팅 화면</div>
+			<div class="videoChat" style="width: 700px; height: 350px; background-color:lightgray;">
+				<video id="localVideo" autoplay></video>
+				<video id="remoteVideo" autoplay></video>
+			</div>
 		</div>
 		
-		<textarea class="projectIntro" style="width:700px; height: 200px;" readonly="readonly">프로젝트 소개</textarea>
+		<!-- <textarea class="projectIntro" style="width:700px; height: 200px;" readonly="readonly">프로젝트 소개</textarea> -->
+		<textarea id="dataChannelSend"></textarea>
+		<textarea id="dataChannelReceive"></textarea>
+
+		<div>
+			<button id="send">send</button>
+		</div>
 		<br>
 		<br>
 		
@@ -75,6 +84,10 @@
 	<jsp:include page="../../pages/form/footer.jsp"></jsp:include>
 
 	<!-- JAVASCRIPTS -->
+	<script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
+	<script src="${path}/resources/js/Web_RTC_Server/rtc_local.js"></script>
+	<script src="${path}/resources/js/Web_RTC_Server/rtc_server.js"></script>
+	<script src="/socket.io/socket.io.js"></script>
 	<script src="${path}/resources/js/jquery.min.js"></script>
 	<script src="${path}/resources/js/jquery.backtotop.js"></script>
 	<script src="${path}/resources/js/jquery.mobilemenu.js"></script>
