@@ -68,7 +68,9 @@
 	width: 350px;
 	height: 300px;
 	margin-right: 30px;
-	
+}
+.pjl td{
+	text-align: center;
 }
 
 .pjr>h1 {
