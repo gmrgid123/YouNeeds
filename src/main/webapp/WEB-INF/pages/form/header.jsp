@@ -78,7 +78,7 @@
          <!-- 펼치기 스타일 메뉴 -->
         
         
-        <li><a href="list.do">프로젝트 목록</a></li>
+        <li><a href="pjlist.do">프로젝트 목록</a></li>
         <li><a href="pjupload.do">프로젝트 등록</a></li>
         <li><a href="notice_board">공지사항</a></li>
         <li><a href="qna_board">QnA</a></li>
