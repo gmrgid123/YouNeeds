@@ -50,7 +50,7 @@
 }
 
 .pjl {
-	width: 400px;
+	width: 100%;
 	height: 300px;
 	margin-right: 50px;
 	text-align: center;
@@ -68,7 +68,9 @@
 	width: 350px;
 	height: 300px;
 	margin-right: 30px;
-	
+}
+.pjl td{
+	text-align: center;
 }
 
 .pjr>h1 {
@@ -162,7 +164,7 @@
 			<h1>프로젝트 기간</h1>
 			<h1>모인 금액</h1>
 			<h1>후원자 수</h1>
-			<input type="button" class="btn1" value="후원하기" onclick="location.href=''">
+			<input type="button" class="btn1" value="후원하기" onclick="location.href='order_test'">
 		</div>
 	</div>
 		<div class="pjbtn">
@@ -226,8 +228,8 @@
 			
 			
 			</pre>
-			<input type="button" id="btn3" value="공지등록" onclick="location.href=''">
-			<input type="button" id="btn3" value="화상설명회 개최공지" onclick="location.href=''">
+			<input type="button" id="btn3" value="공지등록" onclick="location.href='pjupnotice.do'">
+			<input type="button" id="btn3" value="화상설명회 개최공지" onclick="location.href='pjupnotice.do'">
 		</div>
 			
 			

@@ -47,7 +47,7 @@
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	
+	margin-bottom : 50px;
 	text-align: center;
 }
 
@@ -151,7 +151,7 @@ textarea {
 
 	<!-- ------------------------------------------------------------------------- -->
 	<!-- ------------------------------------------------------------------------- -->
-	
+	<form action="#" method="post">
 	<div class="body">
 		<div class="P0">
 		<h5>카테고리 선택</h5>
@@ -196,16 +196,12 @@ textarea {
 		<!-- ------------------------------------------------------------------------------ -->
 		
 		<div class="P5">
-			<form action="#" method="post">
+			
 				<h5>프로젝트 소개</h5>
 				<div>
+					
 					<div>
-						<input type="text" name="notice_title" placeholder="제목을 입력해주세요."
-							required="required" style="width: 100%; height: 40px;">
-					</div>
-					<br>
-					<div>
-						<textarea class="form-control" id="p_content" required="required"
+						<textarea class="form-control" id="p_content" name="notice_content" required="required"
 							style="resize: none;"></textarea>
 						<script type="text/javascript">
 							CKEDITOR.config.resize_enabled = false;
@@ -219,12 +215,9 @@ textarea {
 						</script>
 					</div>
 					<br>
-					<div style="text-align: center;">
-						<input type="submit" value="작성" id="btn2">
-						<input type="button" value="취소" id="btn2" onclick="location.href='notice_board'">
-					</div> 
+					
 				</div>  
-			</form>
+			
 		</div>
 
 		<!-- -------------------------------------------------------------------------------- -->
@@ -233,7 +226,12 @@ textarea {
 			<h5>펀딩 안내</h5>
 			<textarea cols="80" rows="15"> </textarea>		
 		</div>
+		<div style="text-align: center;">
+				<input type="submit" value="작성" id="btn2">
+				<input type="button" value="취소" id="btn2" onclick="location.href='notice_board'">
+		</div> 
 	</div>
+	</form>
 		<!-- ----------------------------------------------------------- -->
 
 	<!-- ------------------------------------------------------------------------------- -->

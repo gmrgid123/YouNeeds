@@ -47,7 +47,7 @@
 }
 
 .pjl {
-	width: 400px;
+	width: 100%;
 	height: 300px;
 	margin-right: 50px;
 	text-align: center;
@@ -156,7 +156,7 @@
 			<h1>프로젝트 기간</h1>
 			<h1>모인 금액</h1>
 			<h1>후원자 수</h1>
-			<input type="button" class="btn1" value="후원하기" onclick="location.href=''">
+			<input type="button" class="btn1" value="후원하기" onclick="location.href='order_test'">
 		</div>
 	</div>
 		<div class="pjbtn">

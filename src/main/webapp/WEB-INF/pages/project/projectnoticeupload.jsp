@@ -6,8 +6,7 @@
 
 
 <!-- JAVASCRIPTS -->
-<script src="${path}/resources/js/slider/slider.js" type="text/javascript"></script>
-<script src="${path}/resources/js/slider/jssor.slider-28.1.0.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="${path}/resources/ckeditor/ckeditor.js"></script>
 <script src="${path}/resources/js/jquery.min.js"></script>
 <script src="${path}/resources/js/jquery.backtotop.js"></script>
 <script src="${path}/resources/js/jquery.mobilemenu.js"></script>
@@ -42,7 +41,13 @@
 	color : white;
 	margin : 0 auto;
 	margin-left : 8%;
+	
 }
+.btn-div{
+	margin-top:20px;
+	margin-left: 5%;
+}
+
 
 		
 </style>
@@ -66,12 +71,19 @@
 		<form action="">
 				<h1 style="font-family: 'Gugi', cursive; text-align:center;">프로젝트 공지 등록</h1>
 			<div class="body">
-				<label>제목<input type="text" placeholder="내용을 입력해주세요"
-							style="width:400px; height:30px;"></label>
-				<label>내용<input type="text" placeholder="내용을 입력해주세요"
-							style="width:400px; height:300px;"></label>
-				<input type="submit" value="등록" id=btn>
-				<input type="submit" value="취소" id=btn>
+				<label>제목<input type="text" placeholder="내용을 입력해주세요" required="required"
+							style="width:600px; height:30px;"></label>
+				<textarea id="edit_content" name="" required="required"></textarea>
+				<script type="text/javascript">
+					CKEDITOR.config.resize_enabled= false;
+					CKEDITOR.replace('edit_content',
+									{width:'600px',height:'300px', filebrowserUploadUrl: '${pageContext.request.contextPath }/adm/fileupload.do'}		
+					);
+				</script>
+				<div class="btn-div">
+					<input type="submit" value="등록" id="btn">
+					<input type="button" value="취소" id="btn">
+				</div>
 			</div>
 		</form>
 	

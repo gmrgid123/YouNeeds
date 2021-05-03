@@ -151,7 +151,7 @@
         <input type="password" id="pw" class="pw" placeholder="PW">
       </div>
        <div class="passText">
-        <a href="#">비밀번호를 잊으셨나요?</a>
+        <a href="found_pw">비밀번호를 잊으셨나요?</a>
       </div>
       <br>
       <input type="button" class="btn" value="LOG IN" onclick="login();">
