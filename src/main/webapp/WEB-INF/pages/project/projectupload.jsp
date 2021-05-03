@@ -199,11 +199,7 @@ textarea {
 			
 				<h5>프로젝트 소개</h5>
 				<div>
-					<div>
-						<input type="text" name="notice_title" placeholder="제목을 입력해주세요."
-							required="required" style="width: 100%; height: 40px;">
-					</div>
-					<br>
+					
 					<div>
 						<textarea class="form-control" id="p_content" name="notice_content" required="required"
 							style="resize: none;"></textarea>
