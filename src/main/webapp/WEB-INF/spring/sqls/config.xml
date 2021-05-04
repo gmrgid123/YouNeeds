@@ -5,11 +5,6 @@
 
 <configuration>
 
-	<typeAliases>
-		<typeAlias type=""/>
-		<typeAlias type=""/>
-		<typeAlias type=""/>
-	</typeAliases>
 
 
 	<mappers>
