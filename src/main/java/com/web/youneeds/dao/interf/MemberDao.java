@@ -10,5 +10,5 @@ public interface MemberDao {
 	public int update(MemberDto dto); // 정보수정
 	public int withdrawal(int m_uid); // 회원탈퇴
 	
-	
+	public int nicknameChk(String m_nickname); // 닉네임 중복 검사
 }

@@ -29,4 +29,10 @@ public class MemberDaoImpl implements MemberDao{
 		return 0;
 	}
 
+	@Override
+	public int nicknameChk(String m_nickname) {		// 닉네임 중복 검사
+
+		return 0;
+	}
+
 }
