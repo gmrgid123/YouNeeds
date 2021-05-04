@@ -237,7 +237,7 @@ function goPopup(){
 	   
 	   /* 인증번호 비교*/
 	   $("#c_mail").click(function(){
-		    	var inputCode = $(".num_emil").val();
+		    	var inputCode = $(".num_email").val();
 		    	var checkResult = $("#c_mail_warn");
 		    	
 		    	if(inputCode == code){
