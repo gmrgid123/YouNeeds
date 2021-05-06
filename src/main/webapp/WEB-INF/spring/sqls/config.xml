@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	<typeAliases>
+		<typeAlias type="com.web.youneeds.dto.MemberDto" alias="memberDto"/>
+	</typeAliases>
+
+	<mappers>
+		<mapper resource="/mybatis/mapper/Creator-Mapper.xml"/>
+		<mapper resource="/mybatis/mapper/Member-Mapper.xml"/>
+		<mapper resource="/mybatis/mapper/NoticeImg-Mapper.xml"/>
+		<mapper resource="/mybatis/mapper/Notice-Mapper.xml"/>
+		<mapper resource="/mybatis/mapper/Order-Mapper.xml"/>
+		<mapper resource="/mybatis/mapper/ProjectFundGuide-Mapper.xml"/>
+		<mapper resource="/mybatis/mapper/ProjectIntroImg-Mapper.xml"/>
+		<mapper resource="/mybatis/mapper/ProjectIntro-Mapper.xml"/>
+		<mapper resource="/mybatis/mapper/Project-Mapper.xml"/>
+		<mapper resource="/mybatis/mapper/ProjectNoticeImg-Mapper.xml"/>
+		<mapper resource="/mybatis/mapper/ProjectNotice-Mapper.xml"/>
+		<mapper resource="/mybatis/mapper/ProjectTitleImg-Mapper.xml"/>
+		<mapper resource="/mybatis/mapper/QnaImg-Mapper.xml"/>
+		<mapper resource="/mybatis/mapper/Qna-Mapper.xml"/>
+		<mapper resource="/mybatis/mapper/VideoChat-Mapper.xml"/>
+	</mappers>
+</configuration>

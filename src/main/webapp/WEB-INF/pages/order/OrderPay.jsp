@@ -56,8 +56,9 @@
 }
 
 </style>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript">
-/*function openApi_Addr(){
+function openApi_Addr(){
 
     new daum.Postcode({
         oncomplete: function(data) {
@@ -65,14 +66,6 @@
         }
     }).open();
     
-}*/
-/* 주소 */
-function goPopup(){
-	var pop=window.open("popup/jusoPopup.jsp", "pop", "width=570, height=420, scrollbars=yes, resizable=yes");
-}
-function jusoCallBack(roadAddrPart2){
-	var addressEl=document.querySelector("#address");
-	addressEl.value=roadAddrPart2;
 }
 </script>
 </head>
@@ -103,7 +96,7 @@ function jusoCallBack(roadAddrPart2){
 						<div class="input-group">
 						<input name="order_addr1" class="order_input_text form-control" type="text" required="required" placeholder="주소를 입력해주세요.">
 							<div class="input-group-append">
-								<button  class="btn btn-info" type="button" onclick="goPopup();">주소찾기</button>
+								<button  class="btn btn-info" type="button" onclick="openApi_Addr();">주소찾기</button>
 							</div>
 						</div>
 						<input name="order_addr2" class="order_input_text form-control" type="text" placeholder="상세주소를 입력해주세요.">

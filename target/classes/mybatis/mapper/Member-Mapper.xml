@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="member">
+ 	<resultMap type="memberDto" id="memberMap">
+		<result property="m_uid" column="m_uid"/>
+		<result property="m_email" column="m_email"/>
+		<result property="m_pw" column="m_pw"/>
+		<result property="m_nickname" column="m_nickname"/>
+		<result property="m_addr" column="m_addr"/>
+		<result property="m_type" column="m_type"/>
+		<result property="m_regdate" column="m_regdate"/>
+		<result property="m_enabled" column="m_enabled"/>
+		<result property="m_deldate" column="m_deldate"/>
+	</resultMap>
+	
+ 	<insert id="insert" parameterType="memberDto"> <!-- 회원가입 -->
+ 		insert into Member
+ 		values(m_uidseq.nextval, #{m_email}, #{m_pw}, #{m_nickname}, #{m_addr}, #{m_type}, sysdate, #{m_enabled}, sysdate)
+ 	</insert>
+ 	
+ 	<select id="nicknameChk" resultType="int">
+ 		select count(*) form Member
+ 		where m_nickname=#{m_nickname}
+ 	</select>
+ 
+ </mapper>

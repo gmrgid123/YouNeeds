@@ -20,22 +20,26 @@
   		text-decoration: none;
 	}
 	
+	span{
+		font-size: 17px;
+	}
+	
 	#top{
 		background-color: #F4FFFF;
 	}
 	
 	#signup{
-		height: 1000px;
+		height: 1050px;
 	}
 	
 	.singupForm {
 		font-family:sans-serif;
   		position:absolute;
-  		margin-top: 250px;
+  		margin-top: 280px;
   		margin-bottom: 10px;
   		padding: 30px, 20px;
-		width:500px;
-		height:800px;
+		width:520px;
+		height:900px;
 		background-color:#FFFFFF;
 		text-align:left;
 		top:50%;
@@ -110,6 +114,16 @@
 		width: 330px;
 		height:30px;
 		background: none;
+	}
+	
+	.pw_1{
+		color: green;
+		display: none;
+	}
+	
+	.pw_2{
+		color: red;
+		display: none;
 	}
 	
 	.userpw{
@@ -200,6 +214,23 @@
 	.btn:hover {
 		background-position: right;
 	}
+	
+	.final_mail_ck{
+		display: none;
+	}
+	.final_pw_ck{
+		display: none;
+	}
+	.final_pwck_ck{
+		display: none;
+	}
+	.final_nickname_ck{
+		display: none;
+	}
+	.final_addr_ck{
+		display: none;
+	}
+	
 </style>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -214,15 +245,43 @@ function goPopup(){
     }).open();
     
 }
-    
+
+/* 이메일 형식 유효성*/
+function mailFormCheck(email){
+    var form = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+ 	return form.test(email);
+}    
    
    $(function(){
 	   /* 이메일 인증 */
 		var code=" ";
+	   
+	   /* 유효성 검사 */
+	   var nicknameCheck = false; //닉네임
+	   var nicknameckCheck = false; //닉네임 중복
+	   var pwCheck = false; //비번
+	   var pwckCheck = false; //비번확인
+	   var pwckorCheck = false; //비번 확인 일치
+	   var mailCheck = false; //이메일
+	   var mailnumCheck = false; //이메일 인증번호
+	   var addressCheck = false; //주소
+	   
+	   /* 이메일 인증번호 */
 	   $("#email").click(function(){
 	    	var email = $(".useremail").val();
 	    	var checkBox = $(".num_email");
 	    	var boxWrap=$(".emailForm");
+	    	var warnMsg =$(".mail_warn");
+	    	
+	    	/* 이메일 유효성 */
+	    	if(mailFormCheck(email)){
+	    		warnMsg.html("이메일이 전송 되었습니다. 이메일을 확인해주세요.");
+	    		warnMsg.css("display", "inline-block");
+	    	}else{
+	    		warnMsg.html("올바르지 못한 이메일 형식입니다.");
+	    		warnMsg.css("display", "inline-block");
+	    		return false;
+	    	}
 	    	
 	    	$.ajax({
 	    		type: "GET",
@@ -235,31 +294,124 @@ function goPopup(){
 	    	});
 	    });
 	   
-	   /* 인증번호 비교*/
+	   /* 인증번호 비교 */
 	   $("#c_mail").click(function(){
 		    	var inputCode = $(".num_email").val();
 		    	var checkResult = $("#c_mail_warn");
 		    	
 		    	if(inputCode == code){
 		            checkResult.html("인증번호가 일치합니다.");
-		            checkResult.attr("class", "correct");        
+		            checkResult.attr("class", "correct"); 
+		            mailnumCheck=true;
 		        }else if(inputCode != code){
 		    		checkResult.html("인증번호를 다시 확인해주세요.");
 		    		checkResult.attr("class", "incorrect");
+		    		mailnumCheck=false;
 		    	}
+	   });
+	   
+	   /* 비밀번호 확인 일치*/
+	   $("#c_userpw").on("propertychange change keyup paste input", function(){
+		   var pw=$("#userpw").val();
+		   var pwck=$("#c_userpw").val();
+		   $(".final_pwck_ck").css("display", "none");
+		   
+		   if(pw == pwck){
+			   $(".pw_1").css("display", "block");
+			   $(".pw_2").css("display", "none");
+			   pwckorCheck = true;
+		   }else{
+			   $(".pw_1").css("display", "none");
+			   $(".pw_2").css("display", "block");
+			   pwckorCheck = false;
+		   }
 	   });
 	   
 	   /* 닉네임 중복 */
 	   $("#nickname_btn").click(function(){
 	    	var nickname =$(".nickname").val();
-	    	var data = {nickname : nickname}
+	    	var data = {m_nickname : $("#nickname").val()}
 	    	
 	    	$.ajax({
 	    		type: "post",
-	    		url: "/nicknameChk",
-	    		data: data
+	    		url: "nicknameChk.do",
+	    		data: data,
+	    		success:function(result){
+	    			console.log("성공"+result);
+	    			if(result != 'fail'){
+	    				$(".nick_1").css("display", "inline-block");
+	    				$(".nick_2").css("display", "none");
+	    				nicknameckCheck=true;
+	    			}else{
+	    				$(".nick_2").css("display", "inline-block");
+	    				$(".nick_1").css("display", "none");
+	    				nicknameckCheck=false;
+	    			}
+	    		}
 	    	});
 	    });
+	   
+	   //회원가입
+	   $("#join_button").click(function(){
+		   /* 입력값 변수 */
+		   var nickname = $(".nickname").val();
+		   var pw = $("#userpw").val();
+		   var pwck = $("#c_userpw").val();
+		   var mail = $(".useremail").val();
+		   var addr = $(".address").val();
+		   
+		   /* 닉네임 유효성 */
+		   if(nickname==""){
+			   $(".final_nickname_ck").css("display", "block");
+			   nicknameCheck=false;
+		   }else{
+			   $(".final_nickname_ck").css("display", "none");
+			   nicknameCheck=true;
+		   }
+		   
+		   /* 비밀번호 유효성 */
+		   if(pw==""){
+			   $(".final_pw_ck").css("display", "block");
+			   pwCheck=false;
+		   }else{
+			   $(".final_pw_ck").css("display", "none");
+			   pwCheck=true;
+		   }
+		   
+		   /* 비밀번호 확인 유효성 */
+		   if(pwck==""){
+			   $(".final_pwck_ck").css("display", "block");
+			   pwckCheck=false;
+		   }else{
+			   $(".final_pwck_ck").css("display", "none");
+			   pwckCheck=true;
+		   }
+		   
+		   /* 이메일 유효성 */
+		   if(mail==""){
+			   $(".final_mail_ck").css("display", "block");
+			   mailCheck=false;
+		   }else{
+			   $(".final_mail_ck").css("display", "none");
+			   mailCheck=true;
+		   }
+		   
+		   /* 주소 유효성 */
+		   if(addr==""){
+			   $(".final_addr_ck").css("display", "block");
+			   addressCheck=false;
+		   }else{
+			   $(".final_addr_ck").css("display", "none");
+			   addressCheck=true;
+		   }
+		   
+		   /* 최종 유효성 */
+		   if(nicknameCheck && nicknameckCheck && pwCheck && pwckCheck && pwckorCheck && mailCheck && mailnumCheck && addressCheck){
+			   $("#join_form").attr("action", "join.do");
+			   $("#join_form").submit();
+		   }
+		   return false;
+	   });
 	});
     
 </script>
@@ -269,33 +421,41 @@ function goPopup(){
 	<jsp:include page="../form/header.jsp"></jsp:include>
 
 <div id="signup">
-	<form action="main.do" method="post" class="singupForm">
+	<form action="" method="post" id="join_form" class="singupForm">
 		<h1>Create account</h1>
 		<div class="emailForm">이메일<br><br>
-        	<input type="text" id="useremail" class="useremail" placeholder="이메일 입력 후 인증해주세요.">
+        	<input type="text" name="m_email" id="useremail" class="useremail" placeholder="이메일 입력 후 인증해주세요.">
        		<input type="button" id="email" class="userbtn" value="인증하기"/>
        		<input type="text" id="num_email" class="num_email" placeholder="인증번호 입력하세요." disabled="disabled">
        		<input type="button" id="c_mail" class="userbtn" value="인증확인">
        		<div class="clearfix"></div>
        		<span id="c_mail_warn"></span>
+       		<span class="final_mail_ck">이메일을 입력해주세요.</span>
+      		<span class="mail_warn"></span>
       	</div>
       	<div class="passForm">비밀번호<br><br>
         	<input type="password" id="userpw" class="userpw" placeholder="비밀번호 입력하세요.">
+      		<span class="final_pw_ck">비밀번호를 입력해주세요.</span>
       		<br>비밀번호 확인<br><br>
-        	<input type="password" id="c_userpw" class="userpw" placeholder="비밀번호 확인하세요.">
+        	<input type="password" name="m_pw" id="c_userpw" class="userpw" placeholder="비밀번호 확인하세요.">
+      		<span class="final_pwck_ck">비밀번호 확인을 입력해주세요.</span>
+      		<span class="pw_1">비밀번호가 일치합니다.</span>
+      		<span class="pw_2">비밀번호가 일치하지 않습니다.</span>
       	</div>
       	<div class="nicknameForm">닉네임<br><br>
-        	<input type="text" id="nickname" class="nickname" placeholder="닉네임 입력하세요.">
+        	<input type="text" name="m_nickname" id="nickname" class="nickname" placeholder="닉네임 입력하세요.">
       		<input type="button" id="nickname_btn" class="userbtn" value="중복확인">
       		<span class="nick_1">사용 가능한 닉네임입니다.</span>
       		<span class="nick_2">이미 존재한 닉네임입니다.</span>
+      		<span class="final_nickname_ck">닉네임을 입력해주세요.</span>
       	</div>
       	<div class="addrForm">주소<br><br>
 			<input type="button" id="address_btn" class="userbtn" onclick="goPopup()" value="주소검색"> 
-			<input type="text" id="address" class="address" placeholder="주소를 검색하세요." required readonly>
-      		<input type="text" id="sub_address" class="sub_address" placeholder="상세주소를 입력하세요.">
+			<input type="text" name="m_addr" id="address" class="address" placeholder="주소를 검색하세요." required readonly>
+      		<input type="text" name="m_addr" id="sub_address" class="sub_address" placeholder="상세주소를 입력하세요.">
+      		<span class="final_addr_ck">주소를 입력해주세요.</span>
       	</div>
-      	<input type="submit" class="btn" value="Create your YouNeeds account" onclick="">
+      	<input type="submit" class="btn" value="Create your YouNeeds account" id="join_button">
 	</form>
 </div>
 	<!-- footer include -->
