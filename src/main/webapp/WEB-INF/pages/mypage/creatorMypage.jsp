@@ -153,7 +153,7 @@ div .card {
 			</div>
 			<div class="box2">
 				<input type="button" style="width: 120px; height: 30px; font-size: 15px; background-color: skyblue; border-radius: 5px;" value="회원정보수정" onclick="location.href='updatecreator'">
-				<input type="button" style="width: 100px; height: 30px; font-size: 15px; background-color: skyblue; border-radius: 5px;" value="로그아웃" onclick="">
+				<input type="button" style="width: 100px; height: 30px; font-size: 15px; background-color: skyblue; border-radius: 5px;" value="로그아웃" onclick="location.href='logout'">
 			</div>
 			<hr>
 		</div>

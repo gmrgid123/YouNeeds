@@ -72,7 +72,9 @@
 		
 		<br>
 		
-		<textarea class="projectIntro" style="width:700px; height: 200px;" readonly="readonly">프로젝트 소개</textarea>
+		<textarea class="projectIntro" style="width:700px; height: 200px;" readonly="readonly">
+			
+		</textarea>
 
 
 		<br>

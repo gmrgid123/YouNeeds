@@ -2,11 +2,14 @@ package com.web.youneeds.controller;
 
 import java.util.Locale;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class MyPageController {
@@ -28,6 +31,15 @@ public class MyPageController {
 		logger.info("creatorMypage 페이지 호출");
 		
 		return "mypage/creatorMypage";
+	}
+	
+	@RequestMapping(value="/logout", method=RequestMethod.GET)
+	public String logout(HttpSession session) {
+		session.invalidate();
+		
+		logger.info("Logout 성공");
+		
+		return "redirect:/";
 	}
 	
 }
