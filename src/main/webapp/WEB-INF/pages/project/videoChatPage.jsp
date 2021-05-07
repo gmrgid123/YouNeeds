@@ -62,24 +62,21 @@
 			<br>
 			<div class="creator">설명회 개최자</div>
 			<br>
-			<div class="videoChat" style="width: 700px; height: 500px; background-color:lightgray;">
-				<video id="localVideo" autoplay playsinline></video>
-				<video id="remoteVideo" autoplay playsinline></video>
+			<div class="videoChat" style="width: 700px; height: 550px; background-color:black;">
+				<video controls autoplay id="localVideo" style="width: 700px; height: 500px"></video>
+			</div>
+			<div style="width: 700px; height: 200px; background-color:black;">
+				<video controls autoplay id="remoteVideo" style="width: 200px; height: 200px"></video>
 			</div>
 		</div>
+		
+		<br>
 		
 		<textarea class="projectIntro" style="width:700px; height: 200px;" readonly="readonly">프로젝트 소개</textarea>
 
 
 		<br>
 		<br>
-		
-		
-		
-		
-		
-		
-		
 		
 	</div>
 
