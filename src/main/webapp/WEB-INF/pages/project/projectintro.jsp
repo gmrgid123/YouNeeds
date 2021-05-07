@@ -18,8 +18,7 @@
 	type="text/css" media="all">
 
 <link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Gugi&display=swap"
-	rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Gugi&display=swap" rel="stylesheet">
 
 
 <!-- -------------------------------------------------------------------------------- -->
@@ -28,143 +27,108 @@
 	font-family: 'Gugi', cursive;
 }
 
-.title {
+.pjtitle {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
+	margin-top: 30px;
 	background-color: #93C0C5;
 	color: white;
 }
 
-.top {
+.pjtop {
 	width: 1000px;
 	display: flex;
 	flex-direction: row;
 	align-items: center;
 	justify-content: center;
-	margin: auto auto 0px auto;
-	background-color : #93c0c541;
+	margin: 40px auto 0px auto;
 }
 
-.tl {
-	width: 450px;
+.pjl {
+	width: 100%;
 	height: 300px;
 	margin-right: 50px;
 	text-align: center;
-	background-color :#93c0c521;
-	
 }
 
-.tr {
+.pjl>img {
+	width: 400px;
+	height: 300px;
+	background-position: center;
+	background-size: cover;
+}
+
+.pjr {
 	width: 350px;
-	height: 200px;
-	background-color :#ffffff6c;
-	
-}
-.tr>h1 {
-	line-height : 60px;
-	margin : 0px 0px 0px 20px;
-	font-size : 20px;
-	color : #93C0C5;
+	height: 300px;
+	margin-right: 30px;
 }
 
-#b1 {
+.pjr>h1 {
+	line-height: 60px;
+	color: #93c0c5;;
+}
+
+.pjl>h1 {
+	line-height: 60px;
+	color: #93c0c565;
+}
+
+.btn1 {
 	width: 120px;
 	height: 40px;
-	margin-top : 20px;
-	
 	border: 2px solid #93C0C5;
-	border-radius : 20px;
 	text-decoration: none;
 	text-align: center;
 	color: #93C0C5;
-	
 	font-weight: bold;
-
 }
 
-#b1:hover {
+.btn1:hover {
 	background-color: #93C0C5;
 	color: white;
 }
 
-.middle {
+.pjbtn {
+	margin-left: 260px;
+	width: 1000px;
+	height: 50px;
+}
+
+#btn2 {
+	color: black;
+	margin-right: 40px;
+	font-size: 17px;
+	font-weight: bold;
+	line-height: 50px;
+}
+
+.pjbtm {
 	width: 1000px;
 	display: flex;
 	flex-direction: row;
 	align-items: center;
 	justify-content: center;
-	margin: 5px auto 0px auto;
-	background-color : #93c0c521;
-	color : white;
-}
-.btn {
-	width: 450px;
-	font-size: 20px;
+	margin: 30px auto 100px auto;
 }
 
-.btn>a {
-	margin-left: 20px;	
-	color :  #3533335d;
-}
-
-a:hover {
-	color : black;
-
-}
-.bottom{
-	width: 1000px;
-	margin: 5px auto 20px auto;
-	background-color : #93c0c541;
-	
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	justify-content: center;
-	
-}
-
-.bl{
-
-	width: 450px;
-	height: 300px;
-	margin-right: 50px;
-	text-align: center;
-	background-color :#93c0c521;
-}
-
-
-.br{
-	width: 350px;
-	height: 200px;;
-	background-color:#ffffff6c;
-	
-}
-
-#b2 {
-	display : inline-block;
-	
-	width: 150px;
+#btn3 {
+	display: inline-block;
+	width: 140px;
 	height: 40px;
-	margin-top : 20px;
-	
 	border: 2px solid #93C0C5;
-	border-radius : 20px;
 	text-decoration: none;
 	text-align: center;
 	color: #93C0C5;
-	
 	font-weight: bold;
-
 }
 
-#b2:hover {
+#btn3:hover {
 	background-color: #93C0C5;
 	color: white;
 }
-
-
 </style>
 
 <!DOCTYPE html>
@@ -181,63 +145,50 @@ a:hover {
 
 
 	<!-- -------------------------------------------------------------------------------- -->
-	<div class="title">
-		<h1>프로젝트명</h1>
-	</div>
-	<!-- ------------------------------------top----------------------------------------- -->
-
-
-	<div class="top">
-		<div class="tl">
-		
+	<!-- -------------------------------------------------------------------------------- -->
+	
+	<div class="pjtitle"><h1>프로젝트명</h1></div>
+	<div class="pjtop">	
+		<div class="pjl">
+			<img src="resources/images/1.jpg">
 		</div>
-		<!-- ---------------------------------------------------------------------------- -->
-		<div>
-		<div class="tr">
+		<div class="pjr">
 			<h1>프로젝트 기간</h1>
 			<h1>모인 금액</h1>
 			<h1>후원자 수</h1>
-		</div>
-			<input type="button" id="b1" value="후원하기" 
-			style="text-align:center;" onclick="location.href='order_test'">
+			<input type="button" class="btn1" value="후원하기" onclick="location.href='order_test'">
 		</div>
 	</div>
-
-	<!-- -------------------------------------------------------------------------------- -->
-	<!-- -------------------------------middle-------------------------------------------- -->
-
-	<div class=middle>
-		<div class="btn">
-			<a href="pjintro.do">프로젝트 소개</a> 
-			<a href="pjnotice.do">프로젝트 공지</a> 
-			<a href="pjfunding.do">펀딩안내</a>
+		<div class="pjbtn">
+			<div class="pjl">
+				<hr>
+				<a href="pjintro.do" id="btn2">프로젝트 소개</a>
+				<a href="pjnotice.do" id="btn2">프로젝트 공지</a>
+				<a href="pjfunding.do" id="btn2">펀딩안내</a>	
+				<hr>
+			</div>
 		</div>
-	</div>
-
+	
 	<!-- -------------------------------------------------------------------------------- -->
-	<!-- ---------------------------------bottom----------------------------------------- -->
-	<div class="bottom">
-		<div class="bl">
 	
+	<!-- -------------------------------------------------------------------------------- -->
+	<div class="pjbtm">
+		<div class="pjl" style="background-color :#93c0c50e; margin-bottom:50px;">
+			<h1>프로젝트 소개 </h1>
 		
+		</div>	
+		<div class="pjr" style="margin-bottom : 50px;">
+			<h1>창작자 소개</h1>
+			<pre> 
+			
+			
+			</pre>
+			<input type="button" id="btn3" value="공지등록" onclick="location.href='pjupnotice.do'">
+			<input type="button" id="btn3" value="화상설명회 개최공지" onclick="location.href='pjupnotice.do'">
 		</div>
-		<div style="text-align:center;">
-            <div class="br">
-            	
-
-
-            </div>
-            
-            <input type="button" id="b2" value="공지사항 등록">
-             <input type="button" id="b2" value="화상설명회 개최공지">
-        </div>
-    </div>
-		
-	
-
-	
-
-
+			
+			
+		</div>
 	<!-- ----------------------------------------------------------- -->
 	<!-- footer include -->
 	<jsp:include page="../form/footer.jsp"></jsp:include>

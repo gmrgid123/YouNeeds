@@ -65,7 +65,7 @@
 	line-height: 60px;
 	margin: 0px 0px 0px 20px;
 	font-size: 20px;
-	color: #93C0C5;
+	color: black;
 }
 
 #b1 {
@@ -111,7 +111,7 @@ a:hover {
 
 .bottom {
 	width: 1000px;
-	margin: 5px auto 20px auto;
+	margin: 5px auto 0px auto;
 	background-color: #93c0c541;
 	display: flex;
 	flex-direction: row;
@@ -156,7 +156,7 @@ a:hover {
 <html>
 <head>
 <meta charset="UTF-8">
-<title>프로젝트</title>
+<title>펀딩안내</title>
 </head>
 <body>
 
@@ -173,7 +173,10 @@ a:hover {
 
 
 	<div class="top">
-		<div class="tl"></div>
+		<div class="tl">
+			프로젝트 대표 이미지 (프로젝트 등록시)
+			
+		</div>
 		<!-- ---------------------------------------------------------------------------- -->
 		<div>
 			<div class="tr">
@@ -199,9 +202,14 @@ a:hover {
 	<!-- -------------------------------------------------------------------------------- -->
 	<!-- ---------------------------------bottom----------------------------------------- -->
 	<div class="bottom">
-		<div class="bl"></div>
+		<div class="bl">
+			펀딩안내 (프로젝트 등록시)
+		</div>
 		<div style="text-align: center;">
-			<div class="br"></div>
+			<div class="br">
+				창작자 소개 (창작 회원 가입시)
+				
+			</div>
 
 			<input type="button" id="b2" value="공지사항 등록"> <input
 				type="button" id="b2" value="화상설명회 개최공지">

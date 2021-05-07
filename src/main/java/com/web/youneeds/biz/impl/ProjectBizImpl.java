@@ -2,12 +2,17 @@ package com.web.youneeds.biz.impl;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.web.youneeds.biz.interf.ProjectBiz;
 import com.web.youneeds.dao.interf.ProjectDao;
 import com.web.youneeds.dto.ProjectDto;
 
+@Service
 public class ProjectBizImpl implements ProjectBiz{
-
+	
+	@Autowired
 	private ProjectDao projectDao;
 	
 	@Override
@@ -24,8 +29,7 @@ public class ProjectBizImpl implements ProjectBiz{
 
 	@Override
 	public int insert(ProjectDto dto) {
-		// TODO Auto-generated method stub
-		return 0;
+		return projectDao.insert(dto);
 	}
 
 	@Override
