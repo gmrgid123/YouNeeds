@@ -34,12 +34,19 @@
 }
 
 .videoChat{
+	margin: 0 auto;
+	position: relative;
 	text-align: center;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	font-size:20pt;
+	
+}
+
+.localVideo{
+	position: absolute;
+	margin: 0;
 }
 
 </style>
@@ -50,24 +57,20 @@
 	<jsp:include page="../../pages/form/header.jsp"></jsp:include>
 	
 	<div class="main">
-		<div class="videoChat" style="width: 700px; height: 500px;">
+		<div class="videoChat" style="width: 700px;">
 			<div class="title">프로젝트 제목 - 설명회</div>
 			<br>
 			<div class="creator">설명회 개최자</div>
 			<br>
-			<div class="videoChat" style="width: 700px; height: 350px; background-color:lightgray;">
-				<video id="localVideo" autoplay></video>
-				<video id="remoteVideo" autoplay></video>
+			<div class="videoChat" style="width: 700px; height: 500px; background-color:lightgray;">
+				<video id="localVideo" autoplay playsinline></video>
+				<video id="remoteVideo" autoplay playsinline></video>
 			</div>
 		</div>
 		
-		<!-- <textarea class="projectIntro" style="width:700px; height: 200px;" readonly="readonly">프로젝트 소개</textarea> -->
-		<textarea id="dataChannelSend"></textarea>
-		<textarea id="dataChannelReceive"></textarea>
+		<textarea class="projectIntro" style="width:700px; height: 200px;" readonly="readonly">프로젝트 소개</textarea>
 
-		<div>
-			<button id="send">send</button>
-		</div>
+
 		<br>
 		<br>
 		
@@ -84,10 +87,10 @@
 	<jsp:include page="../../pages/form/footer.jsp"></jsp:include>
 
 	<!-- JAVASCRIPTS -->
+	<script src="http://localhost:82/socket.io/socket.io.js"></script>
 	<script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
-	<script src="${path}/resources/js/Web_RTC_Server/rtc_local.js"></script>
-	<script src="${path}/resources/js/Web_RTC_Server/rtc_server.js"></script>
-	<script src="/socket.io/socket.io.js"></script>
+	<script src="${path}/resources/js/Web_RTC_Server/RTC.js"></script>
+	<script src="${path}/resources/js/Web_RTC_Server/index.js"></script>
 	<script src="${path}/resources/js/jquery.min.js"></script>
 	<script src="${path}/resources/js/jquery.backtotop.js"></script>
 	<script src="${path}/resources/js/jquery.mobilemenu.js"></script>
