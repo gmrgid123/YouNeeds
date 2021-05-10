@@ -14,7 +14,7 @@ public class PayController {
 	public String orderPayForm() {
 		logger.info("펀딩 결제 페이지 호출");
 		
-		return "/project/OrderPay";
+		return "/order/OrderPay";
 	}
 	
 }

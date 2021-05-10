@@ -32,12 +32,9 @@
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	
 	margin-top: 30px;
 	background-color: #93C0C5;
-	color : white;
-	
-	
+	color: white;
 }
 
 .pjtop {
@@ -54,7 +51,6 @@
 	height: 300px;
 	margin-right: 50px;
 	text-align: center;
-
 }
 
 .pjl>img {
@@ -69,23 +65,24 @@
 	height: 300px;
 	margin-right: 30px;
 }
-.pjl td{
-	text-align: center;
-}
 
 .pjr>h1 {
 	line-height: 60px;
-	color :  #93c0c5;;
-    
+	color: #93c0c5;;
+}
+
+.pjl>h1 {
+	line-height: 60px;
+	color: #93c0c565;
 }
 
 .btn1 {
 	width: 120px;
 	height: 40px;
-	border: 2px solid  #93C0C5;
+	border: 2px solid #93C0C5;
 	text-decoration: none;
 	text-align: center;
-	color:  #93C0C5;
+	color: #93C0C5;
 	font-weight: bold;
 }
 
@@ -94,22 +91,19 @@
 	color: white;
 }
 
-.pjbtn{
-	
-	margin-left : 260px;
-	width:1000px; 
-	height:50px;
+.pjbtn {
+	margin-left: 260px;
+	width: 1000px;
+	height: 50px;
 }
 
-#btn2{
-	color : black;
+#btn2 {
+	color: black;
 	margin-right: 40px;
-	font-size : 17px;
-	font-weight : bold;
+	font-size: 17px;
+	font-weight: bold;
 	line-height: 50px;
-	}
-
-
+}
 
 .pjbtm {
 	width: 1000px;
@@ -118,17 +112,16 @@
 	align-items: center;
 	justify-content: center;
 	margin: 30px auto 100px auto;
-	
 }
 
 #btn3 {
-	display : inline-block;
+	display: inline-block;
 	width: 140px;
 	height: 40px;
-	border: 2px solid  #93C0C5;
+	border: 2px solid #93C0C5;
 	text-decoration: none;
 	text-align: center;
-	color:  #93C0C5;
+	color: #93C0C5;
 	font-weight: bold;
 }
 
@@ -136,7 +129,6 @@
 	background-color: #93C0C5;
 	color: white;
 }
-
 </style>
 
 <!DOCTYPE html>
@@ -181,47 +173,10 @@
 	
 	<!-- -------------------------------------------------------------------------------- -->
 	<div class="pjbtm">
-		<div class="pjl">
-			<table>
-            <col width="80px"><col width="300px"><col width="80px">
-            <thead>
-               <tr>
-                  <th>글번호</th>
-                  <th>제목</th>
-                  <th>작성일자</th>
-               </tr>
-            </thead>
-            <tbody>
-               <tr>
-                  <td>1</td>
-                  <td><a href="notice_view" style="color:black;">임시용 제목 1</a></td>
-                  <td>yyyy-MM-dd</td>
-               </tr>
-               <tr>
-                  <td>2</td>
-                  <td><a href="order_test">임시용 제목 2</a></td>
-                  <td>yyyy-MM-dd</td>
-               </tr>
-               <tr>
-                  <td>3</td>
-                  <td><a href="#">임시용 제목 3</a></td>
-                  <td>yyyy-MM-dd</td>
-               </tr>
-               <tr>
-                  <td>4</td>
-                  <td><a href="#">임시용 제목 4</a></td>
-                  <td>yyyy-MM-dd</td>
-               </tr>
-               <tr>
-                  <td>5</td>
-                  <td><a href="#">임시용 제목 5</a></td>
-                  <td>yyyy-MM-dd</td>
-               </tr>
-            </tbody>
-         </table>
-		</div>
-
+		<div class="pjl" style="background-color :#93c0c50e; margin-bottom:50px;">
+			<h1>프로젝트 소개 </h1>
 		
+		</div>	
 		<div class="pjr" style="margin-bottom : 50px;">
 			<h1>창작자 소개</h1>
 			<pre> 

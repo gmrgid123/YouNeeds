@@ -39,4 +39,11 @@ public class LoginController {
 		
 		return "login/create";
 	}
+	
+	@RequestMapping("/found_pw")
+	public String foundPw() {
+		logger.info("패스워드 찾기 페이지");
+		
+		return "login/foundPw";
+	}
 }

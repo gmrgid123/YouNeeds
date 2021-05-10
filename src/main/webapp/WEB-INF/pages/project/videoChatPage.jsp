@@ -6,7 +6,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>videoChatPage</title>
+<title>MyPage</title>
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -65,18 +65,15 @@
 			<div class="videoChat" style="width: 700px; height: 550px; background-color:black;">
 				<video controls autoplay id="localVideo" style="width: 700px; height: 500px"></video>
 			</div>
-			<div style="width: 700px; height: 200px; background-color:black;">
+			<div class="remoteChat" style="width: 700px; height: 200px; background-color:black;">
 				<video controls autoplay id="remoteVideo" style="width: 200px; height: 200px"></video>
 			</div>
 		</div>
-		
 		<br>
 		
 		<textarea class="projectIntro" style="width:700px; height: 200px;" readonly="readonly">
 			
 		</textarea>
-
-
 		<br>
 		<br>
 		
@@ -88,8 +85,8 @@
 	<!-- JAVASCRIPTS -->
 	<script src="http://localhost:82/socket.io/socket.io.js"></script>
 	<script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
-	<script src="${path}/resources/js/Web_RTC_Server/RTC.js"></script>
-	<script src="${path}/resources/js/Web_RTC_Server/index.js"></script>
+	<script src="${path}/resources/js/Web_RTC_Server/rtc.js"></script>
+	<script src="${path}/resources/js/Web_RTC_Server/server.js"></script>
 	<script src="${path}/resources/js/jquery.min.js"></script>
 	<script src="${path}/resources/js/jquery.backtotop.js"></script>
 	<script src="${path}/resources/js/jquery.mobilemenu.js"></script>
