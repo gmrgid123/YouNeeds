@@ -16,9 +16,8 @@ public class ProjectBizImpl implements ProjectBiz{
 	private ProjectDao projectDao;
 	
 	@Override
-	public List<ProjectDto> selectList() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<ProjectDto> selectList(ProjectDto dto) {
+		return projectDao.selectList(dto);
 	}
 
 	@Override
@@ -29,6 +28,13 @@ public class ProjectBizImpl implements ProjectBiz{
 
 	@Override
 	public int insert(ProjectDto dto) {
+		String startDate = dto.getStart_date();
+		String endDate = dto.getEnd_date();
+		String[] startDateArr = startDate.split("T");
+		String[] endDateArr = endDate.split("T");
+		dto.setStart_date(startDateArr[0] + " " + startDateArr[1]);
+		dto.setEnd_date(endDateArr[0] + " " + endDateArr[1]);
+		
 		return projectDao.insert(dto);
 	}
 

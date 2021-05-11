@@ -14,6 +14,8 @@
 <link href="${path}/resources/css/layout.css" rel="stylesheet" type="text/css" media="all">
 
 
+
+
 <!-- -------------------------------------------------------------------------------- -->
 
 <style type="text/css">
@@ -57,28 +59,33 @@
 <jsp:include page="../form/header.jsp"></jsp:include>
 
 <!-- --------------------------------------------------------------------------- -->
-<!-- --------------------------------------------------------------------------- -->
+<!-- --------------------------------------------------------------------------- -->ㄱㄱ
 	
-		<form class="body" action="" >
+		<form action="">
 				<h1 style="font-family: 'Gugi', cursive; text-align:center;">프로젝트 / 화상설명회 공지 등록</h1>
-				<input type="text" placeholder="제목을 입력해주세요" required="required" style="width:600px; height:30px;">
-				<table>
-                    <tbody id="tbody">
-                        <tr>
-                            <td><textarea id="board_content" name="board_content" cols="83" rows="20"></textarea></td>
-                        </tr>
-                    </tbody>
-                </table>
+			<div class="body">
+				<label>제목<input type="text" placeholder="내용을 입력해주세요" required="required"
+							style="width:600px; height:30px;"></label>
+				<textarea id="edit_content" name="" required="required"></textarea>
+				<script type="text/javascript">
+					CKEDITOR.config.resize_enabled= false;
+					CKEDITOR.replace('edit_content',
+									{width:'600px',height:'300px', filebrowserUploadUrl: '${pageContext.request.contextPath }/adm/fileupload.do'}		
+					);
+				</script>
 				<div class="btn-div">
 					<input type="submit" value="등록" id="btnSave" class="btn" >
 					<input type="button" value="취소" id="btn_Cancle" class="btn" onclick="location.href='pjintro.do'">
 				</div>
+			</div>
 		</form>
 	
 <!-- --------------------------------------------------------------------------- -->
-<!-- --------------------------------------------------------------------------- -->	
+<!-- -------------------------------------------------------------------------------- -->	
 	<!-- footer include -->
 	<jsp:include page="../form/footer.jsp"></jsp:include>
+	
+
 
 
 </body>

@@ -8,17 +8,20 @@ public class ProjectDto {
 	private String p_title;
 	private String p_category;
 	private int target_amount;
-	private Date p_regdate;
-	private Date start_date;
-	private Date end_date;
+	private String p_regdate;
+	private String start_date;
+	private String end_date;
 	private int creator_uid;
+	
+	//join용 필드
+	private CreatorDto creatorDto;
+	private ProjectTitleImgDto projectTilteImgDto;
+	
+
 	
 	public int getP_id() {
 		return p_id;
 	}
-
-
-
 
 
 
@@ -28,15 +31,9 @@ public class ProjectDto {
 
 
 
-
-
-
 	public String getP_title() {
 		return p_title;
 	}
-
-
-
 
 
 
@@ -46,15 +43,9 @@ public class ProjectDto {
 
 
 
-
-
-
 	public String getP_category() {
 		return p_category;
 	}
-
-
-
 
 
 
@@ -64,15 +55,9 @@ public class ProjectDto {
 
 
 
-
-
-
 	public int getTarget_amount() {
 		return target_amount;
 	}
-
-
-
 
 
 
@@ -82,60 +67,39 @@ public class ProjectDto {
 
 
 
-
-
-
-	public Date getP_regdate() {
+	public String getP_regdate() {
 		return p_regdate;
 	}
 
 
 
-
-
-
-	public void setP_regdate(Date p_regdate) {
+	public void setP_regdate(String p_regdate) {
 		this.p_regdate = p_regdate;
 	}
 
 
 
-
-
-
-	public Date getStart_date() {
+	public String getStart_date() {
 		return start_date;
 	}
 
 
 
-
-
-
-	public void setStart_date(Date start_date) {
+	public void setStart_date(String start_date) {
 		this.start_date = start_date;
 	}
 
 
 
-
-
-
-	public Date getEnd_date() {
+	public String getEnd_date() {
 		return end_date;
 	}
 
 
 
-
-
-
-	public void setEnd_date(Date end_date) {
+	public void setEnd_date(String end_date) {
 		this.end_date = end_date;
 	}
-
-
-
 
 
 
@@ -145,15 +109,9 @@ public class ProjectDto {
 
 
 
-
-
-
 	public void setCreator_uid(int creator_uid) {
 		this.creator_uid = creator_uid;
 	}
-
-
-
 
 
 
@@ -163,15 +121,9 @@ public class ProjectDto {
 
 
 
-
-
-
 	public void setCreatorDto(CreatorDto creatorDto) {
 		this.creatorDto = creatorDto;
 	}
-
-
-
 
 
 
@@ -181,30 +133,10 @@ public class ProjectDto {
 
 
 
-
-
-
 	public void setProjectTilteImgDto(ProjectTitleImgDto projectTilteImgDto) {
 		this.projectTilteImgDto = projectTilteImgDto;
 	}
 
-
-
-
-
-
-	//join용 필드
-	private CreatorDto creatorDto;
-	private ProjectTitleImgDto projectTilteImgDto;
-	
-	
-	public ProjectDto() {
-		super();
-	}
-
-
-	
-	
 
 
 	@Override

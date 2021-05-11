@@ -13,13 +13,14 @@ import com.web.youneeds.dto.ProjectDto;
 @Repository
 public class ProjectDaoImpl implements ProjectDao {
 	
+	String NAMESPACE = "temp9.";
+	
 	@Inject
 	private SqlSession sqlSession;
 	
 	@Override
-	public List<ProjectDto> selectList() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<ProjectDto> selectList(ProjectDto dto) {
+		return sqlSession.selectList(NAMESPACE + "searchProjectList", dto);
 	}
 
 	@Override
@@ -30,7 +31,7 @@ public class ProjectDaoImpl implements ProjectDao {
 
 	@Override
 	public int insert(ProjectDto dto) {
-		return sqlSession.insert("temp9.insertProject", dto);
+		return sqlSession.insert(NAMESPACE + "insertProject", dto);
 	}
 
 	@Override

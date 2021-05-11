@@ -17,16 +17,11 @@
 <link href="${path}/resources/css/layout.css" rel="stylesheet"
 	type="text/css" media="all">
 
-<link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Gugi&display=swap"
-	rel="stylesheet">
 
 
 <!-- -------------------------------------------------------------------------------- -->
-<style>
-* {
-	font-family: 'Gugi', cursive;
-}
+<style type="text/css">
+
 
 .title {
 	display: flex;
@@ -68,7 +63,7 @@
 	color: black;
 }
 
-#b1 {
+.b1 {
 	width: 120px;
 	height: 40px;
 	margin-top: 20px;
@@ -80,7 +75,7 @@
 	font-weight: bold;
 }
 
-#b1:hover {
+.b1:hover {
 	background-color: #93C0C5;
 	color: white;
 }
@@ -111,12 +106,14 @@ a:hover {
 
 .bottom {
 	width: 1000px;
-	margin: 5px auto 0px auto;
-	background-color: #93c0c541;
+	margin: 5px auto 20px auto;
+	background-color : #93c0c541;
+	
 	display: flex;
 	flex-direction: row;
 	align-items: center;
 	justify-content: center;
+	
 }
 
 .bl {
@@ -133,7 +130,7 @@ a:hover {
 	background-color: #ffffff6c;
 }
 
-#b2 {
+.b2 {
 	display: inline-block;
 	width: 150px;
 	height: 40px;
@@ -146,7 +143,7 @@ a:hover {
 	font-weight: bold;
 }
 
-#b2:hover {
+.b2:hover {
 	background-color: #93C0C5;
 	color: white;
 }
@@ -184,7 +181,7 @@ a:hover {
 				<h1>모인 금액</h1>
 				<h1>후원자 수</h1>
 			</div>
-			<input type="button" id="b1" value="후원하기" style="text-align: center;"
+			<input type="button" class="b1" value="후원하기" style="text-align: center;"
 				onclick="location.href='order_test'">
 		</div>
 	</div>
@@ -194,8 +191,9 @@ a:hover {
  
 	<div class=middle>
 		<div class="btn">
-			<a href="pjintro.do">프로젝트 소개</a> <a href="pjnotice.do">프로젝트 공지</a> <a
-				href="pjfunding.do">펀딩안내</a>
+			<a href="pjintro.do">프로젝트 소개</a> 
+			<a href="pjnotice.do">프로젝트 공지</a> 
+			<a href="pjfunding.do">펀딩안내</a>
 		</div>
 	</div>
 
@@ -210,11 +208,10 @@ a:hover {
 				창작자 소개 (창작 회원 가입시)
 				
 			</div>
-
-			<input type="button" id="b2" value="공지사항 등록"> <input
-				type="button" id="b2" value="화상설명회 개최공지">
+			<input type="button" class="b2" value="공지사항 등록" onclick="location.href='pjupnotice.do'"> 
+			<input type="button" class="b2" value="화상설명회 개최공지" onclick="location.href='pjupnotice.do'">
 		</div>
-	</div>
+	</div> 
 
 
 	<!-- ----------------------------------------------------------- -->

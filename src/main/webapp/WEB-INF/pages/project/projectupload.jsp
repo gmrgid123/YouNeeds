@@ -18,17 +18,13 @@
 <link href="${path}/resources/css/layout.css" rel="stylesheet"
 	type="text/css" media="all">
 
-<link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Gugi&display=swap"
-	rel="stylesheet">
-
-
 <!-- -------------------------------------------------------------------------------- -->
 <script type="text/javascript">
 	$(document).ready(function() {
 		// 저장버튼 클릭
 		$("#btnSave").on("click", function() {
 			fn_save();
+		
 		});
 	});
 
@@ -40,10 +36,9 @@
 		frm.submit();
 	}
 </script>
+<!-- --------------------------------------------------------------------- -->
 <style type="text/css">
-* {
-	font-family: 'Gugi', cursive;
-}
+
 
 .title {
 	width: 100%;
@@ -132,6 +127,7 @@ textarea {
 	color: #93C0C5;
 	font-weight: bold;
 }
+
 </style>
 </head>
 <body>
@@ -152,12 +148,12 @@ textarea {
 			<div class="P0">
 				<h2>카테고리 선택</h2>
 				 <select id="p_category" name="p_category" class="top">
-					<option value="1">출판</option>
-					<option value="2">공예</option>
-					<option value="3">예술</option>
-					<option value="4">공연</option>
-					<option value="5">푸드</option>
-					<option value="6">패션</option>
+					<option value="출판">출판</option>
+					<option value="공예">공예</option>
+					<option value="예술">예술</option>
+					<option value="공연">공연</option>
+					<option value="푸드">푸드</option>
+					<option value="패션">패션</option>
 				</select>
 			</div>
 
@@ -205,7 +201,6 @@ textarea {
 								}
 							});
 				</script>
-
 			</div>
 
 			<!-- ------------------------------------------------------------------------------ -->
@@ -228,9 +223,7 @@ textarea {
 						</script>
 					</div>
 					<br>
-
 				</div>
-
 			</div>
 
 			<!-- -------------------------------------------------------------------------------- -->
@@ -240,12 +233,9 @@ textarea {
 				<textarea cols="80" rows="15"> </textarea>
 			</div>
 			<div style="text-align: center;">
-				<input type="button" value="작성" id="btnSave" class="btn"> 
-				<input type="button" value="취소" id="btnCancel" class="btn"
-					onclick="location.href='notice_board'">
+				<input type="submit" value="작성" id="btnSave" class="btn"> 
+				<input type="button" value="취소" id="btnCancel" class="btn" onclick="location.href='notice_board'">
 			</div>
-
-
 		</div>
 	</form>
 
