@@ -8,8 +8,8 @@
 		<typeAlias type="com.web.youneeds.dto.ProjectDto" alias="ProjectDto" />
 		<typeAlias type="com.web.youneeds.dto.ProjectDto" alias="CreateDto" />
 		<typeAlias type="com.web.youneeds.dto.ProjectDto" alias="ProjectIntroDto" />
+		<typeAlias type="com.web.youneeds.dto.MemberDto" alias="memberDto"/>
 	</typeAliases>
-
 
 	<mappers>
 		<mapper resource="/mybatis/mapper/Creator-Mapper.xml"/>

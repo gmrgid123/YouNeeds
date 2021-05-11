@@ -107,6 +107,14 @@ public class MemberDto {
 	public void setM_deldate(Date m_deldate) {
 		this.m_deldate = m_deldate;
 	}
+
+
+	@Override
+	public String toString() {
+		return "MemberDto [m_uid=" + m_uid + ", m_email=" + m_email + ", m_pw=" + m_pw + ", m_nickname=" + m_nickname
+				+ ", m_addr=" + m_addr + ", m_type=" + m_type + ", m_regdate=" + m_regdate + ", m_enabled=" + m_enabled
+				+ ", m_deldate=" + m_deldate + "]";
+	}
 	
 	
 	

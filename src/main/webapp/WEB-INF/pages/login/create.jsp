@@ -131,6 +131,20 @@
 		border-bottom: 2px solid #adadad;
 		outline:none;
 		color: #636e72;
+		font-size:20px;
+		width: 330px;
+		height:30px;
+		background: none;
+	}
+	
+	.sub_address{
+		border: none;
+		border-bottom: 2px solid #adadad;
+		outline:none;
+		color: #636e72;
+		font-size:20px;
+		width: 330px;
+		height:30px;
 		background: none;
 	}
 	
@@ -189,14 +203,18 @@
 		background-position: right;
 	}
 </style>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
-    function goPopup(){
-    	var pop=window.open("popup/jusoPopup.jsp", "pop", "width=570, height=420, scrollbars=yes, resizable=yes");
-    }
-    function jusoCallBack(roadAddrPart2){
-    	var addressEl=document.querySelector("#address");
-    	addressEl.value=roadAddrPart2;
-    }
+function goPopup(){
+
+    new daum.Postcode({
+        oncomplete: function(data) {
+            $("#address").eq(0).val(data.address);
+        }
+    }).open();
+    
+}
 </script>
 </head>
 <body id="top">
@@ -223,7 +241,8 @@
       	</div>
       	<div class="addrForm">주소<br><br>
 			<input type="button" id="address_btn" class="userbtn" onclick="goPopup()" value="주소검색"> 
-			<textarea cols="45" rows="2" id="address" class="address" placeholder="주소를 검색하세요." required readonly></textarea>
+			<input type="text" id="address" class="address" placeholder="주소를 검색하세요." required readonly>
+      		<input type="text" id="sub_address" class="sub_address" placeholder="상세주소를 입력하세요.">
       	</div>
       	<div class="passForm">창작자 명<br><br>
         	<input type="text" id="c_name" class="c_name" placeholder="창작자명을 입력하세요.">
