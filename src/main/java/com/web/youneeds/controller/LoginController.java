@@ -1,12 +1,20 @@
 package com.web.youneeds.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.web.youneeds.biz.interf.MemberBiz;
 import com.web.youneeds.dto.MemberDto;
@@ -19,12 +27,38 @@ public class LoginController {
 	@Autowired
 	private MemberBiz biz;
 	
-	@RequestMapping("/login.do")
+	@RequestMapping("/loginForm.do")
 	public String login() {
 		logger.info("login 페이지");
-		
 		return "login/login";
 	}
+	
+	/* 로그인 */
+	@RequestMapping(value="/login.do", method=RequestMethod.POST)
+	public  String login(HttpServletRequest req, RedirectAttributes rttr, MemberDto dto) throws Exception{
+		logger.info("login 페이지");
+				
+				System.out.println("login 메서드 진입");
+				HttpSession session =req.getSession();
+				MemberDto login = biz.login(dto);
+				
+				if(login == null) {
+					//session.setAttribute("login", null);
+					rttr.addFlashAttribute("msg", false);
+					System.out.println("로그인실패");
+					return "redirect:/loginForm.do";
+				}else {
+					session.setAttribute("login", login);
+					System.out.println("로그인성공");
+					return "redirect:/main.do";
+				}
+				
+	}
+	
+	@RequestMapping("/login/login")
+	   public void loginGET() {
+	      logger.info("로그인 페이지");
+	   }
 	
 	@RequestMapping("/general_create.do")
 	public String general_create() {
@@ -41,13 +75,13 @@ public class LoginController {
 		return "login/general";
 	}
 	
-	@RequestMapping("/join.do") //회원가입
+	@RequestMapping("/insert.do") //회원가입
 	public String insert_general(MemberDto dto) {
 		logger.info("insert_general");
-		
+		System.out.println("dto : " + dto);
 		int res = biz.insert(dto);
 		if(res>0) {
-			return "redirect:login.do";
+			return "redirect:loginForm.do";
 		}else {
 			return "redirect:general.do";
 		}	

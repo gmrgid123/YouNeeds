@@ -16,14 +16,24 @@
 		<result property="m_deldate" column="m_deldate"/>
 	</resultMap>
 	
+	<!-- 회원가입 -->
  	<insert id="insert" parameterType="memberDto"> <!-- 회원가입 -->
  		insert into Member
- 		values(m_uidseq.nextval, #{m_email}, #{m_pw}, #{m_nickname}, #{m_addr}, #{m_type}, sysdate, #{m_enabled}, sysdate)
+ 		values(memberseq.nextval, #{m_email}, #{m_pw}, #{m_nickname}, #{m_addr}, #{m_type}, sysdate, 'N', null)
  	</insert>
  	
+ 	<!-- 닉네임중복 -->
  	<select id="nicknameChk" resultType="int">
- 		select count(*) form Member
+ 		select count(*)
+ 		from Member
  		where m_nickname=#{m_nickname}
+ 	</select>
+ 	
+ 	<!-- 로그인 -->
+ 	<select id="login" parameterType="memberDto" resultType="memberDto">
+ 		select m_email, m_pw
+ 		from Member
+ 		where m_email = #{m_email, jdbcType=VARCHAR} and m_pw = #{m_pw, jdbcType=VARCHAR}
  	</select>
  
  </mapper>

@@ -9,5 +9,6 @@ public interface MemberBiz {
 	public int update(MemberDto dto);
 	public int withdrawal(int m_uid);
 	
+	public MemberDto login(MemberDto dto) throws Exception; 
 	public int nicknameChk(MemberDto dto) throws Exception;
 }

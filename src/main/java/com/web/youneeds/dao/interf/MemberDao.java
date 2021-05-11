@@ -10,5 +10,6 @@ public interface MemberDao {
 	public int update(MemberDto dto); // 정보수정
 	public int withdrawal(int m_uid); // 회원탈퇴
 	
+	public MemberDto login(MemberDto dto) throws Exception; //로그인
 	public int nicknameChk(MemberDto dto) throws Exception; // 닉네임 중복 검사
 }

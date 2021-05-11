@@ -40,4 +40,9 @@ public class MemberBizImpl implements MemberBiz {
 		return memberDao.nicknameChk(dto);
 	}
 
+	@Override
+	public MemberDto login(MemberDto dto) throws Exception {
+		return memberDao.login(dto);
+	}
+
 }

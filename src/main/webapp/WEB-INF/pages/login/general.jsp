@@ -394,6 +394,14 @@ function mailFormCheck(email){
 		   }else{
 			   $(".final_mail_ck").css("display", "none");
 			   mailCheck=true;
+			   
+			   var address=$("#address").val();
+			   var sub_address=$("#sub_address").val();
+			   var m_addr="";
+			   
+			   m_addr=address+sub_address;
+			
+			   $("#m_addr").val(m_addr);
 		   }
 		   
 		   /* 주소 유효성 */
@@ -407,7 +415,7 @@ function mailFormCheck(email){
 		   
 		   /* 최종 유효성 */
 		   if(nicknameCheck && nicknameckCheck && pwCheck && pwckCheck && pwckorCheck && mailCheck && mailnumCheck && addressCheck){
-			   $("#join_form").attr("action", "join.do");
+			   $("#join_form").attr("action", "insert.do");
 			   $("#join_form").submit();
 		   }
 		   return false;
@@ -423,6 +431,7 @@ function mailFormCheck(email){
 <div id="signup">
 	<form action="" method="post" id="join_form" class="singupForm">
 		<h1>Create account</h1>
+		<input type="hidden" name="m_type" value="일반">
 		<div class="emailForm">이메일<br><br>
         	<input type="text" name="m_email" id="useremail" class="useremail" placeholder="이메일 입력 후 인증해주세요.">
        		<input type="button" id="email" class="userbtn" value="인증하기"/>
@@ -450,9 +459,10 @@ function mailFormCheck(email){
       		<span class="final_nickname_ck">닉네임을 입력해주세요.</span>
       	</div>
       	<div class="addrForm">주소<br><br>
-			<input type="button" id="address_btn" class="userbtn" onclick="goPopup()" value="주소검색"> 
-			<input type="text" name="m_addr" id="address" class="address" placeholder="주소를 검색하세요." required readonly>
-      		<input type="text" name="m_addr" id="sub_address" class="sub_address" placeholder="상세주소를 입력하세요.">
+			<input type="button" id="address_btn" class="userbtn" onclick="goPopup()" value="주소검색">
+			<input type="hidden" name="m_addr" id="m_addr"> 
+			<input type="text" id="address" class="address" placeholder="주소를 검색하세요." required readonly>
+      		<input type="text" id="sub_address" class="sub_address" placeholder="상세주소를 입력하세요.">
       		<span class="final_addr_ck">주소를 입력해주세요.</span>
       	</div>
       	<input type="submit" class="btn" value="Create your YouNeeds account" id="join_button">
