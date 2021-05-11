@@ -25,20 +25,20 @@
 
 <!-- -------------------------------------------------------------------------------- -->
 <script type="text/javascript">
-$(document).ready(function() {
-	// 저장버튼 클릭
-	$("#btnSave").on("click", function() {
-		fn_save();
+	$(document).ready(function() {
+		// 저장버튼 클릭
+		$("#btnSave").on("click", function() {
+			fn_save();
+		});
 	});
-});
 
-// 프로젝트 저장
-function fn_save() {
-	var frm = document.frm;
-	frm.action = "${path}/pjinsert.do";
-	frm.method = "POST";
-	frm.submit();
-}
+	// 프로젝트 저장
+	function fn_save() {
+		var frm = document.frm;
+		frm.action = "${path}/pjinsert.do";
+		frm.method = "POST";
+		frm.submit();
+	}
 </script>
 <style type="text/css">
 * {
@@ -60,56 +60,69 @@ function fn_save() {
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	margin-bottom : 50px;
+	margin-bottom: 50px;
 	text-align: center;
 }
+
 .top {
 	width: 350px;
 	height: 40px;
 	text-align-last: center;
 	border: 0.1px solid #93c0c549;
 }
+
 #cost {
 	width: 350px;
 	height: 40px;
 	border: 0.1px solid #93c0c549;
 }
+
 #date {
 	border: 0.1px solid #93c0c549;
 }
+
 #intro {
 	width: 430px;
 	height: 300px;
 	border: 0.1px solid #93c0c549;
 	border-radius: 10px 10px 10px 10px;
 }
+
 textarea {
 	resize: none;
 	border: 0.1px solid #93c0c549;
 	border-radius: 10px 10px 10px 10px;
 }
+
 .P0 {
 	margin-top: 40px;
 }
+
 .P1 {
 	margin-top: 25px;
 }
+
 .P2 {
 	margin-top: 25px;
 }
+
 .P3 {
 	margin-top: 25px;
 }
+
 .P4 {
 	margin-top: 30px;
 }
+
 .P5 {
 	margin-top: 30px;
 }
+
 .P6 {
 	margin-top: 30px;
 	margin-bottom: 20px;
 }
+
 .btn {
 	display: inline-block;
 	width: 120px;
@@ -138,7 +151,7 @@ textarea {
 		<div class="body">
 			<div class="P0">
 				<h2>카테고리 선택</h2>
-				<select id="p_category" name="p_category" class="top">
+				 <select id="p_category" name="p_category" class="top">
 					<option value="1">출판</option>
 					<option value="2">공예</option>
 					<option value="3">예술</option>
@@ -152,14 +165,16 @@ textarea {
 
 			<div class="P1">
 				<h2>프로젝트 제목</h2>
-				<input type="text" id="p_title" name="p_title" placeholder="프로젝트 제목을 입력하세요(최대40자)">
+				<input type="text" id="p_title" name="p_title"
+					placeholder="프로젝트 제목을 입력하세요(최대40자)">
 			</div>
 
 			<!-- ------------------------------------------------------------------------------- -->
 
 			<div class="P2">
 				<h2>목표 금액</h2>
-				<input type="text" id="target_amount" name="target_amount" placeholder="목표금액을 설정하세요">
+				<input type="text" id="target_amount" name="target_amount"
+					placeholder="목표금액을 설정하세요">
 			</div>
 
 			<!-- ------------------------------------------------------------------------------ -->
@@ -175,7 +190,22 @@ textarea {
 
 			<div class="P4">
 				<h2>프로젝트 대표 이미지</h2>
-				<img src="#" style="width: 400px; height: 350px">
+				 <input type="file" id="gdsImg" name="file" />
+				 <div class="select_img"><img src="" /></div>
+				<script>
+					$("#gdsImg").change(
+							function() {
+								if (this.files && this.files[0]) {
+									var reader = new FileReader;
+									reader.onload = function(data) {
+										$(".select_img img").attr("src",
+												data.target.result).width(500);
+									}
+									reader.readAsDataURL(this.files[0]);
+								}
+							});
+				</script>
+
 			</div>
 
 			<!-- ------------------------------------------------------------------------------ -->
@@ -184,8 +214,8 @@ textarea {
 				<h2>프로젝트 소개</h2>
 				<div>
 					<div>
-						<textarea class="form-control" id="p_content"
-							name="p_content" required="required" style="resize: none;"></textarea>
+						<textarea class="form-control" id="p_content" name="p_content"
+							required="required" style="resize: none;"></textarea>
 						<script type="text/javascript">
 							CKEDITOR.config.resize_enabled = false;
 							CKEDITOR
@@ -210,8 +240,9 @@ textarea {
 				<textarea cols="80" rows="15"> </textarea>
 			</div>
 			<div style="text-align: center;">
-				<input type="button" value="작성" id="btnSave" class="btn">
-				<input type="button" value="취소" id="btnCancel" class="btn" onclick="location.href='notice_board'">
+				<input type="button" value="작성" id="btnSave" class="btn"> 
+				<input type="button" value="취소" id="btnCancel" class="btn"
+					onclick="location.href='notice_board'">
 			</div>
 
 

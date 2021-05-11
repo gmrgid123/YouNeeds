@@ -21,16 +21,16 @@
 
 <style type="text/css">
 
-* {
-	font-family: 'Gugi', cursive;
- }
+* { font-family: 'Gugi', cursive;}
 .body{
-	margin-left : 35%;
-	margin-bottom : 5%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
 }
 
- 
-#btn {
+.btn-div{
+	
 	display:inline-block;
 	width: 100px;
 	height: 40px;
@@ -41,13 +41,7 @@
 	color : white;
 	margin : 0 auto;
 	margin-left : 8%;
-	
 }
-.btn-div{
-	margin-top:20px;
-	margin-left: 5%;
-}
-
 
 		
 </style>
@@ -81,8 +75,8 @@
 					);
 				</script>
 				<div class="btn-div">
-					<input type="submit" value="등록" id="btn">
-					<input type="button" value="취소" id="btn">
+					<input type="submit" value="등록">
+					<input type="button" value="취소">
 				</div>
 			</div>
 		</form>

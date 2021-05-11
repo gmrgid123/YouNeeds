@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="temp9">
+ 	<insert id="insertProject" parameterType="com.web.youneeds.dto.ProjectDto">
+ 		INSERT INTO "Project"
+ 		(
+ 			"p_id",
+ 			"p_title",
+ 			"p_category",
+ 			"target_amount",
+ 			"p_regdate",
+ 			"start_date",
+ 			"end_date",
+ 			"creator_uid"
+ 		 ) VALUES (
+ 		 	PROJECT_SEQ.NEXTVAL,
+ 		 	#{p_title},
+ 		 	#{p_category},
+ 		 	#{target_amount},
+ 		 	SYSDATE,
+ 		 	#{start_date},
+ 		 	#{end_date},
+ 		 	1
+ 		 )	
+ 	</insert>
+ 
+ 
+ </mapper>
