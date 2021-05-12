@@ -3,17 +3,70 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="path" value="${pageContext.request.contextPath}"/>  
-<c:set var="now" value="<%=new java.util.Date()%>" />
-<c:set var="sysYear"><fmt:formatDate value="${now}" pattern="yyyy-MM-dd" /></c:set> 
+
     
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <link href="${path}/resources/css/layout.css" rel="stylesheet" type="text/css" media="all">
 <link href="${path}/resources/css/bootstrap.css" rel="stylesheet" type="text/css">
+<script>
+function open_import() {
+	IMP.init('imp36070952');
+	var msg;
+	
+	IMP.request_pay({
+	    pg : 'kakaopay',
+	    pay_method : 'card',
+	    merchant_uid : 'merchant_' + new Date().getTime(),
+	    name : '주문명:결제테스트',
+	    amount : $("#order_pay").val(),
+	    buyer_email : '${orderDto.order_email}',
+	    buyer_name : $("#order_name").val(),
+	    buyer_tel : $("#order_phone").val(),
+	    buyer_addr : $("input[name=order_addr1]").val()+" "+$("input[name=order_addr2]").val(),
+	    buyer_postcode : '123-456'
+	}, function(rsp) {
+	    if ( rsp.success ) {
+	    	//[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
+	    	jQuery.ajax({
+	    		url: "/payments/complete", //cross-domain error가 발생하지 않도록 주의해주세요
+	    		type: 'POST',
+	    		dataType: 'json',
+	    		data: {
+		    		imp_uid : rsp.imp_uid
+		    		//기타 필요한 데이터가 있으면 추가 전달
+	    		}
+	    	}).done(function(data) {
+	    		//[2] 서버에서 REST API로 결제정보확인 및 서비스루틴이 정상적인 경우
+	    		if ( everythings_fine ) {
+	    			var msg = '결제가 완료되었습니다.';
+	    			msg += '\n고유ID : ' + rsp.imp_uid;
+	    			msg += '\n상점 거래ID : ' + rsp.merchant_uid;
+	    			msg += '\결제 금액 : ' + rsp.paid_amount;
+	    			msg += '카드 승인번호 : ' + rsp.apply_num;
+	    			
+	    			alert(msg);
+	    		} else {
+	    			//[3] 아직 제대로 결제가 되지 않았습니다.
+	    			//[4] 결제된 금액이 요청한 금액과 달라 결제를 자동취소처리하였습니다.
+	    		}
+	    	});
+	    	var form = document.orderForm;
+	    	form.submit();
+	    } else {
+	        var msg = '결제에 실패하였습니다.';
+	        msg += '에러내용 : ' + rsp.error_msg;
+	        
+	        alert(msg);
+	    }
+	});
+}
+</script>
 <style type="text/css">
 .main_form{
 	margin-top: 50px;
@@ -77,7 +130,7 @@ function openApi_Addr(){
 	<div class="main_form">
 		<div class="content_body">
 			<button id="myinfo_add" class="btn btn-info" type="button" onclick="">나의 정보 가져오기</button>
-			<form action="" method="post">
+			<form action="OrderSuccess" method="post" name="orderForm">
 				<div class="form_group">
 					<label for="order_name" class="form_label"><h5>결제자 이름</h5></label>
 					<input id="order_name" name="order_name" class="order_input_text form-control" type="text" required="required" placeholder="이름을 입력해주세요." style="float: right;">
@@ -87,8 +140,12 @@ function openApi_Addr(){
 					<input id="order_pay" name="order_pay" class="order_input_text form-control" type="text" required="required" placeholder="금액을 입력해주세요." style="float: right;">
 				</div>
 				<div class="form_group">
+					<label for="order_phone" class="form_label"><h5>연락처</h5></label>
+					<input id="order_phone" name="order_phone" class="order_input_text form-control" type="text" required="required" placeholder="연락처를 입력해주세요." style="float: right;">
+				</div>
+				<div class="form_group">
 					<label for="order_email" class="form_label"><h5>이메일</h5></label>
-					<input id="order_email" name="order_email" class="order_input_text form-control" type="email" required="required" placeholder="이메일 입력해주세요." style="float: right;">
+					<input id="order_email" name="order_email" class="order_input_text form-control" type="email" required="required" placeholder="이메일을 입력해주세요." style="float: right;">
 				</div>
 				<div class="form_group">
 					<label for="order_addr" class="form_label"><h5>주소 정보</h5></label>
@@ -102,12 +159,9 @@ function openApi_Addr(){
 						<input name="order_addr2" class="order_input_text form-control" type="text" placeholder="상세주소를 입력해주세요.">
 					</div>
 				</div>
-				<div class="form_group">
-					<label for="order_date" class="form_label"><h5>입금일자</h5></label>
-					<input id="order_date" name="order_date" class="order_input_text form-control" type="date" min="${sysYear }" required="required" placeholder="이메일 입력해주세요." style="float: right;">
-				</div>
+				
 				<div>
-					<input type="submit"  class="btn btn-info" value="결제하기" style="text-align: center;">
+					<input type="button" class="btn btn-info" onclick="open_import();" value="결제하기" style="text-align: center;">
 				</div>
 			</form>
 		</div>

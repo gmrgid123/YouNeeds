@@ -164,7 +164,7 @@
 			<h1>프로젝트 기간</h1>
 			<h1>모인 금액</h1>
 			<h1>후원자 수</h1>
-			<input type="button" class="btn1" value="후원하기" onclick="location.href='order_test'">
+			<input type="button" class="btn1" value="후원하기" onclick="location.href='orderPayForm'">
 		</div>
 	</div>
 		<div class="pjbtn">

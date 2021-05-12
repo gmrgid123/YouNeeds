@@ -4,7 +4,10 @@
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 
 <configuration>
-
+	<typeAliases>
+		<typeAlias type="com.web.youneeds.dto.OrderDto" alias="orderDto"/>
+		<typeAlias type="com.web.youneeds.dto.ProjectDto" alias="projectDto"/>
+	</typeAliases>
 
 
 	<mappers>
