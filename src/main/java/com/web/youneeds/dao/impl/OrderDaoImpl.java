@@ -43,11 +43,9 @@ public class OrderDaoImpl implements OrderDao {
 
 	@Override
 	public int paying(OrderDto orderDto) {
-		int res = 0;
 		
 		try {
 			sqlSession.insert(NAMESPACE+"paying", orderDto);
-			//System.out.println("결제번호 : " + orderDto.getOrder_id());
 		} catch (Exception e) {
 			System.out.println("[error] : orderDao - paying");
 			e.printStackTrace();
