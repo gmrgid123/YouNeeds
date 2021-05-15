@@ -33,6 +33,7 @@ public class EmailController {
 		Random random = new Random();
 		int checkNum = random.nextInt(888888)+111111;
 		logger.info("인증번호"+checkNum);
+		System.out.println("인증번호:"+checkNum);
 		
 		String setFrom = "drizzle0808@gmail.com";
 		String toMail = email;
