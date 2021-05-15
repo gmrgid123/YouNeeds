@@ -19,7 +19,7 @@
 	<!-- 회원가입 -->
  	<insert id="insert" parameterType="memberDto"> <!-- 회원가입 -->
  		insert into Member
- 		values(memberseq.nextval, #{m_email}, #{m_pw}, #{m_nickname}, #{m_addr}, #{m_type}, sysdate, 'N', null)
+ 		values(member_seq.nextval, #{m_email}, #{m_pw}, #{m_nickname}, #{m_addr}, #{m_type}, sysdate, 'N', null)
  	</insert>
  	
  	<!-- 닉네임중복 -->
