@@ -43,7 +43,7 @@
 		<!-- mybatis -->
 		<bean id="sqlSession" class="org.mybatis.spring.SqlSessionFactoryBean">
 			<property name="dataSource" ref="dataSource"/>
-			<property name="configLocation" value="/WEB-INF/spring/sqls/config.xml"/>
+			<property name="configLocation" value="WEB-INF/spring/sqls/config.xml"/>
 		</bean>
 		
 		<!-- mybatis-template -->
@@ -57,7 +57,7 @@
 		</bean>
 		
 		<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-			<property name="maxUploadSize" value="100000000"/>
+			<property name="maxUploadSize" value="10485760"/>
 			<property name="defaultEncoding" value="UTF-8"/>
 		</bean>	
 	
