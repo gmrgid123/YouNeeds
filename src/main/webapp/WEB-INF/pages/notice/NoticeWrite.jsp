@@ -23,19 +23,19 @@
 		<h2>공지사항</h2>
 	</div>
 	
-	<form action="#" method="post">
+	<form action="noticeInsert.do" method="post">
 		<div>
-		
+		<input type="hidden" name="m_uid" value="1"> <!-- 로그인 구현시 해당 부분 수정 필요 -->
 			<div>
 				<input type="text" name="notice_title" placeholder="제목을 입력해주세요." required="required" style="width: 100%; height: 40px;">
 			</div>
 			<br>
 			<div>
-				<textarea class="form-control" id="p_content" required="required" style="resize: none;"></textarea>
+				<textarea class="form-control" name="p_content" id="p_content" required="required" style="resize: none;"></textarea>
 				<script type="text/javascript">
 					CKEDITOR.config.resize_enabled= false;
 					CKEDITOR.replace('p_content',
-									{height:600, filebrowserUploadUrl: '${pageContext.request.contextPath }/adm/fileupload.do'}		
+									{height:600, filebrowserUploadUrl: '${path}/uploadImg/notice'}		
 					);
 				</script>
 			</div>

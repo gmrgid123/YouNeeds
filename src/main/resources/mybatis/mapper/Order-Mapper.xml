@@ -3,7 +3,60 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
- <mapper namespace="temp5">
+ <mapper namespace="OrderPaySql">
  
+ 	<resultMap type="projectDto" id="projectDtoJoin">
+ 		<result property="p_title" column="P_TITLE"/>
+ 		<result property="p_category" column="P_CATEGORTY"/>
+ 		<result property="target_amount" column="TARGET_AMOUNT"/>
+ 		<result property="p_regdate" column="P_REGDATE"/>
+ 		<result property="start_date" column="START_DATE"/>
+ 		<result property="end_date" column="END_DATE"/>
+ 		<result property="creator_uid" column="CREATOR_UID"/>
+ 	</resultMap>
+ 
+ 	<resultMap type="orderDto" id="orderMap">
+ 		<result property="order_id" column="ORDER_ID"/>
+ 		<result property="order_name" column="ORDER_NAME"/>
+ 		<result property="order_pay" column="ORDER_PAY"/>
+ 		<result property="order_date" column="ORDER_DATE"/>
+ 		<result property="order_phone" column="ORDER_PHONE"/>
+ 		<result property="order_email" column="ORDER_EMAIL"/>
+ 		<result property="order_addr" column="ORDER_ADDR"/>
+ 		<result property="p_id" column="P_ID"/>
+ 		<result property="m_uid" column="M_UID"/>
+ 		<collection property="projectDto" resultMap="projectDtoJoin"></collection>
+ 	</resultMap>
+ 
+ 
+ 	<select id="selectOne" parameterType="int" resultType="orderDto">
+ 		SELECT FROM ORDERPAY
+ 		WHERE ORDER_ID = #{order_id}
+ 	</select>
+ 	
+ 	
+ 	
+ 	<select id="selectList" parameterType="int" resultType="orderDto">
+ 		SELECT FROM ORDERPAY
+ 		WHERE M_UID = #{m_uid}
+ 	</select>
+ 	
+ 	
+ 	<select id="selectDetail" parameterType="int" resultMap="orderMap" >
+ 		SELECT O.ORDER_ID, O.ORDER_NAME, O.ORDER_PAY, O.ORDER_DATE, O.ORDER_PHONE, O.ORDER_EMAIL, O.ORDER_ADDR, O.P_ID,  O.M_UID, P.P_TITLE
+		FROM ORDERPAY O
+		JOIN PROJECT P ON ( O.P_ID = P.P_ID )
+		WHERE ORDER_ID = ${order_id}
+ 	</select>	
+ 
+ 	<insert id="paying" parameterType="orderDto">
+ 		<selectKey keyProperty="order_id" resultType="int" order="BEFORE">
+ 			SELECT OrderPAY_SEQ.NEXTVAL FROM DUAL
+ 		</selectKey>
+ 	
+ 		INSERT INTO ORDERPAY
+ 		VALUES(#{order_id}, #{order_name}, #{order_pay}, SYSDATE, #{order_phone}, #{order_email}, #{order_addr}, #{p_id}, #{m_uid})
+ 		
+ 	</insert>
  
  </mapper>
