@@ -154,8 +154,13 @@ div .card {
 				<div class="userId">회원 아이디</div>
 			</div>
 			<div class="box2">
+<<<<<<< HEAD
+				<input type="button" style="width: 120px; height: 30px; font-size: 15px; background-color: skyblue; border-radius: 5px;" value="회원정보수정" onclick="location.href='updategeneral'">
+				<input type="button" style="width: 100px; height: 30px; font-size: 15px; background-color: skyblue; border-radius: 5px;" value="로그아웃" onclick="location.href='logout'">
+=======
 				<input type="button" style="width: 120px; height: 30px; font-size: 15px; background-color: skyblue; border-radius: 5px;" value="회원정보수정" onclick="location.href='userUpdate'">
 				<input type="button" style="width: 100px; height: 30px; font-size: 15px; background-color: skyblue; border-radius: 5px;" value="로그아웃" onclick="">
+>>>>>>> refs/heads/master
 			</div>
 			<hr>
 		</div>

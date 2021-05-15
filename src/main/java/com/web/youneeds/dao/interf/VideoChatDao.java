@@ -5,7 +5,7 @@ import java.util.List;
 import com.web.youneeds.dto.VideoChatDto;
 
 public interface VideoChatDao {
-	String NAMESPACE = "";
+	String NAMESPACE = "zz";
 	
 	public List<VideoChatDto> selectList();
 	public VideoChatDto selectOne(int chat_id);
