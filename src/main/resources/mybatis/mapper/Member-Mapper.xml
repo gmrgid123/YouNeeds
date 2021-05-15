@@ -16,11 +16,23 @@
 		<result property="m_deldate" column="m_deldate"/>
 	</resultMap>
 	
-	<!-- 회원가입 -->
- 	<insert id="insert" parameterType="memberDto"> <!-- 회원가입 -->
+	<!-- 일반 회원가입 -->
+ 	<insert id="insert" parameterType="memberDto">
  		insert into Member
- 		values(memberseq.nextval, #{m_email}, #{m_pw}, #{m_nickname}, #{m_addr}, #{m_type}, sysdate, 'N', null)
+ 		values(member_seq.nextval, #{m_email}, #{m_pw}, #{m_nickname}, #{m_addr}, #{m_type}, sysdate, 'N', null)
  	</insert>
+ 	
+ 	<!-- 창작 회원가입 -->
+ 	<insert id="c_insert" parameterType="memberDto">
+ 		<selectKey keyProperty="m_uid" resultType="int" order="BEFORE">
+ 			SELECT MEMBER_SEQ.NEXTVAL FROM DUAL
+ 		</selectKey>
+ 		insert into Member
+ 		values(#{m_uid}, #{m_email}, #{m_pw}, #{m_nickname}, #{m_addr}, #{m_type}, sysdate, 'N', null);
+ 		insert into Creator
+ 		values (#{m_uid}, #{create_name}, #{create_intro});
+ 	</insert>
+ 	
  	
  	<!-- 닉네임중복 -->
  	<select id="nicknameChk" resultType="int">

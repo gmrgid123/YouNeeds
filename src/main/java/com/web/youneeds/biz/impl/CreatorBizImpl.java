@@ -1,11 +1,16 @@
 package com.web.youneeds.biz.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.web.youneeds.biz.interf.CreatorBiz;
 import com.web.youneeds.dao.interf.CreatorDao;
 import com.web.youneeds.dto.CreatorDto;
 
+@Service
 public class CreatorBizImpl implements CreatorBiz {
 	
+	@Autowired
 	private CreatorDao creatorDao;
 	
 	@Override
@@ -16,8 +21,7 @@ public class CreatorBizImpl implements CreatorBiz {
 
 	@Override
 	public int insert(CreatorDto dto) {
-		// TODO Auto-generated method stub
-		return 0;
+		return creatorDao.insert(dto);
 	}
 
 	@Override

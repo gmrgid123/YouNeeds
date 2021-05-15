@@ -43,8 +43,12 @@ public class CreatorDto {
 	public void setMemberDto(MemberDto memberDto) {
 		this.memberDto = memberDto;
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		return "CreatorDto [m_uid=" + m_uid + ", create_name=" + create_name + ", create_intro=" + create_intro
+				+ ", memberDto=" + memberDto + "]";
+	}
 	
 	
 	

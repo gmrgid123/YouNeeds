@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.web.youneeds.biz.interf.CreatorBiz;
 import com.web.youneeds.biz.interf.MemberBiz;
+import com.web.youneeds.dto.CreatorDto;
 import com.web.youneeds.dto.MemberDto;
 
 @Controller
@@ -26,6 +28,8 @@ public class LoginController {
 	
 	@Autowired
 	private MemberBiz biz;
+	@Autowired
+	private CreatorBiz c_biz;
 	
 	@RequestMapping("/loginForm.do")
 	public String login() {
@@ -75,7 +79,7 @@ public class LoginController {
 		return "login/general";
 	}
 	
-	@RequestMapping("/insert.do") //회원가입
+	@RequestMapping("/insert.do") //일반 회원가입
 	public String insert_general(MemberDto dto) {
 		logger.info("insert_general");
 		System.out.println("dto : " + dto);
@@ -84,6 +88,18 @@ public class LoginController {
 			return "redirect:loginForm.do";
 		}else {
 			return "redirect:general.do";
+		}	
+	}
+	
+	@RequestMapping("/c_insert.do") //창작 회원가입
+	public String insert_create(CreatorDto dto) {
+		logger.info("insert_create");
+		System.out.println("dto : " + dto);
+		int res = c_biz.insert(dto);
+		if(res>0) {
+			return "redirect:loginForm.do";
+		}else {
+			return "redirect:create.do";
 		}	
 	}
 	

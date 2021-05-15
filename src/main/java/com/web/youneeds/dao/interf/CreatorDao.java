@@ -3,7 +3,7 @@ package com.web.youneeds.dao.interf;
 import com.web.youneeds.dto.CreatorDto;
 
 public interface CreatorDao {
-	String NAMESPACE = "";
+	String NAMESPACE = "member.";
 	
 	public CreatorDto selectOne(int m_uid);
 	public int insert(CreatorDto dto);
