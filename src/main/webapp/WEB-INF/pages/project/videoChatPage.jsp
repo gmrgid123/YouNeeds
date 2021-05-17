@@ -34,12 +34,19 @@
 }
 
 .videoChat{
+	margin: 0 auto;
+	position: relative;
 	text-align: center;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	font-size:20pt;
+	
+}
+
+.localVideo{
+	position: absolute;
+	margin: 0;
 }
 
 </style>
@@ -50,24 +57,25 @@
 	<jsp:include page="../../pages/form/header.jsp"></jsp:include>
 	
 	<div class="main">
-		<div class="videoChat" style="width: 700px; height: 500px;">
+		<div class="videoChat" style="width: 700px;">
 			<div class="title">프로젝트 제목 - 설명회</div>
 			<br>
 			<div class="creator">설명회 개최자</div>
 			<br>
-			<div class="videoChat" style="width: 700px; height: 350px; background-color:lightgray;">화상 채팅 화면</div>
+			<div class="videoChat" style="width: 700px; height: 550px; background-color:black;">
+				<video controls autoplay id="localVideo" style="width: 700px; height: 500px"></video>
+			</div>
+			<div class="remoteChat" style="width: 700px; height: 200px; background-color:black;">
+				<video controls autoplay id="remoteVideo" style="width: 200px; height: 200px"></video>
+			</div>
 		</div>
-		
-		<textarea class="projectIntro" style="width:700px; height: 200px;" readonly="readonly">프로젝트 소개</textarea>
-		<br>
 		<br>
 		
-		
-		
-		
-		
-		
-		
+		<textarea class="projectIntro" style="width:700px; height: 200px;" readonly="readonly">
+			
+		</textarea>
+		<br>
+		<br>
 		
 	</div>
 
@@ -75,6 +83,10 @@
 	<jsp:include page="../../pages/form/footer.jsp"></jsp:include>
 
 	<!-- JAVASCRIPTS -->
+	<script src="http://localhost:82/socket.io/socket.io.js"></script>
+	<script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
+	<script src="${path}/resources/js/Web_RTC_Server/rtc.js"></script>
+	<script src="${path}/resources/js/Web_RTC_Server/server.js"></script>
 	<script src="${path}/resources/js/jquery.min.js"></script>
 	<script src="${path}/resources/js/jquery.backtotop.js"></script>
 	<script src="${path}/resources/js/jquery.mobilemenu.js"></script>

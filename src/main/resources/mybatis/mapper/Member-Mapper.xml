@@ -3,7 +3,37 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
- <mapper namespace="temp2">
- 
+ <mapper namespace="member">
+ 	<resultMap type="memberDto" id="memberMap">
+		<result property="m_uid" column="m_uid"/>
+		<result property="m_email" column="m_email"/>
+		<result property="m_pw" column="m_pw"/>
+		<result property="m_nickname" column="m_nickname"/>
+		<result property="m_addr" column="m_addr"/>
+		<result property="m_type" column="m_type"/>
+		<result property="m_regdate" column="m_regdate"/>
+		<result property="m_enabled" column="m_enabled"/>
+		<result property="m_deldate" column="m_deldate"/>
+	</resultMap>
+	
+	<!-- 회원가입 -->
+ 	<insert id="insert" parameterType="memberDto"> <!-- 회원가입 -->
+ 		insert into Member
+ 		values(member_seq.nextval, #{m_email}, #{m_pw}, #{m_nickname}, #{m_addr}, #{m_type}, sysdate, 'N', null)
+ 	</insert>
+ 	
+ 	<!-- 닉네임중복 -->
+ 	<select id="nicknameChk" resultType="int">
+ 		select count(*)
+ 		from Member
+ 		where m_nickname=#{m_nickname}
+ 	</select>
+ 	
+ 	<!-- 로그인 -->
+ 	<select id="login" parameterType="memberDto" resultType="memberDto">
+ 		select m_email, m_pw
+ 		from Member
+ 		where m_email = #{m_email, jdbcType=VARCHAR} and m_pw = #{m_pw, jdbcType=VARCHAR}
+ 	</select>
  
  </mapper>

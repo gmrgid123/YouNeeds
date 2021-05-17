@@ -79,6 +79,12 @@
 		background: none;
 		}
 		
+	.login_warn{
+		margin-top: 30px;
+		text-align: center;
+		color: red;
+	}
+		
 	.btn {
 		position:relative;
 		left:40%;
@@ -117,22 +123,12 @@
 </style>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
-	function login(){
-		var email=$("#email").val();
-		var pw=$("#pw").val();
-		
-		if($.trim(email).length ==0){
-			alert("메일을 입력해주세요.");
-			$("#email").focus();
-		}else if($.trim(pw).length ==0){
-			alert("비밀번호를 입력해주세요");
-			$("#pw").val("");
-			$("#pw").focus();
-		}else{
-			alert("메일 또는 비밀번호 확인해주세요.");
-		}
-	}
-	
+	$(function(){
+		$("#login_btn").click(function(){
+			$("#loginForm").attr("action", "login.do");
+			$("#loginForm").submit();
+		});
+	});
 </script>
 
 </head>
@@ -142,19 +138,22 @@
 	<jsp:include page="../form/header.jsp"></jsp:include>
 
 <div id="login">
-	<form action="main.do" method="post" id="loginForm" class="loginForm">
+	<form action="" method="post" id="loginForm" class="loginForm">
       <h2>Login</h2>
       <div class="emailForm">
-        <input type="text" id="email" class="email" placeholder="E-MAIL">
+        <input type="text" name="m_email" id="email" class="email" placeholder="E-MAIL">
       </div>
       <div class="passForm">
-        <input type="password" id="pw" class="pw" placeholder="PW">
+        <input type="password" name="m_pw" id="pw" class="pw" placeholder="PW">
       </div>
+      <c:if test="${msg=='false'}">
+      	<div class="login_warn">이메일 또는 비밀번호를 잘못 입력하셨습니다.</div>
+	</c:if>
        <div class="passText">
         <a href="found_pw">비밀번호를 잊으셨나요?</a>
       </div>
       <br>
-      <input type="button" class="btn" value="LOG IN" onclick="login();">
+      <input type="button" id="login_btn" class="btn" value="LOG IN">
       
       <div class="bottomText">
         Don't you have ID? <a href="general_create.do">sign up</a>
