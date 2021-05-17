@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class OrderDto {
 	private int order_id;
+	private String order_name;
 	private int order_pay;
 	private Date order_date;
 	private String order_phone;
@@ -19,6 +20,22 @@ public class OrderDto {
 	public OrderDto() {
 		super();
 	}
+	
+	
+
+	public OrderDto(String order_name, int order_pay, String order_phone, String order_email, String order_addr,
+			int p_id, int m_uid) {
+		super();
+		this.order_name = order_name;
+		this.order_pay = order_pay;
+		this.order_phone = order_phone;
+		this.order_email = order_email;
+		this.order_addr = order_addr;
+		this.p_id = p_id;
+		this.m_uid = m_uid;
+	}
+
+
 
 	public int getOrder_id() {
 		return order_id;
@@ -26,6 +43,14 @@ public class OrderDto {
 
 	public void setOrder_id(int order_id) {
 		this.order_id = order_id;
+	}
+
+	public String getOrder_name() {
+		return order_name;
+	}
+
+	public void setOrder_name(String order_name) {
+		this.order_name = order_name;
 	}
 
 	public int getOrder_pay() {
@@ -99,6 +124,18 @@ public class OrderDto {
 	public void setMemberDto(MemberDto memberDto) {
 		this.memberDto = memberDto;
 	}
+
+
+
+	@Override
+	public String toString() {
+		return "OrderDto [order_id=" + order_id + ", order_name=" + order_name + ", order_pay=" + order_pay
+				+ ", order_date=" + order_date + ", order_phone=" + order_phone + ", order_email=" + order_email
+				+ ", order_addr=" + order_addr + ", p_id=" + p_id + ", m_uid=" + m_uid + ", projectDto=" + projectDto
+				+ ", memberDto=" + memberDto + "]";
+	}
+	
+	
 	
 	
 	

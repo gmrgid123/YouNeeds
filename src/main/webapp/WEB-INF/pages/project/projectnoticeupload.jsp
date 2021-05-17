@@ -13,39 +13,30 @@
 
 <link href="${path}/resources/css/layout.css" rel="stylesheet" type="text/css" media="all">
 
-<link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Gugi&display=swap" rel="stylesheet">
-
 
 <!-- -------------------------------------------------------------------------------- -->
 
 <style type="text/css">
 
-* {
-	font-family: 'Gugi', cursive;
- }
 .body{
-	margin-left : 35%;
-	margin-bottom : 5%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
 }
 
- 
-#btn {
-	display:inline-block;
-	width: 100px;
+.btn{
+	width: 150px;
 	height: 40px;
-	background-color : #93C0C5;
-	border : none;
-	border-radius : 5px 5px 5px 5px;
-	font-weight : bold;
-	color : white;
-	margin : 0 auto;
-	margin-left : 8%;
+	margin : 20px 0px 20px 0px;
 	
-}
-.btn-div{
-	margin-top:20px;
-	margin-left: 5%;
+	border: 2px solid #93C0C5;
+	border-radius : 20px;
+	text-decoration: none;
+	text-align: center;
+	
+	color: #93C0C5;
+	font-weight: bold;
 }
 
 
@@ -68,31 +59,26 @@
 <!-- --------------------------------------------------------------------------- -->
 <!-- --------------------------------------------------------------------------- -->
 	
-		<form action="">
-				<h1 style="font-family: 'Gugi', cursive; text-align:center;">프로젝트 공지 등록</h1>
-			<div class="body">
-				<label>제목<input type="text" placeholder="내용을 입력해주세요" required="required"
-							style="width:600px; height:30px;"></label>
-				<textarea id="edit_content" name="" required="required"></textarea>
-				<script type="text/javascript">
-					CKEDITOR.config.resize_enabled= false;
-					CKEDITOR.replace('edit_content',
-									{width:'600px',height:'300px', filebrowserUploadUrl: '${pageContext.request.contextPath }/adm/fileupload.do'}		
-					);
-				</script>
+		<form class="body" action="" >
+				<h1 style="font-family: 'Gugi', cursive; text-align:center;">프로젝트 / 화상설명회 공지 등록</h1>
+				<input type="text" placeholder="제목을 입력해주세요" required="required" style="width:600px; height:30px;">
+				<table>
+                    <tbody id="tbody">
+                        <tr>
+                            <td><textarea id="board_content" name="board_content" cols="83" rows="20"></textarea></td>
+                        </tr>
+                    </tbody>
+                </table>
 				<div class="btn-div">
-					<input type="submit" value="등록" id="btn">
-					<input type="button" value="취소" id="btn">
+					<input type="submit" value="등록" id="btnSave" class="btn" >
+					<input type="button" value="취소" id="btn_Cancle" class="btn" onclick="location.href='pjintro.do'">
 				</div>
-			</div>
 		</form>
 	
 <!-- --------------------------------------------------------------------------- -->
-<!-- -------------------------------------------------------------------------------- -->	
+<!-- --------------------------------------------------------------------------- -->	
 	<!-- footer include -->
 	<jsp:include page="../form/footer.jsp"></jsp:include>
-	
-
 
 
 </body>

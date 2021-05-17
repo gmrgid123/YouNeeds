@@ -18,15 +18,16 @@
 	type="text/css" media="all">
 
 
-<link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Gugi&display=swap" rel="stylesheet">
-
 <!-- -------------------------------------------------------------------------------- -->
+<script type="text/javascript">
+$(document).ready(function() {
+	// fn_search();
+	var count = '${count}';
+});
+
+</script>
 
 <style type="text/css">
-* {
-	font-family: 'Gugi', cursive;
-}
 
 .card {
 	height: 220px;
@@ -47,6 +48,7 @@
 	justify-content: center;
 	background-color: #93C0C5;
 	color: white;
+	
 }
 
 .topbar {
@@ -54,23 +56,19 @@
 	flex-direction: row;
 	align-items: center;
 	justify-content: center;
-	text-align: center;
 	background-color: white;
-	color: gray;
+	color: black;
 }
 
-
-#btn {
+.btn {
 	display: inline-block;
 	margin: 20px 20px 0px 20px;
 	background-color: #93c0c59d;
-	width: 70px;
+	width: 50px;
 	height: 50px;
 	border-radius: 5px 5px 5px 5px;
 	border: none;
-	text-align: center;
-	font: black;
-	background-color: #93c0c59d
+	cursor: pointer;
 }
 
 <!------------------------------------------------------------->
@@ -122,7 +120,7 @@
 }
 
 
-#btn2 {
+.btn2 {
 	display: inline-block;
 	margin: 60px 20px 20px 20px;
 	background-color: #FFFFFF;
@@ -167,24 +165,26 @@
 	<jsp:include page="../form/header.jsp"></jsp:include>
 
 	<!-- --------------------------------------------------------------------------- -->
-
 	<div class="title">
 		<h1>프로젝트 목록</h1>
 	</div>
 
 	<!-- --------------------------------------------------------------------------- -->
 	<div class="topbar">
-		<input type="button" value="전체" id="btn" onclick="location.href=''">
-		<input type="button" value="출판" id="btn" onclick="location.href=''">
-		<input type="button" value="공예" id="btn" onclick="location.href=''">
-		<input type="button" value="예술" id="btn" onclick="location.href=''">
-		<input type="button" value="공연" id="btn" onclick="location.href=''">
-		<input type="button" value="푸드" id="btn" onclick="location.href=''">
-		<input type="button" value="패션" id="btn" onclick="location.href=''">
+		<input type="button" value="전체" class="btn" onclick="location.href='${path}/pjlist.do?p_category='">
+		<input type="button" value="출판" class="btn" onclick="location.href='${path}/pjlist.do?p_category=출판'">
+		<input type="button" value="공예" class="btn" onclick="location.href='${path}/pjlist.do?p_category=공예'">
+		<input type="button" value="예술" class="btn" onclick="location.href=''">
+		<input type="button" value="공연" class="btn" onclick="location.href=''">
+		<input type="button" value="푸드" class="btn" onclick="location.href=''">
+		<input type="button" value="패션" class="btn" onclick="location.href=''">
 	</div>
 	<!-- ------------------------------------------------------------------------------ -->
-	<!-- -----------------------프로젝트 첫 줄---------------------------------------------- -->
-	<div class="cgroup">
+	
+	<c:forEach var="listVo" items="${list}" varStatus="status">
+		<c:if test="${status.count % 3 eq 1}">
+			<div class="cgroup">
+		</c:if>
 		<a class="project_card" href="pjintro.do">
 			<div class="card">
 				<div class="card_header">
@@ -193,148 +193,26 @@
 				</div>
 				<div class="card_body">
 					<hr>
-					<i class="name" style="font-size: 12pt;"><br>프로젝트 제목</i> <br>
-					<i class="payment"> 결제금액 : -----원 </i>
+					<i class="name" style="font-size: 12pt;"><br>${listVo.p_title}</i> <br>
+					<i class="payment"> 목표금액 : ${listVo.target_amount}원 </i>
 				</div>
 			</div>
 		</a>
-		<!-- ----------------------------------------------------------------------- -->
-		<a class="project_card" href="#">
-			<div class="card">
-				<div class="card_header">
-					<span><img src="${path}/resources/images/2.jpg"
-						style="width: 100%; height: 120px;"></span>
-				</div>
-				<div class="card_body">
-					<hr>
-					<i class="name" style="font-size: 12pt;"><br>프로젝트 제목</i> <br>
-					<i class="payment"> 결제금액 : -----원 </i>
-				</div>
+		<c:if test="${status.count % 3 eq 0}">
 			</div>
-		</a>
-		<!-- ---------------------------------------------------------------------- -->
-		<a class="project_card" href="#">
-			<div class="card">
-				<div class="card_header">
-					<span><img src="${path}/resources/images/3.jpg"
-						style="width: 100%; height: 120px;"></span>
-				</div>
-				<div class="card_body">
-					<hr>
-					<i class="name" style="font-size: 12pt;"><br>프로젝트 제목</i> <br>
-					<i class="payment"> 결제금액 : -----원 </i>
-				</div>
-			</div>
-		</a>
-	</div>
-
-	<!-- ---------------------------------------------------------------------- -->
-	<!-- ----------------------------프로젝트 둘째줄------------------------------ -->
-	<div class="cgroup">
-		<a class="project_card" href="#">
-			<div class="card" id="c2">
-				<div class="card_header">
-					<span><img src="${path}/resources/images/4.jpg"
-						style="width: 100%; height: 120px;"></span>
-				</div>
-				<div class="card_body">
-					<hr>
-					<i class="name" style="font-size: 12pt;"><br>프로젝트 제목</i> <br>
-					<i class="payment"> 결제금액 : -----원 </i>
-				</div>
-			</div>
-		</a>
-		<!-- -------------------------------------------------------------------------- -->
-
-		<a class="project_card" href="#">
-			<div class="card" id="c2">
-				<div class="card_header">
-					<span><img src="${path}/resources/images/1.jpg"
-						style="width: 100%; height: 120px;"></span>
-				</div>
-				<div class="card_body">
-					<hr>
-					<i class="name" style="font-size: 12pt;"><br>프로젝트 제목</i> <br>
-					<i class="payment"> 결제금액 : -----원 </i>
-				</div>
-			</div>
-		</a>
-
-		<!-- ------------------------------------------------------------------------ -->
-
-		<a class="project_card" href="#">
-			<div class="card" id="c2">
-				<div class="card_header">
-					<span><img src="${path}/resources/images/2.jpg"
-						style="width: 100%; height: 120px;"></span>
-				</div>
-				<div class="card_body">
-					<hr>
-					<i class="name" style="font-size: 12pt;"><br>프로젝트 제목</i> <br>
-					<i class="payment"> 결제금액 : -----원 </i>
-				</div>
-			</div>
-		</a>
-	</div>
-
-	<!-- ---------------------------------------------------------------------- -->
-	<!-- ----------------------프로젝트 셋째줄------------------------------------- -->
-	<div class="cgroup">
-		<a class="project_card" href="#">
-			<div class="card" id="c3">
-				<div class="card_header">
-					<span><img src="${path}/resources/images/3.jpg"
-						style="width: 100%; height: 120px;"></span>
-				</div>
-				<div class="card_body">
-					<hr>
-					<i class="name" style="font-size: 12pt;"><br>프로젝트 제목</i> <br>
-					<i class="payment"> 결제금액 : -----원 </i>
-				</div>
-			</div>
-		</a>
-
-
-		<!-- -------------------------------------------------------------------------- -->
-		<a class="project_card" href="#">
-			<div class="card" id="c3">
-				<div class="card_header">
-					<span><img src="${path}/resources/images/1.jpg"
-						style="width: 100%; height: 120px"></span>
-				</div>
-				<div class="card_body">
-					<hr>
-					<i class="name" style="font-size: 12pt;"><br>프로젝트 제목</i> <br>
-					<i class="payment"> 결제금액 : -----원 </i>
-				</div>
-			</div>
-		</a>
-
-		<!-- ------------------------------------------------------------------------ -->
-
-		<a class="project_card" href="#">
-			<div class="card" id="c3">
-				<div class="card_header">
-					<span><img src="${path}/resources/images/2.jpg"
-						style="width: 100%; height: 120px"></span>
-				</div>
-				<div class="card_body">
-					<hr>
-					<i class="name" style="font-size: 12pt;"><br>프로젝트 제목</i> <br>
-					<i class="payment"> 결제금액 : -----원 </i>
-				</div>
-			</div>
-		</a>
-	</div>
-
-
+		</c:if>
+	</c:forEach>
+	<c:if test="${count < 3}">
+		</div>
+	</c:if>
+		
 	<!---------------------- 마지막 버튼--------------------- -->
 	<div class="bgroup">
-		<input type="button" value="←" id="btn2" onclick="location.href=''">
-		<input type="button" value="1" id="btn2" onclick="location.href=''">
-		<input type="button" value="2" id="btn2" onclick="location.href=''">
-		<input type="button" value="3" id="btn2" onclick="location.href=''">
-		<input type="button" value="→" id="btn2" onclick="location.href=''">
+		<input type="button" value="←" class="btn2" onclick="location.href=''">
+		<input type="button" value="1" class="btn2" onclick="location.href=''">
+		<input type="button" value="2" class="btn2" onclick="location.href=''">
+		<input type="button" value="3" class="btn2" onclick="location.href=''">
+		<input type="button" value="→" class="btn2" onclick="location.href=''">
 	</div>
 
 

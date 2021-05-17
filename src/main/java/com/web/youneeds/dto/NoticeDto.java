@@ -9,7 +9,7 @@ public class NoticeDto {
 	private Date notice_regdate;
 	private int m_uid;
 	
-	//Join¿ë ÇÊµå
+	//Joinìš© í•„ë“œ
 	private MemberDto memberDto;
 	
 	
@@ -75,6 +75,14 @@ public class NoticeDto {
 
 	public void setMemberDto(MemberDto memberDto) {
 		this.memberDto = memberDto;
+	}
+
+
+	@Override
+	public String toString() {
+		return "NoticeDto [notice_id=" + notice_id + ", notice_title=" + notice_title + ", notice_content="
+				+ notice_content + ", notice_regdate=" + notice_regdate + ", m_uid=" + m_uid + ", memberDto="
+				+ memberDto + "]";
 	}
 	
 	

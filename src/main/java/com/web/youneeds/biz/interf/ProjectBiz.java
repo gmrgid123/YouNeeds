@@ -6,7 +6,7 @@ import com.web.youneeds.dto.ProjectDto;
 
 public interface ProjectBiz {
 
-	public List<ProjectDto> selectList();
+	public List<ProjectDto> selectList(ProjectDto dto);
 	public ProjectDto selectOne(int p_id);
 	public int insert(ProjectDto dto);
 	public int update(ProjectDto dto);

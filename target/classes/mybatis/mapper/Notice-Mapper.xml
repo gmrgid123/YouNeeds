@@ -3,7 +3,20 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
- <mapper namespace="temp4">
+ <mapper namespace="NoticeSql">
  
+ 	<select id="selectOne" parameterType="int" resultType="noticeDto">
+ 		SELECT NOTICE_ID, NOTICE_TITLE, NOTICE_CONTENT, NOTICE_REGDATE, M_UID
+ 		FROM NOTICE
+ 		WHERE NOTICE_ID = #{notice_id}
+ 	</select>
  
+ 	<insert id="noticeInsert" parameterType="noticeDto">
+ 		<selectKey keyProperty="notice_id" resultType="int" order="BEFORE">
+ 			SELECT Notice_SEQ.NEXTVAL FROM DUAL
+ 		</selectKey>
+ 	
+ 		INSERT INTO NOTICE
+ 		VALUES(#{notice_id}, #{notice_title}, #{notice_content}, SYSDATE, #{m_uid})
+ 	</insert>
  </mapper>

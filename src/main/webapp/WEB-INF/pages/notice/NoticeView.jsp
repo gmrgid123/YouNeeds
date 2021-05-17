@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="path" value="${pageContext.request.contextPath}"/>     
     
 <!DOCTYPE html>
@@ -47,9 +48,9 @@
 	<div style="margin-top: 50px; margin-bottom: 50px; padding-right: 20%; padding-left: 20%;">
 		<div class="content_body">
 			<div class="content_title">
-				<h1 style="text-align: center;">공지사항 타이틀</h1>
+				<h1 style="text-align: center;">${noticeDto.notice_title}</h1>
 				<div style="text-align: right;">
-					<span class="regdate">작성일 : yyyy-dd-mm</span>
+					<span class="regdate">작성일 : <fmt:formatDate value="${noticeDto.notice_regdate}" pattern="yyyy-MM-dd  HH:mm:ss"/></span>
 				</div>
 			</div>
 		
@@ -58,7 +59,7 @@
 			<br>
 			
 			<div class="content" style="margin-right: 10%; margin-left: 10%;">
-				<p>내용을 채워야 합니다</p>
+				<p>${noticeDto.notice_content}</p>
 			</div>
 		</div>
 		<div class="btn_div">

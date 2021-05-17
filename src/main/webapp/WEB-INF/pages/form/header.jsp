@@ -32,7 +32,7 @@
     </div>
     <div class="fl_right">
       <ul class="nospace inline">
-        <li><a href="login.do">로그인 / 회원가입</a></li>
+        <li><a href="loginForm.do">로그인 / 회원가입</a></li>
         <li><a href="userMypage">유저 마이페이지 테스트</a></li>
         <li><a href="creatorMypage">창작 마이페이지 테스트</a></li>
         <li><a href="videoChatPage">화생채팅 페이지 테스트</a></li>

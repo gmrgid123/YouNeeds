@@ -18,7 +18,7 @@
 	
 	<properties>
 		<java-version>1.8</java-version>
-		<org.springframework-version>5.1.12.RELEASE</org.springframework-version>
+		<org.springframework-version>5.2.12.RELEASE</org.springframework-version>
 		<org.aspectj-version>1.6.10</org.aspectj-version>
 		<org.slf4j-version>1.6.6</org.slf4j-version>
 	</properties>
@@ -184,19 +184,19 @@
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-core</artifactId>
-            <version>5.4.2</version>
+            <version>5.2.1.RELEASE</version>
         </dependency>
         <!-- 비밀번호: https://mvnrepository.com/artifact/org.springframework.security/spring-security-web -->
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-web</artifactId>
-            <version>5.4.2</version>
+            <version>5.2.1.RELEASE</version>
         </dependency>
         <!-- 비밀번호: https://mvnrepository.com/artifact/org.springframework.security/spring-security-config -->
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-config</artifactId>
-            <version>5.4.2</version>
+            <version>5.2.1.RELEASE</version>
         </dependency>
 		
 		<!-- 이메일 인증: https://mvnrepository.com/artifact/javax.mail/mail-->
@@ -210,9 +210,36 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context-support</artifactId>
-			<version>5.2.0.RELEASE</version>
+			<version>${org.springframework-version}</version>
 		</dependency>
 		
+		<!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
+		<dependency>
+		    <groupId>commons-io</groupId>
+		    <artifactId>commons-io</artifactId>
+		    <version>2.4</version>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload -->
+		<dependency>
+		    <groupId>commons-fileupload</groupId>
+		    <artifactId>commons-fileupload</artifactId>
+		    <version>1.3.1</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
+		<dependency>
+		    <groupId>com.google.code.gson</groupId>
+		    <artifactId>gson</artifactId>
+		    <version>2.8.5</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
+		<dependency>
+		    <groupId>org.apache.commons</groupId>
+		    <artifactId>commons-lang3</artifactId>
+		    <version>3.11</version>
+		</dependency>
+		
+			
 		
 		     
 	</dependencies>

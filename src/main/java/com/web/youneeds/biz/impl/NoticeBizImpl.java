@@ -2,12 +2,17 @@ package com.web.youneeds.biz.impl;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.web.youneeds.biz.interf.NoticeBiz;
 import com.web.youneeds.dao.interf.NoticeDao;
 import com.web.youneeds.dto.NoticeDto;
 
+@Service
 public class NoticeBizImpl implements NoticeBiz {
 
+	@Autowired
 	private NoticeDao noticeDao;
 	
 	@Override
@@ -18,14 +23,12 @@ public class NoticeBizImpl implements NoticeBiz {
 
 	@Override
 	public NoticeDto selectOne(int notice_id) {
-		// TODO Auto-generated method stub
-		return null;
+		return noticeDao.selectOne(notice_id);
 	}
 
 	@Override
 	public int insert(NoticeDto dto) {
-		// TODO Auto-generated method stub
-		return 0;
+		return noticeDao.insert(dto);
 	}
 
 	@Override
