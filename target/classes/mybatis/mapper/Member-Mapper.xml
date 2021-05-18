@@ -27,12 +27,13 @@
  		<selectKey keyProperty="m_uid" resultType="int" order="BEFORE">
  			SELECT MEMBER_SEQ.NEXTVAL FROM DUAL
  		</selectKey>
- 		insert into Member
- 		values(#{m_uid}, #{m_email}, #{m_pw}, #{m_nickname}, #{m_addr}, #{m_type}, sysdate, 'N', null);
- 		insert into Creator
- 		values (#{m_uid}, #{create_name}, #{create_intro});
+ 		insert all
+ 		into Member
+ 		values(#{m_uid}, #{memberDto.m_email}, #{memberDto.m_pw}, #{memberDto.m_nickname}, #{memberDto.m_addr}, #{memberDto.m_type}, sysdate, 'N', null)
+ 		into Creator
+ 		values (#{m_uid}, #{create_name}, #{create_intro})
+ 		select * from dual
  	</insert>
- 	
  	
  	<!-- 닉네임중복 -->
  	<select id="nicknameChk" resultType="int">

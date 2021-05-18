@@ -29,7 +29,7 @@
 	}
 	
 	#signup{
-		height: 1200px;
+		height: 1300px;
 	}
 	
 	.singupForm {
@@ -39,7 +39,7 @@
   		margin-bottom: 10px;
   		padding: 30px, 20px;
 		width:540px;
-		height:1150px;
+		height:1200px;
 		background-color:#FFFFFF;
 		text-align:left;
 		top:50%;
@@ -254,7 +254,7 @@
 		display: none;
 	}
 	.final_create_int{
-		create: none;
+		display: none;
 	}
 </style>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -442,23 +442,29 @@ $(function(){
 				   addressCheck=true;
 			   }
 			   
-			   /* 창작자 유효성 */
+			   /* 창작자명 유효성 */
 			   if(create==""){
 				   $(".final_create").css("display", "block");
+				   createCheck=false;
 			   }else{
-				   $("final_create").css("display", "none");
+				   $(".final_create").css("display", "none");
+				   createCheck=true;
 			   }
 			   
+			   /*창작자 소개 유효성*/
 			   if(createInt==""){
 				   $(".final_create_int").css("display", "block");
+				   createIntCheck=false;				   
 			   }else{
 				   $(".final_create_int").css("display", "none");
+				   createIntCheck=true;
 			   }
 			   
 			   /* 최종 유효성 */
 			   if(nicknameCheck && nicknameckCheck && pwCheck && pwckCheck && pwckorCheck && mailCheck && mailnumCheck && addressCheck && createCheck && createIntCheck){
 				   $("#join_form").attr("action", "c_insert.do");
 				   $("#join_form").submit();
+				   console.log("완료");
 			   }
 			   return false;
 		   });
@@ -472,9 +478,9 @@ $(function(){
 <div id="signup">
 	<form action="" method="post" id="join_form" class="singupForm">
 		<h1>Create account</h1>
-		<input type="hidden" name="m_type" value="창작">
+		<input type="hidden" name="memberDto.m_type" value="창작">
 		<div class="emailForm">이메일<br><br>
-        	<input type="text" name="m_email" id="useremail" class="useremail" placeholder="이메일 입력 후 인증해주세요.">
+        	<input type="text" name="memberDto.m_email" id="useremail" class="useremail" placeholder="이메일 입력 후 인증해주세요.">
        		<input type="button" id="email" class="userbtn" value="인증하기">
        		<input type="text" id="num_email" class="num_email" placeholder="인증번호 입력하세요.">
        		<input type="button" id="c_mail" class="userbtn" value="인증확인">
@@ -487,13 +493,13 @@ $(function(){
         	<input type="password" id="userpw" class="userpw" placeholder="비밀번호 입력하세요.">
       		<span class="final_pw_ck">비밀번호를 입력해주세요.</span>
       		<br>비밀번호 확인<br><br>
-        	<input type="password" name="m_pw" id="c_userpw" class="userpw" placeholder="비밀번호 확인하세요.">
+        	<input type="password" name="memberDto.m_pw" id="c_userpw" class="userpw" placeholder="비밀번호 확인하세요.">
       		<span class="final_pwck_ck">비밀번호 확인을 입력해주세요.</span>
       		<span class="pw_1">비밀번호가 일치합니다.</span>
       		<span class="pw_2">비밀번호가 일치하지 않습니다.</span>
       	</div>
       	<div class="nicknameForm">닉네임<br><br>
-        	<input type="text" name="m_nickname" id="nickname" class="nickname" placeholder="닉네임 입력하세요.">
+        	<input type="text" name="memberDto.m_nickname" id="nickname" class="nickname" placeholder="닉네임 입력하세요.">
       		<input type="button" id="nickname_btn" class="userbtn" value="중복확인">
       		<span class="nick_1">사용 가능한 닉네임입니다.</span>
       		<span class="nick_2">이미 존재한 닉네임입니다.</span>
@@ -501,16 +507,16 @@ $(function(){
       	</div>
       	<div class="addrForm">주소<br><br>
 			<input type="button" id="address_btn" class="userbtn" onclick="goPopup()" value="주소검색"> 
-			<input type="hidden" name="m_addr" id="m_addr"> 
+			<input type="hidden" name="memberDto.m_addr" id="m_addr"> 
 			<input type="text" id="address" class="address" placeholder="주소를 검색하세요." required readonly>
       		<input type="text" id="sub_address" class="sub_address" placeholder="상세주소를 입력하세요.">
       		<span class="final_addr_ck">주소를 입력해주세요.</span>
       	</div>
       	<div class="passForm">창작자 명<br><br>
-        	<input type="text" id="c_name" class="c_name" placeholder="창작자명을 입력하세요.">
+        	<input type="text" name="create_name" id="c_name" class="c_name" placeholder="창작자 명을 입력하세요.">
       		<span class="final_create">창작자 명을 입력해주세요.</span>
       		<br>창작자 소개<br><br>
-        	<textarea cols="45" rows="3" id="c_intro" class="c_intro" placeholder="창작자 소개를 입력하세요."></textarea>
+        	<textarea cols="45" rows="3" name="create_intro" id="c_intro" class="c_intro" placeholder="창작자 소개를 입력하세요."></textarea>
       		<span class="final_create_int">창작자 소개를 입력해주세요.</span>
       	</div>
       	<input type="submit" class="btn" value="Create your YouNeeds account" id="join_button">

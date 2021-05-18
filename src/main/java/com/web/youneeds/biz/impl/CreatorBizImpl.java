@@ -21,6 +21,7 @@ public class CreatorBizImpl implements CreatorBiz {
 
 	@Override
 	public int insert(CreatorDto dto) {
+		System.out.println("되라");
 		return creatorDao.insert(dto);
 	}
 
