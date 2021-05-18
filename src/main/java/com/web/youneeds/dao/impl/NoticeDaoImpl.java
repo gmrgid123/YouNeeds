@@ -45,7 +45,7 @@ public class NoticeDaoImpl implements NoticeDao{
 			e.printStackTrace();
 		}
 		
-		return dto.getM_uid();
+		return dto.getNotice_id();
 	}
 
 	@Override

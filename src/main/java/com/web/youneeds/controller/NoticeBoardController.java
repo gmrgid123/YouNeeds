@@ -113,17 +113,23 @@ public class NoticeBoardController {
 	
 	@RequestMapping(value="/noticeInsert.do",  method = RequestMethod.POST)
 	public String InsertNotice(String notice_title, String p_content, int m_uid) {
+		logger.info("공지사항 업로드 처리");
+		
 		
 		NoticeDto dto = new NoticeDto();
 		dto.setNotice_title(notice_title); dto.setNotice_content(p_content); dto.setM_uid(m_uid);
 		
 		int no = noticeBiz.insert(dto);
+		System.out.println("notice_id값 : "  + no);
 		
 		return "redirect:noticeView?no="+no;
 	}
 	
 	@RequestMapping("/noticeView")
 	public String noticeDetailView(Model model, int no) {
+		logger.info("공지사항 상세 호출");
+		
+		System.out.println("공지사항 번호 : "+no);
 		
 		NoticeDto dto = noticeBiz.selectOne(no);
 		
