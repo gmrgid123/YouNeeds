@@ -99,7 +99,7 @@ public class NoticeBoardController {
 					try {
 						String originName = upload.getOriginalFilename();
 						byte[] bytes = upload.getBytes();
-						String uploadPath = request.getServletContext().getRealPath("/uploadImg");
+						String uploadPath = request.getServletContext().getRealPath("/uploadImg/notice");
 						
 						
 						File uploadFile = new File(uploadPath);
@@ -113,7 +113,7 @@ public class NoticeBoardController {
 						
 						printWriter = response.getWriter();
 						response.setContentType("text/html");
-						String fileUrl = request.getContextPath() + "/uploadImg/" + storedName;
+						String fileUrl = request.getContextPath() + "/uploadImg/notice/" + storedName;
 						
 						json.addProperty("uploaded", 1);
 						json.addProperty("fileName", storedName);

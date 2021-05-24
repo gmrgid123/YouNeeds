@@ -23,7 +23,8 @@
 		<h2>QnA</h2>
 	</div>
 	
-	<form action="">
+	<form action="qnaInsert.do" method="post">
+		<input type="hidden" name="m_uid" value="${sessionScope.login.m_uid}">
 		<div>
 		
 			<div>
@@ -31,13 +32,12 @@
 			</div>
 			<br>
 			<div>
-				<textarea class="form-control" name="qna_content"  id="p_content"  required="required" style="resize: none;"></textarea>
+				<textarea class="form-control" name="qna_content"  id="qna_content"  required="required" style="resize: none;"></textarea>
 				<script type="text/javascript">
-					CKEDITOR.config.resize_enabled= false;
-					
-					CKEDITOR.replace('p_content',
-									{height:600, filebrowserUploadUrl: '${pageContext.request.contextPath }/adm/fileupload.do'}		
-					);
+				CKEDITOR.config.resize_enabled= false;
+				CKEDITOR.replace('qna_content',
+								{height:600, filebrowserUploadUrl: '${path}/uploadImg/qna'}		
+				);
 				</script>
 			</div>	
 			<br>

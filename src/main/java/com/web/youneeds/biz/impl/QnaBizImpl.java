@@ -2,12 +2,17 @@ package com.web.youneeds.biz.impl;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.web.youneeds.biz.interf.QnaBiz;
 import com.web.youneeds.dao.interf.QnaDao;
 import com.web.youneeds.dto.QnaDto;
 
+@Service
 public class QnaBizImpl implements QnaBiz {
 
+	@Autowired
 	private QnaDao qnaDao;
 	
 	@Override
@@ -18,14 +23,12 @@ public class QnaBizImpl implements QnaBiz {
 
 	@Override
 	public QnaDto selectOne(int qna_id) {
-		// TODO Auto-generated method stub
-		return null;
+		return qnaDao.selectOne(qna_id);
 	}
 
 	@Override
 	public int insert(QnaDto dto) {
-		// TODO Auto-generated method stub
-		return 0;
+		return qnaDao.insert(dto);
 	}
 
 	@Override

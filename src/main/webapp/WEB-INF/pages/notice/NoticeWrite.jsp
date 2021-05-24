@@ -25,7 +25,7 @@
 	
 	<form action="noticeInsert.do" method="post">
 		<div>
-		<input type="hidden" name="m_uid" value="1"> <!-- 로그인 구현시 해당 부분 수정 필요 -->
+		<input type="hidden" name="m_uid" value="${sessionScope.login.m_uid}">
 			<div>
 				<input type="text" name="notice_title" placeholder="제목을 입력해주세요." required="required" style="width: 100%; height: 40px;">
 			</div>

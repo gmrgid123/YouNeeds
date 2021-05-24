@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="path" value="${pageContext.request.contextPath}"/>     
     
 <!DOCTYPE html>
@@ -66,11 +67,11 @@
 	<div style="margin-top: 50px; margin-bottom: 50px; padding-right: 20%; padding-left: 20%;">
 		<div class="content_body">
 			<div class="content_title">
-				<h1 style="text-align: center; margin-bottom: 30px;">QnA 타이틀</h1>
+				<h1 style="text-align: center; margin-bottom: 30px;">${qnaDto.qna_title}</h1>
 				<div style="float: right;">
-					<span class="regdate" style="border-right: 1px solid; border-color: #D7D7D7;">작성자 : 아무개</span>
-					<span class="regdate" style="border-right: 1px solid; border-color: #D7D7D7;">작성일 : yyyy-dd-mm</span>
-					<span class="regdate">조회수 : 0</span>
+					<span class="regdate" style="border-right: 1px solid; border-color: #D7D7D7;">작성자 : ${qnaDto.memberDto.m_nickname }</span>
+					<span class="regdate" style="border-right: 1px solid; border-color: #D7D7D7;">작성일 : <fmt:formatDate value="${qnaDto.qna_regdate}" pattern="yyyy-MM-dd  HH:mm:ss"/></span>
+					<span class="regdate">조회수 : ${qnaDto.qna_hit }</span>
 				</div>
 			</div>
 		
@@ -79,7 +80,7 @@
 			<br>
 			
 			<div class="content" style="margin-right: 10%; margin-left: 10%;">
-				<p>내용을 채워야 합니다</p>
+				<p>${qnaDto.qna_content }</p>
 			</div>
 			
 			<br>

@@ -3,7 +3,43 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
- <mapper namespace="temp14">
+ <mapper namespace="QnaSql">
  
+ 	<resultMap type="memberDto" id="MemberMap">
+ 		<result property="m_uid" column="M_UID"/>
+ 		<result property="m_email" column="M_EMAIL"/>
+ 		<result property="m_pw" column="M_PW"/>
+ 		<result property="m_nickname" column="M_NICKNAME"/>
+ 		<result property="m_addr" column="M_ADDR"/>
+ 		<result property="m_type" column="M_TYPE"/>
+ 		<result property="m_regdate" column="M_REGDATE"/>
+ 		<result property="m_enabled" column="M_ENABLED"/>
+ 		<result property="m_deldate" column="M_DELDATE"/>
+ 	</resultMap>
+ 
+ 	<resultMap type="qnaDto" id="QnaMap">
+ 		<result property="qna_id" column="QNA_ID"/>
+ 		<result property="qna_title" column="QNA_TITLE"/>
+ 		<result property="qna_content" column="QNA_CONTENT"/>
+ 		<result property="qna_regdate" column="QNA_REGDATE"/>
+ 		<result property="qna_hit" column="QNA_HIT"/>
+ 		<result property="m_uid" column="M_UID"/>
+ 		<collection property="memberDto" resultMap="MemberMap"></collection>
+ 	</resultMap>
+ 
+ 	<select id="selectOne" parameterType="int" resultMap="QnaMap">
+ 		SELECT Q.QNA_ID, Q.QNA_TITLE, Q.QNA_CONTENT, Q.QNA_REGDATE, Q.QNA_HIT, Q.M_UID, M.M_NICKNAME
+		FROM QNA Q
+		JOIN MEMBER M ON (Q.M_UID = M.M_UID)
+ 		WHERE QNA_ID = #{qna_id}
+ 	</select>
+ 
+ 	<insert id="QnaInsert" parameterType="qnaDto">
+ 		<selectKey keyProperty="qna_id" resultType="int" order="BEFORE">
+ 			SELECT QnA_SEQ.NEXTVAL FROM DUAL
+ 		</selectKey>
+ 		INSERT INTO QnA
+ 		VALUES(#{qna_id}, #{qna_title}, #{qna_content}, SYSDATE, DEFAULT, #{m_uid})	
+ 	</insert>
  
  </mapper>
