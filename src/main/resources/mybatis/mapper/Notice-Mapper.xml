@@ -5,6 +5,25 @@
   
  <mapper namespace="NoticeSql">
  
+ 	<resultMap type="noticeDto" id="boardMap">
+ 		<result property="notice_id" column="NOTICE_ID"/>
+ 		<result property="notice_title" column="NOTICE_TITLE"/>
+ 		<result property="notice_content" column="NOTICE_CONTENT"/>
+ 		<result property="notice_regdate" column="NOTICE_REGDATE"/>
+ 		<result property="m_uid" column="M_UID"/>
+ 	</resultMap>
+ 	
+ 	<select id="selectList" resultMap="boardMap" parameterType="int">
+ 		SELECT NOTICE_ID, NOTICE_TITLE, NOTICE_CONTENT, NOTICE_REGDATE, M_UID
+ 		FROM (SELECT ROW_NUMBER() OVER(ORDER BY NOTICE_ID DESC) AS NUM, NOTICE_ID, NOTICE_TITLE, NOTICE_CONTENT, NOTICE_REGDATE, M_UID  FROM NOTICE) 
+ 		WHERE NUM <![CDATA[<=]]> #{p}*10 AND NUM <![CDATA[>=]]> #{p}*10-9
+ 	</select>
+ 	
+ 	<select id="selectListMaxLength" resultType="int">
+ 		SELECT MAX(ROWNUM) FROM NOTICE ORDER BY NOTICE_ID DESC
+ 	</select>
+ 
+ 
  	<select id="selectOne" parameterType="int" resultType="noticeDto">
  		SELECT NOTICE_ID, NOTICE_TITLE, NOTICE_CONTENT, NOTICE_REGDATE, M_UID
  		FROM NOTICE
@@ -15,7 +34,6 @@
  		<selectKey keyProperty="notice_id" resultType="int" order="BEFORE">
  			SELECT Notice_SEQ.NEXTVAL FROM DUAL
  		</selectKey>
- 	
  		INSERT INTO NOTICE
  		VALUES(#{notice_id}, #{notice_title}, #{notice_content}, SYSDATE, #{m_uid})
  	</insert>

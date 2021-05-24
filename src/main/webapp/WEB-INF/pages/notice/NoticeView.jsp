@@ -63,7 +63,7 @@
 			</div>
 		</div>
 		<div class="btn_div">
-			<input id="listGo" type="button" class="btn btn-secondary"  value="목록으로 돌아가기"  onclick="location.href='notice_board'"/>
+			<input id="listGo" type="button" class="btn btn-secondary"  value="목록으로 돌아가기"  onclick="location.href='notice_board?p=1'"/>
 		</div>
 	
 	</div>

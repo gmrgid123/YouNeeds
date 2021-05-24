@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -34,8 +35,34 @@ public class NoticeBoardController {
 	private NoticeBiz noticeBiz;
 	
 	@RequestMapping("/notice_board")
-	public String noticeList() {
+	public String noticeList(Model model, int p) {
 		logger.info("공지사항 게시판 목록 페이지 호출");
+		
+		List<NoticeDto> list = noticeBiz.selectList(p);
+		int list_max = noticeBiz.selectListMaxLength();
+		System.out.println(list_max);
+		int max;
+		if(list_max%10 == 0) {
+			max = list_max/10;
+		}else {
+			max = list_max/10 + 1;
+		}
+		
+		int tmp=0;
+		if((p%10)==0){
+			tmp = p/10;
+		}else{
+			tmp = p/10 + 1;
+		}
+		int end_num = tmp*10;
+		int start_num = end_num-9;
+		
+		model.addAttribute("list",list);
+		model.addAttribute("list_max", list_max);
+		model.addAttribute("max",max);
+		model.addAttribute("start_num",start_num);
+		model.addAttribute("end_num",end_num);
+		model.addAttribute("page",p);
 		
 		return "/notice/NoticeList";
 	}
