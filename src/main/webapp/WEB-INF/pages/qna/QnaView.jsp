@@ -143,12 +143,12 @@
 			<div class="reply_edit" style="margin-right: 5%; margin-left: 5%;">
 				<div style="padding: 0.3em;"><h5>댓글 작성</h5></div>
 				<div>
-					<form action="" method="post">
-					
+					<form action="qnaReplyInsert.do" method="post">
+						<input type="hidden" name="qna_id" value="${qnaDto.qna_id}">
 						<table style="margin: auto; text-align: center;">
 							<col width="1200px"><col width="100px;">
 							<tr>
-								<td><textarea name="reply_content" style="width: 100%; height:100px; resize: none;" maxlength="8000" required="required"></textarea></td>
+								<td><textarea name="reply_content" style="width: 100%; height:100px; resize: none;" maxlength="1000" required="required"></textarea></td>
 								<td><input type="submit" value="작성" style="width: 100%; height:100px;"></td>
 							</tr>
 						</table>
@@ -165,7 +165,7 @@
 		
 		
 		<div class="btn_div">
-			<input id="listGo" type="button" class="btn btn-secondary"  value="목록으로 돌아가기"  onclick="location.href='qna_board'"/>
+			<input id="listGo" type="button" class="btn btn-secondary"  value="목록으로 돌아가기"  onclick="location.href='qna_board?p=1'"/>
 		</div>
 	</div>
 

@@ -2,12 +2,15 @@ package com.web.youneeds.biz.impl;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.web.youneeds.biz.interf.VideoChatBiz;
 import com.web.youneeds.dao.interf.VideoChatDao;
 import com.web.youneeds.dto.VideoChatDto;
 
 public class VideoChatBizImpl implements VideoChatBiz {
 
+	@Autowired
 	private VideoChatDao videoChatDao;
 	
 	@Override

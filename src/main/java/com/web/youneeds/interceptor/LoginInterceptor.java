@@ -23,17 +23,23 @@ public class LoginInterceptor implements HandlerInterceptor {
 		
 		MemberDto loginDto = (MemberDto)request.getSession().getAttribute("login");
 		
-		if(request.getRequestURI().contains("/notice_write")) {
+		if(request.getRequestURI().contains("/notice_write") || request.getRequestURI().contains("/noticeInsert.do")) {
 			if( loginDto==null || !(loginDto.getM_type().equals("관리")) ) {
 				jsResponse("관리자만 이용 가능합니다.", "notice_board?p=1" , response);
 				return false;
 			}
 		}
 		
-		if(request.getRequestURI().contains("/qna_write") && loginDto==null ) {
-			jsResponse("로그인 후 이용 가능합니다.", "loginForm.do" , response);
-			return false;
+		if( request.getRequestURI().contains("/qna_write") || 
+			request.getRequestURI().contains("/qnaInsert.do") ||
+			request.getRequestURI().contains("/qnaReplyInsert.do") ) {
+			if(loginDto==null) {
+				jsResponse("로그인 후 이용 가능합니다.", "loginForm.do" , response);
+				return false;
+			}
 		}
+		
+		
 		
 		return true;
 	}

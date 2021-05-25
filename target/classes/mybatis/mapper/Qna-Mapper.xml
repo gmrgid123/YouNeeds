@@ -26,6 +26,17 @@
  		<result property="m_uid" column="M_UID"/>
  		<collection property="memberDto" resultMap="MemberMap"></collection>
  	</resultMap>
+ 	
+ 	<select id="selectList" parameterType="int" resultMap="QnaMap">
+ 		SELECT Q.QNA_ID, Q.QNA_TITLE , Q.QNA_REGDATE, Q.QNA_HIT, Q.M_UID, M.M_NICKNAME
+		FROM (SELECT ROW_NUMBER() OVER(ORDER BY QNA_ID DESC) AS NUM, QNA_ID, QNA_TITLE, QNA_REGDATE, QNA_HIT, M_UID  FROM QNA) Q
+		JOIN MEMBER M ON (Q.M_UID = M.M_UID)
+		WHERE NUM <![CDATA[<=]]> #{p}*10 AND NUM <![CDATA[>=]]> #{p}*10-9
+ 	</select>
+ 	
+ 	 <select id="selectListMaxLength" resultType="int">
+ 		SELECT MAX(ROWNUM) FROM QNA ORDER BY QNA_ID DESC
+ 	</select>
  
  	<select id="selectOne" parameterType="int" resultMap="QnaMap">
  		SELECT Q.QNA_ID, Q.QNA_TITLE, Q.QNA_CONTENT, Q.QNA_REGDATE, Q.QNA_HIT, Q.M_UID, M.M_NICKNAME
@@ -41,5 +52,10 @@
  		INSERT INTO QnA
  		VALUES(#{qna_id}, #{qna_title}, #{qna_content}, SYSDATE, DEFAULT, #{m_uid})	
  	</insert>
+ 	
+ 	<update id="hitUpdate" parameterType="int">
+ 		UPDATE QNA SET QNA_HIT = QNA_HIT+1 WHERE QNA_ID = #{qnd_id}
+ 	</update>
+ 	
  
  </mapper>

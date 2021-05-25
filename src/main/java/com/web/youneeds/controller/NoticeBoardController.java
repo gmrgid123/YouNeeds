@@ -24,6 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.google.gson.JsonObject;
 import com.web.youneeds.biz.interf.NoticeBiz;
 import com.web.youneeds.biz.interf.NoticeImgBiz;
+import com.web.youneeds.dto.MemberDto;
 import com.web.youneeds.dto.NoticeDto;
 
 @Controller
@@ -39,6 +40,7 @@ public class NoticeBoardController {
 		logger.info("공지사항 게시판 목록 페이지 호출");
 		
 		List<NoticeDto> list = noticeBiz.selectList(p);
+		
 		int list_max = noticeBiz.selectListMaxLength();
 		System.out.println(list_max);
 		int max;
@@ -72,13 +74,6 @@ public class NoticeBoardController {
 		logger.info("공지사항 작성 페이지 호출");
 		
 		return "/notice/NoticeWrite";
-	}
-	
-	@RequestMapping("/notice_view")
-	public String noticeView() {
-		logger.info("공지사항 상세 페이지 호출");
-		
-		return "/notice/NoticeView";
 	}
 	
 	
@@ -139,9 +134,10 @@ public class NoticeBoardController {
 	}
 	
 	@RequestMapping(value="/noticeInsert.do",  method = RequestMethod.POST)
-	public String InsertNotice(String notice_title, String p_content, int m_uid) {
+	public String InsertNotice(HttpServletRequest request, String notice_title, String p_content) {
 		logger.info("공지사항 업로드 처리");
 		
+		int m_uid = ((MemberDto)request.getSession().getAttribute("login")).getM_uid();
 		
 		NoticeDto dto = new NoticeDto();
 		dto.setNotice_title(notice_title); dto.setNotice_content(p_content); dto.setM_uid(m_uid);

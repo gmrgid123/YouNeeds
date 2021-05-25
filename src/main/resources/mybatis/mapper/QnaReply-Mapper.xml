@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="qnaReplySql">
+
+	<insert id="insertReply" parameterType="qnaReplyDto">
+		INSERT INTO QNA_REPLY
+		VALUES(QnA_Reply_SEQ.NEXTVAL, #{reply_content}, SYSDATE, #{qna_id}, #{m_uid})
+	</insert>
+
+	<select id="selectListMaxLength">
+		SELECT MAX(ROWNUM) FROM QNA_REPLY ORDER BY QNA_REPLY_ID DESC
+	</select>
+	
+</mapper>

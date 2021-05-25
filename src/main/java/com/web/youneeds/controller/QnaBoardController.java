@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,7 +23,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.JsonObject;
 import com.web.youneeds.biz.interf.QnaBiz;
+import com.web.youneeds.biz.interf.QnaReplyBiz;
+import com.web.youneeds.dto.MemberDto;
 import com.web.youneeds.dto.QnaDto;
+import com.web.youneeds.dto.QnaReplyDto;
 
 @Controller
 public class QnaBoardController {
@@ -32,9 +36,39 @@ public class QnaBoardController {
 	@Autowired
 	QnaBiz qnaBiz;
 	
+	@Autowired
+	QnaReplyBiz replyBiz;
+	
 	@RequestMapping("/qna_board")
-	public String qnaList() {
+	public String qnaList(Model model, int p) {
 		logger.info("QNA 게시판 목록 페이지 호출");
+		
+		List<QnaDto> list = qnaBiz.selectList(p);
+		
+		int list_max = qnaBiz.selectListMaxLength();
+		System.out.println(list_max);
+		int max;
+		if(list_max%10 == 0) {
+			max = list_max/10;
+		}else {
+			max = list_max/10 + 1;
+		}
+		
+		int tmp=0;
+		if((p%10)==0){
+			tmp = p/10;
+		}else{
+			tmp = p/10 + 1;
+		}
+		int end_num = tmp*10;
+		int start_num = end_num-9;
+		
+		model.addAttribute("list",list);
+		model.addAttribute("list_max", list_max);
+		model.addAttribute("max",max);
+		model.addAttribute("start_num",start_num);
+		model.addAttribute("end_num",end_num);
+		model.addAttribute("page",p);
 		
 		return "/qna/QnaList";
 	}
@@ -46,33 +80,31 @@ public class QnaBoardController {
 		return "/qna/QnaWrite";
 	}
 	
-	@RequestMapping("/qna_view")
-	public String qnaView() {
-		logger.info("QNA 상세 페이지 호출");
-		
-		return "/qna/QnaView";
-	}
-	
 	@RequestMapping("/qnaView")
-	public String noticeDetailView(Model model, int no) {
+	public String qnaDetailView(Model model, int no) {
 		logger.info("QNA 상세 호출");
 		
 		System.out.println("QNA 번호 : "+no);
 		
-		QnaDto dto = qnaBiz.selectOne(no);
-		System.out.println(dto);
+		if(qnaBiz.HitUpdate(no)>0) {
+			QnaDto dto = qnaBiz.selectOne(no);
+			System.out.println(dto);
+			model.addAttribute("qnaDto", dto);
+		}
 		
-		model.addAttribute("qnaDto", dto);
 		
 		return "/qna/QnaView";
 	}
 	
 	@RequestMapping(value="/qnaInsert.do",  method = RequestMethod.POST)
-	public String InsertNotice(String qna_title, String qna_content, int m_uid) {
+	public String InsertQna(HttpServletRequest request, String qna_title, String qna_content) {
+		
+		int m_uid = ((MemberDto)request.getSession().getAttribute("login")).getM_uid();
+		
 		logger.info("QNA 업로드 처리");
-		System.out.println(m_uid);
-		System.out.println(qna_title);
-		System.out.println(qna_content);
+		//System.out.println(m_uid);
+		//System.out.println(qna_title);
+		//System.out.println(qna_content);
 		
 		
 		QnaDto dto = new QnaDto();
@@ -82,6 +114,22 @@ public class QnaBoardController {
 		System.out.println("qna_id값 : "  + no);
 		
 		return "redirect:qnaView?no="+no;
+	}
+	
+	
+	@RequestMapping(value="/qnaReplyInsert.do",method = RequestMethod.POST)
+	public String ReplyInsert(HttpServletRequest request, String reply_content, int qna_id) {
+		logger.info("QNA 댓글 업로드 처리");
+		
+		int m_uid = ((MemberDto)request.getSession().getAttribute("login")).getM_uid();
+		
+		QnaReplyDto dto = new QnaReplyDto();
+		dto.setM_uid(m_uid); dto.setQna_reply_content(reply_content); dto.setQna_id(qna_id);
+		
+		replyBiz.insert(dto);
+		
+		
+		return "";
 	}
 	
 	

@@ -7,9 +7,11 @@ import com.web.youneeds.dto.QnaDto;
 public interface QnaDao {
 	String NAMESPACE = "QnaSql.";
 	
-	public List<QnaDto> selectList();
+	public List<QnaDto> selectList(int p);
 	public QnaDto selectOne(int qna_id);
 	public int insert(QnaDto dto);
 	public int update(QnaDto dto);
 	public int delete(int qna_id);
+	public int selectListMaxLength();
+	public int HitUpdate(int qna_id);
 }

@@ -11,5 +11,6 @@ public interface QnaReplyBiz {
 	public int insert(QnaReplyDto dto);
 	public int update(QnaReplyDto dto);
 	public int delete(int qna_reply_id);
+	public int selectListMaxLength();
 	
 }

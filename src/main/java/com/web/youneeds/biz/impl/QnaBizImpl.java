@@ -16,9 +16,8 @@ public class QnaBizImpl implements QnaBiz {
 	private QnaDao qnaDao;
 	
 	@Override
-	public List<QnaDto> selectList() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<QnaDto> selectList(int p) {
+		return qnaDao.selectList(p);
 	}
 
 	@Override
@@ -41,6 +40,16 @@ public class QnaBizImpl implements QnaBiz {
 	public int delete(int qna_id) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public int selectListMaxLength() {
+		return qnaDao.selectListMaxLength();
+	}
+
+	@Override
+	public int HitUpdate(int qna_id) {
+		return qnaDao.HitUpdate(qna_id);
 	}
 
 }
