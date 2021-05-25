@@ -1,8 +1,11 @@
 package com.web.youneeds.dao.impl;
 
+import org.springframework.stereotype.Repository;
+
 import com.web.youneeds.dao.interf.CreatorDao;
 import com.web.youneeds.dto.CreatorDto;
 
+@Repository
 public class CreatorDaoImpl implements CreatorDao {
 
 	@Override

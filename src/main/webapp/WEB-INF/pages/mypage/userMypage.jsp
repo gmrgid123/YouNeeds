@@ -37,14 +37,6 @@ div .box1 {
 	font-size: 15px;
 }
 
-.profile{
-	width: 70px;
-    height: 70px; 
-    border-radius: 70%;
-    overflow: hidden;
-    background-color: lightgray;
-}
-
 div .box2 {
 	width: 50%;
 	float: right;
@@ -145,22 +137,13 @@ div .card {
 	<div class="main">
 		<div class="user">
 			<div class="box1">
-			<!-- 
-				<div class="profile">
-					<img alt="프로필" src="" onclick="">
-				</div>
-			-->
 				&nbsp; &nbsp;
-				<div class="userId">회원 아이디</div>
+				<h3 class="userId">아이디 : ${sessionScope.login.m_email }</h3>
+				<h3 class="userNck">닉네임 : ${sessionScope.login.m_nickname }</h3>
 			</div>
 			<div class="box2">
-<<<<<<< HEAD
-				<input type="button" style="width: 120px; height: 30px; font-size: 15px; background-color: skyblue; border-radius: 5px;" value="회원정보수정" onclick="location.href='updategeneral'">
-				<input type="button" style="width: 100px; height: 30px; font-size: 15px; background-color: skyblue; border-radius: 5px;" value="로그아웃" onclick="location.href='logout'">
-=======
 				<input type="button" style="width: 120px; height: 30px; font-size: 15px; background-color: skyblue; border-radius: 5px;" value="회원정보수정" onclick="location.href='userUpdate'">
-				<input type="button" style="width: 100px; height: 30px; font-size: 15px; background-color: skyblue; border-radius: 5px;" value="로그아웃" onclick="">
->>>>>>> refs/heads/master
+				<input type="button" style="width: 100px; height: 30px; font-size: 15px; background-color: skyblue; border-radius: 5px;" value="로그아웃" onclick="location.href='logout'">
 			</div>
 			<hr>
 		</div>

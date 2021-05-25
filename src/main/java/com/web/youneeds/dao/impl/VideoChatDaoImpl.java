@@ -2,9 +2,12 @@ package com.web.youneeds.dao.impl;
 
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
 import com.web.youneeds.dao.interf.VideoChatDao;
 import com.web.youneeds.dto.VideoChatDto;
 
+@Repository
 public class VideoChatDaoImpl implements VideoChatDao {
 
 	@Override

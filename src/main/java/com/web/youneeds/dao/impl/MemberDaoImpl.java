@@ -7,19 +7,11 @@ import org.springframework.stereotype.Repository;
 import com.web.youneeds.dao.interf.MemberDao;
 import com.web.youneeds.dto.MemberDto;
 
-import oracle.jdbc.proxy.annotation.Post;
-
 @Repository
 public class MemberDaoImpl implements MemberDao{
 
 	@Autowired
 	private SqlSessionTemplate sqlSession;
-	
-	@Override
-	public MemberDto selectOne(int m_uid) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 	
 	@Override
 	public int insert(MemberDto dto) {

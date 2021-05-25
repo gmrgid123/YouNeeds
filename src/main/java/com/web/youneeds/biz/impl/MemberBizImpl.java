@@ -14,11 +14,6 @@ public class MemberBizImpl implements MemberBiz {
 	private MemberDao memberDao;
 	
 	@Override
-	public MemberDto selectOne(int m_uid) {
-		return null;
-	}
-
-	@Override
 	public int insert(MemberDto dto) {
 		return memberDao.insert(dto);
 	}
