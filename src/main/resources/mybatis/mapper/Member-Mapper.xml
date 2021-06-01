@@ -51,7 +51,7 @@
  	
  	<!-- 로그인 -->
  	<select id="login" parameterType="memberDto" resultType="memberDto">
- 		select m_uid, m_email, m_pw, m_nickname, m_addr
+ 		select m_uid, m_email, m_pw, m_nickname, m_addr, m_regdate, m_enabled, m_deldate
  		from Member
  		where m_email = #{m_email, jdbcType=VARCHAR} and m_pw = #{m_pw, jdbcType=VARCHAR}
  	</select>
