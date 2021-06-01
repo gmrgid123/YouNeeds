@@ -11,6 +11,13 @@ public class CreatorDto {
 	public CreatorDto() {
 		super();
 	}
+	
+	public CreatorDto(int m_uid, String create_name, String create_intro) {
+		super();
+		this.m_uid = m_uid;
+		this.create_name = create_name;
+		this.create_intro = create_intro;
+	}
 
 	public int getM_uid() {
 		return m_uid;

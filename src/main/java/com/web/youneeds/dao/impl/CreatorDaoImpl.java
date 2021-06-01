@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import com.web.youneeds.dao.interf.CreatorDao;
 import com.web.youneeds.dto.CreatorDto;
+import com.web.youneeds.dto.MemberDto;
 
 @Repository
 public class CreatorDaoImpl implements CreatorDao {
@@ -35,8 +36,46 @@ public class CreatorDaoImpl implements CreatorDao {
 
 	@Override
 	public int update(CreatorDto dto) {
-		// TODO Auto-generated method stub
-		return 0;
+		int res = 0;
+		
+		try {
+			res = sqlSession.update(NAMESPACE+"create_update", dto);
+
+			System.out.println("update");
+		} catch (Exception e) {
+			System.out.println("[error] : update");
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
+
+	@Override
+	public int mupdate(MemberDto mdto) {
+		int res = 0;
+				
+				try {
+					res = sqlSession.update(NAMESPACE+"c_update", mdto);
+					System.out.println("update");
+				} catch (Exception e) {
+					System.out.println("[error] : update");
+					e.printStackTrace();
+				}
+				
+				return res;
+	}
+
+	@Override
+	public CreatorDto clogin(CreatorDto cdto) throws Exception {
+		CreatorDto res = null;
+				
+				try {
+					res = sqlSession.selectOne(NAMESPACE+"c_login", cdto);
+				} catch (Exception e) {
+					System.out.println("error:login");
+					e.printStackTrace();
+				}
+				return res;
 	}
 
 }

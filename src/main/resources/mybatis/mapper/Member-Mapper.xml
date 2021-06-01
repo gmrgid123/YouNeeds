@@ -16,6 +16,13 @@
 		<result property="m_deldate" column="m_deldate"/>
 	</resultMap>
 	
+	<resultMap type="creatorDto" id="creatorMap">
+ 		<result property="m_uid" column="m_uid"/>
+ 		<result property="create_name" column="create_name"/>
+ 		<result property="create_intro" column="create_intro"/>
+ 		<collection property="memberDto" resultMap="memberMap"/>
+ 	</resultMap>
+	
 	<!-- 일반 회원가입 -->
  	<insert id="insert" parameterType="memberDto">
  		insert into Member
@@ -44,9 +51,45 @@
  	
  	<!-- 로그인 -->
  	<select id="login" parameterType="memberDto" resultType="memberDto">
- 		select m_email, m_pw
+ 		select m_uid, m_email, m_pw, m_nickname, m_addr
  		from Member
  		where m_email = #{m_email, jdbcType=VARCHAR} and m_pw = #{m_pw, jdbcType=VARCHAR}
  	</select>
- 
+ 	<select id="c_login" parameterType="creatorDto" resultType="creatorDto">
+ 		select create_name, create_intro
+ 		from Creator
+ 	</select>
+
+	<!-- 비번찾기 -->
+	<select id="findPwd" parameterType="memberDto" resultType="memberDto">
+		select m_email, m_pw
+		from Member
+		where m_email = #{m_email}
+	</select>
+	
+	<!-- 일반회원 수정 -->
+	<update id="update" parameterType="memberDto">
+		update Member
+		set m_pw= #{m_pw}, m_nickname = #{m_nickname}, m_addr=#{m_addr}
+		where m_uid=#{m_uid}
+	</update>
+	
+	<!-- 창작회원 수정 -->
+	<update id="c_update" parameterType="memberDto">
+		update Member
+		set m_pw= #{m_pw}, m_nickname = #{m_nickname}, m_addr=#{m_addr}
+		where m_uid=#{m_uid}
+	</update>
+	<update id="create_update" parameterType="creatorDto">
+		update Creator
+		set create_name=#{create_name}, create_intro=#{create_intro} 
+		where m_uid=#{m_uid}
+	</update>
+	
+	
+	<select id="selectOne" parameterType="int" resultType="memberDto">
+		select m_uid, m_email, m_pw, m_nickname, m_addr, m_type
+		from Member
+		where m_uid=#{m_uid}
+	</select>
  </mapper>

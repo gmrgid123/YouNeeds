@@ -1,8 +1,5 @@
 package com.web.youneeds.controller;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -10,7 +7,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -39,24 +35,34 @@ public class LoginController {
 	
 	/* 로그인 */
 	@RequestMapping(value="/login.do", method=RequestMethod.POST)
-	public  String login(HttpServletRequest req, RedirectAttributes rttr, MemberDto dto) throws Exception{
+	public  String login(HttpServletRequest req, RedirectAttributes rttr, MemberDto dto, CreatorDto cdto) throws Exception{
 		logger.info("login 페이지");
 				
 				System.out.println("login 메서드 진입");
 				HttpSession session =req.getSession();
 				MemberDto login = biz.login(dto);
+				CreatorDto clogin = c_biz.clogin(cdto);
 				
 				if(login == null) {
-					//session.setAttribute("login", null);
+					session.setAttribute("member", null);
 					rttr.addFlashAttribute("msg", false);
 					System.out.println("로그인실패");
 					return "redirect:/loginForm.do";
 				}else {
-					session.setAttribute("login", login);
+					session.setAttribute("member", login);
+					session.setAttribute("creator", clogin);
 					System.out.println("로그인성공");
 					return "redirect:/main.do";
 				}
 				
+	}
+	
+	/* 로그아웃 */
+	@RequestMapping("/logout")
+	public String logout(HttpSession session) throws Exception{
+		session.invalidate();
+		
+		return "redirect:/";
 	}
 	
 	@RequestMapping("/login/login")
@@ -79,7 +85,8 @@ public class LoginController {
 		return "login/general";
 	}
 	
-	@RequestMapping("/insert.do") //일반 회원가입
+	/* 일반 회원가입 */
+	@RequestMapping("/insert.do")
 	public String insert_general(MemberDto dto) {
 		logger.info("insert_general");
 		System.out.println("dto : " + dto);
@@ -91,7 +98,8 @@ public class LoginController {
 		}	
 	}
 	
-	@RequestMapping("/c_insert.do") //창작 회원가입
+	/* 창작 회원가입 */
+	@RequestMapping("/c_insert.do")
 	public String insert_create(CreatorDto dto) {
 		logger.info("insert_create");
 		System.out.println("dto : " + dto);
@@ -103,6 +111,7 @@ public class LoginController {
 		}	
 	}
 	
+	/* 닉네임 중복 */
 	@RequestMapping(value="/nicknameChk", method=RequestMethod.POST)
 	@ResponseBody
 	public String nicknameChk(MemberDto dto) throws Exception{
@@ -128,8 +137,33 @@ public class LoginController {
 	
 	@RequestMapping("/found_pw")
 	public String foundPw() {
+		
 		logger.info("패스워드 찾기 페이지");
 		
 		return "login/foundPw";
+	}
+	
+	/* 일반회원 수정 */
+	@RequestMapping("/update.do")
+	public String update_general(MemberDto dto, HttpSession session) {
+		logger.info("UPDATE");
+		System.out.println("UPDATE");
+		System.out.println("dto : " + dto);
+		int res = biz.update(dto);
+		session.invalidate();
+		return "redirect:/";
+	}
+	
+	/* 창작회원 수정 */
+	@RequestMapping("/c_update.do")
+	public String update_create(MemberDto mdto, CreatorDto dto, HttpSession session) {
+		logger.info("UPDATE");
+		System.out.println("UPDATE");
+		System.out.println("mdto : " + mdto);
+		System.out.println("dto : " + dto);
+		int res = c_biz.mupdate(mdto);
+		int cres = c_biz.update(dto);
+		session.invalidate();
+		return "redirect:/";
 	}
 }

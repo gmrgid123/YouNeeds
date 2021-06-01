@@ -11,8 +11,7 @@ public class MemberDto {
 	private String m_type;
 	private Date m_regdate;
 	private String m_enabled;
-	private Date m_deldate;
-	
+	private Date m_deldate;	
 	
 	public MemberDto() {
 		super();

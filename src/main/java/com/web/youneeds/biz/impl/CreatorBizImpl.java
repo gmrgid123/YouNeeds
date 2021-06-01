@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import com.web.youneeds.biz.interf.CreatorBiz;
 import com.web.youneeds.dao.interf.CreatorDao;
 import com.web.youneeds.dto.CreatorDto;
+import com.web.youneeds.dto.MemberDto;
 
 @Service
 public class CreatorBizImpl implements CreatorBiz {
@@ -27,8 +28,17 @@ public class CreatorBizImpl implements CreatorBiz {
 
 	@Override
 	public int update(CreatorDto dto) {
-		// TODO Auto-generated method stub
-		return 0;
+		return creatorDao.update(dto);
+	}
+
+	@Override
+	public int mupdate(MemberDto mdto) {
+		return creatorDao.mupdate(mdto);
+	}
+
+	@Override
+	public CreatorDto clogin(CreatorDto cdto) throws Exception{
+		return creatorDao.clogin(cdto);
 	}
 
 }

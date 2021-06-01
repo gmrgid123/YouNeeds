@@ -25,7 +25,7 @@
 	}
 	
 	#signup{
-		height: 1050px;
+		height: 1150px;
 	}
 	
 	.singupForm {
@@ -34,8 +34,8 @@
   		margin-top: 300px;
   		margin-bottom: 10px;
   		padding: 30px, 20px;
-		width:500px;
-		height:950px;
+		width:540px;
+		height:1050px;
 		background-color:#FFFFFF;
 		text-align:left;
 		top:50%;
@@ -115,6 +115,16 @@
 		background: none;
 	}
 	
+	.pw_1{
+		color: green;
+		display: none;
+	}
+	
+	.pw_2{
+		color: red;
+		display: none;
+	}
+	
 	.nickname{
 		border: none;
 		border-bottom: 2px solid #adadad;
@@ -126,11 +136,36 @@
 		background: none;
 	}
 	
+	.nick_1{
+		color: green;
+		display: none;
+	}
+	
+	.nick_2{
+		color: red;
+		display: none;
+	}
+	
+	
 	.address{
 		border: none;
 		border-bottom: 2px solid #adadad;
 		outline:none;
 		color: #636e72;
+		font-size:20px;
+		width: 330px;
+		height:30px;
+		background: none;
+	}
+	
+	.sub_address{
+		border: none;
+		border-bottom: 2px solid #adadad;
+		outline:none;
+		color: #636e72;
+		font-size:20px;
+		width: 330px;
+		height:30px;
 		background: none;
 	}
 	
@@ -188,15 +223,172 @@
 	.btn:hover {
 		background-position: right;
 	}
+	
+	.final_pw_ck{
+		display: none;
+	}
+	.final_pwck_ck{
+		display: none;
+	}
+	.final_nickname_ck{
+		display: none;
+	}
+	.final_addr_ck{
+		display: none;
+	}
+	.final_create{
+		display: none;
+	}
+	.final_create_int{
+		display: none;
+	}
 </style>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
-    function goPopup(){
-    	var pop=window.open("popup/jusoPopup.jsp", "pop", "width=570, height=420, scrollbars=yes, resizable=yes");
-    }
-    function jusoCallBack(roadAddrPart2){
-    	var addressEl=document.querySelector("#address");
-    	addressEl.value=roadAddrPart2;
-    }
+/* 주소 */
+function goPopup(){
+
+    new daum.Postcode({
+        oncomplete: function(data) {
+            $("#address").eq(0).val(data.address);
+        }
+    }).open();
+    
+}
+
+$(function(){
+	var nicknameCheck = false; //닉네임
+	var nicknameckCheck = false; //닉네임 중복
+	var pwCheck = false; //비번
+	var pwckCheck = false; //비번확인
+	var pwckorCheck = false; //비번 확인 일치
+	var addressCheck = false; //주소
+	var createCheck = false; //창작이름
+	var createIntCheck = false; //창작소개
+	
+	 /* 비밀번호 확인 일치*/
+	   $("#c_userpw").on("propertychange change keyup paste input", function(){
+		   var pw=$("#userpw").val();
+		   var pwck=$("#c_userpw").val();
+		   $(".final_pwck_ck").css("display", "none");
+		   
+		   if(pw == pwck){
+			   $(".pw_1").css("display", "block");
+			   $(".pw_2").css("display", "none");
+			   pwckorCheck = true;
+		   }else{
+			   $(".pw_1").css("display", "none");
+			   $(".pw_2").css("display", "block");
+			   pwckorCheck = false;
+		   }
+	   });
+	  
+	   /* 닉네임 중복 */
+	   $("#nickname_btn").click(function(){
+	    	var nickname =$(".nickname").val();
+	    	var data = {m_nickname : $("#nickname").val()}
+	    	
+	    	$.ajax({
+	    		type: "post",
+	    		url: "nicknameChk.do",
+	    		data: data,
+	    		success:function(result){
+	    			console.log("성공"+result);
+	    			if(result != 'fail'){
+	    				$(".nick_1").css("display", "inline-block");
+	    				$(".nick_2").css("display", "none");
+	    				nicknameckCheck=true;
+	    			}else{
+	    				$(".nick_2").css("display", "inline-block");
+	    				$(".nick_1").css("display", "none");
+	    				nicknameckCheck=false;
+	    			}
+	    		}
+	    	});
+	    });
+	   
+	 //수정하기
+	 	$("#update").click(function(){
+	 		var nickname = $(".nickname").val();
+			var pw = $("#userpw").val();
+			var pwck = $("#c_userpw").val();
+			var addr = $(".address").val();
+			var create = $(".c_name").val();
+			var createInt = $(".c_intro").val();
+			
+			console.log("update")
+			
+			/* 닉네임 유효성 */
+			   if(nickname==""){
+				   $(".final_nickname_ck").css("display", "block");
+				   nicknameCheck=false;
+			   }else{
+				   $(".final_nickname_ck").css("display", "none");
+				   nicknameCheck=true;
+				   
+				   var address=$("#address").val();
+				   var sub_address=$("#sub_address").val();
+				   var m_addr="";
+				   
+				   m_addr=address+sub_address;
+				
+				   $("#m_addr").val(m_addr);
+			   }
+			
+			   /* 비밀번호 유효성 */
+			   if(pw==""){
+				   $(".final_pw_ck").css("display", "block");
+				   pwCheck=false;
+			   }else{
+				   $(".final_pw_ck").css("display", "none");
+				   pwCheck=true;
+			   }
+			   
+			   /* 비밀번호 확인 유효성 */
+			   if(pwck==""){
+				   $(".final_pwck_ck").css("display", "block");
+				   pwckCheck=false;
+			   }else{
+				   $(".final_pwck_ck").css("display", "none");
+				   pwckCheck=true;
+			   }
+			   
+			   /* 주소 유효성 */
+			   if(addr==""){
+				   $(".final_addr_ck").css("display", "block");
+				   addressCheck=false;
+			   }else{
+				   $(".final_addr_ck").css("display", "none");
+				   addressCheck=true;
+			   }
+			   
+			   /* 창작자명 유효성 */
+			   if(create==""){
+				   $(".final_create").css("display", "block");
+				   createCheck=false;
+			   }else{
+				   $(".final_create").css("display", "none");
+				   createCheck=true;
+			   }
+			   
+			   /*창작자 소개 유효성*/
+			   if(createInt==""){
+				   $(".final_create_int").css("display", "block");
+				   createIntCheck=false;				   
+			   }else{
+				   $(".final_create_int").css("display", "none");
+				   createIntCheck=true;
+			   }
+			   
+			   /* 최종 유효성 */
+			   if(nicknameCheck && nicknameckCheck && pwCheck && pwckCheck && pwckorCheck && addressCheck){
+				   $("#update_form").attr("action", "c_update.do");
+				   $("#update_form").submit();
+			   }
+			   return false;
+	 	});
+});
 </script>
 </head>
 <body id="top">
@@ -204,32 +396,42 @@
 	<jsp:include page="../form/header.jsp"></jsp:include>
 
 <div id="signup">
-	<form action="main.do" method="post" class="singupForm">
+	<form action="main.do" method="post" id="update_form" class="singupForm">
+	<input type="hidden" name="m_uid" value="${member.m_uid }">
 		<h1>Update account</h1>
 		<div class="emailForm">이메일<br><br>
-        	<input type="text" id="useremail" class="useremail" placeholder="이메일">
+        	<input type="text" name="m_email" id="useremail" class="useremail" value="${member.m_email }" readonly="readonly">
       	</div>
       	<div class="passForm">비밀번호<br><br>
-        	<input type="password" id="userpw" class="userpw" placeholder="비밀번호">
-			<input type="button" class="userbtn" value="수정하기">
+        	<input type="password" id="userpw" class="userpw" value="${member.m_pw }">
+      		<br>비밀번호 확인<br><br>
+        	<input type="password" name="m_pw" id="c_userpw" class="userpw" placeholder="비밀번호 확인하세요.">
+      		<span class="final_pwck_ck">비밀번호 확인을 입력해주세요.</span>
+      		<span class="pw_1">비밀번호가 일치합니다.</span>
+      		<span class="pw_2">비밀번호가 일치하지 않습니다.</span>
       	</div>
       	<div class="nicknameForm">닉네임<br><br>
-        	<input type="password" id="nickname" class="nickname" placeholder="닉네임">
-      		<input type="button" class="userbtn" value="수정하기">
+        	<input type="text" name="m_nickname" id="nickname" class="nickname" value="${member.m_nickname }">
+      		<input type="button" id="nickname_btn" class="userbtn" value="중복확인">
+      		<span class="nick_1">사용 가능한 닉네임입니다.</span>
+      		<span class="nick_2">이미 존재한 닉네임입니다.</span>
+      		<span class="final_nickname_ck">닉네임을 입력해주세요.</span>
       	</div>
       	<div class="addrForm">주소<br><br>
 			<input type="button" id="address_btn" class="userbtn" onclick="goPopup()" value="주소검색"> 
-			<textarea cols="45" rows="2" id="address" class="address" placeholder="주소" required readonly></textarea>
-			<input type="button" class="userbtn" value="수정하기">
+			<input type="hidden" name="m_addr" id="m_addr"> 
+			<input type="text" id="address" class="address" value="${member.m_addr }" readonly="readonly">
+      		<input type="text" id="sub_address" class="sub_address" placeholder="상세주소를 입력하세요.">
+      		<span class="final_addr_ck">주소를 입력해주세요.</span>
       	</div>
       		<div class="passForm">창작자 명<br><br>
-        	<input type="text" id="c_name" class="c_name" placeholder="창작자명">
-        	<input type="button" class="userbtn" value="수정하기">
+        	<input type="text" name="create_name" id="c_name" class="c_name" value="${creator.create_name }">
+      		<span class="final_create">창작자 명을 입력해주세요.</span>
       		<br>창작자 소개<br><br>
-      		<input type="button" class="userbtn" value="수정하기">
-        	<textarea cols="45" rows="3" id="c_intro" class="c_intro" placeholder="창작자 소개"></textarea>
+        	<textarea cols="45" rows="3" name="create_intro" id="c_intro" class="c_intro">${creator.create_intro }</textarea>
+      		<span class="final_create_int">창작자 소개를 입력해주세요.</span>
       	</div>
-      	<input type="submit" class="btn" value="뒤로가기">
+      	<input type="submit" id="update" class="btn" value="수정하기">
 	</form>
 </div>
 	<!-- footer include -->

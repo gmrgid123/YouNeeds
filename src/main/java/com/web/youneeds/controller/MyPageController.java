@@ -6,10 +6,13 @@ import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.web.youneeds.biz.interf.MemberBiz;
 
 @Controller
 public class MyPageController {
@@ -17,6 +20,8 @@ public class MyPageController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
+	@Autowired
+	private MemberBiz biz;
 
 	//마이페이지
 	@RequestMapping("/userMypage")
@@ -52,7 +57,7 @@ public class MyPageController {
 	
 	//마이페이지
 	@RequestMapping("/userUpdate")
-	public String userMypageUpdate(Locale locale, Model model) {
+	public String userMypageUpdate(Model model) {
 		logger.info("userMypage 페이지 호출");
 				
 		return "login/updategeneral";

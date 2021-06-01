@@ -12,7 +12,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <link href="${path}/resources/css/layout.css" rel="stylesheet" type="text/css" media="all">
 <link href="${path}/resources/css/slider/slider-banner.css" rel="stylesheet" type="text/css">
-<title>General Sign up</title>
+<title>Found Password</title>
 <style type="text/css">
 	*{
   		margin: 0px;
@@ -95,15 +95,43 @@
 		border-radius: 3px;
 		border:none;
 	}
+	
+	.final_mail_ck{
+		display: none;
+	}
 </style>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
 
+var mailCheck = false; //이메일
+
+$(function(){
+	
+	$("#email").click(function(){
+		var mail = $(".useremail").val();
+		if(mail==""){
+			   $(".final_mail_ck").css("display", "block");
+			   mailCheck=false;
+		   }else{
+			   $(".final_mail_ck").css("display", "none");
+			   mailCheck=true;
+		   }
+		 /* 최종 유효성 */
+		 if(mailCheck){
+			 $(".singupForm").attr("action", "find_pass.do");
+			 $(".singupForm").submit();
+		 }
+		return false;
+	});
+});
+</script>
 </head>
 <body id="top">
 	<!-- header include -->
 	<jsp:include page="../form/header.jsp"></jsp:include>
 
 <div id="signup">
-	<form action="main.do" method="post" class="singupForm">
+	<form action="" method="post" class="singupForm">
 		<h1 class="title">Found Password</h1>
 		<h1 class="sub_title">비밀번호 찾기</h1>
 		<div class="sub_sub_title">
@@ -111,8 +139,10 @@
 			이메일로 발송해드립니다.
 		</div>
 		<div class="emailForm">이메일<br><br>
-        	<input type="text" id="useremail" class="useremail" placeholder="이메일 입력 후 인증해주세요.">
-       		<input type="button" class="userbtn" value="발송하기">
+        	<input type="text" name="m_email" id="useremail" class="useremail" placeholder="이메일 입력 후 발송해주세요.">
+       		<input type="submit" id="email" class="userbtn" value="발송하기">
+      		<span class="final_mail_ck">이메일을 입력해주세요.</span>
+      		<span class="mail_warn"></span>
       	</div>
       </form>
 		
