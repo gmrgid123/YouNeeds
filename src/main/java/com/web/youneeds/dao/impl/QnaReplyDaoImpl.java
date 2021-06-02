@@ -1,6 +1,7 @@
 package com.web.youneeds.dao.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +17,17 @@ public class QnaReplyDaoImpl implements QnaReplyDao {
 	private SqlSessionTemplate sqlSession;
 	
 	@Override
-	public List<QnaReplyDto> selectList() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<QnaReplyDto> selectList(Map<String, Integer> map) {
+		List<QnaReplyDto> list = null;
+		
+		try {
+			list = sqlSession.selectList(NAMESPACE+"selectList", map);
+		} catch (Exception e) {
+			System.out.println("[error] : QnaReplyDao - selectList");
+			e.printStackTrace();
+		}
+		
+		return list;
 	}
 
 	@Override
@@ -29,8 +38,16 @@ public class QnaReplyDaoImpl implements QnaReplyDao {
 
 	@Override
 	public int insert(QnaReplyDto dto) {
-		// TODO Auto-generated method stub
-		return 0;
+		int res=0;
+		
+		try {
+			res=sqlSession.insert(NAMESPACE+"insertReply" ,dto);
+		} catch (Exception e) {
+			System.out.println("[error] : QnaReplyDao - insertReply");
+			e.printStackTrace();
+		}
+		
+		return res;
 	}
 
 	@Override
@@ -46,11 +63,11 @@ public class QnaReplyDaoImpl implements QnaReplyDao {
 	}
 
 	@Override
-	public int selectListMaxLength() {
-		int max=0;
+	public Integer selectListMaxLength(int qna_id) {
+		Integer max = null;
 		
 		try {
-			max = sqlSession.selectOne(NAMESPACE+"selectListMaxLength");
+			max = sqlSession.selectOne(NAMESPACE+"selectListMaxLength", qna_id);
 		} catch (Exception e) {
 			System.out.println("[error] : QnaReplyDao - selectListMaxLength");
 			e.printStackTrace();

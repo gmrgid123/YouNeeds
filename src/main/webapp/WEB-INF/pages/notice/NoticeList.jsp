@@ -77,6 +77,7 @@
 					<button type="button" class="btn btn-secondary" onclick="location.href='notice_write'" style="float: right;">글쓰기</button>
 				</c:if>
 				
+				<c:if test="${not empty list}">
 				<nav class="pagination justify-content-center">
 			        <ul>
 			      
@@ -111,6 +112,7 @@
 				        </c:if>
 			        </ul>
 	      		</nav>
+	      		</c:if>
 	      
 		</div>
 	</div>

@@ -5,7 +5,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -46,7 +48,7 @@ public class QnaBoardController {
 		List<QnaDto> list = qnaBiz.selectList(p);
 		
 		int list_max = qnaBiz.selectListMaxLength();
-		System.out.println(list_max);
+
 		int max;
 		if(list_max%10 == 0) {
 			max = list_max/10;
@@ -64,7 +66,6 @@ public class QnaBoardController {
 		int start_num = end_num-9;
 		
 		model.addAttribute("list",list);
-		model.addAttribute("list_max", list_max);
 		model.addAttribute("max",max);
 		model.addAttribute("start_num",start_num);
 		model.addAttribute("end_num",end_num);
@@ -81,15 +82,76 @@ public class QnaBoardController {
 	}
 	
 	@RequestMapping("/qnaView")
-	public String qnaDetailView(Model model, int no) {
+	public String qnaDetailView(Model model, int no, Integer rp) {
 		logger.info("QNA 상세 호출");
 		
-		System.out.println("QNA 번호 : "+no);
+		int rp_val;
 		
+		if(rp == null) {
+			rp_val = 0;
+		} else {
+			rp_val = rp.intValue();
+		}
+		
+		
+				
 		if(qnaBiz.HitUpdate(no)>0) {
 			QnaDto dto = qnaBiz.selectOne(no);
-			System.out.println(dto);
+			List<QnaReplyDto> replyList = null;
+			Map<String, Integer> map = new HashMap<String, Integer>();
+			
+			int rp_ListMax = replyBiz.selectListMaxLength(no);
+			int rp_max;
+			int end_num;
+			int start_num;
+			int tmp;
+			
+			if(rp_ListMax%20 == 0) {
+				rp_max = rp_ListMax/20;
+			} else {
+				rp_max = rp_ListMax/20 + 1;
+			}
+			
+			if(rp_val != 0) {
+				if((rp_val%10)==0){
+					tmp = rp_val/10;
+				}else{
+					tmp = rp_val/10 + 1;
+				}
+				end_num = tmp*10;
+				start_num = end_num-9;
+				map.put("rp_val", rp_val);
+				map.put("qna_id", no);
+				
+				replyList = replyBiz.selectList(map);
+			} else {
+				rp_val = rp_max;
+				
+				if((rp_val%10)==0){
+					tmp = rp_val/10;
+				}else{
+					tmp = rp_val/10 + 1;
+				}
+				end_num = tmp*10;
+				start_num = end_num-9;
+				
+				map.put("rp_val", rp_val);
+				map.put("qna_id", no);
+				
+				replyList = replyBiz.selectList(map);
+			}
+			
+			
+			
 			model.addAttribute("qnaDto", dto);
+			model.addAttribute("replyList", replyList);
+			model.addAttribute("rp_ListMax", rp_ListMax);
+			model.addAttribute("rp_max",rp_max);
+			model.addAttribute("start_num", start_num);
+			model.addAttribute("end_num",end_num);
+			model.addAttribute("reply_page", rp_val);
+			
+			
 		}
 		
 		
@@ -111,7 +173,7 @@ public class QnaBoardController {
 		dto.setM_uid(m_uid); dto.setQna_title(qna_title); dto.setQna_content(qna_content);
 		
 		int no = qnaBiz.insert(dto);
-		System.out.println("qna_id값 : "  + no);
+
 		
 		return "redirect:qnaView?no="+no;
 	}
@@ -124,12 +186,12 @@ public class QnaBoardController {
 		int m_uid = ((MemberDto)request.getSession().getAttribute("login")).getM_uid();
 		
 		QnaReplyDto dto = new QnaReplyDto();
-		dto.setM_uid(m_uid); dto.setQna_reply_content(reply_content); dto.setQna_id(qna_id);
+		dto.setM_uid(m_uid); dto.setReply_content(reply_content);dto.setQna_id(qna_id);
 		
 		replyBiz.insert(dto);
 		
 		
-		return "";
+		return "redirect:qnaView?no="+qna_id;
 	}
 	
 	

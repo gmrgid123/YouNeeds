@@ -1,6 +1,7 @@
 package com.web.youneeds.biz.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,9 +17,8 @@ public class QnaReplyBizImpl implements QnaReplyBiz{
 	private QnaReplyDao qnaReplyDao;
 	
 	@Override
-	public List<QnaReplyDto> selectList() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<QnaReplyDto> selectList(Map<String, Integer> map) {
+		return qnaReplyDao.selectList(map);
 	}
 
 	@Override
@@ -45,8 +45,16 @@ public class QnaReplyBizImpl implements QnaReplyBiz{
 	}
 
 	@Override
-	public int selectListMaxLength() {
-		return qnaReplyDao.selectListMaxLength();
+	public int selectListMaxLength(int qna_id) {
+		Integer temp = qnaReplyDao.selectListMaxLength(qna_id);
+		int res;
+		if(temp==null) {
+			res=0;
+		}else {
+			res=temp.intValue();
+		}
+		
+		return res;
 	}
 
 }

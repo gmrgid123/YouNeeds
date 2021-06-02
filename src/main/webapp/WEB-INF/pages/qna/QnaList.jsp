@@ -80,6 +80,8 @@
 			</table>
 				<button type="button" class="btn btn-secondary" onclick="location.href='qna_write'" style="float: right;">글쓰기</button>
 		
+			
+			<c:if test="${not empty list}">
 				<nav class="pagination justify-content-center">
 			        <ul>
 			      
@@ -114,6 +116,7 @@
 				        </c:if>
 			        </ul>
 	      		</nav>
+	      	</c:if>
 	      
 		</div>
 	</div>
