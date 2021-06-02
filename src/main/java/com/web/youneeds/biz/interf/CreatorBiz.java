@@ -9,5 +9,5 @@ public interface CreatorBiz {
 	public int insert(CreatorDto dto);
 	public int update(CreatorDto dto);
 	public int mupdate(MemberDto mdto);
-	public CreatorDto clogin(CreatorDto cdto) throws Exception;
+	//public CreatorDto clogin(CreatorDto cdto) throws Exception;
 }

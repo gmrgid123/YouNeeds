@@ -41,7 +41,7 @@ public class LoginController {
 				System.out.println("login 메서드 진입");
 				HttpSession session =req.getSession();
 				MemberDto login = biz.login(dto);
-				CreatorDto clogin = c_biz.clogin(cdto);
+				System.out.println(login);
 				
 				if(login == null) {
 					session.setAttribute("member", null);
@@ -50,7 +50,6 @@ public class LoginController {
 					return "redirect:/loginForm.do";
 				}else {
 					session.setAttribute("member", login);
-					session.setAttribute("creator", clogin);
 					System.out.println("로그인성공");
 					return "redirect:/main.do";
 				}

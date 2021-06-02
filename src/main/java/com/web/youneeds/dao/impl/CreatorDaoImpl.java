@@ -64,7 +64,7 @@ public class CreatorDaoImpl implements CreatorDao {
 				
 				return res;
 	}
-
+/*
 	@Override
 	public CreatorDto clogin(CreatorDto cdto) throws Exception {
 		CreatorDto res = null;
@@ -77,5 +77,5 @@ public class CreatorDaoImpl implements CreatorDao {
 				}
 				return res;
 	}
-
+*/
 }

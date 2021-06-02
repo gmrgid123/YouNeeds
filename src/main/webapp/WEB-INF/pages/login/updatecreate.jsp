@@ -425,10 +425,10 @@ $(function(){
       		<span class="final_addr_ck">주소를 입력해주세요.</span>
       	</div>
       		<div class="passForm">창작자 명<br><br>
-        	<input type="text" name="create_name" id="c_name" class="c_name" value="${creator.create_name }">
+        	<input type="text" name="create_name" id="c_name" class="c_name" value="${member.creatorDto.create_name }">
       		<span class="final_create">창작자 명을 입력해주세요.</span>
       		<br>창작자 소개<br><br>
-        	<textarea cols="45" rows="3" name="create_intro" id="c_intro" class="c_intro">${creator.create_intro }</textarea>
+        	<textarea cols="45" rows="3" name="create_intro" id="c_intro" class="c_intro">${member.creatorDto.create_intro }</textarea>
       		<span class="final_create_int">창작자 소개를 입력해주세요.</span>
       	</div>
       	<input type="submit" id="update" class="btn" value="수정하기">

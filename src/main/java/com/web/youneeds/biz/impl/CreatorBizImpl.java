@@ -36,9 +36,11 @@ public class CreatorBizImpl implements CreatorBiz {
 		return creatorDao.mupdate(mdto);
 	}
 
+	/*
 	@Override
 	public CreatorDto clogin(CreatorDto cdto) throws Exception{
 		return creatorDao.clogin(cdto);
 	}
+	*/
 
 }

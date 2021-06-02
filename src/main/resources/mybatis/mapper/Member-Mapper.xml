@@ -4,6 +4,13 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
  <mapper namespace="member">
+ 	
+ 	<resultMap type="creatorDto" id="creatorMap">
+ 		<result property="m_uid" column="m_uid"/>
+ 		<result property="create_name" column="create_name"/>
+ 		<result property="create_intro" column="create_intro"/>
+ 	</resultMap>
+ 
  	<resultMap type="memberDto" id="memberMap">
 		<result property="m_uid" column="m_uid"/>
 		<result property="m_email" column="m_email"/>
@@ -14,14 +21,10 @@
 		<result property="m_regdate" column="m_regdate"/>
 		<result property="m_enabled" column="m_enabled"/>
 		<result property="m_deldate" column="m_deldate"/>
+		<collection property="creatorDto" resultMap="creatorMap"></collection>
 	</resultMap>
 	
-	<resultMap type="creatorDto" id="creatorMap">
- 		<result property="m_uid" column="m_uid"/>
- 		<result property="create_name" column="create_name"/>
- 		<result property="create_intro" column="create_intro"/>
- 		<collection property="memberDto" resultMap="memberMap"/>
- 	</resultMap>
+	
 	
 	<!-- 일반 회원가입 -->
  	<insert id="insert" parameterType="memberDto">
@@ -50,15 +53,13 @@
  	</select>
  	
  	<!-- 로그인 -->
- 	<select id="login" parameterType="memberDto" resultType="memberDto">
- 		select m_uid, m_email, m_pw, m_nickname, m_addr, m_regdate, m_enabled, m_deldate
- 		from Member
+ 	<select id="login" parameterType="memberDto" resultMap="memberMap">
+ 		select m.m_uid, m.m_email, m.m_pw, m.m_nickname, m.m_addr, m.m_type, m.m_regdate, m.m_enabled, m.m_deldate, c.create_name, c.create_intro
+ 		from Member m
+        left join creator c on (m.m_uid = c.m_uid)
  		where m_email = #{m_email, jdbcType=VARCHAR} and m_pw = #{m_pw, jdbcType=VARCHAR}
  	</select>
- 	<select id="c_login" parameterType="creatorDto" resultType="creatorDto">
- 		select create_name, create_intro
- 		from Creator
- 	</select>
+
 
 	<!-- 비번찾기 -->
 	<select id="findPwd" parameterType="memberDto" resultType="memberDto">
@@ -80,6 +81,7 @@
 		set m_pw= #{m_pw}, m_nickname = #{m_nickname}, m_addr=#{m_addr}
 		where m_uid=#{m_uid}
 	</update>
+	
 	<update id="create_update" parameterType="creatorDto">
 		update Creator
 		set create_name=#{create_name}, create_intro=#{create_intro} 
