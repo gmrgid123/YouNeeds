@@ -3,7 +3,30 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
- <mapper namespace="temp1">
+ <mapper namespace="creator">
  
+ 	<resultMap type="projectDto" id="projectDtoJoin">
+ 		<result property="p_title" column="P_TITLE"/>
+ 		<result property="p_category" column="P_CATEGORTY"/>
+ 		<result property="target_amount" column="TARGET_AMOUNT"/>
+ 		<result property="p_regdate" column="P_REGDATE"/>
+ 		<result property="start_date" column="START_DATE"/>
+ 		<result property="end_date" column="END_DATE"/>
+ 		<result property="creator_uid" column="CREATOR_UID"/>
+ 	</resultMap>
+ 	
+ 	<resultMap type="creatorDto" id="creatorMap">
+ 		<result property="m_uid" column="m_uid"/>
+ 		<result property="create_name" column="create_name"/>
+ 		<result property="create_intro" column="create_intro"/>
+ 		<collection property="projectDto" resultMap="projectDtoJoin"></collection>
+ 	</resultMap>
+ 	
+ 	<select id="creatorPageInfo" parameterType="int" resultMap="creatorMap">
+ 	SELECT M_UID, CREATE_NAME, CREATE_INTRO, P_TITLE, TARGET_AMOUNT, P_END_DATE, CREATOR_UID
+ 	FROM CREATOR
+ 	JOIN PROJECT ON (M_UID = CREATOR_UID)
+ 	WHERE M_UID = ${m_uid}
+	</select>
  
  </mapper>

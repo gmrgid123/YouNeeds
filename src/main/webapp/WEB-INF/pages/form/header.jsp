@@ -35,7 +35,7 @@
         <li><a href="loginForm.do">로그인 / 회원가입</a></li>
         <li><a href="userMypage">유저 마이페이지 테스트</a></li>
         <li><a href="creatorMypage">창작 마이페이지 테스트</a></li>
-        <li><a href="videoChatPage">화생채팅 페이지 테스트</a></li>
+        <li><a href="https://192.168.130.7:3000/">화생채팅 페이지 테스트</a></li>
         <li><a href="pwdCheckTest">비밀번호 체크 페이지 테스트</a></li>
       </ul>
     </div>

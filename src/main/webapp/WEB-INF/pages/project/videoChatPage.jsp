@@ -83,10 +83,9 @@
 	<jsp:include page="../../pages/form/footer.jsp"></jsp:include>
 
 	<!-- JAVASCRIPTS -->
-	<script src="http://localhost:82/socket.io/socket.io.js"></script>
+	<script src="https://192.168.35.134:3000/socket.io/socket.io.js"></script>
 	<script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
-	<script src="${path}/resources/js/Web_RTC_Server/rtc.js"></script>
-	<script src="${path}/resources/js/Web_RTC_Server/server.js"></script>
+	<script src="${path}/resources/js/Web_RTC_Server/js/rtc.js"></script>
 	<script src="${path}/resources/js/jquery.min.js"></script>
 	<script src="${path}/resources/js/jquery.backtotop.js"></script>
 	<script src="${path}/resources/js/jquery.mobilemenu.js"></script>

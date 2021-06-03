@@ -1,12 +1,24 @@
 package com.web.youneeds.biz.impl;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.web.youneeds.biz.interf.CreatorBiz;
 import com.web.youneeds.dao.interf.CreatorDao;
 import com.web.youneeds.dto.CreatorDto;
 
+@Service
 public class CreatorBizImpl implements CreatorBiz {
 	
+	@Autowired
 	private CreatorDao creatorDao;
+	
+	@Override
+	public List<CreatorDto> creatorPageInfo(int m_uid) {
+		return creatorDao.creatorPageInfo(m_uid);
+	}
 	
 	@Override
 	public CreatorDto selectOne(int m_uid) {

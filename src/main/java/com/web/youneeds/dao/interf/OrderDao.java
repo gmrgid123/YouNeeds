@@ -12,4 +12,5 @@ public interface OrderDao {
 	public OrderDto selectDetail(int order_id);
 	public int paying(OrderDto orderDto);
 	public int update(OrderDto orderDto);
+	public List<OrderDto> myPageInfo(int m_uid);
 }

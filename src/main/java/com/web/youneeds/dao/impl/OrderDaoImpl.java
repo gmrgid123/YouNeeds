@@ -61,5 +61,19 @@ public class OrderDaoImpl implements OrderDao {
 		return 0;
 	}
 
+	@Override
+	public List<OrderDto> myPageInfo(int m_uid) {
+		List<OrderDto> dto = null;
+		
+		try {
+			dto = sqlSession.selectOne(NAMESPACE+"selectDetail", m_uid);
+		} catch (Exception e) {
+			System.out.println("[error] : orderDao - mypageInfo");
+			e.printStackTrace();
+		}
+		
+		return dto;
+	}
+
 
 }

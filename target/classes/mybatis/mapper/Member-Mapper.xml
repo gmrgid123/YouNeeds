@@ -16,6 +16,13 @@
 		<result property="m_deldate" column="m_deldate"/>
 	</resultMap>
 	
+	<!-- 회원조회 -->
+	<select id="selectOne" resultType="memberDto" parameterType="int">
+		select m_uid, m_email, m_pw, m_nickname, m_addr, m_type, m_regdate, m_enabled, m_deldate  
+		from Member
+		where m_uid = #{m_uid}
+	</select>
+	
 	<!-- 회원가입 -->
  	<insert id="insert" parameterType="memberDto"> <!-- 회원가입 -->
  		insert into Member

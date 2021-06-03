@@ -59,5 +59,14 @@
  		VALUES(#{order_id}, #{order_name}, #{order_pay}, SYSDATE, #{order_phone}, #{order_email}, #{order_addr},#{imp_uid}, #{p_id}, #{m_uid})
  		
  	</insert>
+ 	
+ 	<select id="myPageInfo" parameterType="int" resultMap="orderMap">
+ 	SELECT P.P_ID, P.P_TITLE,  P.START_DATE, P.END_DATE,O.ORDER_ID, O.ORDER_NAME, O.ORDER_PAY, O.ORDER_DATE, O.ORDER_PHONE, O.ORDER_EMAIL, O.ORDER_ADDR
+	FROM ORDERPAY O
+	JOIN PROJECT P ON (P.P_ID=O.P_ID)
+	WHERE O.M_UID = #{m_uid}
+	</select> 	
+ 	
+ 	
  
  </mapper>

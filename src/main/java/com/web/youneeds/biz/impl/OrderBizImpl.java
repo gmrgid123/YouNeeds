@@ -47,6 +47,12 @@ public class OrderBizImpl implements OrderBiz{
 		return 0;
 	}
 
+	@Override
+	public List<OrderDto> myPageInfo(int m_uid) {
+		
+		return orderDao.myPageInfo(m_uid);
+	}
+
 	
 
 }

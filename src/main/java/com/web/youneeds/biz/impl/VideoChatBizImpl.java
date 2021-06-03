@@ -3,11 +3,13 @@ package com.web.youneeds.biz.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.web.youneeds.biz.interf.VideoChatBiz;
 import com.web.youneeds.dao.interf.VideoChatDao;
 import com.web.youneeds.dto.VideoChatDto;
 
+@Service
 public class VideoChatBizImpl implements VideoChatBiz {
 
 	@Autowired
