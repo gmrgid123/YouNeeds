@@ -22,8 +22,7 @@ public class ProjectBizImpl implements ProjectBiz{
 
 	@Override
 	public ProjectDto selectOne(int p_id) {
-		// TODO Auto-generated method stub
-		return null;
+		return projectDao.selectOne(p_id);
 	}
 
 	@Override

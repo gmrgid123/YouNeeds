@@ -23,13 +23,14 @@
 		 	 p_category, 
 		 	 target_amount, 
 		 	 p_regdate, 
-		 	 start_date, 
+		 	 start_date,  
 		 	 end_date, 
 		 	 creator_uid
 		 from project
 		 <if test="p_category != null and !''.equals(p_category)">
 		 	where p_category = #{p_category}
 		 </if>
+		 order by p_id desc
  	 </select> 
  	
  	<!-- 프로젝트 등록 -->
@@ -53,8 +54,26 @@
  		 	TO_DATE(#{start_date}, 'YYYY-MM-DD HH24:MI'),
  		 	TO_DATE(#{end_date}, 'YYYY-MM-DD HH24:MI'),
  		 	1
- 		 )	
+ 		 )
+ 		 <selectKey keyProperty="p_id" resultType="Integer" order="AFTER">
+ 		 	SELECT PROJECT_SEQ.CURRVAL FROM dual
+ 		 </selectKey>
  	</insert>
- 
- 
+ 		
+ 	<!-- 프로젝트 상세 조회 -->
+ 	<select id="projectDetail" parameterType="int" resultType="com.web.youneeds.dto.ProjectDto">
+ 		select
+ 			 p_id, 
+		 	 p_title, 
+		 	 p_category, 
+		 	 target_amount, 
+		 	 p_regdate, 
+		 	 start_date,  
+		 	 end_date, 
+		 	 creator_uid
+ 		from project 
+ 		where p_id = #{p_id}
+ 	</select>
+	
+	
  </mapper>
