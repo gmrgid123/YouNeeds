@@ -21,12 +21,5 @@
  		<result property="create_intro" column="create_intro"/>
  		<collection property="projectDto" resultMap="projectDtoJoin"></collection>
  	</resultMap>
- 	
- 	<select id="creatorPageInfo" parameterType="int" resultMap="creatorMap">
- 	SELECT M_UID, CREATE_NAME, CREATE_INTRO, P_TITLE, TARGET_AMOUNT, P_END_DATE, CREATOR_UID
- 	FROM CREATOR
- 	JOIN PROJECT ON (M_UID = CREATOR_UID)
- 	WHERE M_UID = ${m_uid}
-	</select>
  
  </mapper>

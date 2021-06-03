@@ -123,12 +123,25 @@
 </style>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
-	$(function(){
-		$("#login_btn").click(function(){
-			$("#loginForm").attr("action", "login.do");
-			$("#loginForm").submit();
-		});
-	});
+	
+	  $(function(){
+		  	let message = '${msg}';
+			console.log(message);
+			
+	         if(message == "fail"){
+	            alert("일치하는 이메일 정보가 없습니다. 회원가입 진행해주세요.");
+	            
+	         } else if(message == "success"){
+	            alert("이메일로 발송해 드렸습니다. 로그인 진행해주세요.");
+	         }
+	         //alert(message);
+	   	  
+	 		$("#login_btn").click(function(){
+	 			$("#loginForm").attr("action", "login.do");
+	 			$("#loginForm").submit();
+	 		});
+	   });
+
 </script>
 
 </head>
