@@ -47,18 +47,19 @@
 	align-items: center;
 	justify-content: center;
 	background-color: white;
-	color: black;
+	font-size : 18px;
+	
 }
 
 .btn {
-	display: inline-block;
 	margin: 20px 20px 0px 20px;
 	background-color: #93c0c59d;
-	width: 50px;
+	width: 100px;
 	height: 50px;
 	border-radius: 5px 5px 5px 5px;
 	border: none;
 	cursor: pointer;
+	
 }
 
 <!------------------------------------------------------------->
@@ -99,14 +100,6 @@
 
 .payment {
 	float: right;
-}
-
-#c2 {
-	margin-top: 55px;
-}
-
-#c3 {
-	margin-top: 55px;
 }
 
 
@@ -151,7 +144,6 @@ function fn_search(pid) {
 	///pjdetail.do
 	location.href = "${pageContext.request.contextPath}/pjdetail.do?p_id=" + pid; 
 }
-
 </script>
 
 
@@ -220,10 +212,7 @@ function fn_search(pid) {
 		<input type="button" value="3" class="btn2" onclick="location.href=''">
 		<input type="button" value="→" class="btn2" onclick="location.href=''">
 	</div>
-
-
 	<!-- --------------------------------------------------------------------------- -->
-
 	<!-- footer include -->
 	<jsp:include page="../form/footer.jsp"></jsp:include>
 </body>
