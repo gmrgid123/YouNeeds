@@ -1,5 +1,6 @@
 package com.web.youneeds.controller;
 
+import java.util.List;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,17 +15,20 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.web.youneeds.biz.interf.MemberBiz;
+import com.web.youneeds.biz.interf.CreatorBiz;
+import com.web.youneeds.biz.interf.OrderBiz;
+import com.web.youneeds.dto.CreatorDto;
 import com.web.youneeds.dto.MemberDto;
+import com.web.youneeds.dto.OrderDto;
 
 @Controller
 public class MyPageController {
 
-	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
 	@Autowired
-	private MemberBiz memberBiz;
+	private OrderBiz orderBiz;
+	private CreatorBiz creatorBiz;
 	
 	@RequestMapping(value="/logout", method=RequestMethod.GET)
 	public String logout(HttpSession session) {
@@ -63,10 +67,17 @@ public class MyPageController {
 		logger.info("userMypage 호출");
 		
 		MemberDto dto = (MemberDto)request.getSession().getAttribute("login");
+		List<OrderDto> user = orderBiz.myPageInfo(dto.getM_uid());
+		//List<CreatorDto> creator = creatorBiz.creatorPageInfo(dto.getM_uid());
+		
+		
 		
 		if(dto.getM_type().equals("일반") || dto.getM_type().equals("관리")) {
+			model.addAttribute("user", user);
 			return "/mypage/userMypage";
 		} else {
+			model.addAttribute("user", user);
+			//model.addAttribute("creator", creator);
 			return "/mypage/creatorMypage";
 		}
 		
