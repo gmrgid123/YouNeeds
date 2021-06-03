@@ -174,9 +174,6 @@ function openApi_Addr(){
 
 	<!-- include footer -->
 	<jsp:include page="../../pages/form/footer.jsp"></jsp:include>
-<script src="${path}/resources/js/jquery.min.js"></script>
-<script src="${path}/resources/js/jquery.backtotop.js"></script>
-<script src="${path}/resources/js/jquery.mobilemenu.js"></script>
 <script src="${path}/resources/js/bootstrap.js"></script>
 </body>
 </html>

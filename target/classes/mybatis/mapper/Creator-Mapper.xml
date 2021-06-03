@@ -14,12 +14,13 @@
  		<result property="end_date" column="END_DATE"/>
  		<result property="creator_uid" column="CREATOR_UID"/>
  	</resultMap>
- 	
+ 
  	<resultMap type="creatorDto" id="creatorMap">
  		<result property="m_uid" column="m_uid"/>
  		<result property="create_name" column="create_name"/>
  		<result property="create_intro" column="create_intro"/>
  		<collection property="projectDto" resultMap="projectDtoJoin"></collection>
  	</resultMap>
+ 	
  
  </mapper>

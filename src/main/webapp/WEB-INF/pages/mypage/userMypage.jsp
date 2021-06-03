@@ -140,8 +140,9 @@ div .card {
 		<div class="user">
 			<div class="box1">
 				&nbsp; &nbsp;
-				<h3 class="userId">아이디 : ${sessionScope.login.m_email }</h3>
-				<h3 class="userNck">닉네임 : ${sessionScope.login.m_nickname }</h3>
+				<h3 class="userId">아이디 : ${sessionScope.member.m_email }</h3>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<h3 class="userNck">닉네임 : ${sessionScope.member.m_nickname }</h3>
 			</div>
 			<div class="box2">
 				<input type="button" style="width: 120px; height: 30px; font-size: 15px; background-color: skyblue; border-radius: 5px;" value="회원정보수정" onclick="location.href='userUpdate'">
@@ -157,7 +158,7 @@ div .card {
 			<br>
 			<div class="list">
 				<c:choose>
-					<c:when test="${empty list }">
+					<c:when test="${empty user }">
 						<h1>===참여중인 프로젝트가 없습니다.===</h1>
 					</c:when>
 					<c:otherwise>

@@ -23,7 +23,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.JsonObject;
 import com.web.youneeds.biz.interf.NoticeBiz;
-import com.web.youneeds.biz.interf.NoticeImgBiz;
 import com.web.youneeds.dto.MemberDto;
 import com.web.youneeds.dto.NoticeDto;
 
@@ -137,7 +136,7 @@ public class NoticeBoardController {
 	public String InsertNotice(HttpServletRequest request, String notice_title, String p_content) {
 		logger.info("공지사항 업로드 처리");
 		
-		int m_uid = ((MemberDto)request.getSession().getAttribute("login")).getM_uid();
+		int m_uid = ((MemberDto)request.getSession().getAttribute("member")).getM_uid();
 		
 		NoticeDto dto = new NoticeDto();
 		dto.setNotice_title(notice_title); dto.setNotice_content(p_content); dto.setM_uid(m_uid);

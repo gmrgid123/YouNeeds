@@ -4,20 +4,17 @@
 <c:set var="path" value="${pageContext.request.contextPath}" />
 
 
-<!-- JAVASCRIPTS -->
-<script src="${path}/resources/js/slider/slider.js"
-	type="text/javascript"></script>
-<script src="${path}/resources/js/slider/jssor.slider-28.1.0.min.js"
-	type="text/javascript"></script>
-<script src="${path}/resources/js/jquery.min.js"></script>
-<script src="${path}/resources/js/jquery.backtotop.js"></script>
-<script src="${path}/resources/js/jquery.mobilemenu.js"></script>
 
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>YouNeeds</title>
 <link href="${path}/resources/css/layout.css" rel="stylesheet"
 	type="text/css" media="all">
-
-
-<!-------------------------------------------------------------------------------- -->
 <style type="text/css">
 .title {
 	display: flex;
@@ -124,15 +121,11 @@ a:hover {
 	color: white;
 }
 </style>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>프로젝트</title>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js" ></script>
 <script>
-	$(document).ready(function() {
+	/*$(document).ready(function() {
 		fn_loadScr("intro");
-	});
+	});*/
 	// 화면 전환
 	function fn_change(category) {
 		if(category == "intro") {
@@ -148,8 +141,8 @@ a:hover {
 			$("#div_notice").hide();
 			$("#div_funding").show();
 		}
-		fn_loadScr(category);
-	}
+		//fn_loadScr(category);
+	}/*
 	// 전환된 화면에 데이터 조회 후 반영
 	function fn_loadScr(category) {
 		var params = {
@@ -191,7 +184,7 @@ a:hover {
               alert("통신 실패.");
           }
       });
-	}
+	}*/
 </script>
 </head>
 <body>

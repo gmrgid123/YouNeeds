@@ -13,7 +13,6 @@ import com.web.youneeds.dto.ProjectIntroDto;
 @Repository
 public class ProjectIntroDaoImpl implements ProjectIntroDao{
 
-	String NAMESPACE = "temp8.";
 	
 	@Inject
 	private SqlSession sqlSession;
@@ -32,8 +31,8 @@ public class ProjectIntroDaoImpl implements ProjectIntroDao{
 
 	@Override
 	public int insert(ProjectIntroDto dto) {
-		sqlSession.insert(NAMESPACE + "insertProjectIntro", dto);
-		return 0;
+		return sqlSession.insert(NAMESPACE + "insertProjectIntro", dto);
+		
 	}
 
 	@Override

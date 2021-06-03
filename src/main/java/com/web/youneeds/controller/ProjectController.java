@@ -87,7 +87,7 @@ public class ProjectController {
 		// 프로젝트 안내 insert
 		// TODO
 		// 프로젝트 소개 외에도 필요한 것들 insert
-		return "/project/projectlist";
+		return "redirect:pjlist.do";
 	}
 	
 	/**

@@ -298,11 +298,12 @@ $(function(){
 				   
 				   var address=$("#address").val();
 				   var sub_address=$("#sub_address").val();
-				   var m_addr="";
+				   //var m_addr="";
 				   
-				   m_addr=address+sub_address;
+				   //m_addr=address+sub_address;
 				
-				   $("#m_addr").val(m_addr);
+				   $("#m_addr").val(address);
+				   $("#m_addr_detail").val(sub_address);
 			   }
 			
 			   /* 비밀번호 유효성 */
@@ -372,8 +373,9 @@ $(function(){
       	<div class="addrForm">주소<br><br>
 			<input type="button" id="address_btn" class="userbtn" onclick="goPopup()" value="주소검색"> 
 			<input type="hidden" name="m_addr" id="m_addr"> 
+			<input type="hidden" name="m_addr_detail" id="m_addr_detail">
 			<input type="text" id="address" class="address" value="${member.m_addr }" readonly="readonly">
-      		<input type="text" id="sub_address" class="sub_address" placeholder="상세주소를 입력하세요.">
+      		<input type="text" id="sub_address" class="sub_address" value="${member.m_addr_detail }" placeholder="상세주소를 입력하세요." required="required">
       		<span class="final_addr_ck">주소를 입력해주세요.</span>
       	</div>
       	<input type="submit" id="update" class="btn" value="수정하기">

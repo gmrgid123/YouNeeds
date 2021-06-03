@@ -47,11 +47,11 @@ public class LoginController {
 					session.setAttribute("member", null);
 					rttr.addFlashAttribute("msg", false);
 					System.out.println("로그인실패");
-					return "redirect:/loginForm.do";
+					return "redirect:loginForm.do";
 				}else {
 					session.setAttribute("member", login);
 					System.out.println("로그인성공");
-					return "redirect:/main.do";
+					return "redirect:main.do";
 				}
 				
 	}
@@ -61,13 +61,9 @@ public class LoginController {
 	public String logout(HttpSession session) throws Exception{
 		session.invalidate();
 		
-		return "redirect:/";
+		return "redirect:main.do";
 	}
 	
-	@RequestMapping("/login/login")
-	   public void loginGET() {
-	      logger.info("로그인 페이지");
-	   }
 	
 	@RequestMapping("/general_create.do")
 	public String general_create() {
@@ -150,7 +146,7 @@ public class LoginController {
 		System.out.println("dto : " + dto);
 		int res = biz.update(dto);
 		session.invalidate();
-		return "redirect:/";
+		return "redirect:loginForm.do";
 	}
 	
 	/* 창작회원 수정 */
@@ -160,9 +156,11 @@ public class LoginController {
 		System.out.println("UPDATE");
 		System.out.println("mdto : " + mdto);
 		System.out.println("dto : " + dto);
+		
 		int res = c_biz.mupdate(mdto);
 		int cres = c_biz.update(dto);
+		
 		session.invalidate();
-		return "redirect:/";
+		return "redirect:loginForm.do";
 	}
 }

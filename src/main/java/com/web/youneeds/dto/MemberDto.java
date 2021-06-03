@@ -8,6 +8,7 @@ public class MemberDto {
 	private String m_pw;
 	private String m_nickname;
 	private String m_addr;
+	private String m_addr_detail;
 	private String m_type;
 	private Date m_regdate;
 	private String m_enabled;
@@ -56,6 +57,14 @@ public class MemberDto {
 		this.m_addr = m_addr;
 	}
 
+	public String getM_addr_detail() {
+		return m_addr_detail;
+	}
+
+	public void setM_addr_detail(String m_addr_detail) {
+		this.m_addr_detail = m_addr_detail;
+	}
+
 	public String getM_type() {
 		return m_type;
 	}
@@ -99,10 +108,11 @@ public class MemberDto {
 	@Override
 	public String toString() {
 		return "MemberDto [m_uid=" + m_uid + ", m_email=" + m_email + ", m_pw=" + m_pw + ", m_nickname=" + m_nickname
-				+ ", m_addr=" + m_addr + ", m_type=" + m_type + ", m_regdate=" + m_regdate + ", m_enabled=" + m_enabled
-				+ ", m_deldate=" + m_deldate + ", creatorDto=" + creatorDto + "]";
+				+ ", m_addr=" + m_addr + ", m_addr_detail=" + m_addr_detail + ", m_type=" + m_type + ", m_regdate="
+				+ m_regdate + ", m_enabled=" + m_enabled + ", m_deldate=" + m_deldate + ", creatorDto=" + creatorDto
+				+ "]";
 	}
-	
+
 	
 	
 	

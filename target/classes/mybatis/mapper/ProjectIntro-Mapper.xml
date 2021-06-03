@@ -2,10 +2,10 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="temp8">
+<mapper namespace="projectIntroSQL">
 
-	<select id="searchProjectIntro" parameterType="com.web.youneeds.dto.ProjectIntroDto" 
- 	 			resultType="com.web.youneeds.dto.ProjectIntroDto">
+	<select id="searchProjectIntro" parameterType="projectIntroDto" 
+ 	 			resultType="projectIntroDto">
  	 	SELECT A.P_ID,
  	 			A.P_INTRO,
  	 			B.INTRO_IMG_ID,
@@ -17,7 +17,7 @@
  	 	  WHERE A.P_ID = B.P_ID
  	</select>
  	
- 	<insert id="insertProjectIntro" parameterType="com.web.youneeds.dto.ProjectIntroDto">
+ 	<insert id="insertProjectIntro" parameterType="projectIntroDto">
  		INSERT INTO PROJECT_INTRO
  			(
  				P_ID,

@@ -152,8 +152,8 @@ div .card {
 				</div>
 				 -->
 				&nbsp; &nbsp;
-				<h3 class="userId">아이디 : ${sessionScope.login.m_email }</h3>
-				<h3 class="userNck">닉네임 : ${sessionScope.login.m_nickname }</h3>
+				<h3 class="userId">아이디 : ${sessionScope.member.m_email }</h3>
+				<h3 class="userNck">닉네임 : ${sessionScope.member.m_nickname }</h3>
 			</div>
 			<div class="box2">
 				<input type="button" style="width: 120px; height: 30px; font-size: 15px; background-color: skyblue; border-radius: 5px;" value="회원정보수정" onclick="location.href='creatorUpdate'">

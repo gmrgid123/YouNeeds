@@ -5,7 +5,7 @@ import java.util.List;
 import com.web.youneeds.dto.ProjectIntroDto;
 
 public interface ProjectIntroDao {
-	String NAMESPACE = "";
+	String NAMESPACE = "projectIntroSQL.";
 	
 	public List<ProjectIntroDto> selectList();
 	public ProjectIntroDto selectOne(int p_id);

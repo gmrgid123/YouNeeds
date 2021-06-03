@@ -1,5 +1,6 @@
 package com.web.youneeds.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -63,12 +64,17 @@ public class MyPageController {
 	public String selectOne(Model model, HttpServletRequest request, HttpServletResponse response) {
 		logger.info("userMypage 호출");
 		
-		MemberDto dto = (MemberDto)request.getSession().getAttribute("login");
-		List<OrderDto> user = orderBiz.myPageInfo(dto.getM_uid());
+		List<OrderDto> user= null;
+		
+		MemberDto member = (MemberDto)request.getSession().getAttribute("member");
+		System.out.println(member);
+		System.out.println("@@@@@@@@@회원번호 : " );
+		user = orderBiz.myPageInfo(member.getM_uid());
+		System.out.println("@@@@@@@@@회원번호 : " + member.getM_uid());
+		System.out.println(user);
 		
 		
-		
-		if(dto.getM_type().equals("일반") || dto.getM_type().equals("관리")) {
+		if(member.getM_type().equals("일반") || member.getM_type().equals("관리")) {
 			model.addAttribute("user", user);
 			return "/mypage/userMypage";
 		} else {

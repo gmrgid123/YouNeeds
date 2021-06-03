@@ -6,7 +6,7 @@ import com.web.youneeds.dto.CreatorDto;
 import com.web.youneeds.dto.MemberDto;
 
 public interface CreatorDao {
-	String NAMESPACE = "creator.";
+	String NAMESPACE = "member.";
 	
 	public List<CreatorDto> creatorPageInfo(int m_uid);
 	public CreatorDto selectOne(int m_uid);

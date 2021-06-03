@@ -13,7 +13,6 @@ import com.web.youneeds.dto.ProjectDto;
 @Repository
 public class ProjectDaoImpl implements ProjectDao {
 	
-	String NAMESPACE = "temp9.";
 	
 	@Inject
 	private SqlSession sqlSession;

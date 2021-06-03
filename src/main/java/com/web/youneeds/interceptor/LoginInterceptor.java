@@ -21,7 +21,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
 		
-		MemberDto loginDto = (MemberDto)request.getSession().getAttribute("login");
+		MemberDto loginDto = (MemberDto)request.getSession().getAttribute("member");
 		
 		if(request.getRequestURI().contains("/notice_write") || request.getRequestURI().contains("/noticeInsert.do")) {
 			if( loginDto==null || !(loginDto.getM_type().equals("관리")) ) {
