@@ -15,9 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.web.youneeds.biz.interf.CreatorBiz;
 import com.web.youneeds.biz.interf.OrderBiz;
-import com.web.youneeds.dto.CreatorDto;
 import com.web.youneeds.dto.MemberDto;
 import com.web.youneeds.dto.OrderDto;
 
@@ -28,7 +26,6 @@ public class MyPageController {
 	
 	@Autowired
 	private OrderBiz orderBiz;
-	private CreatorBiz creatorBiz;
 	
 	@RequestMapping(value="/logout", method=RequestMethod.GET)
 	public String logout(HttpSession session) {
@@ -68,7 +65,6 @@ public class MyPageController {
 		
 		MemberDto dto = (MemberDto)request.getSession().getAttribute("login");
 		List<OrderDto> user = orderBiz.myPageInfo(dto.getM_uid());
-		//List<CreatorDto> creator = creatorBiz.creatorPageInfo(dto.getM_uid());
 		
 		
 		
@@ -77,7 +73,6 @@ public class MyPageController {
 			return "/mypage/userMypage";
 		} else {
 			model.addAttribute("user", user);
-			//model.addAttribute("creator", creator);
 			return "/mypage/creatorMypage";
 		}
 		
