@@ -154,13 +154,11 @@
       </div>
       <br>
       <input type="button" id="login_btn" class="btn" value="LOG IN">
-      
       <div class="bottomText">
         Don't you have ID? <a href="general_create.do">sign up</a>
       </div>
     </form>
 </div>
-
 	<!-- footer include -->
 	<jsp:include page="../form/footer.jsp"></jsp:include>
 

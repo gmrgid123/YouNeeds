@@ -4,7 +4,6 @@
 <c:set var="path" value="${pageContext.request.contextPath}" />
 
 
-
 <!-- JAVASCRIPTS -->
 <script src="${path}/resources/js/slider/slider.js"
 	type="text/javascript"></script>
@@ -28,7 +27,6 @@
 	background-color: #93C0C5;
 	color: white;
 }
-
 .top {
 	width: 1000px;
 	display: flex;
@@ -38,7 +36,6 @@
 	margin: auto auto 0px auto;
 	background-color: #93c0c541;
 }
-
 .tl {
 	width: 450px;
 	height: 300px;
@@ -46,24 +43,15 @@
 	text-align: center;
 	background-color: #93c0c521;
 }
-
-.tr {
-	width: 350px;
-	height: 200px;
-	background-color: #ffffff6c;
-}
-
 .tr>h1 {
-	line-height: 60px;
-	margin: 0px 0px 0px 20px;
-	font-size: 20px;
+	font-size: 28px;
 	color: #93C0C5;
 }
 
 .b1 {
 	width: 120px;
 	height: 40px;
-	margin-top: 20px;
+	margin: 20px 0px 0px 250px;
 	border: 2px solid #93C0C5;
 	border-radius: 20px;
 	text-decoration: none;
@@ -71,12 +59,10 @@
 	color: #93C0C5;
 	font-weight: bold;
 }
-
 .b1:hover {
 	background-color: #93C0C5;
 	color: white;
 }
-
 .middle {
 	width: 1000px;
 	display: flex;
@@ -87,17 +73,15 @@
 	background-color: #93c0c521;
 	color: white;
 }
-
 .btn {
 	width: 450px;
-	font-size: 20px;
+	font-size: 15px;
 }
 
 .btn>a {
 	margin-left: 20px;
 	color: #3533335d;
 }
-
 a:hover {
 	color: black;
 }
@@ -111,7 +95,6 @@ a:hover {
 	align-items: center;
 	justify-content: center;
 }
-
 .bl {
 	width: 450px;
 	height: 300px;
@@ -119,13 +102,11 @@ a:hover {
 	text-align: center;
 	background-color: #93c0c521;
 }
-
 .br {
 	width: 350px;
 	height: 200px;;
 	background-color: #ffffff6c;
 }
-
 .b2 {
 	display: inline-block;
 	width: 150px;
@@ -138,13 +119,11 @@ a:hover {
 	color: #93C0C5;
 	font-weight: bold;
 }
-
 .b2:hover {
 	background-color: #93C0C5;
 	color: white;
 }
 </style>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -154,7 +133,6 @@ a:hover {
 	$(document).ready(function() {
 		fn_loadScr("intro");
 	});
-	
 	// 화면 전환
 	function fn_change(category) {
 		if(category == "intro") {
@@ -172,14 +150,12 @@ a:hover {
 		}
 		fn_loadScr(category);
 	}
-	
 	// 전환된 화면에 데이터 조회 후 반영
 	function fn_loadScr(category) {
 		var params = {
                 p_id      : $("#p_id").val()
               , category  : category
-      	};
-          
+      	};   
       // ajax 통신
       $.ajax({
           type : "POST",
@@ -210,7 +186,7 @@ a:hover {
               } else if(category == "funding") {
             	  
               }
-          },
+          }
           error : function(XMLHttpRequest, textStatus, errorThrown){ // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
               alert("통신 실패.");
           }
@@ -221,7 +197,6 @@ a:hover {
 <body>
 	<!-- header -->
 	<jsp:include page="../form/header.jsp"></jsp:include>
-
 	<!-- hidden value -->
 	<input type="hidden" id="p_id" name="p_id" value="${pjdetail.p_id}" />
 	<!-- -------------------------------------------------------------------------------- -->
@@ -244,12 +219,8 @@ a:hover {
 			<input type="button" class="b1" value="후원하기" onclick="location.href='orderPayForm'">
 		</div>
 	</div>
-	
-	
-
 	<!-- -------------------------------------------------------------------------------- -->
 	<!-- -------------------------------middle-------------------------------------------- -->
-
 	<div class=middle>
 		<div class="btn">
 			<a href="javascript:fn_change('intro');">프로젝트 소개</a> 
@@ -262,7 +233,6 @@ a:hover {
 	<!-- ---------------------------------bottom----------------------------------------- -->
 	<div class="bottom" id="div_intro">
 		<div class="bl" id="p_intro" name="p_intro">
-		
 		</div>
 		<div style="text-align: center;">
 			<div class="br">
@@ -270,8 +240,7 @@ a:hover {
 			<input type="button" class="b2" value="공지사항 등록" onclick="location.href='pjupnotice.do'"> 
 				<input type="button" class="b2" value="화상설명회 개최공지" onclick="location.href='pjupnotice.do'">
 		</div>
-	</div>
-	
+	</div>	
 	<!-- 공지사항 -->
 	<div class="bottom" id="div_notice" style="display:none;">
 		<div class="bl">
@@ -279,6 +248,7 @@ a:hover {
             <col width="80px"><col width="300px"><col width="80px">
             <thead>
                <tr>
+               
                   <th>글번호</th>
                   <th>제목</th>
                   <th>작성일자</th>
@@ -334,7 +304,6 @@ a:hover {
 			<input type="button" class="b2" value="화상설명회 개최공지" onclick="location.href='pjupnotice.do'">
 		</div>
 	</div> 
-    
 	<!-- ----------------------------------------------------------- -->
 	<!-- footer include -->
 	<jsp:include page="../form/footer.jsp"></jsp:include>
