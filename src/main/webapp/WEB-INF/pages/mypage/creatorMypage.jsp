@@ -206,11 +206,11 @@ div .card {
 			<br>
 			<div class="list">
 				<c:choose>
-					<c:when test="${empty list }">
+					<c:when test="${empty user }">
 						<h1>===진행중인 프로젝트가 없습니다.===</h1>
 					</c:when>
 					<c:otherwise>
-						<c:forEach var="creator" items="${creator }">
+						<c:forEach var="creator" items="${user }">
 							<a href="#">
 								<div class="card">
 									<div class="card_header">

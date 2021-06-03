@@ -65,7 +65,7 @@ public class MyPageController {
 		
 		MemberDto dto = (MemberDto)request.getSession().getAttribute("login");
 		List<OrderDto> user = orderBiz.myPageInfo(dto.getM_uid());
-		
+		System.out.println(user);
 		
 		
 		if(dto.getM_type().equals("일반") || dto.getM_type().equals("관리")) {
