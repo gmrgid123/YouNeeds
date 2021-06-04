@@ -65,7 +65,7 @@ public class MyPageController {
 	public String selectOne(Model model, HttpServletRequest request, HttpServletResponse response, Integer page) {
 		logger.info("userMypage 호출");
 		
-		MemberDto dto = (MemberDto)request.getSession().getAttribute("login");
+		MemberDto dto = (MemberDto)request.getSession().getAttribute("member");
 
 		int page_val;
 		
@@ -123,7 +123,7 @@ public class MyPageController {
 		System.out.println(user);
 		
 		
-		if(member.getM_type().equals("일반") || member.getM_type().equals("관리")) {
+		if(dto.getM_type().equals("일반") || dto.getM_type().equals("관리")) {
 			model.addAttribute("user", user);
 			model.addAttribute("page_ListMax", page_ListMax);
 			model.addAttribute("page_max", page_max);
