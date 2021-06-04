@@ -73,7 +73,7 @@
 					</c:choose>
 				</tbody>
 			</table>
-				<c:if test="${sessionScope.login.m_type eq '관리' }">
+				<c:if test="${sessionScope.member.m_type eq '관리' }">
 					<button type="button" class="btn btn-secondary" onclick="location.href='notice_write'" style="float: right;">글쓰기</button>
 				</c:if>
 				

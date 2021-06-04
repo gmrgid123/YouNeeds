@@ -17,16 +17,6 @@
 <link href="${path}/resources/css/layout.css" rel="stylesheet"
 	type="text/css" media="all">
 
-
-<!-- -------------------------------------------------------------------------------- -->
-<script type="text/javascript">
-$(document).ready(function() {
-	// fn_search();
-	var count = '${count}';
-});
-
-</script>
-
 <style type="text/css">
 
 .card {
@@ -57,18 +47,19 @@ $(document).ready(function() {
 	align-items: center;
 	justify-content: center;
 	background-color: white;
-	color: black;
+	font-size : 18px;
+	
 }
 
 .btn {
-	display: inline-block;
 	margin: 20px 20px 0px 20px;
 	background-color: #93c0c59d;
-	width: 50px;
+	width: 100px;
 	height: 50px;
 	border-radius: 5px 5px 5px 5px;
 	border: none;
 	cursor: pointer;
+	
 }
 
 <!------------------------------------------------------------->
@@ -111,14 +102,6 @@ $(document).ready(function() {
 	float: right;
 }
 
-#c2 {
-	margin-top: 55px;
-}
-
-#c3 {
-	margin-top: 55px;
-}
-
 
 .btn2 {
 	display: inline-block;
@@ -147,10 +130,22 @@ $(document).ready(function() {
 	justify-content: center;
 	
 }
-
-
-
 </style>
+
+
+<!-- -------------------------------------------------------------------------------- -->
+<script type="text/javascript">
+$(document).ready(function() {
+	// fn_search();
+	var count = '${count}';
+});
+
+function fn_search(pid) {
+	///pjdetail.do
+	location.href = "${pageContext.request.contextPath}/pjdetail.do?p_id=" + pid; 
+}
+</script>
+
 
 <!DOCTYPE html>
 <html>
@@ -163,7 +158,7 @@ $(document).ready(function() {
 
 	<!-- header -->
 	<jsp:include page="../form/header.jsp"></jsp:include>
-
+	
 	<!-- --------------------------------------------------------------------------- -->
 	<div class="title">
 		<h1>프로젝트 목록</h1>
@@ -174,10 +169,10 @@ $(document).ready(function() {
 		<input type="button" value="전체" class="btn" onclick="location.href='${path}/pjlist.do?p_category='">
 		<input type="button" value="출판" class="btn" onclick="location.href='${path}/pjlist.do?p_category=출판'">
 		<input type="button" value="공예" class="btn" onclick="location.href='${path}/pjlist.do?p_category=공예'">
-		<input type="button" value="예술" class="btn" onclick="location.href=''">
-		<input type="button" value="공연" class="btn" onclick="location.href=''">
-		<input type="button" value="푸드" class="btn" onclick="location.href=''">
-		<input type="button" value="패션" class="btn" onclick="location.href=''">
+		<input type="button" value="예술" class="btn" onclick="location.href='${path}/pjlist.do?p_category=예술'">
+		<input type="button" value="공연" class="btn" onclick="location.href='${path}/pjlist.do?p_category=공연'">
+		<input type="button" value="푸드" class="btn" onclick="location.href='${path}/pjlist.do?p_category=푸드'">
+		<input type="button" value="패션" class="btn" onclick="location.href='${path}/pjlist.do?p_category=패션'">
 	</div>
 	<!-- ------------------------------------------------------------------------------ -->
 	
@@ -185,7 +180,7 @@ $(document).ready(function() {
 		<c:if test="${status.count % 3 eq 1}">
 			<div class="cgroup">
 		</c:if>
-		<a class="project_card" href="pjintro.do">
+		<a class="project_card" href="javascript:fn_search('${listVo.p_id}')">
 			<div class="card">
 				<div class="card_header">
 					<span><img src="${path}/resources/images/4.jpg"
@@ -201,8 +196,11 @@ $(document).ready(function() {
 		<c:if test="${status.count % 3 eq 0}">
 			</div>
 		</c:if>
+		<c:if test="${status.last}">
+			</div>
+		</c:if>
 	</c:forEach>
-	<c:if test="${count < 3}">
+	<c:if test="${count < 3 }">
 		</div>
 	</c:if>
 		
@@ -214,10 +212,7 @@ $(document).ready(function() {
 		<input type="button" value="3" class="btn2" onclick="location.href=''">
 		<input type="button" value="→" class="btn2" onclick="location.href=''">
 	</div>
-
-
 	<!-- --------------------------------------------------------------------------- -->
-
 	<!-- footer include -->
 	<jsp:include page="../form/footer.jsp"></jsp:include>
 </body>

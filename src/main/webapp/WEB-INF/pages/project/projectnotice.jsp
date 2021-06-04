@@ -111,12 +111,10 @@ a:hover {
 	width: 1000px;
 	margin: 5px auto 20px auto;
 	background-color : #93c0c541;
-	
 	display: flex;
 	flex-direction: row;
 	align-items: center;
 	justify-content: center;
-	
 }
 
 .bl{
@@ -157,6 +155,9 @@ a:hover {
 	background-color: #93C0C5;
 	color: white;
 }
+.button{
+	text-align : center;
+}
 
 
 </style>
@@ -173,14 +174,11 @@ a:hover {
 	<!-- header -->
 	<jsp:include page="../form/header.jsp"></jsp:include>
 
-
 	<!-- -------------------------------------------------------------------------------- -->
 	<div class="title">
 		<h1>프로젝트명</h1>
 	</div>
 	<!-- ------------------------------------top----------------------------------------- -->
-
-
 	<div class="top">
 		<div class="tl">
 		
@@ -199,7 +197,6 @@ a:hover {
 
 	<!-- -------------------------------------------------------------------------------- -->
 	<!-- -------------------------------middle-------------------------------------------- -->
-
 	<div class=middle>
 		<div class="btn">
 			<a href="pjintro.do">프로젝트 소개</a> 
@@ -249,15 +246,9 @@ a:hover {
                </tr>
             </tbody>
          </table>
-		
-		
 		</div>
-		<div style="text-align:center;">
-            <div class="br">
-            	
-
-
-            </div>
+		<div class="button">
+            <div class="br"> </div>
             
             <input type="button" class="b2" value="공지사항 등록" onclick="location.href='pjupnotice.do'">
              <input type="button" class="b2" value="화상설명회 개최공지" onclick="location.href='pjupnotice.do'">

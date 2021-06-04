@@ -8,6 +8,8 @@
 		<typeAlias type="com.web.youneeds.dto.OrderDto" alias="orderDto"/>
 		<typeAlias type="com.web.youneeds.dto.ProjectDto" alias="projectDto"/>
 		<typeAlias type="com.web.youneeds.dto.NoticeDto" alias="noticeDto"/>
+		<typeAlias type="com.web.youneeds.dto.ProjectIntroDto" alias="projectIntroDto"/>
+		<typeAlias type="com.web.youneeds.dto.CreatorDto" alias="creatorDto"/>
 		<typeAlias type="com.web.youneeds.dto.MemberDto" alias="memberDto"/>
 		<typeAlias type="com.web.youneeds.dto.QnaDto" alias="qnaDto"/>
 		<typeAlias type="com.web.youneeds.dto.QnaReplyDto" alias="qnaReplyDto"/>
@@ -16,17 +18,13 @@
 	<mappers>
 		<mapper resource="/mybatis/mapper/Creator-Mapper.xml"/>
 		<mapper resource="/mybatis/mapper/Member-Mapper.xml"/>
-		<mapper resource="/mybatis/mapper/NoticeImg-Mapper.xml"/>
 		<mapper resource="/mybatis/mapper/Notice-Mapper.xml"/>
 		<mapper resource="/mybatis/mapper/Order-Mapper.xml"/>
 		<mapper resource="/mybatis/mapper/ProjectFundGuide-Mapper.xml"/>
-		<mapper resource="/mybatis/mapper/ProjectIntroImg-Mapper.xml"/>
 		<mapper resource="/mybatis/mapper/ProjectIntro-Mapper.xml"/>
 		<mapper resource="/mybatis/mapper/Project-Mapper.xml"/>
-		<mapper resource="/mybatis/mapper/ProjectNoticeImg-Mapper.xml"/>
 		<mapper resource="/mybatis/mapper/ProjectNotice-Mapper.xml"/>
 		<mapper resource="/mybatis/mapper/ProjectTitleImg-Mapper.xml"/>
-		<mapper resource="/mybatis/mapper/QnaImg-Mapper.xml"/>
 		<mapper resource="/mybatis/mapper/Qna-Mapper.xml"/>
 		<mapper resource="/mybatis/mapper/QnaReply-Mapper.xml"/>
 		<mapper resource="/mybatis/mapper/VideoChat-Mapper.xml"/>

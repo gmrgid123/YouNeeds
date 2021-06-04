@@ -1,37 +1,32 @@
 package com.web.youneeds.controller;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.web.youneeds.biz.interf.OrderBiz;
+import com.web.youneeds.dto.MemberDto;
+import com.web.youneeds.dto.OrderDto;
+
 @Controller
 public class MyPageController {
 
-	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
-
-	//마이페이지
-	@RequestMapping("/userMypage")
-	public String userMypage(Locale locale, Model model) {
-		logger.info("userMypage 페이지 호출");
-			
-		return "mypage/userMypage";
-	}
-		
-	@RequestMapping("/creatorMypage")
-	public String creatorMypage(Locale locale, Model model) {
-		logger.info("creatorMypage 페이지 호출");
-		
-		return "mypage/creatorMypage";
-	}
+	@Autowired
+	private OrderBiz orderBiz;
 	
 	@RequestMapping(value="/logout", method=RequestMethod.GET)
 	public String logout(HttpSession session) {
@@ -53,16 +48,40 @@ public class MyPageController {
 	//마이페이지
 	@RequestMapping("/userUpdate")
 	public String userMypageUpdate(Locale locale, Model model) {
-		logger.info("userMypage 페이지 호출");
+		logger.info("userMypage 업데이트 페이지 호출");
 				
 		return "login/updategeneral";
 	}
 			
 	@RequestMapping("/creatorUpdate")
 	public String creatorMypageUpdate(Locale locale, Model model) {
-		logger.info("creatorMypage 페이지 호출");
+		logger.info("creatorMypage 업데이트 페이지 호출");
 				
 		return "login/updatecreate";
+	}
+	
+	@RequestMapping("/userMypage")
+	public String selectOne(Model model, HttpServletRequest request, HttpServletResponse response) {
+		logger.info("userMypage 호출");
+		
+		List<OrderDto> user= null;
+		
+		MemberDto member = (MemberDto)request.getSession().getAttribute("member");
+		System.out.println(member);
+		System.out.println("@@@@@@@@@회원번호 : " );
+		user = orderBiz.myPageInfo(member.getM_uid());
+		System.out.println("@@@@@@@@@회원번호 : " + member.getM_uid());
+		System.out.println(user);
+		
+		
+		if(member.getM_type().equals("일반") || member.getM_type().equals("관리")) {
+			model.addAttribute("user", user);
+			return "/mypage/userMypage";
+		} else {
+			model.addAttribute("user", user);
+			return "/mypage/creatorMypage";
+		}
+		
 	}
 	
 }

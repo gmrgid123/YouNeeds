@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 
 <!DOCTYPE HTML>
@@ -37,14 +38,6 @@ div .box1 {
 	font-size: 15px;
 }
 
-.profile{
-	width: 70px;
-    height: 70px; 
-    border-radius: 70%;
-    overflow: hidden;
-    background-color: lightgray;
-}
-
 div .box2 {
 	width: 50%;
 	float: right;
@@ -67,6 +60,7 @@ div .box2 {
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
+	height: 300px;
 }
 
 div .card {
@@ -145,22 +139,14 @@ div .card {
 	<div class="main">
 		<div class="user">
 			<div class="box1">
-			<!-- 
-				<div class="profile">
-					<img alt="프로필" src="" onclick="">
-				</div>
-			-->
 				&nbsp; &nbsp;
-				<div class="userId">회원 아이디</div>
+				<h3 class="userId">아이디 : ${sessionScope.member.m_email }</h3>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<h3 class="userNck">닉네임 : ${sessionScope.member.m_nickname }</h3>
 			</div>
 			<div class="box2">
-<<<<<<< HEAD
-				<input type="button" style="width: 120px; height: 30px; font-size: 15px; background-color: skyblue; border-radius: 5px;" value="회원정보수정" onclick="location.href='updategeneral'">
-				<input type="button" style="width: 100px; height: 30px; font-size: 15px; background-color: skyblue; border-radius: 5px;" value="로그아웃" onclick="location.href='logout'">
-=======
 				<input type="button" style="width: 120px; height: 30px; font-size: 15px; background-color: skyblue; border-radius: 5px;" value="회원정보수정" onclick="location.href='userUpdate'">
-				<input type="button" style="width: 100px; height: 30px; font-size: 15px; background-color: skyblue; border-radius: 5px;" value="로그아웃" onclick="">
->>>>>>> refs/heads/master
+				<input type="button" style="width: 100px; height: 30px; font-size: 15px; background-color: skyblue; border-radius: 5px;" value="로그아웃" onclick="location.href='logout'">
 			</div>
 			<hr>
 		</div>
@@ -171,26 +157,36 @@ div .card {
 			</div>
 			<br>
 			<div class="list">
-				<a href="#">
-					<div class="card">
-						<div class="card_header">
-							<img src="${path}/resources/images/" style="width:100%; height: 100%">
-							<div class="card_header_D-day">
-								<div class="card_header_text">참여중</div>
-								<div class="card_header_number">D-7</div>
-							</div>
-						</div>
-
-						<div class="card_body">
-							<hr>
-							<i class="name" style="font-size: 12pt;">프로젝트 제목</i>
-							<br>
-							<i class="payment"> 결제금액 : -----원 </i>
-						</div>
-					</div>
-				</a>
+				<c:choose>
+					<c:when test="${empty user }">
+						<h1>===참여중인 프로젝트가 없습니다.===</h1>
+					</c:when>
+					<c:otherwise>
+						<c:forEach var="dto" items="${user }">
+							<a href="#">
+								<div class="card">
+									<div class="card_header">
+										<img src="${path}/resources/images/" style="width:100%; height: 100%">
+										<div class="card_header_D-day">
+											<div class="card_header_text">마감일</div>
+											<div class="card_header_number"><fmt:formatDate value="${dto.end_date }" pattern="yy.MM.dd"/></div>
+										</div>
+									</div>
+			
+									<div class="card_body">
+										<hr>
+										<i class="name" style="font-size: 12pt;">${dto.p_title }</i>
+										<br>
+										<i class="payment"> 결제금액 : ${dto.order_pay }원 </i>
+									</div>
+								</div>
+							</a>
+						</c:forEach>
+					</c:otherwise>
+				</c:choose>
 			</div>
 			<br>
+<!-- 			
 			<div class="paging">
 				<a href="#">1</a>
 				<a href="#">2</a>
@@ -198,6 +194,7 @@ div .card {
 				<a href="#">4</a>
 				<a href="#">5</a>
 			</div>
+-->
 			<br>
 			<br>
 		</div>

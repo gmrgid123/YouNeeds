@@ -1,7 +1,5 @@
 package com.web.youneeds.dto;
 
-import java.util.Date;
-
 public class ProjectDto {
 
 	private int p_id;
@@ -12,13 +10,29 @@ public class ProjectDto {
 	private String start_date;
 	private String end_date;
 	private int creator_uid;
+	private String p_content;
+	
+	
 	
 	//join용 필드
 	private CreatorDto creatorDto;
 	private ProjectTitleImgDto projectTilteImgDto;
+	private ProjectIntroDto projectIntroDto;
 	
 
 	
+	public ProjectIntroDto getProjectIntroDto() {
+		return projectIntroDto;
+	}
+
+
+
+	public void setProjectIntroDto(ProjectIntroDto projectIntroDto) {
+		this.projectIntroDto = projectIntroDto;
+	}
+
+
+
 	public int getP_id() {
 		return p_id;
 	}
@@ -137,7 +151,12 @@ public class ProjectDto {
 		this.projectTilteImgDto = projectTilteImgDto;
 	}
 
-
+	public String getP_content() {
+		return p_content;
+	}
+	public void setP_content(String p_content) {
+		this.p_content = p_content;
+	}
 
 	@Override
 	public String toString() {

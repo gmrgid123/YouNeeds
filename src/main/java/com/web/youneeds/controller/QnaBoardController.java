@@ -161,7 +161,7 @@ public class QnaBoardController {
 	@RequestMapping(value="/qnaInsert.do",  method = RequestMethod.POST)
 	public String InsertQna(HttpServletRequest request, String qna_title, String qna_content) {
 		
-		int m_uid = ((MemberDto)request.getSession().getAttribute("login")).getM_uid();
+		int m_uid = ((MemberDto)request.getSession().getAttribute("member")).getM_uid();
 		
 		logger.info("QNA 업로드 처리");
 		//System.out.println(m_uid);
@@ -183,7 +183,7 @@ public class QnaBoardController {
 	public String ReplyInsert(HttpServletRequest request, String reply_content, int qna_id) {
 		logger.info("QNA 댓글 업로드 처리");
 		
-		int m_uid = ((MemberDto)request.getSession().getAttribute("login")).getM_uid();
+		int m_uid = ((MemberDto)request.getSession().getAttribute("member")).getM_uid();
 		
 		QnaReplyDto dto = new QnaReplyDto();
 		dto.setM_uid(m_uid); dto.setReply_content(reply_content);dto.setQna_id(qna_id);

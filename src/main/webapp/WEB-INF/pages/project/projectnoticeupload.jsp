@@ -79,7 +79,5 @@
 <!-- --------------------------------------------------------------------------- -->	
 	<!-- footer include -->
 	<jsp:include page="../form/footer.jsp"></jsp:include>
-
-
 </body>
 </html>

@@ -1,5 +1,6 @@
 package com.web.youneeds.biz.impl;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,19 +15,13 @@ public class MemberBizImpl implements MemberBiz {
 	private MemberDao memberDao;
 	
 	@Override
-	public MemberDto selectOne(int m_uid) {
-		return null;
-	}
-
-	@Override
 	public int insert(MemberDto dto) {
 		return memberDao.insert(dto);
 	}
 
 	@Override
 	public int update(MemberDto dto) {
-		// TODO Auto-generated method stub
-		return 0;
+		return memberDao.update(dto);
 	}
 
 	@Override
@@ -44,5 +39,11 @@ public class MemberBizImpl implements MemberBiz {
 	public MemberDto login(MemberDto dto) throws Exception {
 		return memberDao.login(dto);
 	}
+
+	@Override
+	public MemberDto findPwd(MemberDto dto) throws Exception {
+		return memberDao.findPwd(dto);
+	}
+
 
 }
