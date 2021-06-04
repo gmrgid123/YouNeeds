@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 
 <!DOCTYPE HTML>
@@ -57,7 +57,7 @@ div .box2 {
 .list {
 	text-align: center;
 	display: flex;
-	flex-direction: column;
+	flex-direction: row;
 	align-items: center;
 	justify-content: center;
 	height: 300px;
@@ -69,7 +69,8 @@ div .card {
 	border-radius: 15px;
 	display: inline-block;
 	margin-top: 0px;
-	margin-left: 0px;
+	margin-right: 50px;
+	margin-left: 50px;
 	margin-bottom: 0px;
 	position: relative;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0
@@ -141,6 +142,7 @@ div .card {
 			<div class="box1">
 				&nbsp; &nbsp;
 				<h3 class="userId">아이디 : ${sessionScope.login.m_email }</h3>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<h3 class="userNck">닉네임 : ${sessionScope.login.m_nickname }</h3>
 			</div>
 			<div class="box2">
@@ -168,13 +170,15 @@ div .card {
 										<img src="${path}/resources/images/" style="width:100%; height: 100%">
 										<div class="card_header_D-day">
 											<div class="card_header_text">마감일</div>
-											<div class="card_header_number"><fmt:formatDate value="${dto.end_date }" pattern="yy.MM.dd"/></div>
+											<c:if test="${fn:length(dto.projectDto.end_date) > 11 }">
+											<div class="card_header_number"><c:out value="${fn:substring(dto.projectDto.end_date,2,10) }"/></div>
+											</c:if>
 										</div>
 									</div>
 			
 									<div class="card_body">
 										<hr>
-										<i class="name" style="font-size: 12pt;">${dto.p_title }</i>
+										<i class="name" style="font-size: 12pt;">${dto.projectDto.p_title }</i>
 										<br>
 										<i class="payment"> 결제금액 : ${dto.order_pay }원 </i>
 									</div>
@@ -185,15 +189,48 @@ div .card {
 				</c:choose>
 			</div>
 			<br>
-<!-- 			
-			<div class="paging">
-				<a href="#">1</a>
-				<a href="#">2</a>
-				<a href="#">3</a>
-				<a href="#">4</a>
-				<a href="#">5</a>
-			</div>
--->
+			
+			<c:choose>
+				<c:when test="${empty user && page_max eq 0}"></c:when>
+				<c:otherwise>
+					<nav class="pagination justify-content-center">
+				        <ul>
+				      
+				        	<c:if test="${start_num ne 1}">
+				        		<li><a href="page=${start_num-1}">&laquo; Previous</a></li>
+				        	</c:if>
+				        	
+				        	
+				        	<c:set var="doneLoop" value="false"/>
+				        	<c:forEach begin="${start_num}" end="${end_num}" step="1" varStatus="status">
+				        		
+				        		
+				        		 <c:if test="${not doneLoop}">
+				        		 	<c:if test="${page_max eq status.current}">
+						        		 	<c:set var="doneLoop" value="true"/>
+						        		 	<c:set var="end_num" value="${status.current}"/>
+						        	</c:if>
+				        		 	<c:choose>
+				        		 		<c:when test="${page_val eq status.current}">
+				        		 			<li style="background: #eee;"><a href="page=<c:out value="${status.current}"/>"><c:out value="${status.current}"/></a></li>
+				        		 		</c:when>
+				        		 		<c:otherwise>
+				        		 			<li><a href="page=<c:out value="${status.current}"/>"><c:out value="${status.current}"/></a></li>
+				        		 		</c:otherwise>
+				        		 	</c:choose>
+				        		 </c:if>
+				        		
+				        	</c:forEach>
+				        	
+				        	<c:if test="${end_num ne page_max}">
+					          	<li><a href="page=${end_num+1}">Next &raquo;</a></li>
+					        </c:if>
+				        </ul>
+		      		</nav>				
+				
+				</c:otherwise>
+			</c:choose>
+			
 			<br>
 			<br>
 		</div>

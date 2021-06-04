@@ -1,6 +1,7 @@
 package com.web.youneeds.dao.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,11 +63,11 @@ public class OrderDaoImpl implements OrderDao {
 	}
 
 	@Override
-	public List<OrderDto> myPageInfo(int m_uid) {
+	public List<OrderDto> myPageInfo(Map<String, Integer> map) {
 		List<OrderDto> dto = null;
 		
 		try {
-			dto = sqlSession.selectOne(NAMESPACE+"myPageInfo", m_uid);
+			dto = sqlSession.selectList(NAMESPACE+"myPageInfo", map);
 		} catch (Exception e) {
 			System.out.println("[error] : orderDao - mypageInfo");
 			e.printStackTrace();
@@ -74,6 +75,22 @@ public class OrderDaoImpl implements OrderDao {
 		
 		return dto;
 	}
+	
+	@Override
+	public int selectListMaxLength(int m_uid) {
+		int max=0;
+		
+		try {
+			max = sqlSession.selectOne(NAMESPACE+"selectListMaxLength", m_uid);
+		} catch (Exception e) {
+			System.out.println("[error] : orderDao - selectListMaxLength");
+			e.printStackTrace();
+		}
+		
+		return max;
+	}
+
+
 
 
 }
