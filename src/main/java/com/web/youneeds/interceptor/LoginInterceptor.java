@@ -37,9 +37,21 @@ public class LoginInterceptor implements HandlerInterceptor {
 		if( request.getRequestURI().contains("/qna_write") || 
 			request.getRequestURI().contains("/qnaInsert.do") ||
 			request.getRequestURI().contains("/qnaReplyInsert.do") ||
-			request.getRequestURI().contains("/orderPayForm") ) {
+			request.getRequestURI().contains("/orderPayForm") ||
+			request.getRequestURI().contains("/qnaUpdateForm") ||
+			request.getRequestURI().contains("/qnaUpdate.do") ||
+			request.getRequestURI().contains("/qnaDelete.do")
+				) {
 			if(loginDto==null) {
 				jsResponse("로그인 후 이용 가능합니다.", "loginForm.do" , response);
+				return false;
+			}
+		}
+		
+		if(loginDto != null) {
+			if( request.getRequestURI().contains("/login.do") ||
+				request.getRequestURI().contains("/loginForm.do") ) {
+				jsResponse("이미 로그인한 상태입니다.", "main.do" , response);
 				return false;
 			}
 		}

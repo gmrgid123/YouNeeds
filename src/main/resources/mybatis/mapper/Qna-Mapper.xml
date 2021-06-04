@@ -44,6 +44,14 @@
 		JOIN MEMBER M ON (Q.M_UID = M.M_UID)
  		WHERE QNA_ID = #{qna_id}
  	</select>
+ 	
+ 	 <select id="selectWriter" parameterType="int" resultType="int">
+ 		SELECT M_UID
+ 		FROM QNA
+ 		WHERE QNA_ID = #{qna_id}
+ 	</select>
+ 
+ 	
  
  	<insert id="QnaInsert" parameterType="qnaDto">
  		<selectKey keyProperty="qna_id" resultType="int" order="BEFORE">

@@ -9,6 +9,19 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="${path}/resources/js/jquery.min.js"></script>
+<script src="${path}/resources/js/jquery.backtotop.js"></script>
+<script src="${path}/resources/js/jquery.mobilemenu.js"></script>
+<script src="${path}/resources/js/bootstrap.js"></script>
+<script type="text/javascript">
+function delcheck(){
+	if(confirm("삭제를 진행하시겠습니까?")){
+		location.href="qnaDelete.do?no=${qnaDto.qna_id}";
+	}else{
+		
+	}
+}
+</script>
 <link href="${path}/resources/css/layout.css" rel="stylesheet" type="text/css" media="all">
 <link href="${path}/resources/css/bootstrap.css" rel="stylesheet" type="text/css">
 <style type="text/css">
@@ -54,6 +67,11 @@
 	text-align:right;
 	color: rgb(109, 109, 109);
 }
+
+.updateBtn{
+	margin-top: 10px;
+}
+
 
 </style>
 
@@ -180,7 +198,12 @@
 		
 		
 		
-		
+		<c:if test="${sessionScope.member.m_uid eq qnaDto.m_uid}">
+			<div style="float: right;">
+				<input type="button" class="btn btn-secondary updateBtn" value="수정" onclick="location.href='qnaUpdateForm?no=${qnaDto.qna_id}';">
+				<input type="button" class="btn btn-secondary updateBtn" value="삭제" onclick="delcheck();"/>
+			</div>
+		</c:if>
 		
 		<div class="btn_div">
 			<input id="listGo" type="button" class="btn btn-secondary"  value="목록으로 돌아가기"  onclick="location.href='qna_board?p=1'"/>
@@ -191,9 +214,5 @@
 
 	<!-- include footer -->
 	<jsp:include page="../../pages/form/footer.jsp"></jsp:include>
-<script src="${path}/resources/js/jquery.min.js"></script>
-<script src="${path}/resources/js/jquery.backtotop.js"></script>
-<script src="${path}/resources/js/jquery.mobilemenu.js"></script>
-<script src="${path}/resources/js/bootstrap.js"></script>
 </body>
 </html>

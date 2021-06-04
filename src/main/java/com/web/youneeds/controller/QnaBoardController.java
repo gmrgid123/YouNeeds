@@ -164,9 +164,6 @@ public class QnaBoardController {
 		int m_uid = ((MemberDto)request.getSession().getAttribute("member")).getM_uid();
 		
 		logger.info("QNA 업로드 처리");
-		//System.out.println(m_uid);
-		//System.out.println(qna_title);
-		//System.out.println(qna_content);
 		
 		
 		QnaDto dto = new QnaDto();
@@ -180,12 +177,60 @@ public class QnaBoardController {
 	
 	
 	@RequestMapping("/qnaUpdateForm")
-	public String UpdateQnaForm(Model model, int no) {
+	public String UpdateQnaForm(HttpServletRequest request, Model model, int no) {
 		logger.info("QNA 업데이트 페이지 호출");
+		int m_uid = ((MemberDto)request.getSession().getAttribute("member")).getM_uid();
 		
-		return "";
+		QnaDto dto = qnaBiz.selectOne(no);
+		
+		if(m_uid != dto.getM_uid()) {
+			model.addAttribute("msg","작성자 계정이 아닙니다.");
+			model.addAttribute("pageUrl", "qnaView?no="+dto.getQna_id());
+			return "/form/warning";
+		} else {
+			model.addAttribute("dto",dto);
+			return "/qna/QnaUpdate";
+		}
+	
 	}
 	
+	@RequestMapping(value="/qnaUpdate.do", method = RequestMethod.POST)
+	public String UpdateQnaDo(HttpServletRequest request, Model model, QnaDto dto) {
+		logger.info("QNA 업데이트 처리");
+		
+		System.out.println(dto);
+		int m_uid = ((MemberDto)request.getSession().getAttribute("member")).getM_uid();
+		int writer_uid = qnaBiz.selectWriter(dto.getQna_id());
+		
+		if(m_uid == writer_uid) {
+			if(qnaBiz.update(dto) > 0) {
+				return "redirect:qnaView?no="+dto.getQna_id();
+			} else {
+				model.addAttribute("msg","QNA 수정에 실패했습니다.");
+				model.addAttribute("pageUrl", "qnaView?no="+dto.getQna_id());
+				return "/form/warning";
+			}
+		} else {
+			model.addAttribute("msg","작성자 계정이 아닙니다.");
+			model.addAttribute("pageUrl", "qnaView?no="+dto.getQna_id());
+			return "/form/warning";
+		}
+		
+	}
+	
+	@RequestMapping("/qnaDelete.do")
+	public String DeleteQna(Model model, int no) {
+		logger.info("QNA 삭제 처리");
+		
+		if(qnaBiz.delete(no) > 0) {
+			return "redirect:qna_board?p=1";
+		} else {
+			model.addAttribute("msg","QNA 삭제에 실패했습니다.");
+			model.addAttribute("pageUrl", "qnaView?no="+no);
+			return "/form/warning";
+		}
+		
+	}
 	
 	
 	

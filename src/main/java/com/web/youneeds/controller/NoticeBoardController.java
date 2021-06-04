@@ -162,8 +162,6 @@ public class NoticeBoardController {
 	public String UpdateNotice(Model model, NoticeDto dto) {
 		logger.info("공지사항 업데이트 처리");
 		
-		System.out.println(dto);
-		
 		
 		if(noticeBiz.update(dto)>0) {
 			return "redirect:noticeView?no="+dto.getNotice_id();

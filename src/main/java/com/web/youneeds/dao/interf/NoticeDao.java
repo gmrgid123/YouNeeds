@@ -13,5 +13,4 @@ public interface NoticeDao {
 	public int update(NoticeDto dto);
 	public int delete(int notice_id);
 	public Integer selectListMaxLength();
-	
 }

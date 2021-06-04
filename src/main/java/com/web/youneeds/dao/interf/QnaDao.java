@@ -14,4 +14,5 @@ public interface QnaDao {
 	public int delete(int qna_id);
 	public Integer selectListMaxLength();
 	public int HitUpdate(int qna_id);
+	public int selectWriter(int qna_id);
 }

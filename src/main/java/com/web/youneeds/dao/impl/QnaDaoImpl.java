@@ -113,6 +113,20 @@ public class QnaDaoImpl implements QnaDao{
 		return res;
 	}
 
+	@Override
+	public int selectWriter(int qna_id) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.selectOne(NAMESPACE+"selectWriter", qna_id);
+		} catch (Exception e) {
+			System.out.println("[error] : QnaDao - selectWriter");
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
+
 	
 	
 

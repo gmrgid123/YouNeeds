@@ -57,4 +57,9 @@ public class QnaBizImpl implements QnaBiz {
 		return qnaDao.HitUpdate(qna_id);
 	}
 
+	@Override
+	public int selectWriter(int qna_id) {
+		return qnaDao.selectWriter(qna_id);
+	}
+
 }

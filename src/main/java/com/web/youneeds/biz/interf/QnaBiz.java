@@ -13,4 +13,5 @@ public interface QnaBiz {
 	public int delete(int qna_id);
 	public int selectListMaxLength();
 	public int HitUpdate(int qna_id);
+	public int selectWriter(int qna_id);
 }
