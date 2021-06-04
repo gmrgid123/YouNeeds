@@ -197,7 +197,7 @@ div .card {
 				        <ul>
 				      
 				        	<c:if test="${start_num ne 1}">
-				        		<li><a href="page=${start_num-1}">&laquo; Previous</a></li>
+				        		<li><a href="userMyPage?page=${start_num-1}">&laquo; Previous</a></li>
 				        	</c:if>
 				        	
 				        	
@@ -212,10 +212,10 @@ div .card {
 						        	</c:if>
 				        		 	<c:choose>
 				        		 		<c:when test="${page_val eq status.current}">
-				        		 			<li style="background: #eee;"><a href="page=<c:out value="${status.current}"/>"><c:out value="${status.current}"/></a></li>
+				        		 			<li style="background: #eee;"><a href="userMyPage?page=<c:out value="${status.current}"/>"><c:out value="${status.current}"/></a></li>
 				        		 		</c:when>
 				        		 		<c:otherwise>
-				        		 			<li><a href="page=<c:out value="${status.current}"/>"><c:out value="${status.current}"/></a></li>
+				        		 			<li><a href="userMyPage?page=<c:out value="${status.current}"/>"><c:out value="${status.current}"/></a></li>
 				        		 		</c:otherwise>
 				        		 	</c:choose>
 				        		 </c:if>
@@ -223,7 +223,7 @@ div .card {
 				        	</c:forEach>
 				        	
 				        	<c:if test="${end_num ne page_max}">
-					          	<li><a href="page=${end_num+1}">Next &raquo;</a></li>
+					          	<li><a href="userMyPage?page=${end_num+1}">Next &raquo;</a></li>
 					        </c:if>
 				        </ul>
 		      		</nav>				
