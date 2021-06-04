@@ -57,8 +57,14 @@ public class ProjectBizImpl implements ProjectBiz{
 
 	@Override
 	public int selectListMaxLength(int m_uid) {
+		Integer temp = projectDao.selectListMaxLength(m_uid);
+		
+		if(temp == null) {
+			return 0;
+		} else {
+			return temp.intValue();
+		}
 
-		return projectDao.selectListMaxLength(m_uid);
 	}
 
 }

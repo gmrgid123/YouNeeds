@@ -55,8 +55,15 @@ public class OrderBizImpl implements OrderBiz{
 
 	@Override
 	public int selectListMaxLength(int m_uid) {
+		Integer temp = orderDao.selectListMaxLength(m_uid);
 
-		return orderDao.selectListMaxLength(m_uid);
+		if(temp == null) {
+			return 0;
+		} else {
+			return temp.intValue();
+		}
+		
+		
 	}
 
 	

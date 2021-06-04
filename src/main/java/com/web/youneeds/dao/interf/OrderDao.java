@@ -14,6 +14,6 @@ public interface OrderDao {
 	public int paying(OrderDto orderDto);
 	public int update(OrderDto orderDto);
 	public List<OrderDto> userMyPageInfo(Map<String, Integer> map);
-	public int selectListMaxLength(int m_uid);
+	public Integer selectListMaxLength(int m_uid);
 	
 }

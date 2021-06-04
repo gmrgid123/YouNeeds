@@ -30,6 +30,7 @@ public class MyPageController {
 	
 	@Autowired
 	private OrderBiz orderBiz;
+	@Autowired
 	private ProjectBiz projectBiz;
 	
 	@RequestMapping(value="/logout", method=RequestMethod.GET)
@@ -67,9 +68,8 @@ public class MyPageController {
 	@RequestMapping("/userMypage")
 	public String selectOne(Model model, HttpServletRequest request, HttpServletResponse response, Integer page) {
 		logger.info("userMypage 호출");
-		
 		MemberDto dto = (MemberDto)request.getSession().getAttribute("member");
-
+		
 		int page_val;
 		
 		if(page == null) {

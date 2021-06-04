@@ -86,15 +86,14 @@
  	
  	
  	
- 	<select id="creatorMyPageInfo" parameterType="java.util.HashMap" resultMap="projectDtoJoin">
- 	SELECT P.P_ID, P.P_TITLE,  P.START_DATE, P.END_DATE, P.CREATOR_UID, C.M_UID
-	FROM (SELECT ROW_NUMBER() OVER(ORDER BY M_UID) AS NUM, M_UID, CREATE_NAME, CREATE_INTRO FROM CREATOR WHERE M_UID = #{m_uid}) C
-	JOIN PROJECT P ON (P.CREATOR_UID = C.M_UID)
-	WHERE  NUM <![CDATA[<=]]> #{page_val}*3 AND NUM <![CDATA[>=]]> #{page_val}*3-2
+ 	<select id="creatorMyPageInfo" parameterType="java.util.HashMap" resultType="projectDto">
+    SELECT P_ID, P_TITLE, P_CATEGORY, TARGET_AMOUNT, P_REGDATE, START_DATE, END_DATE
+    FROM ( SELECT ROW_NUMBER() OVER(ORDER BY P_ID) AS NUM, P_ID, P_TITLE, P_CATEGORY, TARGET_AMOUNT, P_REGDATE, START_DATE, END_DATE, CREATOR_UID FROM PROJECT )
+    WHERE CREATOR_UID =3 AND  NUM <![CDATA[<=]]> #{page_val}*3 AND NUM <![CDATA[>=]]> #{page_val}*3-2
 	</select>
 
 	<select id="selectListMaxLength" resultType="int">
-	SELECT MAX(ROWNUM) FROM CREATOR WHERE M_UID=#{m_uid} ORDER BY P_ID DESC
+	SELECT MAX(ROWNUM) FROM PROJECT WHERE CREATOR_UID=#{m_uid} ORDER BY P_ID
 	</select>
 	
 	

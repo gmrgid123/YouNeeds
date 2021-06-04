@@ -77,8 +77,8 @@ public class OrderDaoImpl implements OrderDao {
 	}
 	
 	@Override
-	public int selectListMaxLength(int m_uid) {
-		int max=0;
+	public Integer selectListMaxLength(int m_uid) {
+		Integer max = null;
 		
 		try {
 			max = sqlSession.selectOne(NAMESPACE+"selectListMaxLength", m_uid);

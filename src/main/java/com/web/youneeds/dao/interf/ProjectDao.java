@@ -14,5 +14,5 @@ public interface ProjectDao {
 	public int update(ProjectDto dto);
 	public int delete(int p_id);
 	public List<ProjectDto> creatorMyPageInfo(Map<String, Integer> map);
-	public int selectListMaxLength(int m_uid);
+	public Integer selectListMaxLength(int m_uid);
 }
