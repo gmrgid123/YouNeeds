@@ -59,14 +59,31 @@ public class NoticeDaoImpl implements NoticeDao{
 
 	@Override
 	public int update(NoticeDto dto) {
-		// TODO Auto-generated method stub
-		return 0;
+		int res=0;
+		
+		try {
+			res = sqlSession.update(NAMESPACE+"updateNotice", dto);
+		} catch (Exception e) {
+			System.out.println("[error] : noticeDao - update");
+			e.printStackTrace();
+		}
+		
+		return res;
 	}
 
 	@Override
 	public int delete(int notice_id) {
-		// TODO Auto-generated method stub
-		return 0;
+		int res = 0;
+		
+		try {
+			res = sqlSession.delete(NAMESPACE+"deleteNotice", notice_id);
+		} catch (Exception e) {
+			System.out.println("[error] : noticeDao - delete");
+			e.printStackTrace();
+		}
+		
+		
+		return res;
 	}
 
 	@Override

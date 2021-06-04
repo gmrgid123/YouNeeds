@@ -19,7 +19,7 @@ import com.web.youneeds.dto.OrderDto;
 @Controller
 public class PayController {
 
-	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+	private static final Logger logger = LoggerFactory.getLogger(PayController.class);
 	
 	@Autowired
 	private OrderBiz orderBiz;

@@ -29,7 +29,7 @@ import com.web.youneeds.dto.NoticeDto;
 @Controller
 public class NoticeBoardController {
 
-	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+	private static final Logger logger = LoggerFactory.getLogger(NoticeBoardController.class);
 	
 	@Autowired
 	private NoticeBiz noticeBiz;
@@ -146,6 +146,49 @@ public class NoticeBoardController {
 		
 		return "redirect:noticeView?no="+no;
 	}
+	
+	@RequestMapping("/noticeUpdateForm")
+	public String UpdateFormNotice(Model model, int no) {
+		logger.info("공지사항 업데이트 페이지 호출");
+		
+		NoticeDto dto = noticeBiz.selectOne(no);
+		
+		model.addAttribute("dto", dto);
+		
+		return "/notice/NoticeUpdate";
+	}
+	
+	@RequestMapping(value="/noticeUpdate.do", method = RequestMethod.POST)
+	public String UpdateNotice(Model model, NoticeDto dto) {
+		logger.info("공지사항 업데이트 처리");
+		
+		System.out.println(dto);
+		
+		
+		if(noticeBiz.update(dto)>0) {
+			return "redirect:noticeView?no="+dto.getNotice_id();
+		} else {
+			model.addAttribute("msg","공지사항 수정에 실패했습니다.");
+			model.addAttribute("pageUrl", "noticeView?no="+dto.getNotice_id());
+			return "/form/warning";
+		}
+	}
+	
+	@RequestMapping("/noticeDelete.do")
+	public String noticeDelete(Model model, int no) {
+		logger.info("공지사항 삭제 처리");
+		
+		if(noticeBiz.delete(no)>0) {
+			return "redirect:notice_board?p=1";
+		}else {
+			model.addAttribute("msg","공지사항 삭제에 실패했습니다.");
+			model.addAttribute("pageUrl", "noticeView?no="+no);
+			
+			return "/form/warning";
+		}
+		
+	}
+	
 	
 	@RequestMapping("/noticeView")
 	public String noticeDetailView(Model model, int no) {

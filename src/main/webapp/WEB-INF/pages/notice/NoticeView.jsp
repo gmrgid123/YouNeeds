@@ -9,6 +9,20 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="${path}/resources/js/jquery.min.js"></script>
+<script src="${path}/resources/js/jquery.backtotop.js"></script>
+<script src="${path}/resources/js/jquery.mobilemenu.js"></script>
+<script src="${path}/resources/js/bootstrap.js"></script>
+<script type="text/javascript">
+function delcheck(){
+	if(confirm("삭제를 진행하시겠습니까?")){
+		location.href="noticeDelete.do?no=${noticeDto.notice_id}";
+	}else{
+		
+	}
+}
+</script>
+
 <link href="${path}/resources/css/layout.css" rel="stylesheet" type="text/css" media="all">
 <link href="${path}/resources/css/bootstrap.css" rel="stylesheet" type="text/css">
 <style type="text/css">
@@ -36,6 +50,11 @@
 	width: 200px;
 	height: 50px;
 }
+.updateBtn{
+	margin-top: 10px;
+}
+
+
 </style>
 
 <script type="text/javascript" src="${path}/resources/ckeditor/ckeditor.js"></script>
@@ -62,6 +81,14 @@
 				<p>${noticeDto.notice_content}</p>
 			</div>
 		</div>
+		
+		<c:if test="${sessionScope.member.m_type eq '관리' }">
+			<div style="float: right;">
+				<input type="button" class="btn btn-secondary updateBtn" value="수정" onclick="location.href='noticeUpdateForm?no=${noticeDto.notice_id}';">
+				<input type="button" class="btn btn-secondary updateBtn" value="삭제" onclick="delcheck();"/>
+			</div>
+		</c:if>
+		
 		<div class="btn_div">
 			<input id="listGo" type="button" class="btn btn-secondary"  value="목록으로 돌아가기"  onclick="location.href='notice_board?p=1'"/>
 		</div>
@@ -72,9 +99,5 @@
 
 	<!-- include footer -->
 	<jsp:include page="../../pages/form/footer.jsp"></jsp:include>
-<script src="${path}/resources/js/jquery.min.js"></script>
-<script src="${path}/resources/js/jquery.backtotop.js"></script>
-<script src="${path}/resources/js/jquery.mobilemenu.js"></script>
-<script src="${path}/resources/js/bootstrap.js"></script>
 </body>
 </html>

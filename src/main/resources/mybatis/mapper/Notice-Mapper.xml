@@ -29,6 +29,17 @@
  		FROM NOTICE
  		WHERE NOTICE_ID = #{notice_id}
  	</select>
+ 	
+ 	<delete id="deleteNotice" parameterType="int">
+ 		DELETE FROM NOTICE
+ 		WHERE NOTICE_ID = #{notice_id}
+ 	</delete>
+ 	
+ 	<update id="updateNotice" parameterType="noticeDto">
+ 		UPDATE NOTICE
+ 		SET NOTICE_TITLE = #{notice_title}, NOTICE_CONTENT = #{notice_content}
+ 		WHERE NOTICE_ID = #{notice_id}
+ 	</update>
  
  	<insert id="noticeInsert" parameterType="noticeDto">
  		<selectKey keyProperty="notice_id" resultType="int" order="BEFORE">

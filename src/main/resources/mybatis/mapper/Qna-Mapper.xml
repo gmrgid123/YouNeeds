@@ -57,5 +57,16 @@
  		UPDATE QNA SET QNA_HIT = QNA_HIT+1 WHERE QNA_ID = #{qnd_id}
  	</update>
  	
+ 	<update id="updateQna" parameterType="qnaDto">
+ 		UPDATE QNA
+ 		SET QNA_TITLE = #{qna_title} , QNA_CONTENT = #{qna_content}
+ 		WHERE QNA_ID = #{qna_id}
+ 	</update>
+ 	
+ 	<delete id="deleteQna" parameterType="int">
+ 		DELETE FROM QNA
+ 		WHERE QNA_ID = #{qna_id}
+ 	</delete>
+ 	
  
  </mapper>

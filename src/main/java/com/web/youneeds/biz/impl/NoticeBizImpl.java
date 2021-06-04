@@ -17,7 +17,6 @@ public class NoticeBizImpl implements NoticeBiz {
 	
 	@Override
 	public List<NoticeDto> selectList(int p) {
-		// TODO Auto-generated method stub
 		return noticeDao.selectList(p);
 	}
 
@@ -33,14 +32,13 @@ public class NoticeBizImpl implements NoticeBiz {
 
 	@Override
 	public int update(NoticeDto dto) {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		return noticeDao.update(dto);
 	}
 
 	@Override
 	public int delete(int notice_id) {
-		// TODO Auto-generated method stub
-		return 0;
+		return noticeDao.delete(notice_id);
 	}
 
 	@Override

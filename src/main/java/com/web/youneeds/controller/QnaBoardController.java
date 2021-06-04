@@ -33,7 +33,7 @@ import com.web.youneeds.dto.QnaReplyDto;
 @Controller
 public class QnaBoardController {
 
-	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+	private static final Logger logger = LoggerFactory.getLogger(QnaBoardController.class);
 	
 	@Autowired
 	QnaBiz qnaBiz;
@@ -179,6 +179,14 @@ public class QnaBoardController {
 	}
 	
 	
+	@RequestMapping("/qnaUpdateForm")
+	public String UpdateQnaForm(Model model, int ㅜㅐ) {
+		return "";
+	}
+	
+	
+	
+	
 	@RequestMapping(value="/qnaReplyInsert.do",method = RequestMethod.POST)
 	public String ReplyInsert(HttpServletRequest request, String reply_content, int qna_id) {
 		logger.info("QNA 댓글 업로드 처리");
@@ -193,6 +201,9 @@ public class QnaBoardController {
 		
 		return "redirect:qnaView?no="+qna_id;
 	}
+	
+	
+	
 	
 	
 	@RequestMapping(value="/uploadImg/qna", method = RequestMethod.POST)
