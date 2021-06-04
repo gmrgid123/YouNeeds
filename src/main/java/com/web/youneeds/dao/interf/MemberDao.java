@@ -1,5 +1,7 @@
 package com.web.youneeds.dao.interf;
 
+import java.util.Map;
+
 import com.web.youneeds.dto.MemberDto;
 
 public interface MemberDao {
@@ -11,4 +13,5 @@ public interface MemberDao {
 	
 	public MemberDto login(MemberDto dto) throws Exception; //로그인
 	public int nicknameChk(MemberDto dto) throws Exception; // 닉네임 중복 검사
+	public MemberDto findPwd(MemberDto dto) throws Exception; //비번찾기
 }

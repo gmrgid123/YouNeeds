@@ -32,12 +32,20 @@
     </div>
     <div class="fl_right">
       <ul class="nospace inline">
-        <li><a href="loginForm.do">로그인 / 회원가입</a></li>
-        <li><a href="userMypage">유저 마이페이지 테스트</a></li>
-        <li><a href="creatorMypage">창작 마이페이지 테스트</a></li>
-        <li><a href="https://192.168.130.7:3000/">화생채팅 페이지 테스트</a></li>
-        <li><a href="pwdCheckTest">비밀번호 체크 페이지 테스트</a></li>
-      </ul>
+      <c:if test="${member ==null }">
+        	<li><a href="loginForm.do">로그인 / 회원가입</a></li>
+       </c:if>
+
+       <c:if test="${member !=null }">
+       		<li><a href="logout">로그아웃</a></li>
+       		<li><a href="withdrwal">회원탈퇴</a></li>
+       		<li><a href="userMypage">유저 마이페이지 테스트</a></li>
+        	<li><a href="creatorMypage">창작 마이페이지 테스트</a></li>
+        	<li><a href="videoChatPage">화생채팅 페이지 테스트</a></li>
+        	<li><a href="pwdCheckTest">비밀번호 체크 페이지 테스트</a></li>
+      	</c:if>
+      	</ul>
+       		     
     </div>
     <!-- ################################################################################################ -->
   </header>
@@ -81,8 +89,8 @@
         
         <li><a href="pjlist.do">프로젝트 목록</a></li>
         <li><a href="pjupload.do">프로젝트 등록</a></li>
-        <li><a href="notice_board">공지사항</a></li>
-        <li><a href="qna_board">QnA</a></li>
+        <li><a href="notice_board?p=1">공지사항</a></li>
+        <li><a href="qna_board?p=1">QnA</a></li>
       </ul>
     </nav>
     <div id="search" class="fl_right">

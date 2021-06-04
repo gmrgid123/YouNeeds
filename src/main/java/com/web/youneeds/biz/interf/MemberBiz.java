@@ -10,4 +10,5 @@ public interface MemberBiz {
 	
 	public MemberDto login(MemberDto dto) throws Exception; 
 	public int nicknameChk(MemberDto dto) throws Exception;
+	public MemberDto findPwd(MemberDto dto) throws Exception; //비번찾기
 }

@@ -23,21 +23,25 @@
 		<h2>QnA</h2>
 	</div>
 	
-	<form action="">
+
+	<form action="qnaInsert.do" method="post" onsubmit="return editorSubmit();">
 		<div>
 		
 			<div>
-				<input type="text" name="qna_title" placeholder="제목을 입력해주세요." style="width: 100%; height: 40px;">
+				<input type="text" name="qna_title" placeholder="제목을 입력해주세요." required="required" style="width: 100%; height: 40px;">
 			</div>
 			<br>
 			<div>
-				<textarea class="form-control" name="qna_content"  id="p_content"  required="required" style="resize: none;"></textarea>
+				<textarea class="form-control" name="qna_content"  id="qna_content"  required="required" style="resize: none;"></textarea>
 				<script type="text/javascript">
-					CKEDITOR.config.resize_enabled= false;
-					
-					CKEDITOR.replace('p_content',
-									{height:600, filebrowserUploadUrl: '${pageContext.request.contextPath }/adm/fileupload.do'}		
-					);
+				CKEDITOR.config.resize_enabled= false;
+				var editor = CKEDITOR.replace('qna_content',
+								{height:600, filebrowserUploadUrl: '${path}/uploadImg/qna'}		
+				);
+				editor.on( 'required', function( evt ) {
+				    alert( '내용을 작성해주세요.' );
+				    evt.cancel();
+				} );
 				</script>
 			</div>	
 			<br>

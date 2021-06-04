@@ -16,9 +16,18 @@ public class NoticeDaoImpl implements NoticeDao{
 	private SqlSessionTemplate sqlSession;
 	
 	@Override
-	public List<NoticeDto> selectList() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<NoticeDto> selectList(int p) {
+		List<NoticeDto> list = null;
+		
+		try {
+			list = sqlSession.selectList(NAMESPACE+"selectList", p);
+		} catch (Exception e) {
+			System.out.println("[error] : noticeDao - selectList");
+			e.printStackTrace();
+		}
+		
+		
+		return list;
 	}
 
 	@Override
@@ -45,7 +54,7 @@ public class NoticeDaoImpl implements NoticeDao{
 			e.printStackTrace();
 		}
 		
-		return dto.getM_uid();
+		return dto.getNotice_id();
 	}
 
 	@Override
@@ -58,6 +67,21 @@ public class NoticeDaoImpl implements NoticeDao{
 	public int delete(int notice_id) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public int selectListMaxLength() {
+		int max = 0;
+		
+		try {
+			max = sqlSession.selectOne(NAMESPACE+"selectListMaxLength");
+		} catch (Exception e) {
+			System.out.println("[error] : noticeDao - selectListMaxLength");
+			e.printStackTrace();
+		}
+		
+		
+		return max;
 	}
 
 }

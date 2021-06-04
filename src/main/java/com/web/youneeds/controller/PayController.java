@@ -32,13 +32,13 @@ public class PayController {
 	}
 	
 	@RequestMapping(value="/OrderSuccess", method = RequestMethod.POST)
-	public String PaySuccess(Model model, String order_name, int order_pay, String order_phone, String order_email, String order_addr1, String order_addr2, String order_date) {
+	public String PaySuccess(Model model, String order_name, int order_pay, String order_phone, String order_email, String order_addr1, String order_addr2, String order_date, String imp_uid) {
 		logger.info("펀딩 결제 성공 알림 페이지 호출");
 		
 		String order_addr = order_addr1 + " " + order_addr2;
 		
 		OrderDto dto = new OrderDto(order_name, order_pay, order_phone, order_email, 
-									order_addr, 1, 2);
+									order_addr, imp_uid, 1, 2);
 		
 		System.out.println(dto);
 		
