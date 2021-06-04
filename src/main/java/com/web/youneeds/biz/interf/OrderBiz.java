@@ -12,6 +12,6 @@ public interface OrderBiz {
 	public OrderDto selectDetail(int order_id);
 	public int paying(OrderDto orderDto);
 	public int update(OrderDto orderDto);
-	public List<OrderDto> myPageInfo(Map<String, Integer> map);
+	public List<OrderDto> userMyPageInfo(Map<String, Integer> map);
 	public int selectListMaxLength(int m_uid);
 }

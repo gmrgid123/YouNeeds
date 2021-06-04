@@ -230,7 +230,7 @@ div .card {
 				
 				</c:otherwise>
 			</c:choose>
-			
+			<br>
 			<br>
 			<br>
 		</div>

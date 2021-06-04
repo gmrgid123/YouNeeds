@@ -21,6 +21,5 @@
  		<result property="create_intro" column="create_intro"/>
  		<collection property="projectDto" resultMap="projectDtoJoin"></collection>
  	</resultMap>
- 	
  
  </mapper>

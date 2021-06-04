@@ -1,6 +1,7 @@
 package com.web.youneeds.biz.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -47,6 +48,17 @@ public class ProjectBizImpl implements ProjectBiz{
 	public int delete(int p_id) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public List<ProjectDto> creatorMyPageInfo(Map<String, Integer> map) {
+		return projectDao.creatorMyPageInfo(map);
+	}
+
+	@Override
+	public int selectListMaxLength(int m_uid) {
+
+		return projectDao.selectListMaxLength(m_uid);
 	}
 
 }

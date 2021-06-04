@@ -63,13 +63,13 @@ public class OrderDaoImpl implements OrderDao {
 	}
 
 	@Override
-	public List<OrderDto> myPageInfo(Map<String, Integer> map) {
+	public List<OrderDto> userMyPageInfo(Map<String, Integer> map) {
 		List<OrderDto> dto = null;
 		
 		try {
-			dto = sqlSession.selectList(NAMESPACE+"myPageInfo", map);
+			dto = sqlSession.selectList(NAMESPACE+"userMyPageInfo", map);
 		} catch (Exception e) {
-			System.out.println("[error] : orderDao - mypageInfo");
+			System.out.println("[error] : orderDao - userMypageInfo");
 			e.printStackTrace();
 		}
 		

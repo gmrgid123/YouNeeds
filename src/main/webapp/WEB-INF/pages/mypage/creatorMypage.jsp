@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 
 <!DOCTYPE HTML>
@@ -146,11 +146,6 @@ div .card {
 	<div class="main">
 		<div class="user">
 			<div class="box1">
-				<!-- 
-				<div class="profile">
-					<img alt="프로필" src="">
-				</div>
-				 -->
 				&nbsp; &nbsp;
 				<h3 class="userId">아이디 : ${sessionScope.member.m_email }</h3>
 				<h3 class="userNck">닉네임 : ${sessionScope.member.m_nickname }</h3>
@@ -161,32 +156,34 @@ div .card {
 			</div>
 			<hr>
 		</div>
-		<div class="project">
+		<!-- <div class="project">
 			<br>
 			<div class="title">참여중인 프로젝트</div>
 			<br>
 			<div class="list">
 				<c:choose>
-					<c:when test="${empty list }">
+					<c:when test="${empty user }">
 						<h1>===참여중인 프로젝트가 없습니다.===</h1>
 					</c:when>
 					<c:otherwise>
-						<c:forEach var="user" items="${user }">
+						<c:forEach var="dto" items="${user }">
 							<a href="#">
 								<div class="card">
 									<div class="card_header">
 										<img src="${path}/resources/images/" style="width:100%; height: 100%">
 										<div class="card_header_D-day">
 											<div class="card_header_text">마감일</div>
-											<div class="card_header_number"><fmt:formatDate value="${user.end_date }" pattern="yy.MM.dd"/></div>
+											<c:if test="${fn:length(dto.projectDto.end_date) > 11 }">
+											<div class="card_header_number"><c:out value="${fn:substring(dto.projectDto.end_date,2,10) }"/></div>
+											</c:if>
 										</div>
 									</div>
 			
 									<div class="card_body">
 										<hr>
-										<i class="name" style="font-size: 12pt;">${user.p_title }</i>
+										<i class="name" style="font-size: 12pt;">${dto.projectDto.p_title }</i>
 										<br>
-										<i class="payment"> 결제금액 : ${user.order_pay }원 </i>
+										<i class="payment"> 결제금액 : ${dto.order_pay }원 </i>
 									</div>
 								</div>
 							</a>
@@ -195,10 +192,52 @@ div .card {
 				</c:choose>
 			</div>
 			<br>
+			
+			<c:choose>
+				<c:when test="${empty user && page_max eq 0}"></c:when>
+				<c:otherwise>
+					<nav class="pagination justify-content-center">
+				        <ul>
+				      
+				        	<c:if test="${start_num ne 1}">
+				        		<li><a href="creatorMypage?page=${start_num-1}">&laquo; Previous</a></li>
+				        	</c:if>
+				        	
+				        	
+				        	<c:set var="doneLoop" value="false"/>
+				        	<c:forEach begin="${start_num}" end="${end_num}" step="1" varStatus="status">
+				        		
+				        		
+				        		 <c:if test="${not doneLoop}">
+				        		 	<c:if test="${page_max eq status.current}">
+						        		 	<c:set var="doneLoop" value="true"/>
+						        		 	<c:set var="end_num" value="${status.current}"/>
+						        	</c:if>
+				        		 	<c:choose>
+				        		 		<c:when test="${page_val eq status.current}">
+				        		 			<li style="background: #eee;"><a href="creatorMypage?page=<c:out value="${status.current}"/>"><c:out value="${status.current}"/></a></li>
+				        		 		</c:when>
+				        		 		<c:otherwise>
+				        		 			<li><a href="creatorMypage?page=<c:out value="${status.current}"/>"><c:out value="${status.current}"/></a></li>
+				        		 		</c:otherwise>
+				        		 	</c:choose>
+				        		 </c:if>
+				        		
+				        	</c:forEach>
+				        	
+				        	<c:if test="${end_num ne page_max}">
+					          	<li><a href="creatorMypage?page=${end_num+1}">Next &raquo;</a></li>
+					        </c:if>
+				        </ul>
+		      		</nav>				
+				
+				</c:otherwise>
+			</c:choose>
+			<br>
 			<br>
 			<br>
 			<hr>
-		</div>
+		</div> -->
 		
 		<div class="project">
 			<br>
@@ -206,26 +245,28 @@ div .card {
 			<br>
 			<div class="list">
 				<c:choose>
-					<c:when test="${empty user }">
+					<c:when test="${empty creator }">
 						<h1>===진행중인 프로젝트가 없습니다.===</h1>
 					</c:when>
 					<c:otherwise>
-						<c:forEach var="creator" items="${user }">
+						<c:forEach var="dto" items="${creator }">
 							<a href="#">
 								<div class="card">
 									<div class="card_header">
 										<img src="${path}/resources/images/" style="width:100%; height: 100%">
 										<div class="card_header_D-day">
 											<div class="card_header_text">마감일</div>
-											<div class="card_header_number"><fmt:formatDate value="${creator.end_date }" pattern="yy.MM.dd"/></div>
+											<c:if test="${fn:length(dto.end_date) > 11 }">
+											<div class="card_header_number"><c:out value="${fn:substring(dto.end_date,2,10) }"/></div>
+											</c:if>
 										</div>
 									</div>
 			
 									<div class="card_body">
 										<hr>
-										<i class="name" style="font-size: 12pt;">${creator.p_title }</i>
+										<i class="name" style="font-size: 12pt;">${dto.p_title }</i>
 										<br>
-										<i class="payment"> 목표금액 : ${creator.target_amount }원 </i>
+										<i class="payment"> 목표금액 : ${dto.target_amount }원 </i>
 									</div>
 								</div>
 							</a>
@@ -234,15 +275,51 @@ div .card {
 				</c:choose>
 			</div>
 			<br>
-			<div class="paging">
-				<a href="#">1</a>
-				<a href="#">2</a>
-				<a href="#">3</a>
-				<a href="#">4</a>
-				<a href="#">5</a>
-			</div>
+			
+			<c:choose>
+				<c:when test="${empty creator && page_max eq 0}"></c:when>
+				<c:otherwise>
+					<nav class="pagination justify-content-center">
+				        <ul>
+				      
+				        	<c:if test="${start_num ne 1}">
+				        		<li><a href="creatorMypage?page=${start_num-1}">&laquo; Previous</a></li>
+				        	</c:if>
+				        	
+				        	
+				        	<c:set var="doneLoop" value="false"/>
+				        	<c:forEach begin="${start_num}" end="${end_num}" step="1" varStatus="status">
+				        		
+				        		
+				        		 <c:if test="${not doneLoop}">
+				        		 	<c:if test="${page_max eq status.current}">
+						        		 	<c:set var="doneLoop" value="true"/>
+						        		 	<c:set var="end_num" value="${status.current}"/>
+						        	</c:if>
+				        		 	<c:choose>
+				        		 		<c:when test="${page_val eq status.current}">
+				        		 			<li style="background: #eee;"><a href="creatorMypage?page=<c:out value="${status.current}"/>"><c:out value="${status.current}"/></a></li>
+				        		 		</c:when>
+				        		 		<c:otherwise>
+				        		 			<li><a href="creatorMypage?page=<c:out value="${status.current}"/>"><c:out value="${status.current}"/></a></li>
+				        		 		</c:otherwise>
+				        		 	</c:choose>
+				        		 </c:if>
+				        		
+				        	</c:forEach>
+				        	
+				        	<c:if test="${end_num ne page_max}">
+					          	<li><a href="creatorMypage?page=${end_num+1}">Next &raquo;</a></li>
+					        </c:if>
+				        </ul>
+		      		</nav>				
+				
+				</c:otherwise>
+			</c:choose>
 			<br>
 			<br>
+			<br>
+			<hr>
 		</div>
 	</div>
 		

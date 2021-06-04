@@ -48,9 +48,9 @@ public class OrderBizImpl implements OrderBiz{
 	}
 
 	@Override
-	public List<OrderDto> myPageInfo(Map<String, Integer> map) {
+	public List<OrderDto> userMyPageInfo(Map<String, Integer> map) {
 		
-		return orderDao.myPageInfo(map);
+		return orderDao.userMyPageInfo(map);
 	}
 
 	@Override
