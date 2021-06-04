@@ -58,19 +58,36 @@ public class QnaDaoImpl implements QnaDao{
 
 	@Override
 	public int update(QnaDto dto) {
-		// TODO Auto-generated method stub
-		return 0;
+		int res = 0;
+		
+		try {
+			res = sqlSession.update(NAMESPACE+"updateQna",dto);
+		} catch (Exception e) {
+			System.out.println("[error] : QnaDao - updateQna");
+			e.printStackTrace();
+		}
+		
+		return res;
 	}
 
 	@Override
 	public int delete(int qna_id) {
-		// TODO Auto-generated method stub
-		return 0;
+		int res = 0;
+		
+		try {
+			res = sqlSession.delete(NAMESPACE+"deleteQna", qna_id);
+		} catch (Exception e) {
+			System.out.println("[error] : QnaDao - deleteQna");
+			e.printStackTrace();
+		}
+		
+		
+		return res;
 	}
 
 	@Override
-	public int selectListMaxLength() {
-		int max=0;
+	public Integer selectListMaxLength() {
+		Integer max=null;
 		
 		try {
 			max = sqlSession.selectOne(NAMESPACE+"selectListMaxLength");

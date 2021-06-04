@@ -43,8 +43,15 @@ public class NoticeBizImpl implements NoticeBiz {
 
 	@Override
 	public int selectListMaxLength() {
+		Integer temp = noticeDao.selectListMaxLength();
 		
-		return noticeDao.selectListMaxLength();
+		if(temp == null) {
+			return 0;
+		} else {
+			return temp.intValue();
+		}
+		
+		
 	}
 
 }

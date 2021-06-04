@@ -32,19 +32,24 @@ public class QnaBizImpl implements QnaBiz {
 
 	@Override
 	public int update(QnaDto dto) {
-		// TODO Auto-generated method stub
-		return 0;
+		return qnaDao.update(dto);
 	}
 
 	@Override
 	public int delete(int qna_id) {
-		// TODO Auto-generated method stub
-		return 0;
+		return qnaDao.delete(qna_id);
 	}
 
 	@Override
 	public int selectListMaxLength() {
-		return qnaDao.selectListMaxLength();
+		Integer temp = qnaDao.selectListMaxLength();
+		
+		if(temp==null) {
+			return 0;
+		} else {
+			return temp.intValue();
+		}
+		
 	}
 
 	@Override

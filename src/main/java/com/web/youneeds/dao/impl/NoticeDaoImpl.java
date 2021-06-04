@@ -87,8 +87,8 @@ public class NoticeDaoImpl implements NoticeDao{
 	}
 
 	@Override
-	public int selectListMaxLength() {
-		int max = 0;
+	public Integer selectListMaxLength() {
+		Integer max = null;
 		
 		try {
 			max = sqlSession.selectOne(NAMESPACE+"selectListMaxLength");

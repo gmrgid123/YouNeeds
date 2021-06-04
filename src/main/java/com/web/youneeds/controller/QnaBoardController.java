@@ -180,7 +180,9 @@ public class QnaBoardController {
 	
 	
 	@RequestMapping("/qnaUpdateForm")
-	public String UpdateQnaForm(Model model, int ㅜㅐ) {
+	public String UpdateQnaForm(Model model, int no) {
+		logger.info("QNA 업데이트 페이지 호출");
+		
 		return "";
 	}
 	

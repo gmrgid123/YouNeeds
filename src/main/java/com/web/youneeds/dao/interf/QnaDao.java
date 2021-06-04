@@ -12,6 +12,6 @@ public interface QnaDao {
 	public int insert(QnaDto dto);
 	public int update(QnaDto dto);
 	public int delete(int qna_id);
-	public int selectListMaxLength();
+	public Integer selectListMaxLength();
 	public int HitUpdate(int qna_id);
 }
