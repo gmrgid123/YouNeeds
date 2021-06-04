@@ -58,7 +58,7 @@
  		select m.m_uid, m.m_email, m.m_pw, m.m_nickname, m.m_addr, m.m_addr_detail, m.m_type, m.m_regdate, m.m_enabled, m.m_deldate, c.create_name, c.create_intro
  		from Member m
         left join creator c on (m.m_uid = c.m_uid)
- 		where m_email = #{m_email, jdbcType=VARCHAR} and m_pw = #{m_pw, jdbcType=VARCHAR}
+ 		where m_email = #{m_email, jdbcType=VARCHAR} and m_pw = #{m_pw, jdbcType=VARCHAR} and m_enabled='Y'
  	</select>
 
 
@@ -86,6 +86,13 @@
 	<update id="create_update" parameterType="creatorDto">
 		update Creator
 		set create_name=#{create_name}, create_intro=#{create_intro} 
+		where m_uid=#{m_uid}
+	</update>
+	
+	<!-- 회원 탈퇴 -->
+	<update id="withdrawal" parameterType="memberDto">
+		update Member
+		set m_enabled='N', m_deldate=sysdate
 		where m_uid=#{m_uid}
 	</update>
 	

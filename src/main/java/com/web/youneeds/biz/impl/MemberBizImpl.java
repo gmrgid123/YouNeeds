@@ -26,8 +26,7 @@ public class MemberBizImpl implements MemberBiz {
 
 	@Override
 	public int withdrawal(int m_uid) {
-		// TODO Auto-generated method stub
-		return 0;
+		return memberDao.withdrawal(m_uid);
 	}
 
 	@Override

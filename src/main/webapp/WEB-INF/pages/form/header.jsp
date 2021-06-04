@@ -38,7 +38,7 @@
 
        <c:if test="${member !=null }">
        		<li><a href="logout">로그아웃</a></li>
-       		<li><a href="withdrwal">회원탈퇴</a></li>
+       		<li><a href="withdrawal">회원탈퇴</a></li>
        		<li><a href="userMypage">유저 마이페이지 테스트</a></li>
         	<li><a href="creatorMypage">창작 마이페이지 테스트</a></li>
         	<li><a href="videoChatPage">화생채팅 페이지 테스트</a></li>
