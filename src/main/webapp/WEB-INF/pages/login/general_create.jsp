@@ -58,6 +58,22 @@
 		text-align: center;
 	}
 </style>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
+	
+	  $(function(){
+		  	let message = '${msg}';
+			console.log(message);
+			
+	         if(message == "fail"){
+	            alert("일치하는 이메일 정보가 없습니다. 회원가입 진행해주세요.");
+	            
+	         } else if(message == "success"){
+	            alert("이메일로 발송해 드렸습니다. 로그인 진행해주세요.");
+	         }
+	   });
+
+</script>
 </head>
 <body id="top">
 	<!-- header include -->

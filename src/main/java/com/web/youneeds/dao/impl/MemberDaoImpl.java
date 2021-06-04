@@ -1,5 +1,8 @@
 package com.web.youneeds.dao.impl;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -28,8 +31,17 @@ public class MemberDaoImpl implements MemberDao{
 
 	@Override
 	public int update(MemberDto dto) {
-		// TODO Auto-generated method stub
-		return 0;
+		int res = 0;
+				
+				try {
+					res = sqlSession.update(NAMESPACE+"update", dto);
+					System.out.println("update");
+				} catch (Exception e) {
+					System.out.println("[error] : update");
+					e.printStackTrace();
+				}
+				
+				return res;
 	}
 
 	@Override
@@ -63,5 +75,19 @@ public class MemberDaoImpl implements MemberDao{
 		}
 		return res;
 	}
+
+	@Override
+	public MemberDto findPwd(MemberDto dto) throws Exception {
+		MemberDto res = null;
+				
+				try {
+					res = sqlSession.selectOne(NAMESPACE+"findPwd", dto);
+				} catch (Exception e) {
+					System.out.println("error:findPwd");
+					e.printStackTrace();
+				}
+				return res;
+			}
+
 
 }

@@ -2,8 +2,30 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  
- <mapper namespace="temp8">
- 
- 
- </mapper>
+<mapper namespace="projectIntroSQL">
+
+	<select id="searchProjectIntro" parameterType="projectIntroDto" 
+ 	 			resultType="projectIntroDto">
+ 	 	SELECT A.P_ID,
+ 	 			A.P_INTRO,
+ 	 			B.INTRO_IMG_ID,
+ 	 			B.IMG_ORIGIN_NAME,
+ 	 			B.IMG_STORED_NAME,
+ 	 			B.IMG_STORED_PATH,
+ 	 			B.IMG_FILE_SIZE
+ 	 	   FROM PROJECT_INTRO A, PROJECT_INTRO_IMG B
+ 	 	  WHERE A.P_ID = B.P_ID
+ 	</select>
+ 	
+ 	<insert id="insertProjectIntro" parameterType="projectIntroDto">
+ 		INSERT INTO PROJECT_INTRO
+ 			(
+ 				P_ID,
+ 				P_INTRO
+ 			) VALUES (
+ 				#{p_id},
+ 				#{p_intro}
+ 			)
+ 	</insert>
+
+</mapper>

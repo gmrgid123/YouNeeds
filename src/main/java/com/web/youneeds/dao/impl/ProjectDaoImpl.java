@@ -13,7 +13,6 @@ import com.web.youneeds.dto.ProjectDto;
 @Repository
 public class ProjectDaoImpl implements ProjectDao {
 	
-	String NAMESPACE = "temp9.";
 	
 	@Inject
 	private SqlSession sqlSession;
@@ -25,8 +24,8 @@ public class ProjectDaoImpl implements ProjectDao {
 
 	@Override
 	public ProjectDto selectOne(int p_id) {
-		// TODO Auto-generated method stub
-		return null;
+		return sqlSession.selectOne(NAMESPACE + "projectDetail", p_id);
+		
 	}
 
 	@Override

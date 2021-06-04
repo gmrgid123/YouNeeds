@@ -123,7 +123,7 @@ public class MyPageController {
 		System.out.println(user);
 		
 		
-		if(dto.getM_type().equals("일반") || dto.getM_type().equals("관리")) {
+		if(member.getM_type().equals("일반") || member.getM_type().equals("관리")) {
 			model.addAttribute("user", user);
 			model.addAttribute("page_ListMax", page_ListMax);
 			model.addAttribute("page_max", page_max);

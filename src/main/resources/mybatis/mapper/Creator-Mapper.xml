@@ -14,7 +14,7 @@
  		<result property="end_date" column="END_DATE"/>
  		<result property="creator_uid" column="CREATOR_UID"/>
  	</resultMap>
- 	
+ 
  	<resultMap type="creatorDto" id="creatorMap">
  		<result property="m_uid" column="m_uid"/>
  		<result property="create_name" column="create_name"/>
@@ -22,11 +22,5 @@
  		<collection property="projectDto" resultMap="projectDtoJoin"></collection>
  	</resultMap>
  	
- 	<select id="creatorPageInfo" parameterType="int" resultMap="creatorMap">
- 	SELECT M_UID, CREATE_NAME, CREATE_INTRO, P_TITLE, TARGET_AMOUNT, P_END_DATE, CREATOR_UID
- 	FROM CREATOR
- 	JOIN PROJECT ON (M_UID = CREATOR_UID)
- 	WHERE M_UID = ${m_uid}
-	</select>
  
  </mapper>
