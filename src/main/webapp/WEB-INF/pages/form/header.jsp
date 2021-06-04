@@ -81,8 +81,8 @@
         
         <li><a href="pjlist.do">프로젝트 목록</a></li>
         <li><a href="pjupload.do">프로젝트 등록</a></li>
-        <li><a href="notice_board">공지사항</a></li>
-        <li><a href="qna_board">QnA</a></li>
+        <li><a href="notice_board?p=1">공지사항</a></li>
+        <li><a href="qna_board?p=1">QnA</a></li>
       </ul>
     </nav>
     <div id="search" class="fl_right">

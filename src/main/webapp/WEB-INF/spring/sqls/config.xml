@@ -9,6 +9,8 @@
 		<typeAlias type="com.web.youneeds.dto.ProjectDto" alias="projectDto"/>
 		<typeAlias type="com.web.youneeds.dto.NoticeDto" alias="noticeDto"/>
 		<typeAlias type="com.web.youneeds.dto.MemberDto" alias="memberDto"/>
+		<typeAlias type="com.web.youneeds.dto.QnaDto" alias="qnaDto"/>
+		<typeAlias type="com.web.youneeds.dto.QnaReplyDto" alias="qnaReplyDto"/>
 	</typeAliases>
 
 	<mappers>
@@ -26,6 +28,7 @@
 		<mapper resource="/mybatis/mapper/ProjectTitleImg-Mapper.xml"/>
 		<mapper resource="/mybatis/mapper/QnaImg-Mapper.xml"/>
 		<mapper resource="/mybatis/mapper/Qna-Mapper.xml"/>
+		<mapper resource="/mybatis/mapper/QnaReply-Mapper.xml"/>
 		<mapper resource="/mybatis/mapper/VideoChat-Mapper.xml"/>
 	</mappers>
 </configuration>

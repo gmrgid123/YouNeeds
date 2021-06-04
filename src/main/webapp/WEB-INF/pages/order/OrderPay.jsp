@@ -9,8 +9,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+<title>YouNeeds</title>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js" ></script>
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <link href="${path}/resources/css/layout.css" rel="stylesheet" type="text/css" media="all">
 <link href="${path}/resources/css/bootstrap.css" rel="stylesheet" type="text/css">
@@ -56,6 +56,7 @@ function open_import() {
 	    			//[4] 결제된 금액이 요청한 금액과 달라 결제를 자동취소처리하였습니다.
 	    		}
 	    	});
+	    	$("input[name=imp_uid]").val(rsp.imp_uid);
 	    	var form = document.orderForm;
 	    	form.submit();
 	    } else {
@@ -131,6 +132,7 @@ function openApi_Addr(){
 		<div class="content_body">
 			<button id="myinfo_add" class="btn btn-info" type="button" onclick="">나의 정보 가져오기</button>
 			<form action="OrderSuccess" method="post" name="orderForm">
+				<input type="hidden" name="imp_uid" value="">
 				<div class="form_group">
 					<label for="order_name" class="form_label"><h5>결제자 이름</h5></label>
 					<input id="order_name" name="order_name" class="order_input_text form-control" type="text" required="required" placeholder="이름을 입력해주세요." style="float: right;">

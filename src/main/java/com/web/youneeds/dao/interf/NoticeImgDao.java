@@ -5,7 +5,7 @@ import java.util.List;
 import com.web.youneeds.dto.NoticeImgDto;
 
 public interface NoticeImgDao {
-	String NAMESPACE = "";
+	String NAMESPACE = "NoticeImgSql.";
 	
 	public List<NoticeImgDto> selectList();
 	public NoticeImgDto selectOne(int notice_img_id);

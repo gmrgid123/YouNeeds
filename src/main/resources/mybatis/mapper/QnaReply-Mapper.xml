@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="qnaReplySql">
+
+	<resultMap type="memberDto" id="MemberMap">
+ 		<result property="m_uid" column="M_UID"/>
+ 		<result property="m_email" column="M_EMAIL"/>
+ 		<result property="m_pw" column="M_PW"/>
+ 		<result property="m_nickname" column="M_NICKNAME"/>
+ 		<result property="m_addr" column="M_ADDR"/>
+ 		<result property="m_type" column="M_TYPE"/>
+ 		<result property="m_regdate" column="M_REGDATE"/>
+ 		<result property="m_enabled" column="M_ENABLED"/>
+ 		<result property="m_deldate" column="M_DELDATE"/>
+ 	</resultMap>
+
+	<resultMap type="qnaReplyDto" id="qnaReplyMap">
+		<result property="qna_reply_id" column="QNA_REPLY_ID"/>
+		<result property="reply_content" column="REPLY_CONTENT"/>
+		<result property="reply_regdate" column="REPLY_REGDATE"/>
+		<result property="qna_id" column="QNA_ID"/>
+		<result property="m_uid" column="M_UID"/>
+		<collection property="memberDto" resultMap="MemberMap"></collection>
+	</resultMap>
+
+
+	<insert id="insertReply" parameterType="qnaReplyDto">
+		INSERT INTO QNA_REPLY
+		VALUES(QnA_Reply_SEQ.NEXTVAL, #{reply_content}, SYSDATE, #{qna_id}, #{m_uid})
+	</insert>
+	
+	<select id="selectList" parameterType="java.util.HashMap" resultMap="qnaReplyMap">
+		SELECT Q.QNA_REPLY_ID, Q.REPLY_CONTENT, Q.REPLY_REGDATE, Q.QNA_ID, Q.M_UID, M.M_NICKNAME
+		FROM (SELECT ROW_NUMBER() OVER(ORDER BY QNA_REPLY_ID ASC) AS NUM, QNA_REPLY_ID, REPLY_CONTENT, REPLY_REGDATE, QNA_ID, M_UID  FROM QNA_REPLY WHERE QNA_ID=#{qna_id}) Q
+		JOIN MEMBER M ON (Q.M_UID = M.M_UID)
+		WHERE NUM <![CDATA[<=]]> #{rp_val}*20 AND NUM <![CDATA[>=]]> #{rp_val}*20-19
+	</select>
+
+	<select id="selectListMaxLength" resultType="int" parameterType="int">
+		SELECT MAX(ROWNUM) FROM QNA_REPLY WHERE QNA_ID=#{qna_id} ORDER BY QNA_REPLY_ID DESC
+	</select>
+	
+</mapper>

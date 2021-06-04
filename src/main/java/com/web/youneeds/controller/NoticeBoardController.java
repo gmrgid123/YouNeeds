@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -23,6 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.google.gson.JsonObject;
 import com.web.youneeds.biz.interf.NoticeBiz;
 import com.web.youneeds.biz.interf.NoticeImgBiz;
+import com.web.youneeds.dto.MemberDto;
 import com.web.youneeds.dto.NoticeDto;
 
 @Controller
@@ -34,8 +36,35 @@ public class NoticeBoardController {
 	private NoticeBiz noticeBiz;
 	
 	@RequestMapping("/notice_board")
-	public String noticeList() {
+	public String noticeList(Model model, int p) {
 		logger.info("공지사항 게시판 목록 페이지 호출");
+		
+		List<NoticeDto> list = noticeBiz.selectList(p);
+		
+		int list_max = noticeBiz.selectListMaxLength();
+		System.out.println(list_max);
+		int max;
+		if(list_max%10 == 0) {
+			max = list_max/10;
+		}else {
+			max = list_max/10 + 1;
+		}
+		
+		int tmp=0;
+		if((p%10)==0){
+			tmp = p/10;
+		}else{
+			tmp = p/10 + 1;
+		}
+		int end_num = tmp*10;
+		int start_num = end_num-9;
+		
+		model.addAttribute("list",list);
+		model.addAttribute("list_max", list_max);
+		model.addAttribute("max",max);
+		model.addAttribute("start_num",start_num);
+		model.addAttribute("end_num",end_num);
+		model.addAttribute("page",p);
 		
 		return "/notice/NoticeList";
 	}
@@ -45,13 +74,6 @@ public class NoticeBoardController {
 		logger.info("공지사항 작성 페이지 호출");
 		
 		return "/notice/NoticeWrite";
-	}
-	
-	@RequestMapping("/notice_view")
-	public String noticeView() {
-		logger.info("공지사항 상세 페이지 호출");
-		
-		return "/notice/NoticeView";
 	}
 	
 	
@@ -72,7 +94,7 @@ public class NoticeBoardController {
 					try {
 						String originName = upload.getOriginalFilename();
 						byte[] bytes = upload.getBytes();
-						String uploadPath = request.getServletContext().getRealPath("/uploadImg");
+						String uploadPath = request.getServletContext().getRealPath("/uploadImg/notice");
 						
 						
 						File uploadFile = new File(uploadPath);
@@ -86,7 +108,7 @@ public class NoticeBoardController {
 						
 						printWriter = response.getWriter();
 						response.setContentType("text/html");
-						String fileUrl = request.getContextPath() + "/uploadImg/" + storedName;
+						String fileUrl = request.getContextPath() + "/uploadImg/notice/" + storedName;
 						
 						json.addProperty("uploaded", 1);
 						json.addProperty("fileName", storedName);
@@ -112,18 +134,25 @@ public class NoticeBoardController {
 	}
 	
 	@RequestMapping(value="/noticeInsert.do",  method = RequestMethod.POST)
-	public String InsertNotice(String notice_title, String p_content, int m_uid) {
+	public String InsertNotice(HttpServletRequest request, String notice_title, String p_content) {
+		logger.info("공지사항 업로드 처리");
+		
+		int m_uid = ((MemberDto)request.getSession().getAttribute("login")).getM_uid();
 		
 		NoticeDto dto = new NoticeDto();
 		dto.setNotice_title(notice_title); dto.setNotice_content(p_content); dto.setM_uid(m_uid);
 		
 		int no = noticeBiz.insert(dto);
+		System.out.println("notice_id값 : "  + no);
 		
 		return "redirect:noticeView?no="+no;
 	}
 	
 	@RequestMapping("/noticeView")
 	public String noticeDetailView(Model model, int no) {
+		logger.info("공지사항 상세 호출");
+		
+		System.out.println("공지사항 번호 : "+no);
 		
 		NoticeDto dto = noticeBiz.selectOne(no);
 		

@@ -23,6 +23,7 @@
  		<result property="order_phone" column="ORDER_PHONE"/>
  		<result property="order_email" column="ORDER_EMAIL"/>
  		<result property="order_addr" column="ORDER_ADDR"/>
+ 		<result property="imp_uid" column="IMP_UID"/>
  		<result property="p_id" column="P_ID"/>
  		<result property="m_uid" column="M_UID"/>
  		<collection property="projectDto" resultMap="projectDtoJoin"></collection>
@@ -43,7 +44,7 @@
  	
  	
  	<select id="selectDetail" parameterType="int" resultMap="orderMap" >
- 		SELECT O.ORDER_ID, O.ORDER_NAME, O.ORDER_PAY, O.ORDER_DATE, O.ORDER_PHONE, O.ORDER_EMAIL, O.ORDER_ADDR, O.P_ID,  O.M_UID, P.P_TITLE
+ 		SELECT O.ORDER_ID, O.ORDER_NAME, O.ORDER_PAY, O.ORDER_DATE, O.ORDER_PHONE, O.ORDER_EMAIL, O.ORDER_ADDR, O.P_ID, O.IMP_UID, O.M_UID, P.P_TITLE
 		FROM ORDERPAY O
 		JOIN PROJECT P ON ( O.P_ID = P.P_ID )
 		WHERE ORDER_ID = ${order_id}
@@ -55,7 +56,7 @@
  		</selectKey>
  	
  		INSERT INTO ORDERPAY
- 		VALUES(#{order_id}, #{order_name}, #{order_pay}, SYSDATE, #{order_phone}, #{order_email}, #{order_addr}, #{p_id}, #{m_uid})
+ 		VALUES(#{order_id}, #{order_name}, #{order_pay}, SYSDATE, #{order_phone}, #{order_email}, #{order_addr},#{imp_uid}, #{p_id}, #{m_uid})
  		
  	</insert>
  
