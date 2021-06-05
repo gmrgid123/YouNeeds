@@ -80,18 +80,5 @@ public class CreatorDaoImpl implements CreatorDao {
 				
 				return res;
 	}
-/*
-	@Override
-	public CreatorDto clogin(CreatorDto cdto) throws Exception {
-		CreatorDto res = null;
-				
-				try {
-					res = sqlSession.selectOne(NAMESPACE+"c_login", cdto);
-				} catch (Exception e) {
-					System.out.println("error:login");
-					e.printStackTrace();
-				}
-				return res;
-	}
-*/
+
 }

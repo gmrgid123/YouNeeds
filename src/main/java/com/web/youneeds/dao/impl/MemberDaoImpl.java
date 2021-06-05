@@ -46,8 +46,17 @@ public class MemberDaoImpl implements MemberDao{
 
 	@Override
 	public int withdrawal(int m_uid) {
-		// TODO Auto-generated method stub
-		return 0;
+		int res = 0;
+		
+		try {
+			res = sqlSession.update(NAMESPACE+"withdrawal", m_uid);
+			System.out.println("whithdrawal");
+		} catch (Exception e) {
+			System.out.println("[error] : whithdrawal");
+			e.printStackTrace();
+		}
+		
+		return res;
 	}
 
 	@Override

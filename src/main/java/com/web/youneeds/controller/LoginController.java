@@ -1,12 +1,14 @@
 package com.web.youneeds.controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -162,5 +164,21 @@ public class LoginController {
 		
 		session.invalidate();
 		return "redirect:loginForm.do";
+	}
+	
+	/* 회원 탈퇴 */
+	@RequestMapping("/withdrawal")
+	public String delMember(HttpServletResponse res, HttpServletRequest req, HttpSession session, Model model) {
+		MemberDto member = (MemberDto)req.getSession().getAttribute("member");
+		int no=biz.withdrawal(member.getM_uid());
+		System.out.println(no);
+		if(no>0) {
+			session.invalidate();
+			model.addAttribute("msg", "true");
+		}else {
+			model.addAttribute("msg", "false");
+		}
+		return "login/withdrawal";
+		
 	}
 }
