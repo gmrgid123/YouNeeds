@@ -60,12 +60,16 @@
  		
  	</insert>
  	
- 	<select id="myPageInfo" parameterType="int" resultMap="orderMap">
- 	SELECT P.P_ID, P.P_TITLE,  P.START_DATE, P.END_DATE,O.ORDER_ID, O.ORDER_NAME, O.ORDER_PAY, O.ORDER_DATE, O.ORDER_PHONE, O.ORDER_EMAIL, O.ORDER_ADDR
-	FROM ORDERPAY O
-	JOIN PROJECT P ON (P.P_ID=O.P_ID)
-	WHERE O.M_UID = #{m_uid}
-	</select> 	
+ 	<select id="userMyPageInfo" parameterType="java.util.HashMap" resultMap="orderMap">
+ 	SELECT P.P_ID, P.P_TITLE,  P.START_DATE, P.END_DATE, O.ORDER_ID, O.ORDER_NAME, O.ORDER_PAY, O.ORDER_DATE, O.ORDER_PHONE, O.ORDER_EMAIL, O.ORDER_ADDR
+	FROM (SELECT ROW_NUMBER() OVER(ORDER BY ORDER_ID ASC) AS NUM, ORDER_ID, ORDER_NAME, ORDER_PAY, ORDER_DATE, ORDER_PHONE, ORDER_EMAIL, ORDER_ADDR, P_ID FROM ORDERPAY WHERE M_UID = #{m_uid}) O
+	JOIN PROJECT P ON (P.P_ID = O.P_ID)
+	WHERE  NUM <![CDATA[<=]]> #{page_val}*3 AND NUM <![CDATA[>=]]> #{page_val}*3-2
+	</select>
+	
+	<select id="selectListMaxLength" resultType="int">
+	SELECT MAX(ROWNUM) FROM ORDERPAY WHERE M_UID=#{m_uid} ORDER BY P_ID
+	</select>
  	
  	
  

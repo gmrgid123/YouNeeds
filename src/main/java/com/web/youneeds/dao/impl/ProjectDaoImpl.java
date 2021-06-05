@@ -1,6 +1,7 @@
 package com.web.youneeds.dao.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -43,6 +44,33 @@ public class ProjectDaoImpl implements ProjectDao {
 	public int delete(int p_id) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public List<ProjectDto> creatorMyPageInfo(Map<String, Integer> map) {
+		List<ProjectDto> dto = null;
+		
+		try {
+			dto = sqlSession.selectList(NAMESPACE+"creatorMyPageInfo", map);
+		} catch (Exception e) {
+			System.out.println("[error] : projectDao - creatorMypageInfo");
+			e.printStackTrace();
+		}
+		return dto;
+	}
+
+	@Override
+	public Integer selectListMaxLength(int m_uid) {
+		Integer max=null;
+		
+		try {
+			max = sqlSession.selectOne(NAMESPACE+"selectListMaxLength", m_uid);
+		} catch (Exception e) {
+			System.out.println("[error] : projectDao - selectListMaxLength");
+			e.printStackTrace();
+		}
+		
+		return max;
 	}
 
 }

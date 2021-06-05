@@ -1,10 +1,10 @@
 package com.web.youneeds.biz.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.web.youneeds.biz.interf.OrderBiz;
 import com.web.youneeds.dao.interf.OrderDao;
@@ -48,9 +48,22 @@ public class OrderBizImpl implements OrderBiz{
 	}
 
 	@Override
-	public List<OrderDto> myPageInfo(int m_uid) {
+	public List<OrderDto> userMyPageInfo(Map<String, Integer> map) {
 		
-		return orderDao.myPageInfo(m_uid);
+		return orderDao.userMyPageInfo(map);
+	}
+
+	@Override
+	public int selectListMaxLength(int m_uid) {
+		Integer temp = orderDao.selectListMaxLength(m_uid);
+
+		if(temp == null) {
+			return 0;
+		} else {
+			return temp.intValue();
+		}
+		
+		
 	}
 
 	
