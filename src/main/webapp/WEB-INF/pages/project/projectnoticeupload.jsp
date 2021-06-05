@@ -4,7 +4,11 @@
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 
 
-
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>프로젝트 공지 등록</title>
 <!-- JAVASCRIPTS -->
 <script type="text/javascript" src="${path}/resources/ckeditor/ckeditor.js"></script>
 <script src="${path}/resources/js/jquery.min.js"></script>
@@ -42,13 +46,6 @@
 
 		
 </style>
-
-<!DOCTYPE html>
-
-<html>
-<head>
-<meta charset="UTF-8">
-<title>프로젝트 공지 등록</title>
 </head>
 <body>
 

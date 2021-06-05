@@ -143,7 +143,7 @@ textarea {
 
 	<!-- --------------------------------------------------------------------------- -->
 
-	<form name="frm">
+	<form name="frm" enctype="multipart/form-data">
 		<div class="body">
 			<div class="P0">
 				<h2>카테고리 선택</h2>
@@ -186,7 +186,7 @@ textarea {
 
 			<div class="P4">
 				<h2>프로젝트 대표 이미지</h2>
-				 <input type="file" id="gdsImg" name="file" />
+				 <input type="file" id="gdsImg" name="file" required="required" accept="image/*" />
 				 <div class="select_img"><img src="" /></div>
 				<script>
 					$("#gdsImg").change(
@@ -212,14 +212,14 @@ textarea {
 						<textarea class="form-control" id="p_content" name="p_content"
 							required="required" style="resize: none;"></textarea>
 						<script type="text/javascript">
-							CKEDITOR.config.resize_enabled = false;
-							CKEDITOR
-									.replace(
-											'p_content',
-											{
-												height : 500,
-												filebrowserUploadUrl : '${pageContext.request.contextPath }/adm/fileupload.do'
-											});
+						CKEDITOR.config.resize_enabled= false;
+						var editor = CKEDITOR.replace('p_content',
+										{height:600, filebrowserUploadUrl: '${path}/uploadImg/projectContent'}		
+						);
+						editor.on( 'required', function( evt ) {
+						    alert( '내용을 작성해주세요.' );
+						    evt.cancel();
+						} );
 						</script>
 					</div>
 					<br>
@@ -230,7 +230,7 @@ textarea {
 
 			<div class="P6">
 				<h2>펀딩 안내</h2>
-				<textarea cols="80" rows="15"> </textarea>
+				<textarea cols="80" rows="15" name="fund_guide_content"> </textarea>
 			</div>
 			<div style="text-align: center;">
 				<input type="submit" value="작성" id="btnSave" class="btn"> 

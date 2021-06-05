@@ -4,7 +4,11 @@
 <c:set var="path" value="${pageContext.request.contextPath}" />
 
 
-
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>펀딩안내</title>
 <!-- JAVASCRIPTS -->
 <script src="${path}/resources/js/slider/slider.js"
 	type="text/javascript"></script>
@@ -148,12 +152,6 @@ a:hover {
 	color: white;
 }
 </style>
-
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>펀딩안내</title>
 </head>
 <body>
 

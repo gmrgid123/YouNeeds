@@ -5,12 +5,31 @@
  <mapper namespace="projectSQL">
  	
  	<resultMap type="creatorDto" id="creatorMap">
- 		<result property="m_uid" column="m_uid"/>
- 		<result property="create_name" column="create_name"/>
- 		<result property="create_intro" column="create_intro"/>
+ 		<result property="m_uid" column="M_UID"/>
+ 		<result property="create_name" column="CREATE_NAME"/>
+ 		<result property="create_intro" column="CREATE_INTRO"/>
+ 	</resultMap>
+ 	
+ 	<resultMap type="projectTitleImgDto" id="projectTitleImgMap">
+ 		<result property="p_id" column="P_ID"/>
+ 		<result property="title_origin_name" column="TITLE_ORIGIN_NAME"/>
+ 		<result property="title_stored_name" column="TITLE_STORED_NAME"/>
+ 		<result property="title_stored_path" column="TITLE_STORED_PATH"/>
+ 		<result property="title_file_size" column="TITLE_FILE_SIZE"/>
+ 	</resultMap>
+ 	
+ 	<resultMap type="projectFundGuideDto" id="projectFundGuideMap">
+ 		<result property="p_id" column="P_ID"/>
+ 		<result property="fund_guide_content" column="FUND_GUIDE_CONTENT"/>
+ 	</resultMap>
+ 	
+ 	<resultMap type="projectIntroDto" id="projectIntroMap">
+ 		<result property="p_id" column="P_ID"/>
+ 		<result property="p_intro" column="P_INTRO"/>
  	</resultMap>
 
  	<resultMap type="projectDto" id="projectDtoJoin">
+ 		<result property="p_id" column="P_ID"/>
  		<result property="p_title" column="P_TITLE"/>
  		<result property="p_category" column="P_CATEGORTY"/>
  		<result property="target_amount" column="TARGET_AMOUNT"/>
@@ -18,12 +37,27 @@
  		<result property="start_date" column="START_DATE"/>
  		<result property="end_date" column="END_DATE"/>
  		<result property="creator_uid" column="CREATOR_UID"/>
- 		<collection property="creatorDto" resultMap="creatorMap"></collection>
+ 		<collection property="creatorDto" resultMap="creatorMap"/>
+ 	</resultMap>
+ 	
+ 	<resultMap type="projectDto" id="projectJoinDetail">
+ 		<result property="p_id" column="P_ID"/>
+ 		<result property="p_title" column="P_TITLE"/>
+ 		<result property="p_category" column="P_CATEGORTY"/>
+ 		<result property="target_amount" column="TARGET_AMOUNT"/>
+ 		<result property="p_regdate" column="P_REGDATE"/>
+ 		<result property="start_date" column="START_DATE"/>
+ 		<result property="end_date" column="END_DATE"/>
+ 		<result property="creator_uid" column="CREATOR_UID"/>
+ 		<collection property="creatorDto" resultMap="creatorMap"/>
+ 		<collection property="projectTilteImgDto" resultMap="projectTitleImgMap"/>
+ 		<collection property="projectIntroDto" resultMap="projectIntroMap"/>
+ 		<collection property="projectFundGuideDto" resultMap="projectFundGuideMap"/>
  	</resultMap>	
  
  	<!-- 프로젝트 조회 -->
- 	<select id="searchProjectList" parameterType="com.web.youneeds.dto.ProjectDto" 
- 	 			resultType="com.web.youneeds.dto.ProjectDto">
+ 	<select id="searchProjectList" parameterType="projectDto" 
+ 	 			resultType="projectDto">
 	 	 select 
 		 	 p_id, 
 		 	 p_title, 
@@ -45,45 +79,62 @@
  		<selectKey keyProperty="p_id" resultType="int" order="BEFORE">
  		 	SELECT PROJECT_SEQ.NEXTVAL FROM dual
  		 </selectKey>
- 	
- 		INSERT INTO Project
- 		(
- 			p_id,
- 			p_title,
- 			p_category,
- 			target_amount,
- 			p_regdate,
- 			start_date,
- 			end_date,
- 			creator_uid
- 		 ) VALUES (
- 		 	#{p_id},
- 		 	#{p_title},
- 		 	#{p_category},
- 		 	#{target_amount},
- 		 	SYSDATE,
+ 		INSERT 
+ 		INTO Project
+ 		VALUES(#{p_id}, #{p_title}, #{p_category}, #{target_amount}, SYSDATE,
  		 	TO_DATE(#{start_date}, 'YYYY-MM-DD HH24:MI'),
  		 	TO_DATE(#{end_date}, 'YYYY-MM-DD HH24:MI'),
- 		 	3
- 		 )
- 		 
+ 		 	#{creator_uid} )
  	</insert>
  		
- 	<!-- 프로젝트 상세 조회 -->
- 	<select id="projectDetail" parameterType="int" resultType="com.web.youneeds.dto.ProjectDto">
- 		select
- 			 p_id, 
-		 	 p_title, 
-		 	 p_category, 
-		 	 target_amount, 
-		 	 p_regdate, 
-		 	 start_date,  
-		 	 end_date, 
-		 	 creator_uid
- 		from project 
- 		where p_id = #{p_id}
+ 	<insert id="insertGuide" parameterType="projectFundGuideDto">
+ 		INSERT INTO Project_Fund_Guide
+ 		VALUES(#{p_id}, #{fund_guide_content})
+ 	</insert>
+ 	
+ 	<insert id="insertIntro" parameterType="projectIntroDto">
+ 		INSERT INTO PROJECT_INTRO
+ 		VALUES(#{p_id},#{p_intro})
+ 	</insert>
+ 	
+ 	<insert id="insertImgData" parameterType="projectTitleImgDto">
+ 		INSERT INTO Project_title_img
+ 		VALUES(#{p_id}, #{title_origin_name}, #{title_stored_name}, #{title_stored_path}, #{title_file_size})
+ 	</insert>
+ 		
+ 	<!-- 프로젝트 Intro 상세 조회 -->
+ 	<select id="projectDetailIntro" parameterType="int" resultMap="projectJoinDetail">
+ 		SELECT 
+		P.P_ID, P.P_TITLE, P.P_CATEGORY, P.TARGET_AMOUNT, P.P_REGDATE, P.START_DATE, P.END_DATE, P.CREATOR_UID,
+		IMG.TITLE_STORED_NAME,
+		IT.P_INTRO,
+		C.M_UID, C.CREATE_NAME, C.CREATE_INTRO
+		FROM PROJECT P
+		LEFT JOIN PROJECT_TITLE_IMG IMG ON (P.P_ID = IMG.P_ID)
+		LEFT JOIN PROJECT_INTRO IT ON (P.P_ID = IT.P_ID)
+		LEFT JOIN CREATOR C ON (P.CREATOR_UID = C.M_UID)
+		WHERE P_ID = #{p_id}
  	</select>
  	
+ 	<select id="orderSum" parameterType="int" resultType="int">
+ 		SELECT  SUM(ORDER_PAY) FROM ORDERPAY WHERE P_ID=#{p_id}
+ 	</select>
+ 	
+ 	<select id="orderCount" parameterType="int" resultType="int">
+ 		SELECT  COUNT(ORDER_ID) FROM ORDERPAY WHERE P_ID=#{p_id}
+ 	</select>
+ 	
+ 	
+ 	<select id="selectProjectInform" parameterType="int" resultType="projectJoinDetail">
+ 		SELECT 
+		P.P_ID, P.P_TITLE, P.P_CATEGORY, P.TARGET_AMOUNT, P.P_REGDATE, P.START_DATE, P.END_DATE, P.CREATOR_UID,
+		IMG.TITLE_STORED_NAME,
+		C.M_UID, C.CREATE_NAME, C.CREATE_INTRO
+		FROM PROJECT P
+		LEFT JOIN PROJECT_TITLE_IMG IMG ON (P.P_ID = IMG.P_ID)
+		LEFT JOIN CREATOR C ON (P.CREATOR_UID = C.M_UID)
+		WHERE P.P_ID = #{p_id};
+ 	</select>
  	
  	
  	<select id="creatorMyPageInfo" parameterType="java.util.HashMap" resultType="projectDto">

@@ -5,7 +5,7 @@ import java.util.List;
 import com.web.youneeds.dto.ProjectNoticeDto;
 
 public interface ProjectNoticeDao {
-	String NAMESPACE = "";
+	String NAMESPACE = "projectNoticeSql.";
 	
 	public List<ProjectNoticeDto> selectList();
 	public ProjectNoticeDto selectOne(int p_notice_no, int p_id);

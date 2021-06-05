@@ -19,13 +19,11 @@ public class ProjectIntroDaoImpl implements ProjectIntroDao{
 	
 	@Override
 	public List<ProjectIntroDto> selectList() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public ProjectIntroDto selectOne(int p_id) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -37,7 +35,6 @@ public class ProjectIntroDaoImpl implements ProjectIntroDao{
 
 	@Override
 	public int update(ProjectIntroDto dto) {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 

@@ -4,15 +4,23 @@ public class ProjectFundGuideDto {
 	private int p_id;
 	private String fund_guide_content;
 	
-	//join용 필드
-	private ProjectDto projectDto;
 	
-	
-
 	public ProjectFundGuideDto() {
 		super();
 	}
+	
+	public ProjectFundGuideDto(String fund_guide_content) {
+		super();
+		this.fund_guide_content = fund_guide_content;
+	}
 
+	public ProjectFundGuideDto(int p_id, String fund_guide_content) {
+		super();
+		this.p_id = p_id;
+		this.fund_guide_content = fund_guide_content;
+	}
+
+	
 	public int getP_id() {
 		return p_id;
 	}
@@ -29,14 +37,11 @@ public class ProjectFundGuideDto {
 		this.fund_guide_content = fund_guide_content;
 	}
 
-	public ProjectDto getProjectDto() {
-		return projectDto;
+	@Override
+	public String toString() {
+		return "ProjectFundGuideDto [p_id=" + p_id + ", fund_guide_content=" + fund_guide_content + "]";
 	}
 
-	public void setProjectDto(ProjectDto projectDto) {
-		this.projectDto = projectDto;
-	}
-	
 	
 	
 	

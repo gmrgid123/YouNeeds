@@ -10,29 +10,15 @@ public class ProjectDto {
 	private String start_date;
 	private String end_date;
 	private int creator_uid;
-	private String p_content;
-	
-	
 	
 	//join용 필드
 	private CreatorDto creatorDto;
 	private ProjectTitleImgDto projectTilteImgDto;
 	private ProjectIntroDto projectIntroDto;
+	private ProjectFundGuideDto projectFundGuideDto;
 	
-
 	
-	public ProjectIntroDto getProjectIntroDto() {
-		return projectIntroDto;
-	}
-
-
-
-	public void setProjectIntroDto(ProjectIntroDto projectIntroDto) {
-		this.projectIntroDto = projectIntroDto;
-	}
-
-
-
+	
 	public int getP_id() {
 		return p_id;
 	}
@@ -151,20 +137,73 @@ public class ProjectDto {
 		this.projectTilteImgDto = projectTilteImgDto;
 	}
 
-	public String getP_content() {
-		return p_content;
+
+
+	public ProjectIntroDto getProjectIntroDto() {
+		return projectIntroDto;
 	}
-	public void setP_content(String p_content) {
-		this.p_content = p_content;
+
+
+
+	public void setProjectIntroDto(ProjectIntroDto projectIntroDto) {
+		this.projectIntroDto = projectIntroDto;
 	}
+
+
+
+	public ProjectFundGuideDto getProjectFundGuideDto() {
+		return projectFundGuideDto;
+	}
+
+
+
+	public void setProjectFundGuideDto(ProjectFundGuideDto projectFundGuideDto) {
+		this.projectFundGuideDto = projectFundGuideDto;
+	}
+
+
+	
+
+	public ProjectDto() {
+		super();
+	}
+	
+	
+
+
+
+	public ProjectDto(int p_id, String p_title, String p_category, int target_amount, String p_regdate,
+			String start_date, String end_date, int creator_uid, CreatorDto creatorDto,
+			ProjectTitleImgDto projectTilteImgDto, ProjectIntroDto projectIntroDto,
+			ProjectFundGuideDto projectFundGuideDto) {
+		super();
+		this.p_id = p_id;
+		this.p_title = p_title;
+		this.p_category = p_category;
+		this.target_amount = target_amount;
+		this.p_regdate = p_regdate;
+		this.start_date = start_date;
+		this.end_date = end_date;
+		this.creator_uid = creator_uid;
+		this.creatorDto = creatorDto;
+		this.projectTilteImgDto = projectTilteImgDto;
+		this.projectIntroDto = projectIntroDto;
+		this.projectFundGuideDto = projectFundGuideDto;
+	}
+
+
 
 	@Override
 	public String toString() {
 		return "ProjectDto [p_id=" + p_id + ", p_title=" + p_title + ", p_category=" + p_category + ", target_amount="
 				+ target_amount + ", p_regdate=" + p_regdate + ", start_date=" + start_date + ", end_date=" + end_date
 				+ ", creator_uid=" + creator_uid + ", creatorDto=" + creatorDto + ", projectTilteImgDto="
-				+ projectTilteImgDto + "]";
+				+ projectTilteImgDto + ", projectIntroDto=" + projectIntroDto + ", projectFundGuideDto="
+				+ projectFundGuideDto + "]";
 	}
+	
+	
+	
 	
 	
 }

@@ -3,7 +3,29 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
- <mapper namespace="temp12">
- 
- 
+ <mapper namespace="titleImgSql">
+ 	
+ 	
+ 	<insert id="insertImgData" parameterType="projectTitleImgDto">
+ 		INSERT INTO Project_title_img
+ 		VALUES(#{p_id}, #{title_origin_name}, #{title_stored_name}, #{title_stored_path}, #{title_file_size})
+ 	</insert>
+ 	
+ 	<select id="selectImgOne" parameterType="int">
+ 		SELECT P_ID, TITLE_ORIGIN_NAME, TITLE_STORED_NAME, TITLE_STORED_PATH, TITLE_FILE_SIZE
+ 		FROM Project_title_img
+ 		WHERE P_ID = #{p_id}
+ 	</select>
+ 	
+ 	<update id="updateImg" parameterType="projectTitleImgDto">
+ 		UPDATE Project_title_img
+ 		SET TITLE_ORIGIN_NAME = #{title_origin_name}, TITLE_STORED_NAME = #{title_stored_name}, TITLE_STORED_PATH = #{title_stored_path}, TITLE_FILE_SIZE = #{title_file_size}
+ 		WHERE P_ID = #{p_id}
+ 	</update>
+ 	
+ 	<delete id="deleteImg" parameterType="int">
+ 		DELETE FROM Project_title_img
+ 		WHERE P_ID = #{p_id}
+ 	</delete>
+ 	
  </mapper>

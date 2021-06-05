@@ -1,47 +1,44 @@
 package com.web.youneeds.controller;
 
-import java.util.HashMap;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.google.gson.JsonObject;
 import com.web.youneeds.biz.interf.ProjectBiz;
-import com.web.youneeds.biz.interf.ProjectIntroBiz;
+import com.web.youneeds.dto.MemberDto;
 import com.web.youneeds.dto.ProjectDto;
+import com.web.youneeds.dto.ProjectFundGuideDto;
 import com.web.youneeds.dto.ProjectIntroDto;
+import com.web.youneeds.dto.ProjectTitleImgDto;
 
 @Controller
 public class ProjectController {
 
-	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+	private static final Logger logger = LoggerFactory.getLogger(ProjectController.class);
 	
 	@Autowired
 	private ProjectBiz projectBiz;
 	
-	@Autowired
-	private ProjectIntroBiz projectIntroBiz;
-	
-	/**
-	 * 프로젝트 리스트 조회
-	 * @param locale
-	 * @param model
-	 * @param request
-	 * @return
-	 */
 	@RequestMapping(value="/pjlist.do", method=RequestMethod.GET)
 	public String projectlist(Locale locale, ModelMap model, HttpServletRequest request) {
 		logger.info("PROJECT LIST 페이지 호출");
@@ -65,73 +62,97 @@ public class ProjectController {
 		return "/project/projectlist";
 	}
 	
-	/**
-	 * 프로젝트, 프로젝트 소개 등록
-	 * @param model
-	 * @param dto
-	 * @return
-	 */
+	
 	@RequestMapping(value="/pjinsert.do", method=RequestMethod.POST)
-	public String insertProject(Model model, ProjectDto dto) {
+	public String insertProject(HttpServletRequest request, Model model, ProjectDto dto, String p_content, String fund_guide_content, MultipartFile file) {
 		logger.info("PROJECT INSERT 호출");
 		logger.info("dto :" + dto.toString());
-		logger.info("p_content: " + dto.getP_content());
+		logger.info("p_content: " + p_content);
 		
-		// 프로젝트 insert
-		projectBiz.insert(dto);
-		// 프로젝트 소개 insert
-		ProjectIntroDto projectIntroDto = new ProjectIntroDto();
-		projectIntroDto.setP_id(dto.getP_id());
-		projectIntroDto.setP_intro(dto.getP_content());
-		projectIntroBiz.insert(projectIntroDto);
-		// 프로젝트 안내 insert
-		// TODO
-		// 프로젝트 소개 외에도 필요한 것들 insert
-		return "redirect:pjlist.do";
+		int m_uid = ((MemberDto)request.getSession().getAttribute("member")).getM_uid();
+		dto.setCreator_uid(m_uid);
+		
+		dto.setProjectIntroDto(new ProjectIntroDto(p_content));
+		dto.setProjectFundGuideDto(new ProjectFundGuideDto(fund_guide_content));
+		
+		
+		String originName; String storedName; String uploadPath; int fileSize;
+		UUID uuid = UUID.randomUUID();
+		OutputStream out = null;
+		
+		if(file != null) {
+			if(file.getSize() > 0 && StringUtils.isNotBlank(file.getName())) {
+				if(file.getContentType().toLowerCase().startsWith("image/")) {
+					
+					try {
+						originName = file.getOriginalFilename();
+						byte[] bytes = file.getBytes();
+						fileSize = file.getBytes().length;
+						uploadPath = request.getServletContext().getRealPath("/uploadImg/projectTitle");
+						
+						
+						File uploadFile = new File(uploadPath);
+						if(!uploadFile.exists()) {
+							uploadFile.mkdirs();
+						}
+						storedName = uuid + "_" + originName;
+						out = new FileOutputStream(new File(uploadPath+"/"+storedName));
+						out.write(bytes);
+						out.flush();
+						
+						dto.setProjectTilteImgDto(new ProjectTitleImgDto(originName, storedName, uploadPath, fileSize));
+						
+						
+					} catch (IOException e) {
+						e.printStackTrace();
+					} finally {
+						try {
+							out.close();
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+					}
+				}
+			}
+		}
+		
+		System.out.println(dto);
+		if(projectBiz.insert(dto)==4) {
+			return "redirect:pjdetail.do?p_id="+dto.getP_id();
+		} else {
+			model.addAttribute("msg","프로젝트 등록 중 문제가 발생했습니다.");
+			model.addAttribute("pageUrl", "pjupload.do");
+			return "/form/warning";
+		}
+		
+		
 	}
 	
-	/**
-	 * 프로젝트 상세 조회
-	 * @param dto
-	 * @param request
-	 * @param model
-	 * @return
-	 */
 	@RequestMapping(value="/pjdetail.do", method=RequestMethod.GET)
-	public String projectDetail(ProjectDto dto, HttpServletRequest request, Model model) {
-		//int p_id = Integer.parseInt(request.getParameter("p_id"));
-		int p_id = ServletRequestUtils.getIntParameter(request, "p_id", 0);
+	public String projectDetail(int p_id, Model model) {
 		logger.info("PROJECT DETAIL 호출");
 		
-		model.addAttribute("pjdetail", projectBiz.selectOne(p_id));
-		return "/project/projectintro";
-	}
-	
-	/**
-	 * 프로젝트 소개, 공지, 펀딩안내 비동기 조회
-	 * @param paramMap
-	 * @param requset
-	 * @param model
-	 * @return
-	 */
-	@RequestMapping(value="/pjloadscr.do", method=RequestMethod.POST)
-	public ResponseEntity<?> projectLoadScr(@RequestParam Map<String, Object> paramMap, HttpServletRequest requset, Model model) {
-		Map<String, Object> resultMap = new HashMap<>();
+		ProjectDto dto = projectBiz.selectDetailIntro(p_id);
+		int SumOderPay = projectBiz.sumOrder(p_id);
+		int CountOrder = projectBiz.orderCount(p_id);
 		
-		// 소개, 공지, 펀딩안내에 따라 각 테이블 데이터 조회
-		// if("intro".equals(paramMap.get("category")) {
-			// 파라미터 세팅
-			// ProjectIntroDto projectIntroDto = new ProjectIntroDto();
-			// projectIntroDto.setP_id(paramMap.get("p_id"));
-			// 데이터 조회 (공지는 Map이 아니라 List형태 (프로젝트 리스트 형태), 조회한 리스트는 맵에 넣을것)
-			// Map<ProjectIntroDto> introDto = projectIntroBiz.selectOne(projectIntroDto);
-			// 데이터 맵에 넣기
-			// resultMap.put("p_intro", introDto.get("p_intro"));
-		// } else if...
+		if(dto != null) {
+			model.addAttribute("pDto",dto);
+			model.addAttribute("sumOrder", SumOderPay);
+			model.addAttribute("orderCount", CountOrder);
+			
+			System.out.println(dto);
+			
+			return "/project/projectintro";
+		} else {
+			model.addAttribute("msg","프로젝트 조회 중 문제가 발생했습니다.");
+			model.addAttribute("pageUrl", "main.do");
+			return "/form/warning";
+		}
 		
-		resultMap.put("test_value", "abcd");
-		return ResponseEntity.ok(resultMap);
+		
 	}
+
 	
 	// 2. 프로젝트 소개
 	public String projectintro(Locale locale, Model model) {
@@ -142,11 +163,18 @@ public class ProjectController {
 	}
 
 	// 3. 프로젝트 공지
-	@RequestMapping("/pjnotice.do")
-	public String projectnotice(Locale locale, Model model) {
+	@RequestMapping("/pjNotice")
+	public String projectnotice(Model model, int p_id, Integer page) {
 		logger.info("PROJECT NOTICE 페이지 호출");
 
-		return "/project/projectnotice";
+		ProjectDto inform = projectBiz.selectProjectInform(p_id);
+		
+		
+		
+		model.addAttribute("inform", inform);
+		
+		
+		return "/project/projectNotice";
 
 	}
 
@@ -174,7 +202,66 @@ public class ProjectController {
 		logger.info("PROJECT NOTICE UPLOAD 페이지 호출");
 
 		return "/project/projectnoticeupload";
-
 	}
-
+	
+	
+	
+	
+	@RequestMapping(value="/uploadImg/projectContent", method = RequestMethod.POST)
+	public void projectContentImgUpload(HttpServletRequest request, HttpServletResponse response, MultipartFile upload) {
+		logger.info("Project 소개 이미지 업로드 처리");
+		
+		JsonObject json = new JsonObject();
+		OutputStream out = null;
+		PrintWriter printWriter = null;
+		//랜덤 문자 생성
+		UUID uuid = UUID.randomUUID();
+		
+		if(upload != null) {
+			if(upload.getSize() > 0 && StringUtils.isNotBlank(upload.getName())) {
+				if(upload.getContentType().toLowerCase().startsWith("image/")) {
+					
+					try {
+						String originName = upload.getOriginalFilename();
+						byte[] bytes = upload.getBytes();
+						String uploadPath = request.getServletContext().getRealPath("/uploadImg/projectContent");
+						
+						
+						File uploadFile = new File(uploadPath);
+						if(!uploadFile.exists()) {
+							uploadFile.mkdirs();
+						}
+						String storedName = uuid + "_" + originName;
+						out = new FileOutputStream(new File(uploadPath+"/"+storedName));
+						out.write(bytes);
+						out.flush();
+						
+						printWriter = response.getWriter();
+						response.setContentType("text/html");
+						String fileUrl = request.getContextPath() + "/uploadImg/projectContent/" + storedName;
+						
+						json.addProperty("uploaded", 1);
+						json.addProperty("fileName", storedName);
+						json.addProperty("url", fileUrl);
+						
+						printWriter.println(json);
+						printWriter.flush();
+						
+					} catch (IOException e) {
+						e.printStackTrace();
+					} finally {
+						
+						try {
+							out.close();
+							printWriter.close();
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+					}
+				}
+			}
+		}
+		
+	}
+	
 }

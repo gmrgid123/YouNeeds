@@ -3,7 +3,22 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
- <mapper namespace="temp11">
- 
+ <mapper namespace="projectNoticeSql.">
+ 	
+ 	<insert id="insert" parameterType="projectNoticeDto">
+ 		<selectKey keyProperty="p_notice_no" resultType="int" order="BEFORE">
+ 			SELECT NVL(MAX(p_notice_no),0)+1 FROM Project_Notice WHERE P_ID = #{p_id}
+ 		</selectKey>
+ 		INSERT INTO Project_Notice
+ 		VALUES( #{p_notice_no}, #{p_id}, #{p_notice_title}, #{p_notice_content}, SYSDATE)
+ 	</insert>
+ 	
+ 	<select id="selectOne" parameterType="java.util.HashMap" resultType="projectNoticeDto">
+ 	
+ 	</select>
+ 	
+ 	<select id="selectList" parameterType="java.util.HashMap" resultType="projectNoticeDto">
+ 	
+ 	</select>
  
  </mapper>

@@ -7,11 +7,16 @@ import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.web.youneeds.dao.interf.ProjectDao;
 import com.web.youneeds.dto.ProjectDto;
+import com.web.youneeds.dto.ProjectFundGuideDto;
+import com.web.youneeds.dto.ProjectIntroDto;
+import com.web.youneeds.dto.ProjectTitleImgDto;
 
 @Repository
+@Transactional
 public class ProjectDaoImpl implements ProjectDao {
 	
 	
@@ -30,9 +35,59 @@ public class ProjectDaoImpl implements ProjectDao {
 	}
 
 	@Override
-	public int insert(ProjectDto dto) {
-		return sqlSession.insert(NAMESPACE + "insertProject", dto);
+	public int insertProject(ProjectDto dto) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.insert(NAMESPACE + "insertProject", dto);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return res;
 	}
+	
+	@Override
+	public int insertIntro(ProjectIntroDto dto) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.insert(NAMESPACE + "insertIntro", dto);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
+
+	@Override
+	public int insertImgTitle(ProjectTitleImgDto dto) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.insert(NAMESPACE + "insertImgData", dto);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
+
+	@Override
+	public int insertGuide(ProjectFundGuideDto dto) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.insert(NAMESPACE + "insertGuide", dto);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
+	
+	
 
 	@Override
 	public int update(ProjectDto dto) {
@@ -72,5 +127,59 @@ public class ProjectDaoImpl implements ProjectDao {
 		
 		return max;
 	}
+
+	@Override
+	public ProjectDto selectDetailIntro(int p_id) {
+		ProjectDto res = null;
+		
+		try {
+			res = sqlSession.selectOne(NAMESPACE+"projectDetailIntro", p_id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
+
+	@Override
+	public Integer sumOrder(int p_id) {
+		Integer res = null;
+		
+		try {
+			res = sqlSession.selectOne(NAMESPACE + "orderSum", p_id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
+	
+	
+	@Override
+	public Integer orderCount(int p_id) {
+		Integer res = null;
+		
+		try {
+			res = sqlSession.selectOne(NAMESPACE + "orderCount", p_id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
+
+	@Override
+	public ProjectDto selectProjectInform(int p_id) {
+		ProjectDto res = null;
+		
+		try {
+			res = sqlSession.selectOne(NAMESPACE+"selectProjectInform", p_id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
+
 
 }

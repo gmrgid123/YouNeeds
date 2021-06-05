@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.web.youneeds.biz.interf.ProjectBiz;
 import com.web.youneeds.dao.interf.ProjectDao;
@@ -26,8 +27,11 @@ public class ProjectBizImpl implements ProjectBiz{
 		return projectDao.selectOne(p_id);
 	}
 
+	@Transactional
 	@Override
 	public int insert(ProjectDto dto) {
+		int res = 0;
+		
 		String startDate = dto.getStart_date();
 		String endDate = dto.getEnd_date();
 		String[] startDateArr = startDate.split("T");
@@ -35,7 +39,17 @@ public class ProjectBizImpl implements ProjectBiz{
 		dto.setStart_date(startDateArr[0] + " " + startDateArr[1]);
 		dto.setEnd_date(endDateArr[0] + " " + endDateArr[1]);
 		
-		return projectDao.insert(dto);
+		res = projectDao.insertProject(dto);
+		dto.getProjectFundGuideDto().setP_id(dto.getP_id());
+		dto.getProjectIntroDto().setP_id(dto.getP_id());
+		dto.getProjectTilteImgDto().setP_id(dto.getP_id());
+		
+		res += projectDao.insertImgTitle(dto.getProjectTilteImgDto());
+		res += projectDao.insertIntro(dto.getProjectIntroDto());
+		res += projectDao.insertGuide(dto.getProjectFundGuideDto());
+				
+		
+		return res;
 	}
 
 	@Override
@@ -65,6 +79,41 @@ public class ProjectBizImpl implements ProjectBiz{
 			return temp.intValue();
 		}
 
+	}
+
+	@Override
+	public ProjectDto selectDetailIntro(int p_id) {
+		return projectDao.selectDetailIntro(p_id);
+	}
+
+	@Override
+	public int sumOrder(int p_id) {
+		Integer res = projectDao.sumOrder(p_id);
+		
+		if(res==null) {
+			return 0;
+		} else {
+			return res.intValue();
+		}
+		
+		
+	}
+
+	@Override
+	public int orderCount(int p_id) {
+		Integer res = projectDao.orderCount(p_id);
+		
+		if(res==null) {
+			return 0;
+		} else {
+			return res.intValue();
+		}
+		
+	}
+
+	@Override
+	public ProjectDto selectProjectInform(int p_id) {
+		return projectDao.selectProjectInform(p_id);
 	}
 
 }

@@ -7,9 +7,33 @@ public class ProjectTitleImgDto {
 	private String title_stored_path;
 	private int title_file_size;
 	
+	
+	
+	
 	public ProjectTitleImgDto() {
 		super();
 	}
+
+	public ProjectTitleImgDto(String title_origin_name, String title_stored_name, String title_stored_path,
+			int title_file_size) {
+		super();
+		this.title_origin_name = title_origin_name;
+		this.title_stored_name = title_stored_name;
+		this.title_stored_path = title_stored_path;
+		this.title_file_size = title_file_size;
+	}
+
+	public ProjectTitleImgDto(int p_id, String title_origin_name, String title_stored_name, String title_stored_path,
+			int title_file_size) {
+		super();
+		this.p_id = p_id;
+		this.title_origin_name = title_origin_name;
+		this.title_stored_name = title_stored_name;
+		this.title_stored_path = title_stored_path;
+		this.title_file_size = title_file_size;
+	}
+
+	
 
 	public int getP_id() {
 		return p_id;
@@ -49,6 +73,13 @@ public class ProjectTitleImgDto {
 
 	public void setTitle_file_size(int title_file_size) {
 		this.title_file_size = title_file_size;
+	}
+
+	@Override
+	public String toString() {
+		return "ProjectTitleImgDto [p_id=" + p_id + ", title_origin_name=" + title_origin_name + ", title_stored_name="
+				+ title_stored_name + ", title_stored_path=" + title_stored_path + ", title_file_size="
+				+ title_file_size + "]";
 	}
 	
 	
