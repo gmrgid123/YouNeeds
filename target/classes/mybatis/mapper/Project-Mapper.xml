@@ -89,11 +89,11 @@
  	<select id="creatorMyPageInfo" parameterType="java.util.HashMap" resultType="projectDto">
     SELECT P_ID, P_TITLE, P_CATEGORY, TARGET_AMOUNT, P_REGDATE, START_DATE, END_DATE
     FROM ( SELECT ROW_NUMBER() OVER(ORDER BY P_ID) AS NUM, P_ID, P_TITLE, P_CATEGORY, TARGET_AMOUNT, P_REGDATE, START_DATE, END_DATE, CREATOR_UID FROM PROJECT )
-    WHERE CREATOR_UID =3 AND  NUM <![CDATA[<=]]> #{page_val}*3 AND NUM <![CDATA[>=]]> #{page_val}*3-2
+    WHERE CREATOR_UID = #{m_uid} AND  NUM <![CDATA[<=]]> #{page_val}*3 AND NUM <![CDATA[>=]]> #{page_val}*3-2
 	</select>
 
 	<select id="selectListMaxLength" resultType="int">
-	SELECT MAX(ROWNUM) FROM PROJECT WHERE CREATOR_UID=#{m_uid} ORDER BY P_ID
+	SELECT MAX(ROWNUM) FROM PROJECT WHERE CREATOR_UID=#{m_uid} ORDER BY P_ID DESC
 	</select>
 	
 	

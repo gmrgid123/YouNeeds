@@ -164,7 +164,7 @@ div .card {
 					</c:when>
 					<c:otherwise>
 						<c:forEach var="dto" items="${user }">
-							<a href="#">
+							<a href="pjdetail.do?p_id=${dto.p_id }">
 								<div class="card">
 									<div class="card_header">
 										<img src="${path}/resources/images/" style="width:100%; height: 100%">

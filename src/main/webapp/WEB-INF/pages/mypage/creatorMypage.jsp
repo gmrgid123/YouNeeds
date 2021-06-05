@@ -65,9 +65,10 @@ div .box2 {
 .list {
 	text-align: center;
 	display: flex;
-	flex-direction: column;
+	flex-direction: row;
 	align-items: center;
 	justify-content: center;
+	height: 300px;
 }
 
 div .card {
@@ -76,7 +77,8 @@ div .card {
 	border-radius: 15px;
 	display: inline-block;
 	margin-top: 0px;
-	margin-left: 0px;
+	margin-right: 50px;
+	margin-left: 50px;
 	margin-bottom: 0px;
 	position: relative;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0
@@ -148,6 +150,7 @@ div .card {
 			<div class="box1">
 				&nbsp; &nbsp;
 				<h3 class="userId">아이디 : ${sessionScope.member.m_email }</h3>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<h3 class="userNck">닉네임 : ${sessionScope.member.m_nickname }</h3>
 			</div>
 			<div class="box2">
@@ -250,7 +253,7 @@ div .card {
 					</c:when>
 					<c:otherwise>
 						<c:forEach var="dto" items="${creator }">
-							<a href="#">
+							<a href="pjdetail.do?p_id=${dto.p_id }">
 								<div class="card">
 									<div class="card_header">
 										<img src="${path}/resources/images/" style="width:100%; height: 100%">
@@ -283,7 +286,7 @@ div .card {
 				        <ul>
 				      
 				        	<c:if test="${start_num ne 1}">
-				        		<li><a href="creatorMypage?page=${start_num-1}">&laquo; Previous</a></li>
+				        		<li><a href="userMypage?page=${start_num-1}">&laquo; Previous</a></li>
 				        	</c:if>
 				        	
 				        	
@@ -298,10 +301,10 @@ div .card {
 						        	</c:if>
 				        		 	<c:choose>
 				        		 		<c:when test="${page_val eq status.current}">
-				        		 			<li style="background: #eee;"><a href="creatorMypage?page=<c:out value="${status.current}"/>"><c:out value="${status.current}"/></a></li>
+				        		 			<li style="background: #eee;"><a href="userMypage?page=<c:out value="${status.current}"/>"><c:out value="${status.current}"/></a></li>
 				        		 		</c:when>
 				        		 		<c:otherwise>
-				        		 			<li><a href="creatorMypage?page=<c:out value="${status.current}"/>"><c:out value="${status.current}"/></a></li>
+				        		 			<li><a href="userMypage?page=<c:out value="${status.current}"/>"><c:out value="${status.current}"/></a></li>
 				        		 		</c:otherwise>
 				        		 	</c:choose>
 				        		 </c:if>
@@ -309,7 +312,7 @@ div .card {
 				        	</c:forEach>
 				        	
 				        	<c:if test="${end_num ne page_max}">
-					          	<li><a href="creatorMypage?page=${end_num+1}">Next &raquo;</a></li>
+					          	<li><a href="userMypage?page=${end_num+1}">Next &raquo;</a></li>
 					        </c:if>
 				        </ul>
 		      		</nav>				

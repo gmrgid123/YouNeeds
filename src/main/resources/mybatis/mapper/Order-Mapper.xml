@@ -68,7 +68,7 @@
 	</select>
 	
 	<select id="selectListMaxLength" resultType="int">
-	SELECT MAX(ROWNUM) FROM ORDERPAY WHERE M_UID=#{m_uid} ORDER BY P_ID DESC
+	SELECT MAX(ROWNUM) FROM ORDERPAY WHERE M_UID=#{m_uid} ORDER BY P_ID
 	</select>
  	
  	
