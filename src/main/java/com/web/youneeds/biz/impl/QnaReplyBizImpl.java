@@ -5,11 +5,13 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.web.youneeds.biz.interf.QnaReplyBiz;
 import com.web.youneeds.dao.interf.QnaReplyDao;
 import com.web.youneeds.dto.QnaReplyDto;
 
+@Transactional
 @Service
 public class QnaReplyBizImpl implements QnaReplyBiz{
 
@@ -23,7 +25,6 @@ public class QnaReplyBizImpl implements QnaReplyBiz{
 
 	@Override
 	public QnaReplyDto selectOne(int qna_reply_id) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -34,13 +35,11 @@ public class QnaReplyBizImpl implements QnaReplyBiz{
 
 	@Override
 	public int update(QnaReplyDto dto) {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
 	public int delete(int qna_reply_id) {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 

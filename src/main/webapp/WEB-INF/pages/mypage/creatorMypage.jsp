@@ -11,6 +11,15 @@
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<script type="text/javascript">
+function delCheck() {
+	if(confirm("삭제를 진행하시겠습니까?")){
+		location.href="withdrawal";
+	}else{
+		
+	}
+}
+</script>
 <link href="${path}/resources/css/layout.css" rel="stylesheet"
 	type="text/css" media="all">
 <link href="${path}/resources/css/slider/slider-banner.css"
@@ -54,7 +63,9 @@ div .box2 {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
-	justify-content: space-evenly;
+}
+div .box2 input{
+	margin-left: 18px;
 }
 
 .title {
@@ -155,6 +166,7 @@ div .card {
 			</div>
 			<div class="box2">
 				<input type="button" style="width: 120px; height: 30px; font-size: 15px; background-color: skyblue; border-radius: 5px;" value="회원정보수정" onclick="location.href='creatorUpdate'">
+				<input type="button" style="width: 120px; height: 30px; font-size: 15px; background-color: skyblue; border-radius: 5px;" value="회원탈퇴" onclick="delCheck();">
 				<input type="button" style="width: 100px; height: 30px; font-size: 15px; background-color: skyblue; border-radius: 5px;" value="로그아웃" onclick="location.href='logout'">
 			</div>
 			<hr>
@@ -256,7 +268,7 @@ div .card {
 							<a href="pjdetail.do?p_id=${dto.p_id }">
 								<div class="card">
 									<div class="card_header">
-										<img src="${path}/resources/images/" style="width:100%; height: 100%">
+										<img src="${path}/uploadImg/projectTitle/${dto.projectTilteImgDto.title_stored_name}" style="width:100%; height: 100%">
 										<div class="card_header_D-day">
 											<div class="card_header_text">마감일</div>
 											<c:if test="${fn:length(dto.end_date) > 11 }">

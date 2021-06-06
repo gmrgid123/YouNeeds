@@ -132,6 +132,7 @@ function openApi_Addr(){
 		<div class="content_body">
 			<button id="myinfo_add" class="btn btn-info" type="button" onclick="">나의 정보 가져오기</button>
 			<form action="OrderSuccess" method="post" name="orderForm">
+				<input type="hidden" name="p_id" value="${param.p_id}">
 				<input type="hidden" name="imp_uid" value="">
 				<div class="form_group">
 					<label for="order_name" class="form_label"><h5>결제자 이름</h5></label>

@@ -5,6 +5,14 @@
   
  <mapper namespace="OrderPaySql">
  
+  	<resultMap type="projectTitleImgDto" id="projectTitleImgMap">
+ 		<result property="p_id" column="P_ID"/>
+ 		<result property="title_origin_name" column="TITLE_ORIGIN_NAME"/>
+ 		<result property="title_stored_name" column="TITLE_STORED_NAME"/>
+ 		<result property="title_stored_path" column="TITLE_STORED_PATH"/>
+ 		<result property="title_file_size" column="TITLE_FILE_SIZE"/>
+ 	</resultMap>
+ 
  	<resultMap type="projectDto" id="projectDtoJoin">
  		<result property="p_title" column="P_TITLE"/>
  		<result property="p_category" column="P_CATEGORTY"/>
@@ -13,6 +21,7 @@
  		<result property="start_date" column="START_DATE"/>
  		<result property="end_date" column="END_DATE"/>
  		<result property="creator_uid" column="CREATOR_UID"/>
+ 		<collection property="projectTilteImgDto" resultMap="projectTitleImgMap"/>
  	</resultMap>
  
  	<resultMap type="orderDto" id="orderMap">
@@ -61,9 +70,10 @@
  	</insert>
  	
  	<select id="userMyPageInfo" parameterType="java.util.HashMap" resultMap="orderMap">
- 	SELECT P.P_ID, P.P_TITLE,  P.START_DATE, P.END_DATE, O.ORDER_ID, O.ORDER_NAME, O.ORDER_PAY, O.ORDER_DATE, O.ORDER_PHONE, O.ORDER_EMAIL, O.ORDER_ADDR
+ 	SELECT P.P_ID, P.P_TITLE,  P.START_DATE, P.END_DATE, O.ORDER_ID, O.ORDER_NAME, O.ORDER_PAY, O.ORDER_DATE, O.ORDER_PHONE, O.ORDER_EMAIL, O.ORDER_ADDR,  IMG.TITLE_STORED_NAME
 	FROM (SELECT ROW_NUMBER() OVER(ORDER BY ORDER_ID ASC) AS NUM, ORDER_ID, ORDER_NAME, ORDER_PAY, ORDER_DATE, ORDER_PHONE, ORDER_EMAIL, ORDER_ADDR, P_ID FROM ORDERPAY WHERE M_UID = #{m_uid}) O
 	JOIN PROJECT P ON (P.P_ID = O.P_ID)
+	JOIN PROJECT_TITLE_IMG IMG ON (P.P_ID=IMG.P_ID)
 	WHERE  NUM <![CDATA[<=]]> #{page_val}*3 AND NUM <![CDATA[>=]]> #{page_val}*3-2
 	</select>
 	

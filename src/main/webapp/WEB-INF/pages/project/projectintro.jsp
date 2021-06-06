@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<c:set var="path" value="${pageContext.request.contextPath}" />
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<c:set var="path" value="${pageContext.request.contextPath}" />
+<c:set var="per" value="${ sumOrder / pDto.target_amount * 100}"/>
+
 
 <!DOCTYPE html>
 <html>
@@ -91,6 +93,7 @@ a:hover {
 .bl {
 	width: 450px;
 	height: 100%;
+	min-height: 300px;
 	margin-right: 50px;
 	text-align: center;
 	background-color: #93c0c521;
@@ -134,23 +137,23 @@ a:hover {
 		<!-- ---------------------------------------------------------------------------- -->
 		<div>
 			<div class="tr">
-				<h1>프로젝트기간</h1>
+				<h1>프로젝트 기간</h1>
 				<h3>${pDto.start_date } - ${pDto.end_date }</h3>
 				<h1>모인금액/목표금액</h1>
-				<h3><fmt:formatNumber value="${sumOrder}" pattern="#,###"/> 원&nbsp;/&nbsp;<fmt:formatNumber value="${pDto.target_amount}" pattern="#,###"/> 원</h3> 
+				<h3><fmt:formatNumber value="${sumOrder}" pattern="#,###"/> 원&nbsp;/&nbsp;<fmt:formatNumber value="${pDto.target_amount}" pattern="#,###"/> 원&nbsp;&nbsp;&nbsp;( ${per}% 달성 )</h3> 
 				<h1>후원자 수</h1>
 				<h3><fmt:formatNumber value="${orderCount}" pattern="#,###"/> 명</h3>
 			</div>
-			<input type="button" class="b1" value="후원하기" onclick="location.href='orderPayForm'">
+			<input type="button" class="b1" value="후원하기" onclick="location.href='orderPayForm?p_id=${pDto.p_id}'">
 		</div>
 	</div>
 	<!-- -------------------------------------------------------------------------------- -->
 	<!-- -------------------------------middle-------------------------------------------- -->
 	<div class=middle>
 		<div class="btn">
-			<a href="">프로젝트 소개</a> 
-			<a href="">프로젝트 공지</a> 
-			<a href="">펀딩안내</a>
+			<a href="pjdetail.do?p_id=${pDto.p_id}">프로젝트 소개</a> 
+			<a href="pjNoticeList?p_id=${pDto.p_id}&page=1">프로젝트 공지</a> 
+			<a href="pjFundGuide?p_id=${pDto.p_id}">펀딩안내</a>
 		</div>
 	</div>
 
@@ -168,8 +171,8 @@ a:hover {
 				<h3>&lt; Intro &gt;</h3>
 				<p>${pDto.creatorDto.create_intro }</p>
 			</div>
-			<input type="button" class="b2" value="공지사항 등록" onclick="location.href='pjupnotice.do'"> 
-				<input type="button" class="b2" value="화상설명회" onclick="location.href=''">
+			<input type="button" class="b2" value="공지사항 등록" onclick="location.href='pjNoticeUploadForm?p_id=${pDto.p_id}';"> 
+			<input type="button" class="b2" value="화상설명회" onclick="location.href=''">
 		</div>
 	</div>	
 

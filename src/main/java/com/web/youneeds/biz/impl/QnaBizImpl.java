@@ -4,11 +4,13 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.web.youneeds.biz.interf.QnaBiz;
 import com.web.youneeds.dao.interf.QnaDao;
 import com.web.youneeds.dto.QnaDto;
 
+@Transactional
 @Service
 public class QnaBizImpl implements QnaBiz {
 

@@ -36,6 +36,13 @@
 	td a{
 	text-decoration: none !important;
 	}
+	.table {
+  width: 100%;
+  margin-bottom: 1rem;
+  color: #212529;
+}
+
+	
 </style>
 </head>
 <body>

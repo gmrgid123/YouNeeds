@@ -24,8 +24,8 @@ public class ProjectDaoImpl implements ProjectDao {
 	private SqlSession sqlSession;
 	
 	@Override
-	public List<ProjectDto> selectList(ProjectDto dto) {
-		return sqlSession.selectList(NAMESPACE + "searchProjectList", dto);
+	public List<ProjectDto> selectList(Map map) {
+		return sqlSession.selectList(NAMESPACE + "searchProjectList", map);
 	}
 
 	@Override
@@ -174,6 +174,58 @@ public class ProjectDaoImpl implements ProjectDao {
 		
 		try {
 			res = sqlSession.selectOne(NAMESPACE+"selectProjectInform", p_id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
+
+	@Override
+	public int selectWriter(int p_id) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.selectOne(NAMESPACE+"selectWriter", p_id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
+
+	@Override
+	public ProjectDto selectProjectJoinGuide(int p_id) {
+		ProjectDto res = null; 
+		
+		try {
+			res = sqlSession.selectOne(NAMESPACE+"selectProjectJoinGuide", p_id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
+
+	@Override
+	public List<ProjectDto> selectRecentList() {
+		List<ProjectDto> list = null;
+		
+		try {
+			list = sqlSession.selectList(NAMESPACE+"selectRecentList");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+
+	@Override
+	public int selectProjectMax(String p_category) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.selectOne(NAMESPACE+"selectProjectMax", p_category);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

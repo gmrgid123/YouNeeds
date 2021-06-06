@@ -4,11 +4,13 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.web.youneeds.biz.interf.NoticeBiz;
 import com.web.youneeds.dao.interf.NoticeDao;
 import com.web.youneeds.dto.NoticeDto;
 
+@Transactional
 @Service
 public class NoticeBizImpl implements NoticeBiz {
 

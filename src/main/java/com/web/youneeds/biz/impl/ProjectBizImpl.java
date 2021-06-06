@@ -11,6 +11,7 @@ import com.web.youneeds.biz.interf.ProjectBiz;
 import com.web.youneeds.dao.interf.ProjectDao;
 import com.web.youneeds.dto.ProjectDto;
 
+@Transactional
 @Service
 public class ProjectBizImpl implements ProjectBiz{
 	
@@ -18,8 +19,8 @@ public class ProjectBizImpl implements ProjectBiz{
 	private ProjectDao projectDao;
 	
 	@Override
-	public List<ProjectDto> selectList(ProjectDto dto) {
-		return projectDao.selectList(dto);
+	public List<ProjectDto> selectList(Map map) {
+		return projectDao.selectList(map);
 	}
 
 	@Override
@@ -27,7 +28,6 @@ public class ProjectBizImpl implements ProjectBiz{
 		return projectDao.selectOne(p_id);
 	}
 
-	@Transactional
 	@Override
 	public int insert(ProjectDto dto) {
 		int res = 0;
@@ -114,6 +114,26 @@ public class ProjectBizImpl implements ProjectBiz{
 	@Override
 	public ProjectDto selectProjectInform(int p_id) {
 		return projectDao.selectProjectInform(p_id);
+	}
+
+	@Override
+	public int selectWriter(int p_id) {
+		return projectDao.selectWriter(p_id);
+	}
+
+	@Override
+	public ProjectDto selectProjectJoinGuide(int p_id) {
+		return projectDao.selectProjectJoinGuide(p_id);
+	}
+
+	@Override
+	public List<ProjectDto> selectRecentList() {
+		return projectDao.selectRecentList();
+	}
+
+	@Override
+	public int selectProjectMax(String p_category) {
+		return projectDao.selectProjectMax(p_category);
 	}
 
 }

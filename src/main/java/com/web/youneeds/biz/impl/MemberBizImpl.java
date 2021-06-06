@@ -3,11 +3,13 @@ package com.web.youneeds.biz.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.web.youneeds.biz.interf.MemberBiz;
 import com.web.youneeds.dao.interf.MemberDao;
 import com.web.youneeds.dto.MemberDto;
 
+@Transactional
 @Service
 public class MemberBizImpl implements MemberBiz {
 

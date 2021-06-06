@@ -3,6 +3,8 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  <mapper namespace="projectSQL">
+ 
+ 
  	
  	<resultMap type="creatorDto" id="creatorMap">
  		<result property="m_uid" column="M_UID"/>
@@ -39,6 +41,7 @@
  		<result property="creator_uid" column="CREATOR_UID"/>
  		<collection property="creatorDto" resultMap="creatorMap"/>
  	</resultMap>
+ 		
  	
  	<resultMap type="projectDto" id="projectJoinDetail">
  		<result property="p_id" column="P_ID"/>
@@ -56,22 +59,18 @@
  	</resultMap>	
  
  	<!-- 프로젝트 조회 -->
- 	<select id="searchProjectList" parameterType="projectDto" 
- 	 			resultType="projectDto">
-	 	 select 
-		 	 p_id, 
-		 	 p_title, 
-		 	 p_category, 
-		 	 target_amount, 
-		 	 p_regdate, 
-		 	 start_date,  
-		 	 end_date, 
-		 	 creator_uid
-		 from project
-		 <if test="p_category != null and !''.equals(p_category)">
-		 	where p_category = #{p_category}
-		 </if>
-		 order by p_id desc
+ 	<select id="searchProjectList" parameterType="java.util.HashMap" 
+ 	 			resultMap="projectJoinDetail">
+		SELECT  P.P_ID, P.P_TITLE, P.P_CATEGORY, P.TARGET_AMOUNT, P.P_REGDATE, P.START_DATE, P.END_DATE, IMG.TITLE_STORED_NAME
+		FROM (
+		SELECT ROW_NUMBER() OVER(ORDER BY P_ID DESC) AS NUM, P_ID, P_TITLE, P_CATEGORY, TARGET_AMOUNT, P_REGDATE, START_DATE, END_DATE
+		FROM PROJECT
+		<if test="p_category != null and !''.equals(p_category)">
+		 	WHERE P_CATEGORY = #{p_category}
+		</if>
+		) P
+		LEFT JOIN PROJECT_TITLE_IMG IMG ON (P.P_ID = IMG.P_ID)
+		WHERE P.NUM <![CDATA[<=]]> #{p}*9 AND P.NUM <![CDATA[>=]]> #{p}*9-8
  	 </select> 
  	
  	<!-- 프로젝트 등록 -->
@@ -125,7 +124,7 @@
  	</select>
  	
  	
- 	<select id="selectProjectInform" parameterType="int" resultType="projectJoinDetail">
+ 	<select id="selectProjectInform" parameterType="int" resultMap="projectJoinDetail">
  		SELECT 
 		P.P_ID, P.P_TITLE, P.P_CATEGORY, P.TARGET_AMOUNT, P.P_REGDATE, P.START_DATE, P.END_DATE, P.CREATOR_UID,
 		IMG.TITLE_STORED_NAME,
@@ -133,18 +132,55 @@
 		FROM PROJECT P
 		LEFT JOIN PROJECT_TITLE_IMG IMG ON (P.P_ID = IMG.P_ID)
 		LEFT JOIN CREATOR C ON (P.CREATOR_UID = C.M_UID)
-		WHERE P.P_ID = #{p_id};
+		WHERE P.P_ID = #{p_id}
+ 	</select>
+ 	
+ 	<select id="selectProjectJoinGuide" parameterType="int" resultMap="projectJoinDetail">
+		SELECT
+		P.P_ID, P.P_TITLE, P.P_CATEGORY, P.TARGET_AMOUNT, P.P_REGDATE, P.START_DATE, P.END_DATE, P.CREATOR_UID,
+		IMG.TITLE_STORED_NAME,
+		C.M_UID, C.CREATE_NAME, C.CREATE_INTRO,
+        G.FUND_GUIDE_CONTENT
+		FROM PROJECT P
+		LEFT JOIN PROJECT_TITLE_IMG IMG ON (P.P_ID = IMG.P_ID)
+		LEFT JOIN CREATOR C ON (P.CREATOR_UID = C.M_UID)
+        LEFT JOIN Project_Fund_Guide G ON(P.P_ID = G.P_ID)
+		WHERE P.P_ID = #{p_id}
  	</select>
  	
  	
- 	<select id="creatorMyPageInfo" parameterType="java.util.HashMap" resultType="projectDto">
-    SELECT P_ID, P_TITLE, P_CATEGORY, TARGET_AMOUNT, P_REGDATE, START_DATE, END_DATE
-    FROM ( SELECT ROW_NUMBER() OVER(ORDER BY P_ID) AS NUM, P_ID, P_TITLE, P_CATEGORY, TARGET_AMOUNT, P_REGDATE, START_DATE, END_DATE, CREATOR_UID FROM PROJECT )
-    WHERE CREATOR_UID = #{m_uid} AND  NUM <![CDATA[<=]]> #{page_val}*3 AND NUM <![CDATA[>=]]> #{page_val}*3-2
+ 	
+ 	<select id="creatorMyPageInfo" parameterType="java.util.HashMap" resultMap="projectJoinDetail">
+        SELECT P.P_ID, P.P_TITLE, P.P_CATEGORY, P.TARGET_AMOUNT, P.P_REGDATE, P.START_DATE, P.END_DATE ,  IMG.TITLE_STORED_NAME
+	    FROM ( SELECT ROW_NUMBER() OVER(ORDER BY P_ID ASC ) AS NUM, P_ID, P_TITLE, P_CATEGORY, TARGET_AMOUNT, P_REGDATE, START_DATE, END_DATE, CREATOR_UID FROM PROJECT  WHERE CREATOR_UID = #{m_uid}) P
+	    LEFT JOIN PROJECT_TITLE_IMG IMG ON (P.P_ID=IMG.P_ID)
+	    WHERE P.NUM <![CDATA[<=]]> #{page_val}*3 AND P.NUM <![CDATA[>=]]> #{page_val}*3-2
+	</select>
+	
+	<select id="selectRecentList" resultMap="projectJoinDetail">
+		SELECT P.P_ID, P.P_TITLE, P.P_CATEGORY, P.TARGET_AMOUNT, IMG.TITLE_STORED_NAME
+		FROM (
+		    SELECT 
+		    ROW_NUMBER() OVER(ORDER BY P.P_ID DESC) AS CNT , P.P_ID, P.P_TITLE, P.P_CATEGORY, P.TARGET_AMOUNT
+		    FROM PROJECT P
+		) P
+		LEFT JOIN PROJECT_TITLE_IMG  IMG ON (P.P_ID = IMG.P_ID)
+		WHERE CNT <![CDATA[<]]> 4
+	</select>
+	
+	<select id="selectProjectMax" parameterType="String" resultType="int">
+		SELECT NVL(MAX(ROWNUM),0) FROM PROJECT
+		<if test="p_category != null and !''.equals(p_category)">
+		 	WHERE P_CATEGORY = #{p_category}
+		</if>
 	</select>
 
 	<select id="selectListMaxLength" resultType="int">
 	SELECT MAX(ROWNUM) FROM PROJECT WHERE CREATOR_UID=#{m_uid} ORDER BY P_ID DESC
+	</select>
+	
+	<select id="selectWriter" parameterType="int" resultType="int">
+		SELECT NVL(CREATOR_UID,0) FROM PROJECT WHERE P_ID = #{p_id}
 	</select>
 	
 	

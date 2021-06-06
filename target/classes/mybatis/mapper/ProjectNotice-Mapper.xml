@@ -3,7 +3,21 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
- <mapper namespace="projectNoticeSql.">
+ <mapper namespace="projectNoticeSql">
+ 
+ 	<resultMap type="projectDto" id="projectJoin">
+ 		<result property="p_id" column="P_ID"/>
+ 		<result property="creator_uid" column="CREATOR_UID"/>
+ 	</resultMap>
+ 
+ 	<resultMap type="projectNoticeDto" id="projectNoticeJoinMap">
+ 		<result property="p_notice_no" column="P_NOTICE_NO"/>
+ 		<result property="p_id" column="P_ID"/>
+ 		<result property="p_notice_title" column="P_NOTICE_TITLE"/>
+ 		<result property="p_notice_content" column="P_NOTICE_CONTENT"/>
+ 		<result property="p_notice_regdate" column="P_NOTICE_REGDATE"/>
+ 		<collection property="projectDto" resultMap="projectJoin"/>
+ 	</resultMap>
  	
  	<insert id="insert" parameterType="projectNoticeDto">
  		<selectKey keyProperty="p_notice_no" resultType="int" order="BEFORE">
@@ -13,12 +27,21 @@
  		VALUES( #{p_notice_no}, #{p_id}, #{p_notice_title}, #{p_notice_content}, SYSDATE)
  	</insert>
  	
- 	<select id="selectOne" parameterType="java.util.HashMap" resultType="projectNoticeDto">
- 	
+ 	<select id="selectOne" parameterType="java.util.HashMap" resultMap="projectNoticeJoinMap">
+ 		SELECT PN.P_NOTICE_NO, PN.P_ID, PN.P_NOTICE_TITLE, PN.P_NOTICE_CONTENT, PN.P_NOTICE_REGDATE, P.CREATOR_UID
+		FROM Project_Notice PN
+		LEFT JOIN PROJECT P ON(PN.P_ID = P.P_ID)
+		WHERE PN.P_NOTICE_NO=#{no} AND PN.P_ID = #{p_id}
  	</select>
  	
  	<select id="selectList" parameterType="java.util.HashMap" resultType="projectNoticeDto">
+ 		SELECT P_NOTICE_NO, P_ID, P_NOTICE_TITLE, P_NOTICE_REGDATE
+ 		FROM (SELECT ROW_NUMBER() OVER(ORDER BY P_NOTICE_NO DESC) AS NUM, P_NOTICE_NO, P_ID, P_NOTICE_TITLE, P_NOTICE_CONTENT, P_NOTICE_REGDATE FROM PROJECT_NOTICE WHERE P_ID = #{p_id})
+ 		WHERE NUM <![CDATA[<=]]> #{page}*5 AND NUM <![CDATA[>=]]> #{page}*5-4
+ 	</select>
  	
+ 	<select id="selectMaxLength" parameterType="int" resultType="int">
+ 		SELECT NVL(MAX(ROWNUM),0) FROM Project_Notice WHERE P_ID = #{p_id} ORDER BY P_NOTICE_NO DESC
  	</select>
  
  </mapper>

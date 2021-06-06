@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="path" value="${pageContext.request.contextPath}" />
-
+<c:set var="per" value="${ sumOrder / inform.target_amount * 100}"/>
 
 <!DOCTYPE html>
 <html>
@@ -37,7 +38,6 @@
 	background-color: #93c0c521;
 }
 .tr>h1 {
-	font-size: 28px;
 	color: #93C0C5;
 }
 
@@ -89,8 +89,9 @@ a:hover {
 	justify-content: center;
 }
 .bl {
-	width: 450px;
-	height: 300px;
+	width: 550px;
+	min-height: 300px;
+	height: 100%;
 	margin-right: 50px;
 	text-align: center;
 	background-color: #93c0c521;
@@ -116,6 +117,21 @@ a:hover {
 	background-color: #93C0C5;
 	color: white;
 }
+.table th,
+.table td {
+  padding: 0.75rem;
+  vertical-align: top;
+  border-top: 1px solid #dee2e6;
+}
+
+.table thead th {
+  vertical-align: bottom;
+  border-bottom: 2px solid #dee2e6;
+}
+
+.table tbody + tbody {
+  border-top: 2px solid #dee2e6;
+}
 </style>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js" ></script>
 </head>
@@ -124,31 +140,33 @@ a:hover {
 	<jsp:include page="../form/header.jsp"></jsp:include>
 	<!-- -------------------------------------------------------------------------------- -->
 	<div class="title">
-		<h1>${pDto.p_title}</h1>
+		<h1>${inform.p_title}</h1>
 	</div>
 	<!-- ------------------------------------top----------------------------------------- -->
 	<div class="top">
-		<div class="tl"></div>
+		<div class="tl">
+			<img alt="" src="${path}/uploadImg/projectTitle/${inform.projectTilteImgDto.title_stored_name}" style="width: 100%; height: 100%;">
+		</div>
 		<!-- ---------------------------------------------------------------------------- -->
 		<div>
 			<div class="tr">
 				<h1>프로젝트 기간</h1>
-				<h3>${pDto.start_date} - ${pDto.end_date}</h3>
+				<h3>${inform.start_date} - ${inform.end_date}</h3>
 				<h1>모인금액/목표금액</h1>
-				<h3>&nbsp;/&nbsp;${pDto.target_amount}</h3> 
+				<h3><fmt:formatNumber value="${sumOrder}" pattern="#,###"/> 원&nbsp;/&nbsp;<fmt:formatNumber value="${inform.target_amount}" pattern="#,###"/> 원&nbsp;&nbsp;&nbsp;( ${per}% 달성 )</h3> 
 				<h1>후원자 수</h1>
-				<h3></h3>
+				<h3><fmt:formatNumber value="${orderCount}" pattern="#,###"/> 명</h3>
 			</div>
-			<input type="button" class="b1" value="후원하기" onclick="location.href='orderPayForm'">
+			<input type="button" class="b1" value="후원하기" onclick="location.href='orderPayForm?p_id=${inform.p_id}'">
 		</div>
 	</div>
 	<!-- -------------------------------------------------------------------------------- -->
 	<!-- -------------------------------middle-------------------------------------------- -->
 	<div class=middle>
 		<div class="btn">
-			<a href="">프로젝트 소개</a> 
-			<a href="">프로젝트 공지</a> 
-			<a href="">펀딩안내</a>
+			<a href="pjdetail.do?p_id=${inform.p_id}">프로젝트 소개</a> 
+			<a href="pjNoticeList?p_id=${inform.p_id}&page=1">프로젝트 공지</a> 
+			<a href="pjFundGuide?p_id=${inform.p_id}">펀딩안내</a>
 		</div>
 	</div>
 	<!-- -------------------------------------------------------------------------------- -->
@@ -156,8 +174,8 @@ a:hover {
 	<!-- 공지사항 -->
 	<div class="bottom" id="div_notice">
 		<div class="bl">
-			<table style="margin-top:20px;">
-            <col width="80px"><col width="300px"><col width="80px">
+			<table class="table" style="margin-top:20px;">
+            <col width="80px"><col width="300px"><col width="100px">
             <thead>
                <tr>
                   <th>글번호</th>
@@ -166,35 +184,78 @@ a:hover {
                </tr>
             </thead>
             <tbody id="tbody_notice">
-               <tr>
-                  <td>1</td>
-                  <td><a href="notice_view" style="color:black;">임시용 제목 1</a></td>
-                  <td>yyyy-MM-dd</td>
-               </tr>
+            	<c:choose>
+            		<c:when test="${empty nList}">
+            			<tr>
+            				<td colspan="3">===작성된 글이 존재하지 않습니다.===</td>
+            			</tr>
+            		</c:when>
+            		<c:otherwise>
+            			<c:forEach var="pjn" items="${nList}">
+            				<tr>
+            					<td>${pjn.p_notice_no}</td>
+            					<td><a href="pjNoticeView?p_id=${pjn.p_id}&no=${pjn.p_notice_no}" style="color:black;">${pjn.p_notice_title}</a></td>
+            					<td><fmt:formatDate value="${pjn.p_notice_regdate}" pattern="yyyy-MM-dd"/></td>
+            				</tr>
+            			</c:forEach>
+            		</c:otherwise>
+            	</c:choose>
             </tbody>
          </table>
+         
+         <br><br><br>
+         
+         <c:if test="${not empty nList}">
+				<nav class="pagination justify-content-center">
+			        <ul>
+			      
+			        	<c:if test="${start_num ne 1}">
+			        		<li><a href="pjNoticeList?p_id=${inform.p_id}&page=${start_num-1}">&laquo; Previous</a></li>
+			        	</c:if>
+			        	
+			        	
+			        	<c:set var="doneLoop" value="false"/>
+			        	<c:forEach begin="${start_num}" end="${end_num}" step="1" varStatus="status">
+			        		
+			        		
+			        		 <c:if test="${not doneLoop}">
+			        		 	<c:if test="${max eq status.current}">
+					        		 	<c:set var="doneLoop" value="true"/>
+					        		 	<c:set var="end_num" value="${status.current}"/>
+					        	</c:if>
+			        		 	<c:choose>
+			        		 		<c:when test="${page eq status.current}">
+			        		 			<li style="background: #eee;"><a href="pjNoticeList?p_id=${inform.p_id}&page=<c:out value="${status.current}"/>"><c:out value="${status.current}"/></a></li>
+			        		 		</c:when>
+			        		 		<c:otherwise>
+			        		 			<li><a href="pjNoticeList?p_id=${inform.p_id}&page=<c:out value="${status.current}"/>"><c:out value="${status.current}"/></a></li>
+			        		 		</c:otherwise>
+			        		 	</c:choose>
+			        		 </c:if>
+			        		
+			        	</c:forEach>
+			        	
+			        	<c:if test="${end_num ne max}">
+				          	<li><a href="pjNoticeList?p_id=${inform.p_id}&page=${end_num+1}">Next &raquo;</a></li>
+				        </c:if>
+			        </ul>
+	      		</nav>
+	      		</c:if>
+         
 		</div>
-		<div class="button">
-            <div class="br"></div>  
-            <input type="button" class="b2" value="공지사항 등록" onclick="location.href='pjupnotice.do'">
-             <input type="button" class="b2" value="화상설명회 개최공지" onclick="location.href='pjupnotice.do'">
+		<div style="text-align: center;">
+            <div class="br">
+            	<h3>&lt; 창작자 &gt;</h3>
+				<p>${inform.creatorDto.create_name }</p>
+				<h3>&lt; Intro &gt;</h3>
+				<p>${inform.creatorDto.create_intro }</p>
+            </div>  
+            <input type="button" class="b2" value="공지사항 등록" onclick="location.href='pjNoticeUploadForm?p_id=${inform.p_id}'">
+             <input type="button" class="b2" value="화상설명회" onclick="location.href=''">
         </div>
     </div>
     
-    <!-- 펀딩안내 -->
-    <div class="bottom" id="div_funding" style="display:none;">
-		<div class="bl">
-			펀딩안내 (프로젝트 등록시)
-		</div>
-		<div style="text-align: center;">
-			<div class="br">
-				창작자 소개 (창작 회원 가입시)
-				
-			</div>
-			<input type="button" class="b2" value="공지사항 등록" onclick="location.href='pjupnotice.do'"> 
-			<input type="button" class="b2" value="화상설명회 개최공지" onclick="location.href='pjupnotice.do'">
-		</div>
-	</div> 
+ 
 	<!-- ----------------------------------------------------------- -->
 	<!-- footer include -->
 	<jsp:include page="../form/footer.jsp"></jsp:include>

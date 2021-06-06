@@ -56,19 +56,26 @@
 <!-- --------------------------------------------------------------------------- -->
 <!-- --------------------------------------------------------------------------- -->
 	
-		<form class="body" action="" >
-				<h1 style="font-family: 'Gugi', cursive; text-align:center;">프로젝트 / 화상설명회 공지 등록</h1>
-				<input type="text" placeholder="제목을 입력해주세요" required="required" style="width:600px; height:30px;">
-				<table>
-                    <tbody id="tbody">
-                        <tr>
-                            <td><textarea id="board_content" name="board_content" cols="83" rows="20"></textarea></td>
-                        </tr>
-                    </tbody>
-                </table>
+		<form class="body" action="prjNoticeInsert.do" method="post">
+			<input type="hidden" name="p_id" value="${param.p_id }">
+				<h1 style="font-family: 'Gugi', cursive; text-align:center;">프로젝트 공지 등록</h1>
+				<input type="text" name="p_notice_title" placeholder="제목을 입력해주세요" required="required" style="width:600px; height:30px;">
+				
+				<textarea id="p_notice_content" name="p_notice_content" cols="83" rows="20"></textarea>
+             	<script type="text/javascript">
+					CKEDITOR.config.resize_enabled= false;
+					var editor = CKEDITOR.replace('p_notice_content',
+									{height:600, filebrowserUploadUrl: '${path}/uploadImg/pjNotice'}		
+					);
+					editor.on( 'required', function( evt ) {
+					    alert( '내용을 작성해주세요.' );
+					    evt.cancel();
+					} );
+				</script>
+             	
 				<div class="btn-div">
 					<input type="submit" value="등록" id="btnSave" class="btn" >
-					<input type="button" value="취소" id="btn_Cancle" class="btn" onclick="location.href='pjintro.do'">
+					<input type="button" value="취소" id="btn_Cancle" class="btn" onclick="location.href=''">
 				</div>
 		</form>
 	

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 
 <!DOCTYPE HTML>
@@ -86,13 +87,13 @@ div .card {
         </div>
         <div data-u="slides" style="cursor:default;position:relative;top:0px;left:0px;width:980px;height:500px;overflow:hidden;">
             <div>
-                <a href="#"><img data-u="image" src="${path}/resources/images/slider/011.jpg" /></a>
+                <a href="#"><img data-u="image" src="${path}/resources/images/slider/banner.jpg" /></a>
             </div>
             <div>
-                <a href="#"><img data-u="image" src="${path}/resources/images/slider/012.jpg" /></a>
+                <a href="#"><img data-u="image" src="${path}/resources/images/slider/banner2.jpg" /></a>
             </div>
             <div>
-                <a href="#"><img data-u="image" src="${path}/resources/images/slider/013.jpg" /></a>
+                <a href="#"><img data-u="image" src="${path}/resources/images/slider/banner3.jpg" /></a>
             </div>
         </div><a data-scale="0" href="https://www.jssor.com" style="display:none;position:absolute;">responsive slider</a>
         <!-- Bullet Navigator -->
@@ -130,50 +131,35 @@ div .card {
   		<h2 style="text-align: left; padding-left: 30px;     font-family: Noto Sans KR,Nanum Gothic;">최신 프로젝트</h2>
   	</div>
   	<div class="project_recent">
-		<a class="project_card" href="#">
-	               <div class="card">
-	                  <div class="card_header">
-	                  	<span><img class="card_img" src="${path}/resources/images/unnamed.jpg" style="width: 100%; height: 100%;"></span>
-	                  </div>
-	
-	                  <div class="card_body">
-	                     <hr>
-	                     <i class="name" style="font-size: 12pt;">프로젝트 제목</i>
-	                     <br>
-	                     <i class="payment"> 결제금액 : -----원 </i>
-	                  </div>
-	               </div>
-		</a>
 		
-		<a class="project_card" href="#">
-	               <div class="card">
-	                  <div class="card_header">
-	                  	<span><img class="card_img" src="${path}/resources/images/unnamed.jpg" style="width: 100%; height: 100%;"></span>
-	                  </div>
-	
-	                  <div class="card_body">
-	                     <hr>
-	                     <i class="name" style="font-size: 12pt;">프로젝트 제목</i>
-	                     <br>
-	                     <i class="payment"> 결제금액 : -----원 </i>
-	                  </div>
-	               </div>
-		</a>
+		<c:choose>
+			<c:when test="${empty recentList}">
+				<p>최신 프로젝트가 아무것도 없습니다.</p>
+			</c:when>
+			<c:otherwise>
+				<c:forEach var="dto" items="${recentList}">
+					
+					<a class="project_card" href="pjdetail.do?p_id=${dto.p_id }">
+		               <div class="card">
+		                  <div class="card_header">
+		                  	<span><img class="card_img" src="${path}/uploadImg/projectTitle/${dto.projectTilteImgDto.title_stored_name}" style="width: 100%; height: 100%;"></span>
+		                  </div>
 		
-		<a class="project_card" href="#">
-	               <div class="card">
-	                  <div class="card_header">
-	                  	<span><img class="card_img" src="${path}/resources/images/unnamed.jpg" style="width: 100%; height: 100%;"></span>
-	                  </div>
-	
-	                  <div class="card_body">
-	                     <hr>
-	                     <i class="name" style="font-size: 12pt;">프로젝트 제목</i>
-	                     <br>
-	                     <i class="payment"> 결제금액 : -----원 </i>
-	                  </div>
-	               </div>
-		</a>
+		                  <div class="card_body">
+		                     <hr>
+		                     <i class="name" style="font-size: 12pt;">${dto.p_title}</i>
+		                     <br>
+		                     <i class="payment"> 목표금액 : <fmt:formatNumber value="${dto.target_amount}" pattern="#,###"/>원 </i>
+		                  </div>
+		               </div>
+					</a>
+					
+				</c:forEach>
+			</c:otherwise>
+		</c:choose>
+
+		
+		
 	</div>
   </main>
 </div>

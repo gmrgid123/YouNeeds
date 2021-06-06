@@ -26,7 +26,7 @@
 		</tr>
 		<tr>
 			<td>결제금액</td>
-			<td>${dto.order_pay }</td>
+			<td><fmt:formatNumber value="${dto.order_pay }" pattern="#,###"/> 원</td>
 		</tr>
 		<tr>
 			<td>결제날짜</td>

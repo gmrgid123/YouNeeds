@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <c:set var="path" value="${pageContext.request.contextPath}" />
+<c:set var="per" value="${ sumOrder / guide.target_amount * 100}"/>
 
 
 <!DOCTYPE html>
@@ -90,7 +92,8 @@ a:hover {
 }
 .bl {
 	width: 450px;
-	height: 300px;
+	height:100%;
+	min-height: 300px;
 	margin-right: 50px;
 	text-align: center;
 	background-color: #93c0c521;
@@ -124,107 +127,55 @@ a:hover {
 	<jsp:include page="../form/header.jsp"></jsp:include>
 	<!-- -------------------------------------------------------------------------------- -->
 	<div class="title">
-		<h1>${pDto.p_title}</h1>
+		<h1>${guide.p_title}</h1>
 	</div>
 	<!-- ------------------------------------top----------------------------------------- -->
 	<div class="top">
-		<div class="tl"></div>
+		<div class="tl">
+			<img alt="" src="${path}/uploadImg/projectTitle/${guide.projectTilteImgDto.title_stored_name}" style="width: 100%; height: 100%;">
+		</div>
 		<!-- ---------------------------------------------------------------------------- -->
 		<div>
 			<div class="tr">
-				<h1>프로젝트기간</h1>
-				<h3>${pDto.start_date } - ${pDto.end_date }</h3>
+				<h1>프로젝트 기간</h1>
+				<h3>${guide.start_date } - ${guide.end_date }</h3>
 				<h1>모인금액/목표금액</h1>
-				<h3>&nbsp;/&nbsp;${pDto.target_amount}</h3> 
+				<h3><fmt:formatNumber value="${sumOrder}" pattern="#,###"/> 원&nbsp;/&nbsp;<fmt:formatNumber value="${guide.target_amount}" pattern="#,###"/> 원&nbsp;&nbsp;&nbsp;( ${per}% 달성 )</h3> 
 				<h1>후원자 수</h1>
-				<h3></h3>
+				<h3><fmt:formatNumber value="${orderCount}" pattern="#,###"/> 명</h3>
 			</div>
-			<input type="button" class="b1" value="후원하기" onclick="location.href='orderPayForm'">
+			<input type="button" class="b1" value="후원하기" onclick="location.href='orderPayForm?p_id=${guide.p_id}'">
 		</div>
 	</div>
 	<!-- -------------------------------------------------------------------------------- -->
 	<!-- -------------------------------middle-------------------------------------------- -->
 	<div class=middle>
 		<div class="btn">
-			<a href="javascript:fn_change('intro');">프로젝트 소개</a> 
-			<a href="javascript:fn_change('notice');">프로젝트 공지</a> 
-			<a href="javascript:fn_change('funding');">펀딩안내</a>
+			<a href="pjdetail.do?p_id=${guide.p_id}">프로젝트 소개</a> 
+			<a href="pjNoticeList?p_id=${guide.p_id}&page=1">프로젝트 공지</a> 
+			<a href="pjFundGuide?p_id=${guide.p_id}">펀딩안내</a>
 		</div>
 	</div>
 
 	<!-- -------------------------------------------------------------------------------- -->
 	<!-- ---------------------------------bottom----------------------------------------- -->
-	<div class="bottom" id="div_intro">
-		<div class="bl" id="p_intro" name="p_intro">
-		</div>
-		<div style="text-align: center;">
-			<div class="br">
-			</div>
-			<input type="button" class="b2" value="공지사항 등록" onclick="location.href='pjupnotice.do'"> 
-				<input type="button" class="b2" value="화상설명회" onclick="location.href=''">
-		</div>
-	</div>	
-	<!-- 공지사항 -->
-	<div class="bottom" id="div_notice" style="display:none;">
-		<div class="bl">
-			<table style="margin-top:20px;">
-            <col width="80px"><col width="300px"><col width="80px">
-            <thead>
-               <tr>
-               
-                  <th>글번호</th>
-                  <th>제목</th>
-                  <th>작성일자</th>
-               </tr>
-            </thead>
-            <tbody id="tbody_notice">
-               <tr>
-                  <td>1</td>
-                  <td><a href="notice_view" style="color:black;">임시용 제목 1</a></td>
-                  <td>yyyy-MM-dd</td>
-               </tr>
-               <tr>
-                  <td>2</td>
-                  <td><a href="order_test">임시용 제목 2</a></td>
-                  <td>yyyy-MM-dd</td>
-               </tr>
-               <tr>
-                  <td>3</td>
-                  <td><a href="#">임시용 제목 3</a></td>
-                  <td>yyyy-MM-dd</td>
-               </tr>
-               <tr>
-                  <td>4</td>
-                  <td><a href="#">임시용 제목 4</a></td>
-                  <td>yyyy-MM-dd</td>
-               </tr>
-               <tr>
-                  <td>5</td>
-                  <td><a href="#">임시용 제목 5</a></td>
-                  <td>yyyy-MM-dd</td>
-               </tr>
-            </tbody>
-         </table>
-		</div>
-		<div class="button">
-            <div class="br"></div>  
-            <input type="button" class="b2" value="공지사항 등록" onclick="location.href='pjupnotice.do'">
-             <input type="button" class="b2" value="화상설명회 개최공지" onclick="location.href='pjupnotice.do'">
-        </div>
-    </div>
-    
     <!-- 펀딩안내 -->
-    <div class="bottom" id="div_funding" style="display:none;">
+    <div class="bottom" id="div_funding">
 		<div class="bl">
-			펀딩안내 (프로젝트 등록시)
+			<h3>&lt; 펀딩안내 &gt;</h3>
+			<div style="word-break:break-all; width: 100%; height: 100%;">
+				<p>${guide.projectFundGuideDto.fund_guide_content }</p>
+			</div>
 		</div>
 		<div style="text-align: center;">
 			<div class="br">
-				창작자 소개 (창작 회원 가입시)
-				
+				<h3>&lt; 창작자 &gt;</h3>
+				<p>${guide.creatorDto.create_name }</p>
+				<h3>&lt; Intro &gt;</h3>
+				<p>${guide.creatorDto.create_intro }</p>
 			</div>
-			<input type="button" class="b2" value="공지사항 등록" onclick="location.href='pjupnotice.do'"> 
-			<input type="button" class="b2" value="화상설명회 개최공지" onclick="location.href='pjupnotice.do'">
+			<input type="button" class="b2" value="공지사항 등록" onclick="location.href='pjNoticeUploadForm?p_id=${guide.p_id}';"> 
+			<input type="button" class="b2" value="화상설명회" onclick="location.href=''">
 		</div>
 	</div> 
 	<!-- ----------------------------------------------------------- -->

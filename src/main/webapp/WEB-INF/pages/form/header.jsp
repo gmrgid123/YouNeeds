@@ -22,8 +22,6 @@
 </head>
 <body>
 <!-- ################################################################################################ -->
-<!-- ################################################################################################ -->
-<!-- ################################################################################################ -->
 <div class="wrapper row0">
   <header id="header" class="clear"> 
     <!-- ################################################################################################ -->
@@ -32,17 +30,14 @@
     </div>
     <div class="fl_right">
       <ul class="nospace inline">
-      <c:if test="${member ==null }">
+      <c:if test="${sessionScope.member ==null }">
         	<li><a href="loginForm.do">로그인 / 회원가입</a></li>
        </c:if>
 
-       <c:if test="${member !=null }">
+       <c:if test="${sessionScope.member !=null }">
+       		<li>${sessionScope.member.m_nickname } 님</li>
        		<li><a href="logout">로그아웃</a></li>
-       		<li><a href="withdrawal">회원탈퇴</a></li>
-       		<li><a href="userMypage">유저 마이페이지 테스트</a></li>
-        	<li><a href="creatorMypage">창작 마이페이지 테스트</a></li>
-        	<li><a href="videoChatPage">화생채팅 페이지 테스트</a></li>
-        	<li><a href="pwdCheckTest">비밀번호 체크 페이지 테스트</a></li>
+       		<li><a href="userMypage">마이페이지 테스트</a></li>
       	</c:if>
       	</ul>
        		     
@@ -59,35 +54,10 @@
     <nav id="mainav" class="fl_left">
       <ul class="clear">
         <li class="active"><a href="main.do">Home</a></li>
-        
-        <!-- 펼치기 스타일 메뉴 -->
-        <!--
-        <li><a class="drop" href="#">Pages</a>
-          <ul>
-            <li><a href="${path}/pages/gallery.jsp">Gallery</a></li>
-            <li><a href="${path}/pages/full-width.jsp">Full Width</a></li>
-            <li><a href="${path}/pages/sidebar-left.jsp">Sidebar Left</a></li>
-            <li><a href="${path}/pages/sidebar-right.jsp">Sidebar Right</a></li>
-            <li><a href="${path}/pages/basic-grid.jsp">Basic Grid</a></li>
-          </ul>
-        </li>
-        
-        <li><a class="drop" href="#">Dropdown</a>
-          <ul>
-            <li><a href="#">Level 2</a></li>
-            <li><a class="drop" href="#">Level 2 + Drop</a>
-              <ul>
-                <li><a href="#">Level 3</a></li>
-                <li><a href="#">Level 3</a></li>
-              </ul>
-            </li>
-          </ul>
-        </li>
-          -->
-         <!-- 펼치기 스타일 메뉴 -->
+      
         
         
-        <li><a href="pjlist.do">프로젝트 목록</a></li>
+        <li><a href="pjlist.do?p=1">프로젝트 목록</a></li>
         <li><a href="pjupload.do">프로젝트 등록</a></li>
         <li><a href="notice_board?p=1">공지사항</a></li>
         <li><a href="qna_board?p=1">QnA</a></li>
@@ -105,8 +75,6 @@
     <!-- ################################################################################################ -->
   </div>
 </div>
-<!-- ################################################################################################ -->
-<!-- ################################################################################################ -->
 <!-- ################################################################################################ -->
 </body>
 </html>

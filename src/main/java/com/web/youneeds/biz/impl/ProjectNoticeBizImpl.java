@@ -1,14 +1,17 @@
 package com.web.youneeds.biz.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.web.youneeds.biz.interf.ProjectNoticeBiz;
 import com.web.youneeds.dao.interf.ProjectNoticeDao;
 import com.web.youneeds.dto.ProjectNoticeDto;
 
+@Transactional
 @Service
 public class ProjectNoticeBizImpl implements ProjectNoticeBiz {
 
@@ -17,13 +20,13 @@ public class ProjectNoticeBizImpl implements ProjectNoticeBiz {
 	
 	
 	@Override
-	public List<ProjectNoticeDto> selectList() {
-		return null;
+	public List<ProjectNoticeDto> selectList(Map<String, Integer> map) {
+		return projectNoticeDao.selectList(map);
 	}
 
 	@Override
-	public ProjectNoticeDto selectOne(int p_notice_no, int p_id) {
-		return null;
+	public ProjectNoticeDto selectOne(Map<String, Integer> map) {
+		return projectNoticeDao.selectOne(map);
 	}
 
 	@Override
@@ -40,5 +43,11 @@ public class ProjectNoticeBizImpl implements ProjectNoticeBiz {
 	public int delete(int p_notice_no, int p_id) {
 		return 0;
 	}
+
+	@Override
+	public int selectPjNoticeMaxLength(int p_id) {
+		return projectNoticeDao.selectPjNoticeMaxLength(p_id);
+	}
+
 
 }

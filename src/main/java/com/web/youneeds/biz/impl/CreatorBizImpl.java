@@ -4,12 +4,14 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.web.youneeds.biz.interf.CreatorBiz;
 import com.web.youneeds.dao.interf.CreatorDao;
 import com.web.youneeds.dto.CreatorDto;
 import com.web.youneeds.dto.MemberDto;
 
+@Transactional
 @Service
 public class CreatorBizImpl implements CreatorBiz {
 	
