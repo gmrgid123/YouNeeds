@@ -1,10 +1,5 @@
 package com.web.youneeds.controller;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
@@ -36,7 +31,7 @@ public class PayController {
 	
 	@RequestMapping(value="/OrderSuccess", method = RequestMethod.POST)
 	public String PaySuccess(HttpServletRequest request, Model model, int p_id, String order_name, int order_pay, String order_phone, String order_email, String order_addr1, String order_addr2, String order_date, String imp_uid) {
-		logger.info("펀딩 결제 성공 알림 페이지 호출");
+		logger.info("펀딩 결제 시도, 성공 알림 페이지 호출");
 		
 		int m_uid = ((MemberDto)request.getSession().getAttribute("member")).getM_uid();
 		String order_addr = order_addr1 + " " + order_addr2;
@@ -55,7 +50,7 @@ public class PayController {
 		}
 	}
 	
-	@RequestMapping(value="payDetail_popup", method = RequestMethod.GET)
+	@RequestMapping(value="/payDetail_popup", method = RequestMethod.GET)
 	public String resultDetail(Model model, int order_id) {
 		OrderDto dto = orderBiz.selectDetail(order_id);
 		

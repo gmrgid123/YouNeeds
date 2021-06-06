@@ -18,11 +18,14 @@ public class LoginInterceptor implements HandlerInterceptor {
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws IOException {
+		logger.info("로그인 인터셉터 실행");
+		
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
 		
 		MemberDto loginDto = (MemberDto)request.getSession().getAttribute("member");
 		
+		//////////////////////
 		if(request.getRequestURI().contains("/notice_write") || request.getRequestURI().contains("/noticeInsert.do")
 				|| request.getRequestURI().contains("/noticeUpdateForm") || request.getRequestURI().contains("/noticeUpdate.do")
 				|| request.getRequestURI().contains("/noticeDelete.do") ) {
@@ -34,13 +37,34 @@ public class LoginInterceptor implements HandlerInterceptor {
 			
 		}
 		
+		//////////////////////
+		if(request.getRequestURI().contains("/pjinsert.do") || 
+			request.getRequestURI().contains("/pjupload.do") ||
+			request.getRequestURI().contains("/pjNoticeUploadForm") || 
+			request.getRequestURI().contains("/prjNoticeInsert.do")) {
+			
+			if( loginDto==null || !(loginDto.getM_type().equals("창작")) ) {
+				jsResponse("창작자만 이용 가능합니다.", "main.d" , response);
+				return false;
+			}
+			
+		}
+		
+		//////////////////////
 		if( request.getRequestURI().contains("/qna_write") || 
 			request.getRequestURI().contains("/qnaInsert.do") ||
 			request.getRequestURI().contains("/qnaReplyInsert.do") ||
 			request.getRequestURI().contains("/orderPayForm") ||
 			request.getRequestURI().contains("/qnaUpdateForm") ||
 			request.getRequestURI().contains("/qnaUpdate.do") ||
-			request.getRequestURI().contains("/qnaDelete.do")
+			request.getRequestURI().contains("/qnaDelete.do") ||
+			request.getRequestURI().contains("/payDetail_popup") ||
+			request.getRequestURI().contains("/OrderSuccess") ||
+			request.getRequestURI().contains("/logout") ||
+			request.getRequestURI().contains("/creatorUpdate") ||
+			request.getRequestURI().contains("/userUpdate") ||
+			request.getRequestURI().contains("/userMypage") ||
+			request.getRequestURI().contains("/logout")
 				) {
 			if(loginDto==null) {
 				jsResponse("로그인 후 이용 가능합니다.", "loginForm.do" , response);
@@ -48,6 +72,9 @@ public class LoginInterceptor implements HandlerInterceptor {
 			}
 		}
 		
+		
+		
+		//////////////////////
 		if(loginDto != null) {
 			if( request.getRequestURI().contains("/login.do") ||
 				request.getRequestURI().contains("/loginForm.do") ) {
