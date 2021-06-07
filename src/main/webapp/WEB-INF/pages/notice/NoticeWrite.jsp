@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>YouNeeds - Write</title>
 <script type="text/javascript" src="${path}/resources/ckeditor/ckeditor.js"></script>
 <link href="${path}/resources/css/layout.css" rel="stylesheet" type="text/css" media="all">
 <link href="${path}/resources/css/bootstrap.css" rel="stylesheet" type="text/css">

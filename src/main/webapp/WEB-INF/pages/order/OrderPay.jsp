@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>YouNeeds</title>
+<title>YouNeeds - OrderPay</title>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js" ></script>
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <link href="${path}/resources/css/layout.css" rel="stylesheet" type="text/css" media="all">

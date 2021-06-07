@@ -44,7 +44,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 			request.getRequestURI().contains("/prjNoticeInsert.do")) {
 			
 			if( loginDto==null || !(loginDto.getM_type().equals("창작")) ) {
-				jsResponse("창작자만 이용 가능합니다.", "main.d" , response);
+				jsResponse("창작자만 이용 가능합니다.", "main.do" , response);
 				return false;
 			}
 			

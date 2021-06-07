@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>OrderResult</title>
 <link href="${path}/resources/css/layout.css" rel="stylesheet" type="text/css" media="all">
 <link href="${path}/resources/css/bootstrap.css" rel="stylesheet" type="text/css">
 <script type="text/javascript">

@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>YouNeeds - Notice</title>
 <script src="${path}/resources/js/jquery.min.js"></script>
 <script src="${path}/resources/js/jquery.backtotop.js"></script>
 <script src="${path}/resources/js/jquery.mobilemenu.js"></script>
