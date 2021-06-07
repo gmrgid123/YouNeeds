@@ -1,5 +1,7 @@
 package com.web.youneeds.controller;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -117,6 +119,16 @@ public class ProjectController {
 	public String projectDetail(int p_id, Model model) {
 		logger.info("PROJECT DETAIL 호출");
 		
+		InetAddress local;
+		String ip="";
+		try {
+			local = InetAddress.getLocalHost();
+			ip = local.getHostAddress();
+			System.out.println(ip);
+		} catch (UnknownHostException e) {
+			e.printStackTrace();
+		}
+		
 		ProjectDto dto = projectBiz.selectDetailIntro(p_id);
 		int SumOderPay = projectBiz.sumOrder(p_id);
 		int CountOrder = projectBiz.orderCount(p_id);
@@ -125,6 +137,7 @@ public class ProjectController {
 			model.addAttribute("pDto",dto);
 			model.addAttribute("sumOrder", SumOderPay);
 			model.addAttribute("orderCount", CountOrder);
+			model.addAttribute("chat_addr", ip);
 			
 			System.out.println(dto);
 			
@@ -146,6 +159,17 @@ public class ProjectController {
 		
 		System.out.println("p_id : "+p_id);
 		System.out.println("page : "+page);
+		
+		InetAddress local;
+		String ip="";
+		try {
+			local = InetAddress.getLocalHost();
+			ip = local.getHostAddress();
+			System.out.println(ip);
+		} catch (UnknownHostException e) {
+			e.printStackTrace();
+		}
+
 		
 		
 		int listMax = pjnBiz.selectPjNoticeMaxLength(p_id);
@@ -177,6 +201,7 @@ public class ProjectController {
 		int SumOderPay = projectBiz.sumOrder(p_id);
 		int CountOrder = projectBiz.orderCount(p_id);
 		
+		model.addAttribute("chat_addr", ip);
 		model.addAttribute("inform", inform);
 		model.addAttribute("sumOrder", SumOderPay);
 		model.addAttribute("orderCount", CountOrder);
@@ -198,6 +223,17 @@ public class ProjectController {
 	public String projectfundingintro(Model model, int p_id) {
 		logger.info("PROJECT 펀딩 가이드 페이지 호출");
 		
+		InetAddress local;
+		String ip="";
+		try {
+			local = InetAddress.getLocalHost();
+			ip = local.getHostAddress();
+			System.out.println(ip);
+		} catch (UnknownHostException e) {
+			e.printStackTrace();
+		}
+		
+		
 		ProjectDto guide = projectBiz.selectProjectJoinGuide(p_id);
 		int SumOderPay = projectBiz.sumOrder(p_id);
 		int CountOrder = projectBiz.orderCount(p_id);
@@ -206,7 +242,7 @@ public class ProjectController {
 			model.addAttribute("guide",guide);
 			model.addAttribute("sumOrder", SumOderPay);
 			model.addAttribute("orderCount", CountOrder);
-			
+			model.addAttribute("chat_addr", ip);
 			return "/project/projectFundGuide";
 		} else {
 			model.addAttribute("msg","프로젝트 조회 중 문제가 발생했습니다.");

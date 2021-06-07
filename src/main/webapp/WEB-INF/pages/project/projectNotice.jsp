@@ -134,6 +134,11 @@ a:hover {
 }
 </style>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js" ></script>
+<script type="text/javascript">
+function open_chat(){
+	window.open("https://${chat_addr}:3000","화상 채팅", "width=480px,height=510px");
+}
+</script>
 </head>
 <body>
 	<!-- header -->
@@ -251,7 +256,7 @@ a:hover {
 				<p>${inform.creatorDto.create_intro }</p>
             </div>  
             <input type="button" class="b2" value="공지사항 등록" onclick="location.href='pjNoticeUploadForm?p_id=${inform.p_id}'">
-             <input type="button" class="b2" value="화상설명회" onclick="location.href=''">
+             <input type="button" class="b2" value="화상설명회" onclick="location.href='javascript:open_chat()'">
         </div>
     </div>
     

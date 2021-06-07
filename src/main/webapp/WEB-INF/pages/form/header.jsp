@@ -63,6 +63,7 @@
         <li><a href="qna_board?p=1">QnA</a></li>
       </ul>
     </nav>
+    <!-- 
     <div id="search" class="fl_right">
       <form class="clear" method="post" action="#">
         <fieldset>
@@ -72,6 +73,7 @@
         </fieldset>
       </form>
     </div>
+     -->
     <!-- ################################################################################################ -->
   </div>
 </div>
