@@ -89,14 +89,27 @@ public class MemberDaoImpl implements MemberDao{
 	public MemberDto findPwd(MemberDto dto) throws Exception {
 		MemberDto res = null;
 				
-				try {
-					res = sqlSession.selectOne(NAMESPACE+"findPwd", dto);
-				} catch (Exception e) {
-					System.out.println("error:findPwd");
-					e.printStackTrace();
-				}
-				return res;
+			try {
+				res = sqlSession.selectOne(NAMESPACE+"findPwd", dto);
+			} catch (Exception e) {
+				System.out.println("error:findPwd");
+				e.printStackTrace();
 			}
+			return res;
+	}
+
+	@Override
+	public MemberDto selectOne(int m_uid) {
+		MemberDto res=null;
+		
+		try {
+			res = sqlSession.selectOne(NAMESPACE+"selectOne", m_uid);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
 
 
 }

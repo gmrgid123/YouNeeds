@@ -13,7 +13,7 @@
 	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <script type="text/javascript">
 function delCheck() {
-	if(confirm("삭제를 진행하시겠습니까?")){
+	if(confirm("탈퇴를 진행하시겠습니까?")){
 		location.href="withdrawal";
 	}else{
 		

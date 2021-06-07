@@ -68,6 +68,26 @@ function open_import() {
 	});
 }
 </script>
+<script type="text/javascript">
+function requestInform(){
+	$.ajax({
+		url : '${path}/requestMyInform',
+		type : 'POST',
+		dataType : 'json',
+		data: 'm_uid='+${sessionScope.member.m_uid},
+		success : function(data){
+			$('#order_name').val(data.m_nickname);
+			$('#order_email').val(data.m_email);
+			$('input[name=order_addr1]').val(data.m_addr);
+			$('input[name=order_addr2]').val(data.m_addr_detail);
+		},
+		error : function(){
+			alert('데이터를 가져오는 중에 문제가 발생했습니다.');
+		}
+	});
+}
+
+</script>
 <style type="text/css">
 .main_form{
 	margin-top: 50px;
@@ -130,7 +150,7 @@ function openApi_Addr(){
 	<hr>
 	<div class="main_form">
 		<div class="content_body">
-			<button id="myinfo_add" class="btn btn-info" type="button" onclick="">나의 정보 가져오기</button>
+			<input type="button"  id="myinfo_add" class="btn btn-info" type="button" onclick="requestInform();" value="나의 정보 가져오기">
 			<form action="OrderSuccess" method="post" name="orderForm">
 				<input type="hidden" name="p_id" value="${param.p_id}">
 				<input type="hidden" name="imp_uid" value="">

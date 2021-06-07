@@ -46,5 +46,10 @@ public class MemberBizImpl implements MemberBiz {
 		return memberDao.findPwd(dto);
 	}
 
+	@Override
+	public MemberDto selectOne(int m_uid) {
+		return memberDao.selectOne(m_uid);
+	}
+
 
 }
