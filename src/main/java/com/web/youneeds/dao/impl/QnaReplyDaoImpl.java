@@ -30,11 +30,6 @@ public class QnaReplyDaoImpl implements QnaReplyDao {
 		return list;
 	}
 
-	@Override
-	public QnaReplyDto selectOne(int qna_reply_id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	public int insert(QnaReplyDto dto) {
@@ -50,17 +45,6 @@ public class QnaReplyDaoImpl implements QnaReplyDao {
 		return res;
 	}
 
-	@Override
-	public int update(QnaReplyDto dto) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int delete(int qna_reply_id) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
 	@Override
 	public Integer selectListMaxLength(int qna_id) {

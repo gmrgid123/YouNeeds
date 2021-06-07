@@ -16,17 +16,6 @@ public class OrderDaoImpl implements OrderDao {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	
-	@Override
-	public List<OrderDto> selectList() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public OrderDto selectOne(int order_id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 	
 	@Override
 	public OrderDto selectDetail(int order_id) {
@@ -55,12 +44,7 @@ public class OrderDaoImpl implements OrderDao {
 		
 		return orderDto.getOrder_id();
 	}
-
-	@Override
-	public int update(OrderDto orderDto) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+	
 
 	@Override
 	public List<OrderDto> userMyPageInfo(Map<String, Integer> map) {

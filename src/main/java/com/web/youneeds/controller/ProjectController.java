@@ -27,7 +27,6 @@ import com.web.youneeds.dto.ProjectDto;
 import com.web.youneeds.dto.ProjectFundGuideDto;
 import com.web.youneeds.dto.ProjectIntroDto;
 import com.web.youneeds.dto.ProjectNoticeDto;
-import com.web.youneeds.dto.ProjectTitleImgDto;
 import com.web.youneeds.service.EditorImgUploadService;
 
 @Controller

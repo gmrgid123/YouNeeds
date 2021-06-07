@@ -23,24 +23,10 @@ public class QnaReplyBizImpl implements QnaReplyBiz{
 		return qnaReplyDao.selectList(map);
 	}
 
-	@Override
-	public QnaReplyDto selectOne(int qna_reply_id) {
-		return null;
-	}
-
+	
 	@Override
 	public int insert(QnaReplyDto dto) {
 		return qnaReplyDao.insert(dto);
-	}
-
-	@Override
-	public int update(QnaReplyDto dto) {
-		return 0;
-	}
-
-	@Override
-	public int delete(int qna_reply_id) {
-		return 0;
 	}
 
 	@Override

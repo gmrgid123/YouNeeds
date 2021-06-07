@@ -56,16 +56,7 @@ public class ProjectNoticeDaoImpl implements ProjectNoticeDao {
 		return res;
 	}
 
-	@Override
-	public int update(ProjectNoticeDto dto) {
-		return 0;
-	}
 
-	@Override
-	public int delete(int p_notice_no, int p_id) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
 	@Override
 	public int selectPjNoticeMaxLength(int p_id) {

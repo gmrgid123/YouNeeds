@@ -25,12 +25,29 @@ public class ProjectDaoImpl implements ProjectDao {
 	
 	@Override
 	public List<ProjectDto> selectList(Map map) {
-		return sqlSession.selectList(NAMESPACE + "searchProjectList", map);
+		List<ProjectDto> list = null;
+		
+		try {
+			list = sqlSession.selectList(NAMESPACE + "searchProjectList", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
 	}
 
 	@Override
 	public ProjectDto selectOne(int p_id) {
-		return sqlSession.selectOne(NAMESPACE + "projectDetail", p_id);
+		ProjectDto res = null;
+				
+		try {
+			res =  sqlSession.selectOne(NAMESPACE + "projectDetail", p_id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+		return res;
 		
 	}
 
@@ -87,19 +104,6 @@ public class ProjectDaoImpl implements ProjectDao {
 		return res;
 	}
 	
-	
-
-	@Override
-	public int update(ProjectDto dto) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int delete(int p_id) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
 	@Override
 	public List<ProjectDto> creatorMyPageInfo(Map<String, Integer> map) {

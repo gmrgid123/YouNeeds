@@ -12,6 +12,4 @@ public interface ProjectNoticeDao {
 	public ProjectNoticeDto selectOne(Map<String, Integer> map);
 	public int selectPjNoticeMaxLength(int p_id);
 	public int insert(ProjectNoticeDto dto);
-	public int update(ProjectNoticeDto dto);
-	public int delete(int p_notice_no, int p_id);
 }

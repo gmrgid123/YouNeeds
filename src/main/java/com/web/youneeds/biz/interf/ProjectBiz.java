@@ -15,8 +15,6 @@ public interface ProjectBiz {
 	public List<ProjectDto> selectRecentList();
 	public int selectWriter(int p_id);
 	public int insert(ProjectDto dto);
-	public int update(ProjectDto dto);
-	public int delete(int p_id);
 	public int sumOrder(int p_id);
 	public int orderCount(int p_id);
 	public int selectProjectMax(String p_category);

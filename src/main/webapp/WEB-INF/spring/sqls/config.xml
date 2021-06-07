@@ -20,15 +20,11 @@
 	</typeAliases>
 
 	<mappers>
-		<mapper resource="/mybatis/mapper/Creator-Mapper.xml"/>
 		<mapper resource="/mybatis/mapper/Member-Mapper.xml"/>
 		<mapper resource="/mybatis/mapper/Notice-Mapper.xml"/>
 		<mapper resource="/mybatis/mapper/Order-Mapper.xml"/>
-		<mapper resource="/mybatis/mapper/ProjectFundGuide-Mapper.xml"/>
-		<mapper resource="/mybatis/mapper/ProjectIntro-Mapper.xml"/>
 		<mapper resource="/mybatis/mapper/Project-Mapper.xml"/>
 		<mapper resource="/mybatis/mapper/ProjectNotice-Mapper.xml"/>
-		<mapper resource="/mybatis/mapper/ProjectTitleImg-Mapper.xml"/>
 		<mapper resource="/mybatis/mapper/Qna-Mapper.xml"/>
 		<mapper resource="/mybatis/mapper/QnaReply-Mapper.xml"/>
 	</mappers>

@@ -52,17 +52,6 @@ public class ProjectBizImpl implements ProjectBiz{
 		return res;
 	}
 
-	@Override
-	public int update(ProjectDto dto) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int delete(int p_id) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
 	@Override
 	public List<ProjectDto> creatorMyPageInfo(Map<String, Integer> map) {

@@ -25,8 +25,6 @@ public interface ProjectDao {
 	public Integer sumOrder(int p_id);
 	public Integer orderCount(int p_id);
 	public int selectProjectMax(String p_category);
-	public int update(ProjectDto dto);
-	public int delete(int p_id);
 	public List<ProjectDto> creatorMyPageInfo(Map<String, Integer> map);
 	public Integer selectListMaxLength(int m_uid);
 }
