@@ -33,7 +33,7 @@
  	<resultMap type="projectDto" id="projectDtoJoin">
  		<result property="p_id" column="P_ID"/>
  		<result property="p_title" column="P_TITLE"/>
- 		<result property="p_category" column="P_CATEGORTY"/>
+ 		<result property="p_category" column="P_CATEGORY"/>
  		<result property="target_amount" column="TARGET_AMOUNT"/>
  		<result property="p_regdate" column="P_REGDATE"/>
  		<result property="start_date" column="START_DATE"/>
@@ -46,7 +46,7 @@
  	<resultMap type="projectDto" id="projectJoinDetail">
  		<result property="p_id" column="P_ID"/>
  		<result property="p_title" column="P_TITLE"/>
- 		<result property="p_category" column="P_CATEGORTY"/>
+ 		<result property="p_category" column="P_CATEGORY"/>
  		<result property="target_amount" column="TARGET_AMOUNT"/>
  		<result property="p_regdate" column="P_REGDATE"/>
  		<result property="start_date" column="START_DATE"/>

@@ -147,9 +147,11 @@ div .card {
 		
 		                  <div class="card_body">
 		                     <hr>
-		                     <i class="name" style="font-size: 12pt;">${dto.p_title}</i>
+		                     <i style="font-size: 12pt; text-align: center;">${dto.p_category}</i>
 		                     <br>
-		                     <i class="payment"> 목표금액 : <fmt:formatNumber value="${dto.target_amount}" pattern="#,###"/>원 </i>
+		                     <i class="name" style="color:black; font-size: 14pt;">${dto.p_title}</i>
+		                     <br>
+		                     <i class="payment" style="color:black; "> 목표금액 : <fmt:formatNumber value="${dto.target_amount}" pattern="#,###"/>원 </i>
 		                  </div>
 		               </div>
 					</a>

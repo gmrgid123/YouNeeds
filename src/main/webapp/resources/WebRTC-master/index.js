@@ -2,28 +2,28 @@
 
 var os = require('os');
 var nodeStatic = require('node-static');
-//var http = require('http');
 var socketIO = require('socket.io');
 
 const https = require('https');
 const fs = require('fs');
 
+//OpenSSL 인증서 적용
 const options = {
   key: fs.readFileSync('./private.pem'),
   cert: fs.readFileSync('./public.pem')
 };
 
+//포트 설정
 var fileServer = new(nodeStatic.Server)();
 let app = https.createServer(options, (req,res)=>{
   fileServer.serve(req, res);
 }).listen(3000);
 
-console.log('Started chating server...');
+console.log('3000포트에서 서버 실행...');
 
 var io = socketIO.listen(app);
 io.sockets.on('connection', function(socket) {
 
-  // convenience function to log server messages on the client
   function log() {
     var array = ['Message from server:'];
     array.push.apply(array, arguments);
@@ -38,14 +38,11 @@ io.sockets.on('connection', function(socket) {
 		if (error) throw error;
 
 		socketIds.forEach(socketId => {
-		//	if (socket.id===socketId) console.log('-------------------************');
-//			else socket.broadcast.emit('message', message);
 			io.sockets.sockets[socketId].leave('foo');
 		});
 
 		});
-	} //else {
-		// for a real app, would be room-only (not broadcast)
+	}
 		socket.broadcast.emit('message', message);
 		
   });

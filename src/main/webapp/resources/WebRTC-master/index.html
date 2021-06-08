@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <title>YouNeeds 비대면 사업설명회</title>
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Gugi&display=swap" rel="stylesheet">
+  <style type="text/css">
+  #main_icon{
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+      line-height: 1.2;
+  }
+</style>
+  
+</head>
+
+<body>
+  <div class="wrapper">
+    <header id="header" class="clear"> 
+      <!-- ################################################################################################ -->
+      <div id="logo" class="fl_left">
+        <h2 id="main_icon">YouNeeds 사업 설명회에 오신 것을 환영합니다.</h2>
+      </div>
+      <hr>
+      <!-- ################################################################################################ -->
+    </header>
+  </div>
+
+  <div id="videos">
+    <video id="localVideo" autoplay muted playsinline></video>
+    <video id="remoteVideo" autoplay playsinline></video>
+  </div>
+
+  <!-- This file is automatically added/served when running "node index.js". -->
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
+  <script src="js/main.js"></script>
+
+</body>
+
+</html>

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 
 <!DOCTYPE html>
@@ -20,16 +21,65 @@
 
 <style type="text/css">
 
-.card {
-	height: 220px;
-	width: 220px;
-	border-radius: 15px;
-	display: inline-block;
-	margin-left: 50px;
-	margin-bottom: 0px;
-	position: relative;
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0
-		rgba(0, 0, 0, 0.19);
+div .card {
+   height: 300px;
+   width: 330px;
+   border-radius: 15px;
+   display: inline-block;
+   margin-top: 0px;
+   margin-left: 0px;
+   margin-bottom: 0px;
+   position: relative;
+   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0
+      rgba(0, 0, 0, 0.19);
+}
+
+.card_img{
+	border-radius: 15px 15px 0 0 ;
+}
+
+.card_header {
+   width: 100%;
+   height: 200px;
+   border-radius: 15px 15px 0 0;
+   background-image: url("");
+   background-size: 100% 250px;
+}
+
+.card_header_D-day {
+   background-color: #EF5A31;
+   color: #FFF;
+   font-weight: bold;
+   text-align: center;
+   float: right;
+   margin: 10px 10px 0 0;
+   border-radius: 50%;
+   font-weight: bold;
+   padding: 10px 10px;
+   line-height: 20px;
+}
+
+
+.card_body {
+   position: absolute;
+   margin-top: 15px;
+   margin-bottom: 6px;
+   bottom: 0;
+   width: 100%;
+   height: 100px;
+   font-size: 14px;
+   color: #9FA5A8;
+   padding: 0 15px;
+}
+
+.payment {
+   float: right;
+}
+
+
+.project_card{
+	margin: 30px;
+	
 }
 
 .title {
@@ -177,20 +227,23 @@ function fn_search(pid) {
 		<c:otherwise>
 			<c:forEach var="listVo" items="${plist}" varStatus="status">
 				<c:if test="${status.count % 3 eq 1}">
-					<div class="cgroup">
+					<div class="cgroup" style="text-align: center;">
 				</c:if>
 				
 				<a class="project_card" href="javascript:fn_search('${listVo.p_id}')">
 					<div class="card">
 						<div class="card_header">
-							<span><img src="${path}/uploadImg/projectTitle/${listVo.projectTilteImgDto.title_stored_name}"
-								style="width: 100%; height: 120px;"></span>
+							<span><img class="card_img" src="${path}/uploadImg/projectTitle/${listVo.projectTilteImgDto.title_stored_name}"
+								style="width: 100%; height: 100%;"></span>
 						</div>
 						<div class="card_body">
-							<hr>
-							<i class="name" style="font-size: 12pt;"><br>${listVo.p_title}</i> <br>
-							<i class="payment"> 목표금액 : ${listVo.target_amount}원 </i>
-						</div>
+		                     <hr>
+		                     <i style="font-size: 12pt; text-align: center;">${listVo.p_category}</i>
+		                     <br>
+		                     <i class="name" style="color:black; font-size: 14pt;">${listVo.p_title}</i>
+		                     <br>
+		                     <i class="payment" style="color:black; "> 목표금액 : <fmt:formatNumber value="${listVo.target_amount}" pattern="#,###"/>원 </i>
+		                  </div>
 					</div>
 				</a>
 				

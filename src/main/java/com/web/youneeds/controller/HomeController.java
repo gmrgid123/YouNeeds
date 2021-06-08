@@ -29,6 +29,8 @@ public class HomeController {
 		
 		List<ProjectDto> recentList = projectBiz.selectRecentList();
 		
+		System.out.println(recentList);
+		
 		model.addAttribute("recentList", recentList);
 		
 		return "main";
