@@ -37,7 +37,7 @@
        <c:if test="${sessionScope.member !=null }">
        		<li>${sessionScope.member.m_nickname } 님</li>
        		<li><a href="logout">로그아웃</a></li>
-       		<li><a href="userMypage">마이페이지 테스트</a></li>
+       		<li><a href="userMypage">마이페이지</a></li>
       	</c:if>
       	</ul>
        		     
