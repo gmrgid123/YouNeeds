@@ -174,7 +174,7 @@ function openApi_Addr(){
 					<label for="order_addr" class="form_label"><h5>주소 정보</h5></label>
 					<div id="order_addr" style="float: right;">
 						<div class="input-group">
-						<input name="order_addr1" class="order_input_text form-control" type="text" required="required" placeholder="주소를 입력해주세요.">
+						<input name="order_addr1" class="order_input_text form-control" type="text" required="required" placeholder="주소를 입력해주세요." readonly="readonly">
 							<div class="input-group-append">
 								<button  class="btn btn-info" type="button" onclick="openApi_Addr();">주소찾기</button>
 							</div>

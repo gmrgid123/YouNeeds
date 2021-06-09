@@ -157,7 +157,7 @@ function open_chat(){
 		<div class="btn">
 			<a href="pjdetail.do?p_id=${guide.p_id}">프로젝트 소개</a> 
 			<a href="pjNoticeList?p_id=${guide.p_id}&page=1">프로젝트 공지</a> 
-			<a href="pjFundGuide?p_id=${guide.p_id}">펀딩안내</a>
+			<a href="pjFundGuide?p_id=${guide.p_id}" style="color:black;">펀딩안내</a>
 		</div>
 	</div>
 

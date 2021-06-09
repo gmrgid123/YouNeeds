@@ -170,7 +170,7 @@ function open_chat(){
 	<div class=middle>
 		<div class="btn">
 			<a href="pjdetail.do?p_id=${inform.p_id}">프로젝트 소개</a> 
-			<a href="pjNoticeList?p_id=${inform.p_id}&page=1">프로젝트 공지</a> 
+			<a href="pjNoticeList?p_id=${inform.p_id}&page=1" style="color:black;">프로젝트 공지</a> 
 			<a href="pjFundGuide?p_id=${inform.p_id}">펀딩안내</a>
 		</div>
 	</div>
@@ -215,7 +215,7 @@ function open_chat(){
 			        <ul>
 			      
 			        	<c:if test="${start_num ne 1}">
-			        		<li><a href="pjNoticeList?p_id=${inform.p_id}&page=${start_num-1}">&laquo; Previous</a></li>
+			        		<li><a href="pjNoticeList?p_id=${inform.p_id}&page=${start_num-1}"  style="color:black;">&laquo; Previous</a></li>
 			        	</c:if>
 			        	
 			        	
@@ -230,10 +230,10 @@ function open_chat(){
 					        	</c:if>
 			        		 	<c:choose>
 			        		 		<c:when test="${page eq status.current}">
-			        		 			<li style="background: #eee;"><a href="pjNoticeList?p_id=${inform.p_id}&page=<c:out value="${status.current}"/>"><c:out value="${status.current}"/></a></li>
+			        		 			<li style="background: #eee;"><a href="pjNoticeList?p_id=${inform.p_id}&page=<c:out value="${status.current}"/>"  style="color:black;"><c:out value="${status.current}"/></a></li>
 			        		 		</c:when>
 			        		 		<c:otherwise>
-			        		 			<li><a href="pjNoticeList?p_id=${inform.p_id}&page=<c:out value="${status.current}"/>"><c:out value="${status.current}"/></a></li>
+			        		 			<li><a href="pjNoticeList?p_id=${inform.p_id}&page=<c:out value="${status.current}"/>"  style="color:black;"><c:out value="${status.current}"/></a></li>
 			        		 		</c:otherwise>
 			        		 	</c:choose>
 			        		 </c:if>
@@ -241,7 +241,7 @@ function open_chat(){
 			        	</c:forEach>
 			        	
 			        	<c:if test="${end_num ne max}">
-				          	<li><a href="pjNoticeList?p_id=${inform.p_id}&page=${end_num+1}">Next &raquo;</a></li>
+				          	<li><a href="pjNoticeList?p_id=${inform.p_id}&page=${end_num+1}"  style="color:black;">Next &raquo;</a></li>
 				        </c:if>
 			        </ul>
 	      		</nav>
