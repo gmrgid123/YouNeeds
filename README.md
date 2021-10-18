@@ -4,12 +4,19 @@ KH 파이널 프로젝트
 
 # 개발환경
 OS - Window 10
+
 Tool - Eclipse, sqldeveloper, erdcloud, GitHub, 카카오오븐
+
 DBMS - Oracle 11
+
 Server - Apache Tomcat 9.0.45
+
 Language - Java (JDK 1.8), HTML, CSS, JS, JQuery
+
 FrameWork - Spring, MyBatis, BootStrap
+
 API - 다음주소 API, 아임포트 API, Ckeditor API
+
 화상채팅 - WebRTC, Node.js, OpenSSL
 
 
